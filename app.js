@@ -1,16 +1,47 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');//접속한 클라이언트의 쿠키 정보에 접근하기 위한 모듈
-var logger = require('morgan');//클라이언트의 HTTP 요청 정보를 로깅하기 위한 모듈
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');//접속한 클라이언트의 쿠키 정보에 접근하기 위한 모듈
+const logger = require('morgan');//클라이언트의 HTTP 요청 정보를 로깅하기 위한 모듈
+const bodyParser = require('body-parser');
+const mongoose    = require('mongoose');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+let app = express();
 
-var app = express();
+
+// [CONFIGURE APP TO USE bodyParser]
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+// DEFINE MODEL
+let Book = require('./models/book');
+
+// [CONFIGURE ROUTER]
+var router = require('./routes')(app, Book);
+
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+
+
+
+// [ CONFIGURE mongoose ]
+
+// CONNECT TO MONGODB SERVER
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongod server");
+});
+
+//mongoose.connect('mongodb://localhost/mongodb_tutorial');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+
+app.engine('html', require('jade').renderFile);
 app.set('view engine', 'html');
 
 app.use(logger('dev'));
@@ -18,6 +49,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
