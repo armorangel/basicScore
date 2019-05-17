@@ -4,15 +4,12 @@ var util = require('util');  // 유틸리티 함수를 제공하는 기본 모�
 */
 
 const express = require('express');//웹 서버 사용.
-const PORT = process.env.PORT;//heroku posrt number
 const app = express();
 const fs = require('fs');//파일 로드 사용
 
-if(!PORT){
-	
-	console.log(PORT);
-}
+app.set('port', (process.env.PORT || 9000));//heroku posrt number
 
+console.log('port: ' + app.port);
 //포트 설정
 app.listen(9000, function(){
  console.log('Server Start');
