@@ -1,8 +1,8 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-//var cookieParser = require('cookie-parser');//접속한 클라이언트의 쿠키 정보에 접근하기 위한 모듈
-//var logger = require('morgan');//클라이언트의 HTTP 요청 정보를 로깅하기 위한 모듈
+var cookieParser = require('cookie-parser');//접속한 클라이언트의 쿠키 정보에 접근하기 위한 모듈
+var logger = require('morgan');//클라이언트의 HTTP 요청 정보를 로깅하기 위한 모듈
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,10 +13,10 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-//app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-//app.use(cookieParser());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
