@@ -1,7 +1,3 @@
-console.log(11111);
-
-
-
 /*
 var file = require('fs');  // 파일시스템 관련 기본 모듈
 var util = require('util');  // 유틸리티 함수를 제공하는 기본 모듈
