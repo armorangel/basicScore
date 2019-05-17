@@ -3,13 +3,13 @@ var file = require('fs');  // 파일시스템 관련 기본 모듈
 var util = require('util');  // 유틸리티 함수를 제공하는 기본 모듈
 */
 
-var express = require('express');//웹 서버 사용.
+const express = require('express');//웹 서버 사용.
 const PORT = process.env.PORT;//heroku posrt number
-var app = express();
-var fs = require('fs');//파일 로드 사용
+const app = express();
+const fs = require('fs');//파일 로드 사용
 
 //포트 설정
-app.listen(PORT, function(){
+app.listen(9000, function(){
  console.log('Server Start');
 });
 
