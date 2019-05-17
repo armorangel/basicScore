@@ -12,7 +12,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '9001');
+var port = normalizePort(process.env.PORT || '9000');
 app.set('port', port);
 
 /**
@@ -34,6 +34,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
+  console.log('port: ' + val);
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
