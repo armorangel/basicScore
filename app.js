@@ -7,11 +7,11 @@ const express = require('express');//웹 서버 사용.
 const app = express();
 const fs = require('fs');//파일 로드 사용
 
-app.set('port', (process.env.PORT || 9000));//heroku posrt number
+app.set('port', (process.env.PORT || 9001));//heroku posrt number
 
-console.log('port: ' + app.port);
+console.log('port: ' + app.get('port'));
 //포트 설정
-app.listen(9000, function(){
+app.listen(app.get('port'), function(){
  console.log('Server Start');
 });
 
