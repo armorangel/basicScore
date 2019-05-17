@@ -1,8 +1,8 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-//var cookieParser = require('cookie-parser');
-//var logger = require('morgan');
+//var cookieParser = require('cookie-parser');//접속한 클라이언트의 쿠키 정보에 접근하기 위한 모듈
+//var logger = require('morgan');//클라이언트의 HTTP 요청 정보를 로깅하기 위한 모듈
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
