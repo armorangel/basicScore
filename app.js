@@ -1,29 +1,41 @@
-/*
-var file = require('fs');  // 파일시스템 관련 기본 모듈
-var util = require('util');  // 유틸리티 함수를 제공하는 기본 모듈
-*/
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+//var cookieParser = require('cookie-parser');
+//var logger = require('morgan');
 
-const express = require('express');//웹 서버 사용.
-const app = express();
-const fs = require('fs');//파일 로드 사용
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
-app.set('port', (process.env.PORT || 9001));//heroku posrt number||test port
+var app = express();
 
-console.log('port: ' + app.get('port'));
-//포트 설정
-app.listen(app.get('port'), function(){
- console.log('Server Start');
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+//app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+//app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-//라우팅 설정
-app.get('/', function(req,res){//웹 서버 기본주소로 접속 할 경우 실행.
-	fs.readFile('index.html', function(error, data){//test.html 파일 로드.
-		if(error){
-			console.log(error);
-		} else {
-			res.writeHead(200,{'Content-Type':'text/html'});//Head Type설정.
-			res.end(data);//파일 로드 html response.
-		}
-	}); 
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
+
+module.exports = app;
