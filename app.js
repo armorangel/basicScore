@@ -8,6 +8,11 @@ const PORT = process.env.PORT;//heroku posrt number
 const app = express();
 const fs = require('fs');//파일 로드 사용
 
+if(!PORT){
+	
+	console.log(PORT);
+}
+
 //포트 설정
 app.listen(9000, function(){
  console.log('Server Start');
