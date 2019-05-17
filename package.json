@@ -19,7 +19,7 @@
   "homepage": "https://github.com/armorangel/basicScore#readme",
   "dependencies": {
     "express": "^4.16.4"
-  }
+  },
   "engines":{
     "node": "v10.15.3",
     "npm": "6.9.0"
