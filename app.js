@@ -38,10 +38,22 @@ db.once('open', function(){
 //mongoose.connect('mongodb://localhost/mongodb_tutorial');
 
 
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://user:g9WiWkybBBw9a6V7@bsdb-vsnj9.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
-app.engine('html', require('jade').renderFile);
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.use(logger('dev'));
