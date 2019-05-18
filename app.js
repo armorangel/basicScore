@@ -1,18 +1,43 @@
+//node ./index.js --user=bob
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');//접속한 클라이언트의 쿠키 정보에 접근하기 위한 모듈
 const logger = require('morgan');//클라이언트의 HTTP 요청 정보를 로깅하기 위한 모듈
-const bodyParser = require('body-parser');
+
 const mongoose    = require('mongoose');
+const uriUtil = require('mongodb-uri');
 
 let app = express();
+const BodyParser = require('body-parser');
 
+mongoose.Promise = global.Promise;
+// Connection URL
+// const uri = uriUtil.formatMongoose('mongodb+srv://user:p%40ssw0rd%279%27%21@bsdb-vsnj9.mongodb.net/book?retryWrites=true');
+const uri = 'mongodb+srv://user:QmTs5zvR8Phw4CUL@bsdb-vsnj9.mongodb.net/book?retryWrites=true';
+
+// CONNECT TO MONGODB SERVER
+
+mongoose.connect(uri, function(err){
+	if(err){
+		console.error('mongodb connection error', err);
+	
+	}
+	
+	console.log('mongodb conneced');
+});
+
+
+/*
+express 모듈은 웹서버 기능이 구현되어 있습니다.
+mongoose 모듈은 자바스크립트 객체를 MongoDB 객체로 매핑해줍니다.
+body-parser 모듈은 http 요청 데이터를 파싱하는 미들웨어입니다.
+*/
 
 // [CONFIGURE APP TO USE bodyParser]
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended: true }));
 
 // DEFINE MODEL
 let Book = require('./models/book');
@@ -22,32 +47,6 @@ var router = require('./routes')(app, Book);
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
-
-
-
-// [ CONFIGURE mongoose ]
-
-// CONNECT TO MONGODB SERVER
-var db = mongoose.connection;
-db.on('error', console.error);
-db.once('open', function(){
-    // CONNECTED TO MONGODB SERVER
-    console.log("Connected to mongod server");
-});
-
-//mongoose.connect('mongodb://localhost/mongodb_tutorial');
-
-
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://user:g9WiWkybBBw9a6V7@bsdb-vsnj9.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
-
-
 
 
 // view engine setup
