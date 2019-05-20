@@ -14,22 +14,11 @@ module.exports = function(app, Book){
 	
 	app.get('/', function(req, res, next){//웹 서버 기본주소로 접속 할 경우 실행.
 		
-		console.log('home page');
-		res.render('index.html', {
+		res.render('index', {
 			info : 'victory',
-			len : 5
+			len : 5,
+			arr : ['a', 'b', 'c', 'd']
 		});
-		/*
-		fs.readFile('index.html', function(error, data){//test.html 파일 로드.
-			if(error){
-				console.log(error);
-			} else {
-				res.writeHead(200,{'Content-Type':'text/html'});//Head Type설정.
-				res.end(data);//파일 로드 html response.
-			}
-		});
-		*/
-		
 	});
 
 	// GET ALL BOOKS

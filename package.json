@@ -27,9 +27,9 @@
     "express": "^4.17.0",
     "http-errors": "~1.6.3",
     "mongodb": "^3.2.4",
-    "mongodb-uri": "^0.9.7",
     "mongoose": "^5.5.9",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "react": "^16.8.6"
   },
   "engines": {
     "node": "v10.15.3",
