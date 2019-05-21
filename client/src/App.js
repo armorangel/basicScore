@@ -1,3 +1,4 @@
+/*
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -17,10 +18,10 @@ class App extends Component {
 }
 
 export default App;
+*/
 
 
 
-/*
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -45,6 +46,6 @@ function App() {
     </div>
   );
 }
-*/
 
+console.log(App);
 export default App;

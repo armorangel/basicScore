@@ -7,13 +7,10 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.0",
+    "http-proxy-middleware": "^0.19.1",
     "nodemon": "^1.19.0"
   },
   "scripts": {
     "server": "nodemon index.js"
-  },
-  "dependencies": {
-    "express": "^4.16.4",
-    "nodemon": "^1.18.9"
   }
 }
