@@ -8,7 +8,7 @@ const mongoose    = require('mongoose');		//자바스크립트 객체를 MongoDB
 const createError = require('http-errors');
 const path = require('path');
 
-const react = require('react');
+const react = require('react');//react module
 
 const config = require(__dirname + '/src/config');		// CONFIGURATION
 
