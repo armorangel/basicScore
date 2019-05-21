@@ -1,38 +1,19 @@
 {
-  "name": "basicscore",
+  "name": "basicScore",
   "version": "1.0.0",
-  "private": true,
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/armorangel/basicScore.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/armorangel/basicScore/issues"
-  },
-  "homepage": "https://github.com/armorangel/basicScore#readme",
+  "main": "index.js",
+  "repository": "https://armorangel:aa007650@github.com/armorangel/basicScore.git",
+  "author": "armorangel <armorangel@naver.com>",
+  "license": "MIT",
   "dependencies": {
-    "assert": "^2.0.0",
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
-    "debug": "~2.6.9",
-    "ejs": "^2.6.1",
     "express": "^4.17.0",
-    "http-errors": "~1.6.3",
-    "mongodb": "^3.2.4",
-    "mongoose": "^5.5.9",
-    "morgan": "^1.9.1",
-    "react": "^16.8.6"
+    "nodemon": "^1.19.0"
   },
-  "engines": {
-    "node": "v10.15.3",
-    "npm": "6.9.0"
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9"
   }
 }
