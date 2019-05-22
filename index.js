@@ -20,6 +20,13 @@ app.get('/api/passwords', (req, res) => {
 	console.log(`Sent ${count} passwords`);
 });
 
+// An api endpoint that returns a short list of items
+app.get('/api/getList', (req,res) => {
+    var list = ["item1", "item2", "item3"];
+    res.json(list);
+    console.log('Sent list of items');
+});
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
