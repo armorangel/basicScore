@@ -8,4 +8,5 @@ app.get("/api/greeting", (req,res) => {
 
 const PORT = process.env.PORT || 9000;
 
+console.log('port: ' + PORT);
 app.listen(PORT);
