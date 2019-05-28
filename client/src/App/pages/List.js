@@ -19,7 +19,7 @@ class List extends Component {
 		fetch('/api/getList')
 			.then(res => res.json())
 			.then(list => this.setState({ list }));
-		console.log(list);
+		console.log(this.getState("list"));
 	};
 
 	render() {
