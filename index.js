@@ -1,11 +1,13 @@
 const express = require('express');
 const path = require('path');
 const generatePassword = require('password-generator');
+const fs = require('fs');
 
 const app = express();
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/public')));
 
 // Put all API endpoints under '/api'
 app.get('/api/passwords', (req, res) => {
@@ -30,7 +32,13 @@ app.get('/api/getList', (req,res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname + '/client/build/index.html'));
+	//res.sendFile(path.join(__dirname + '/client/build/index.html'));
+	fs.readFile('public/exMidi.html', function(err, data) {
+		res.writeHead(200, {'Content-Type': 'text/html'});
+		res.write(data);
+		res.end();
+	});
+	console.log('Start score');
 });
 
 const port = process.env.PORT || 9000;

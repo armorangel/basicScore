@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Karaoke</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	<link href="./css/sticky-footer-navbar.css" rel="stylesheet">
+	<style>
+		#tabs {
+			overflow: auto;
+			box-sizing: content-size;
+			border: 1px solid black;
+			height: 800px;
+		}
+
+		.overflow {
+			height: 400px;
+		}
+
+		.cssfont {
+			font-size: 12px;
+			font-family: Dotum;
+			color: #ffffff;
+			cursor: pointer;
+		}
+
+		.cssfont:hover {
+			text-decoration: underline;
+		}
+
+		#noteSelect {
+			display: none;
+			position: absolute;
+			left: 0;
+			top: 0;
+			padding: 20px;
+			background-color: #111111;
+			filter: alpha(opacity=60);
+			font-size: 12px;
+			font-family: Dotum;
+			color: #ffffff;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Basic Score</a>
+			</div>
+
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="#">Home</a>
+					</li>
+					<li>
+						<a href="#about">About</a>
+					</li>
+					<li>
+						<a href="#contact">Contact</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#">Action</a>
+							</li>
+							<li>
+								<a href="#">Another action</a>
+							</li>
+							<li>
+								<a href="#">Something else here</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Nav header</li>
+							<li>
+								<a href="#">Separated link</a>
+							</li>
+							<li>
+								<a href="#">One more separated link</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+	<div class="container-fluid">
+		<div id="menu" class="col-md-2">anything menu</div>
+		<div id="tabs" class="col-md-10">
+			<ul id="tab">
+				<li>
+					<a href="#track1">track 1</a>
+				</li>
+				<li class="ui-state-default ui-corner-top">
+					<div class="ui-tabs-anchor" onclick="kara.addTabs();">+</div>
+				</li>
+			</ul>
+			<div id="track1"></div>
+		</div>
+	</div>
+	<div id="testpage"></div>
+	<div class="container-fluid">
+		<button type="button" name="button" onclick="kara.play.player();">재생</button>
+		<button type="button" name="button" onclick="kara.play.stop();">정지</button>
+		<div id="noteSelect" onclick="PopLayer.Close();">
+			<li>
+				<span class="cssfont" onmousedown="notepush.setNote(1);">온음표</span>
+			</li>
+			<li>
+				<span class="cssfont" onmousedown="notepush.setNote(2);">2분음표</span>
+			</li>
+			<li>
+				<span class="cssfont" onmousedown="notepush.setNote(4);">4분음표</span>
+			</li>
+			<li>
+				<span class="cssfont" onmousedown="notepush.setNote(8);">8분음표</span>
+			</li>
+			<li>
+				<span class="cssfont" onmousedown="notepush.setNote(16);">16분음표</span>
+			</li>
+			<li>
+				<span class="cssfont" onmousedown="notepush.setNote(0);">음표 삭제</span>
+			</li>
+		</div>
+	</div>
+	<script>
+		window.onload = function() {
+			$(function() {
+				$("#tabs").tabs();
+			});
+			kara.initScore("track1");
+		}
+	</script>
+
+	<script src="./js/jquery-2.2.0.js"></script>
+	<script src="./js/timbre.dev.js"></script>
+	<script src="./js/midiplayer.js"></script>
+	<script src="./js/edit.js"></script>
+	<script src="./js/player.js"></script>
+	<script src="./js/print.js"></script>
+	<script src="./js/karaoke.js"></script>
+	<script src="./js/MIDI.js"></script>
+	<script src="./js/glyphs.js"></script>
+	<script src="./js/bootstrap.js"></script>
+	<script src="./js/d3.js"></script>
+	<script src="./js/sprintf.js"></script>
+	<script src="./js/Base64.js"></script>
+	<script src="./js/Base64binary.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script src="./js/template.js"></script>
+
+</body>
+
+</html>
