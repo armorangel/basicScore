@@ -1,0 +1,14 @@
+karaoke.js
+
+
+
+
+player.js
+
+	kara.initScore :: Init Score(first execute) (track) Param:: track: trackName -- 'track1'
+	
+	kara.menu :: Set ComboList of Instruments on Each Track (trackN) Param :: trackN: trackNumber -- '1'
+	
+	kara.numToInstrument :: Convert Number to InstrumentName (num) Param :: num: instrumentNumber -- '0' return InstrumentName
+	
+	

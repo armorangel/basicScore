@@ -1,5 +1,6 @@
 if (!window.kara)
 	window.kara = {};
+
 'use strict';
 
 //Init Score(first execute)
@@ -7,7 +8,6 @@ kara.initScore = function(track) {//track: trackName -- 'track1'
 	kara.menu("1");	//드랙별 악기 콤보 추가
 	kara.svgContain(track);
 	kara.textSVG(track);
-
 	kara.printNote(track);
 };
 
@@ -16,8 +16,8 @@ kara.delay = function delay(gap){ /* gap is in millisecs */
 	var then, now;
 	then = new Date().getTime();
 	now = then;
-	while((now-then)<gap) {
-		now = new Date().getTime();  // 현재시간을 읽어 함수를 불러들인 시간과의 차를 이용하여 처리
+	while( (now - then) < gap ) {
+		now = new Date().getTime();  // 현재시간을 읽어 함수를 불러들인 시간과의 차를 이용하여 처리$
 	}
 };
 
@@ -220,143 +220,89 @@ kara.numToInstrument = function(num){//num: instrumentNumber -- '0'
 		case 0: return "acoustic_grand_piano";
 		case 1: return "bright_acoustic_piano";
 		case 2: return "electric_grand_piano";
-		case 3: return "honkytonk_piano";break;
-		case 4: return "electric_piano_1";break;
-		case 5: return "electric_piano_2";break;
-		case 6: return "harpsichord";break;
-		case 7: return "clavinet";break;
-		case 8: return "celesta";break;
-		case 9: return "glockenspiel";break;
-		case 10: return "music_box";break;
-		case 11: return "vibraphone";break;
-		case 12: return "marimba";break;
-		case 13: return "xylophone";break;
-		case 14: return "tubular_bells";break;
-		case 15: return "dulcimer";break;
-		case 16: return "drawbar_organ";break;
-		case 17: return "percussive_organ";break;
-		case 18:return "rock_organ";break;
-		case 19:return "church_organ";break;
-		case 20:return "reed_organ";break;
-		case 21:return "Accordion";break;
-		case 22:return "harmonica";break;
-		case 23:
-			return "tango_accordion";
-			break;
-		case 24:
-			return "acoustic_guitar_nylon";
-			break;
-		case 25:
-			return "acoustic_guitar_steel";
-			break;
-		case 26:
-			return "electric_guitar_jazz";
-			break;
-		case 27:
-			return "electric_guitar_clean";
-			break;
-		case 28:
-			return "electric_guitar_muted";
-			break;
-		case 29:
-			return "overdriven_guitar";
-			break;
-		case 30:
-			return "distortion_guitar";
-			break;
-		case 31:
-			return "guitar_harmonics";
-			break;
-		case 32:
-			return "Acoustic_Bass";
-			break;
-		case 33:
-			return "electric_bass_finger";
-			break;
-		case 34:
-			return "electric_bass_pick";
-			break;
-		case 35:
-			return "fretless_bass";
-			break;
-		case 36:
-			return "slap_bass_1";
-			break;
-		case 37:
-			return "slap_bass_2";
-			break;
-		case 38:
-			return "synth_bass_1";
-			break;
-		case 39:
-			return "synth_bass_2";
-			break;
-		case 40:
-			return "violin";
-			break;
-		case 41:
-			return "viola";
-			break;
+		case 3: return "honkytonk_piano";
+		case 4: return "electric_piano_1";
+		case 5: return "electric_piano_2";
+		case 6: return "harpsichord";
+		case 7: return "clavinet";
+		case 8: return "celesta";
+		case 9: return "glockenspiel";
+		case 10: return "music_box";
+		case 11: return "vibraphone";
+		case 12: return "marimba";
+		case 13: return "xylophone";
+		case 14: return "tubular_bells";
+		case 15: return "dulcimer";
+		case 16: return "drawbar_organ";
+		case 17: return "percussive_organ";
+		case 18: return "rock_organ";
+		case 19: return "church_organ";
+		case 20: return "reed_organ";
+		case 21: return "Accordion";
+		case 22: return "harmonica";
+		case 23: return "tango_accordion";
+		case 24: return "acoustic_guitar_nylon";
+		case 25: return "acoustic_guitar_steel";
+		case 26: return "electric_guitar_jazz";
+		case 27: return "electric_guitar_clean";
+		case 28: return "electric_guitar_muted";
+		case 29: return "overdriven_guitar";
+		case 30: return "distortion_guitar";
+		case 31: return "guitar_harmonics";
+		case 32: return "Acoustic_Bass";
+		case 33: return "electric_bass_finger";
+		case 34: return "electric_bass_pick";
+		case 35: return "fretless_bass";
+		case 36: return "slap_bass_1";
+		case 37: return "slap_bass_2";
+		case 38: return "synth_bass_1";
+		case 39: return "synth_bass_2";
+		case 40: return "violin";
+		case 41: return "viola";
 		case 42:
 			return "cello";
-			break;
 		case 43:
 			return "contrabass";
-			break;
 		case 44:
 			return "tremolo_strings";
-			break;
+			
 		case 45:
 			return "pizzicato_strings";
-			break;
+			
 		case 46:
 			return "orchestral_harp";
-			break;
+			
 		case 47:
-			return "timpani";
-			break;
+			return "timpani";break;
 		case 48:
-			return "string_ensemble_1";
-			break;
+			return "string_ensemble_1";break;
 		case 49:
-			return "string_ensemble_2";
-			break;
+			return "string_ensemble_2";break;
 		case 50:
 			return "synth_strings_1";
 			break;
 		case 51:
-			return "synth_strings_2";
-			break;
+			return "synth_strings_2";break;
 		case 52:
-			return "choir_aahs";
-			break;
+			return "choir_aahs";break;
 		case 53:
-			return "voice_oohs";
-			break;
+			return "voice_oohs";break;
 		case 54:
-			return "synth_choir";
-			break;
+			return "synth_choir";break;
 		case 55:
-			return "orchestra_hit";
-			break;
+			return "orchestra_hit";break;
 		case 56:
-			return "trumpet";
-			break;
+			return "trumpet";break;
 		case 57:
-			return "trombone";
-			break;
+			return "trombone";break;
 		case 58:
-			return "tuba";
-			break;
+			return "tuba";break;
 		case 59:
-			return "muted_trumpet";
-			break;
+			return "muted_trumpet";break;
 		case 60:
-			return "french_horn";
-			break;
+			return "french_horn";break;
 		case 61:
-			return "Brass_Section";
-			break;
+			return "Brass_Section";break;
 		case 62:
 			return "synth_brass_1";
 			break;
