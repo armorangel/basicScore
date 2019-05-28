@@ -1,7 +1,9 @@
 if (!window.kara)
 	window.kara = {};
 'use strict';
-kara.editTitle = function(track){ //타이틀 수정
+
+//타이틀 수정
+kara.editTitle = function(track){
   var title = prompt("Title");
 	if(title == ""){
 		alert("제목을 입력하세요");
@@ -11,14 +13,14 @@ kara.editTitle = function(track){ //타이틀 수정
 
 	kara.scoreInfo.title = title;
 
-  d3.select("#title").remove();
+	d3.select("#title").remove();
 	d3.select("#editTitle").remove();
 	d3.select("#tempo").remove();
 	d3.select("#editTempo").remove();
 	d3.select("#writer").remove();
 	d3.select("#editWriter").remove();
 
-  kara.textSVG(track);
+	kara.textSVG(track);
 	kara.refresh();
 };
 kara.editTempo = function(track){ //템포 수정
@@ -211,7 +213,8 @@ $('#tabs').click(function(e){
 	console.log(notepush.id);
 });
 
-var notepush = { // 선택한 음을 배열에 담는다
+// 선택한 음을 배열에 담는다
+var notepush = {
 	parentId:"",
 	id:"",
 	bNum:"",
@@ -241,14 +244,13 @@ var notepush = { // 선택한 음을 배열에 담는다
 		var nNum = this.nNum.split('_'); //음표번호
 		var track = this.track;
 
-
 		switch(meter){
 			case 1: //온음표
 				if(kara.meterCal(bNum[1], nNum[1], "whole", track) == -1){ // 마디 초과
 					return;
 				}
 				else if(kara.meterCal(bNum[1], nNum[1], "whole", track) == 0){ //마디 꽉차서
-					var bbNum = bNum[1];
+					let bbNum = bNum[1];
 					bbNum = bbNum+1;
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", track); // push
 				}
@@ -261,11 +263,11 @@ var notepush = { // 선택한 음을 배열에 담는다
 					return;
 				}
 				else if(kara.meterCal(bNum[1], nNum[1], "half", track) == 0){ //마디 꽉차서
-					var bbNum = bNum[1];
+					let bbNum = bNum[1];
 					bbNum = bbNum+1;
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", track); // push
 				}
-				else{
+				else {
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", track);
 				}
 				break;
@@ -276,7 +278,7 @@ var notepush = { // 선택한 음을 배열에 담는다
 				}
 				else if(kara.meterCal(bNum[1], nNum[1], "quarter", track) == 0){ //마디 꽉차서
 					console.log("둘 경우");
-					var bbNum = bNum[1];
+					let bbNum = bNum[1];
 					bbNum = bbNum+1;
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "quarter", track); // push
 				}
@@ -289,24 +291,25 @@ var notepush = { // 선택한 음을 배열에 담는다
 				return;
 			}
 			else if(kara.meterCal(bNum[1], nNum[1], "8th", track) == 0){ //마디 꽉차서
-				var bbNum = bNum[1];
+				let bbNum = bNum[1];
 				bbNum = bbNum+1;
 				kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track); // push
 			}
-			else{
+			else {
 				kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track);
 			}
 			break;
+				
 			case 16: //16분음표
 			if(kara.meterCal(bNum[1], nNum[1], "16th", track) == -1){ // 마디 초과
 				return;
 			}
-			else if(kara.meterCal(bNum[1], nNum[1], "16th", track) == 0){ //마디 꽉차서
+			else if(kara.meterCal(bNum[1], nNum[1], "16th", track) == 0) { //마디 꽉차서
 				var bbNum = bNum[1];
 				bbNum = bbNum+1;
 				kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track); // push
 			}
-			else{
+			else {
 				kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track);
 			}
 			break;
@@ -323,8 +326,8 @@ var notepush = { // 선택한 음을 배열에 담는다
 
 
 
-
-var pitch_select = { //선택한 음높이 계산
+//선택한 음높이 계산
+var pitch_select = {
 	note: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
 	selection: function(pitch){
 		var m = 1;
@@ -340,7 +343,7 @@ var pitch_select = { //선택한 음높이 계산
 			n = n + 7;
 		}
 	}
-}
+};
 
 var boxWidth = function(meter){
 	var key = kara.scoreInfo.key;
@@ -352,7 +355,7 @@ var boxWidth = function(meter){
 	var a = N*12+70;
 	var ac = (X-a)/4;
 	var x = a;
-	var width = (X-a)/4
+	var width = (X-a)/4;
 	switch(meter){
 		case 'whole': //온음표
 			width = width;
@@ -379,11 +382,11 @@ var boxWidth = function(meter){
 			break;
 	}
 	return width;
-}
+};
 
 
-
-var PopLayer = { //팝업을 띄운다
+//음표선택 팝업 호출
+var PopLayer = {
 	nowLayer : "",
 	openLayer : "",
 	Xpos : "",
@@ -396,7 +399,7 @@ var PopLayer = { //팝업을 띄운다
 			this.openLayer = "";
 		}
 		this.openLayer = strLayer;
-		try{
+		try {
 			strAnchor.onmouseup = PopLayer.Open;
 		} catch(e) {}
 	},
@@ -419,7 +422,7 @@ var PopLayer = { //팝업을 띄운다
 		var objNowLayer = document.getElementById(PopLayer.nowLayer);
 		objNowLayer.style.display = "none";
 	}
-}
+};
 
 kara.noteToKey = function(keyArray){
 	var split = keyArray.split(",");
@@ -675,7 +678,7 @@ kara.key_er = function(pitch){  // b = -1 return, natural = 0, # = 1;
 				case 'Gm':
 				case 'F': //1
 				case 'Dm':
-					for(var i=0;i<M[keySplit[1]];i++){
+					for(var i=0;i<M[keySplit[1]];i++) {
 						regexp = flatArray[i];
 						if(regexp.test(pitch)){
 							return -1; //그 음이 #이 붙으면 1을 리턴

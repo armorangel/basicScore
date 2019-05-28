@@ -1,13 +1,16 @@
 if (!window.kara)
 	window.kara = {};
+
 'use strict';
-kara.scoreInfo = { //악보 정보
-	title: "title", //타이틀 저장
-	tempo: "120",  //템포 저장
-	writer: "writer", //작가 저장
-	key: "major Db", //키 저장
-	meter: "4/4", //박자저장
-	time: "", //최초 저장 시간
+
+//악보 정보 객체
+kara.scoreInfo = {
+	title: "title",		//타이틀 저장
+	tempo: "120",		//템포 저장
+	writer: "writer",	//작가 저장
+	key: "major Db",	//키 저장
+	meter: "4/4",		//박자저장
+	time: "",			//최초 저장 시간
 	track: {
 		"track1":{
 			clef: "G",
@@ -62,11 +65,14 @@ kara.scoreInfo = { //악보 정보
 	} //노트 저장
 };
 
-kara.noteMeter = { //노트 길이
+//노트 길이
+kara.noteMeter = {
 	head: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1},
 	rest: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1}
 };
-kara.key = { //키 종류
+
+//키 종류
+kara.key = {
 	major:{'C':0, 'G':1, 'D':2, 'A':3, 'E':4, 'B':5, 'Gb':6, 'Db':5, 'Ab':4, 'Eb':3, 'Bb':2, 'F':1},
 	minor:{'Am':0, 'Em':1, 'Bm':2, 'F#m':3, 'C#m':4, 'G#m':5, 'Ebm':6, 'Bbm':5, 'Fm':4, 'Cm':3, 'Gm':2, 'Dm':1}
 };
@@ -79,18 +85,23 @@ kara.printNote = function(track){	//배열의 값을 가져와서 음표를 그�
 	var four_boxEnter = 0;
 	var four_check=0;
 	var pageInc = 0;
-	kara.hLine(0, track);  //한줄 긋고 시작
+	
+	kara.hLine(0, track);	//한줄 긋고 시작
 	if(note[0] === undefined){ //첫마디가 없으면 노트박스 생성
 		kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, "whole", track);
 	}
-	for(var i=0;i<note.length;i++){ //마디 찍기
+	
+	//마디 찍기
+	for(var i=0; i<note.length; i++){
 		var four_enter = i%4;
 		if(four_enter === 0 && i>=4){
 			var four = i/4;
 			kara.hLine(four, track);  //4번째 마디마다 새 오선지 찍기
 			four_boxEnter++;
 		}
-		for(var j = 0;j<note[i].length;j++){ //음표와 음표 박스 찍기
+		
+		//음표와 음표 박스 찍기
+		for(var j = 0;j<note[i].length;j++){
 				var key = kara.scoreInfo.key;
 				var keySplit = key.split(' ');
 				var M = kara.key[keySplit[0]];
@@ -325,16 +336,18 @@ kara.meterCal_box = function(bNum, track){
 	var limited = meter[0]*meter[1]; //마디 제한
 	var now = 0;
 	var noteMeter = kara.noteMeter;
+	
 	if(note[bNum] == undefined){
 		return;
 	}
-	for(var i = 0;i<note[bNum].length;i++){
+	for(var i=0; i<note[bNum].length; i++){
 
 		var note_meter = noteMeter.head[note[bNum][i][1]];
 
 		now = now + note_meter;
 
 	}
+	
 	if (now == limited) {
 		return 1;
 	}

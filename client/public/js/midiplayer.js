@@ -1,11 +1,13 @@
 if (!window.kara)
 	window.kara = {};
 
+//재생
 kara.play = {
-	instru: [],
+	instru: [],//악기
 	lengs: 0,
-	player: function(){
-		console.log("평션 실행");
+	player: function() {
+		
+		console.log("재생 평션 실행");
 		kara.play.instru = [];
 		var mn = 0;
 		var set;
@@ -24,32 +26,34 @@ kara.play = {
 				}
 			}
 		}
+		
 		kara.play.instru = instru;
 		console.log(instru);
+		
 	    MIDI.loadPlugin({
-	      soundfontUrl: "./soundfont/",
+	      soundfontUrl: "./soundfont/",//soundfont path
 	      instrument: kara.play.instru,
 	      onprogress: function(state, progress) {
 	        console.log(state, progress);
 	      },
 	      onsuccess: function() {
-	        console.log("midi set");
+			console.log("midi set");
 	        var note = kara.scoreInfo.track; //note
 					var instru = kara.play.instru;
 					console.log(kara.play.instru);
 					console.log(instru);
 					var chord = [];
 					var tempo = Number(kara.scoreInfo.tempo);
-	        var delay = 0; // play one note every quarter second
-	        var velocity = 127; // how hard the note hits
+					var delay = 0; // play one note every quarter second
+					var velocity = 127; // how hard the note hits
 					var m = 0; //트랙
 					var n = 0; //음과 박자
 					var setting;
 					var player = [];
 					var index = [];
 					var delayTime = 0;
-	        // play the note
-
+			  
+	        		// play the note
 					for(var mm = 0;mm<instru.length;mm++){
 						setting = kara.instrumentTonum(instru[mm]);
 						console.log(setting);
@@ -59,8 +63,8 @@ kara.play = {
 					for (var key in note) {
 						if (note.hasOwnProperty(key)) {
 							if(note[key].clef !== ""){
-								for(var i=0;i<note[key].notes.length;i++){
-				          for(var j=0;j<note[key].notes[i].length;j++){
+								for(var i=0; i<note[key].notes.length; i++){
+				          	for(var j=0; j<note[key].notes[i].length; j++){
 										if(!jQuery.isArray(chord[m])){ //2차원배열이 아니면2차원 배열 생성
 											chord[m] = new Array(); //[m][]
 										}
@@ -91,6 +95,7 @@ kara.play = {
 						for(var r = 0;r<chord.length;r++){
 							var meter = player[r];
 							var ind = index[r];
+							
 							if(meter === 0){
 								ind++;
 								try{
@@ -118,17 +123,18 @@ kara.play = {
 						console.log("kara.play.lengs는"+kara.play.lengs);
 
 						if(kara.play.lengs < 0) {
-				        clearInterval(play);
-								console.log("실행 끝");
-				    }
+				        	clearInterval(play);
+							console.log("실행 끝");
+						}
 					}, (60000/tempo)*(kara.noteMeter.head["16th"]/4));
 			}
 	  });
 	},
 
+	// 정지
 	stop: function(){
 		kara.play.lengs = 0;
 		clearInterval(play);
-		console.log("kara.play.lengs는"+kara.play.lengs);
+		console.log("kara.play.lengs는" + kara.play.lengs);
 	}
 };

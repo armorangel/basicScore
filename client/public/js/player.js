@@ -1,23 +1,27 @@
 if (!window.kara)
 	window.kara = {};
 'use strict';
-kara.initScore = function(track){
-	kara.menu("1");
+
+//Init Score(first execute)
+kara.initScore = function(track) {//track: 트랙이름--'track1'
+	kara.menu("1");	//드랙별 악기 콤보 추가
 	kara.svgContain(track);
 	kara.textSVG(track);
 
 	kara.printNote(track);
 };
 
-kara.delay = function delay(gap){ /* gap is in millisecs */  //  시간지연
-	var then,now;
-	then=new Date().getTime();
-	now=then;
-	while((now-then)<gap){
-		now=new Date().getTime();  // 현재시간을 읽어 함수를 불러들인 시간과의 차를 이용하여 처리
+// 시간지연
+kara.delay = function delay(gap){ /* gap is in millisecs */  
+	var then, now;
+	then = new Date().getTime();
+	now = then;
+	while((now-then)<gap) {
+		now = new Date().getTime();  // 현재시간을 읽어 함수를 불러들인 시간과의 차를 이용하여 처리
 	}
 };
 
+//트랙 추가
 kara.addTabs = function(){
 	var trackN;
 	var track = 1;
@@ -49,16 +53,21 @@ kara.addTabs = function(){
 	kara.menu(track);
 };
 
-kara.menu = function(trackN){
-	var track = "track" + trackN;
-	kara.scoreInfo.track[track].instrument = 0;
+// Set ComboList of Instruments on Each Track
+kara.menu = function(trackN){	//trackN: trackNumber -- '1'
+	
+	var track = "track" + trackN;// 'track1'
+	kara.scoreInfo.track[track].instrument = 0;//처음 Acoustic Grand Piano로 세팅
+	
+	// 메뉴 바에 Select a track 문구 추가
 	$("#menu").append("<form action='#'><fieldset><label for='instrument" + trackN + "'>Select a track" + trackN+ "</label><select name='instrument" + trackN +"' id='instrument" + trackN +"'></fieldset></form>");
 	$("#instrument" + trackN)
-    .selectmenu({width: 200})
-    .selectmenu( "menuWidget" )
-    .addClass( "overflow" );
+		.selectmenu({width: 200})
+		.selectmenu( "menuWidget" )
+		.addClass( "overflow" );
 
-  $("#instrument" + trackN).append("<option value = '0'>Acoustic Grand Piano</option>");
+	//악기 콤보 박스 추가
+	$("#instrument" + trackN).append("<option value = '0'>Acoustic Grand Piano</option>");
 	$("#instrument" + trackN).append("<option value = '1'>Bright Acoustic Piano</option>");
 	$("#instrument" + trackN).append("<option value = '2'>Electric Grand Piano</option>");
 	$("#instrument" + trackN).append("<option value = '3'>Honky-tonk Piano</option>");
@@ -590,6 +599,7 @@ kara.numToInstrument = function(num){
 	}
 };
 
+//악기 번호 변환
 kara.instrumentTonum = function(instrument){
 	switch (instrument) {
 		case "acoustic_grand_piano":

@@ -1,6 +1,8 @@
 if (!window.kara)
 	window.kara = {};
+
 'use strict';
+
 kara.svg = {
 	"track1":{
 		svgContainer: null,
@@ -145,33 +147,33 @@ kara.textSVG = function(track){ // title, tempo, name svg
     .text(title);
 
 	position = jQuery("#title").position();
-  x = position.left - kara.scorePosition.left("track1");
-  y = position.top - kara.scorePosition.top("track1");
-  width = $('#title').width();
-  height = $('#title').height();
+	x = position.left - kara.scorePosition.left("track1");
+	y = position.top - kara.scorePosition.top("track1");
+	width = $('#title').width();
+	height = $('#title').height();
 
 	svg.append("rect")
 		.attr("id", "editTitle")
 		.attr("class", "in_bar")
-    .attr("x", x)
-    .attr("y", y)
+		.attr("x", x)
+		.attr("y", y)
 		.attr("onclick", "kara.editTitle('" + track + "')")
-    .style("width", width)
-    .style("height", height)
-    .style("fill", "#000000")
+		.style("width", width)
+		.style("height", height)
+		.style("fill", "#000000")
 		.style("fill-opacity", opacity);
-//Tempo
+	//Tempo
 	svg.append("text")
 		.attr("id", "tempo")
 		.attr("class", "in_bar")
 		.attr("font-size", "16px")
-    .attr("x", "5%")
-    .attr("y", "140")
-    .attr("dy", ".47em")
-    .style("text-anchor", "start")
-    .style("fill", "#000000")
+		.attr("x", "5%")
+		.attr("y", "140")
+		.attr("dy", ".47em")
+		.style("text-anchor", "start")
+		.style("fill", "#000000")
 		.style("font-weight", "bold")
-    .text("♩ = "+ tempo);
+		.text("♩ = "+ tempo);
 
 	position = $('#tempo').position();
 	x = position.left - kara.scorePosition.left("track1");
@@ -189,18 +191,19 @@ kara.textSVG = function(track){ // title, tempo, name svg
 		.style("height", height)
 		.style("fill", "#000000")
 		.style("fill-opacity", opacity);
-//writer
+	
+	//writer
 	svg.append("text")
 		.attr("id", "writer")
 		.attr("class", "in_bar")
 		.attr("font-size", "16px")
-	  .attr("x", "98%")
-	  .attr("y", "140")
-	  .attr("dy", ".47em")
-	  .style("text-anchor", "end")
-	  .style("fill", "#000000")
+		.attr("x", "98%")
+		.attr("y", "140")
+		.attr("dy", ".47em")
+		.style("text-anchor", "end")
+		.style("fill", "#000000")
 		.style("font-weight", "bold")
-	  .text(writer);
+		.text(writer);
 
 	position = $('#writer').position();
 	x = position.left - kara.scorePosition.left("track1");
@@ -401,12 +404,12 @@ kara.keySVG = function(Y, key, track){ //조표 SVG
 	svg.append("rect")
 		.attr("id", "editKey")
 		.attr("class", "in_bar" + " " + track)
-    .attr("x", x)
-    .attr("y", y)
+    	.attr("x", x)
+   		.attr("y", y)
 		.attr("onclick", "kara.editKey(" + track + ")")
-    .style("width", width)
-    .style("height", height)
-    .style("fill", "#00ffff")
+    	.style("width", width)
+    	.style("height", height)
+    	.style("fill", "#00ffff")
 		.style("fill-opacity", "0.3");
 
 };
