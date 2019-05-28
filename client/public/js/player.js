@@ -259,119 +259,50 @@ kara.numToInstrument = function(num){//num: instrumentNumber -- '0'
 		case 39: return "synth_bass_2";
 		case 40: return "violin";
 		case 41: return "viola";
-		case 42:
-			return "cello";
-		case 43:
-			return "contrabass";
-		case 44:
-			return "tremolo_strings";
+		case 42: return "cello";
+		case 43: return "contrabass";
+		case 44: return "tremolo_strings";
+		case 45: return "pizzicato_strings";
+		case 46: return "orchestral_harp";	
+		case 47: return "timpani";
+		case 48: return "string_ensemble_1";
+		case 49: return "string_ensemble_2";
+		case 50: return "synth_strings_1";
+		case 51: return "synth_strings_2";
+		case 52: return "choir_aahs";
+		case 53: return "voice_oohs";
+		case 54: return "synth_choir";
+		case 55: return "orchestra_hit";
+		case 56: return "trumpet";
+		case 57: return "trombone";
+		case 58: return "tuba";
+		case 59: return "muted_trumpet";
+		case 60: return "french_horn";
+		case 61: return "Brass_Section";
+		case 62: return "synth_brass_1";
+		case 63: return "synth_brass_2";
+		case 64: return "soprano_sax";
+		case 65: return "Alto_Sax";
+		case 66: return "tenor_sax";
+		case 67: return "Baritone_Sax";
+		case 68: return "oboe";
+		case 69: return "english_horn";
+		case 70: return "Bassoon";
+		case 71: return "clarinet";
+		case 72: return "piccolo";
+		case 73: return "flute";
+		case 74: return "recorder";
+		case 75: return "pan_flute";
+		case 76: return "Bottle_Blow";
+		case 77: return "shakuhachi";
+		case 78: return "whistle";
+		case 79: return "ocarina";
+		case 80: return "lead_1_square";
+		case 81: return "lead_2_sawtooth";
+		case 82: return "lead_3_calliope";
+		case 83: return "lead_4_chiff";
+		case 84: return "lead_5_charang";
 			
-		case 45:
-			return "pizzicato_strings";
-			
-		case 46:
-			return "orchestral_harp";
-			
-		case 47:
-			return "timpani";break;
-		case 48:
-			return "string_ensemble_1";break;
-		case 49:
-			return "string_ensemble_2";break;
-		case 50:
-			return "synth_strings_1";
-			break;
-		case 51:
-			return "synth_strings_2";break;
-		case 52:
-			return "choir_aahs";break;
-		case 53:
-			return "voice_oohs";break;
-		case 54:
-			return "synth_choir";break;
-		case 55:
-			return "orchestra_hit";break;
-		case 56:
-			return "trumpet";break;
-		case 57:
-			return "trombone";break;
-		case 58:
-			return "tuba";break;
-		case 59:
-			return "muted_trumpet";break;
-		case 60:
-			return "french_horn";break;
-		case 61:
-			return "Brass_Section";break;
-		case 62:
-			return "synth_brass_1";
-			break;
-		case 63:
-			return "synth_brass_2";
-			break;
-		case 64:
-			return "soprano_sax";
-			break;
-		case 65:
-			return "Alto_Sax";
-			break;
-		case 66:
-			return "tenor_sax";
-			break;
-		case 67:
-			return "Baritone_Sax";
-			break;
-		case 68:
-			return "oboe";
-			break;
-		case 69:
-			return "english_horn";
-			break;
-		case 70:
-			return "Bassoon";
-			break;
-		case 71:
-			return "clarinet";
-			break;
-		case 72:
-			return "piccolo";
-			break;
-		case 73:
-			return "flute";
-			break;
-		case 74:
-			return "recorder";
-			break;
-		case 75:
-			return "pan_flute";
-			break;
-		case 76:
-			return "Bottle_Blow";
-			break;
-		case 77:
-			return "shakuhachi";
-			break;
-		case 78:
-			return "whistle";
-			break;
-		case 79:
-			return "ocarina";
-			break;
-		case 80:
-			return "lead_1_square";
-			break;
-		case 81:
-			return "lead_2_sawtooth";
-			break;
-		case 82:
-			return "lead_3_calliope";
-			break;
-		case 83:
-			return "lead_4_chiff";
-			break;
-		case 84:
-			return "lead_5_charang";
-			break;
 		case 85:
 			return "lead_6_voice";
 			break;

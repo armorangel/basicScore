@@ -8,7 +8,7 @@ const generatePassword = require('password-generator');
 const app = express();
 
 // CONNECT TO MONGODB SERVER
-var dbUrl = 'mongodb+srv://user:QmTs5zvR8Phw4CUL@bsdb-vsnj9.mongodb.net/book?retryWrites=true';
+var dbUrl = 'mongodb+srv://user:QmTs5zvR8Phw4CUL@bsdb-vsnj9.mongodb.net/book?retryWrites=true&useNewUrlParser=true';
 mongoose.connect(dbUrl, (err) => { //MongoDB CONNECT
 	if(err) console.error('mongodb connection error', err);
 
@@ -19,6 +19,11 @@ mongoose.connect(dbUrl, (err) => { //MongoDB CONNECT
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.static(path.join(__dirname, 'client/public')));
 
+app.get('/dbtest', (req, res) => {
+	
+	console.log('dbtest');
+	res.json('dbtest');
+});
 
 // Put all API endpoints under '/api'
 app.get('/api/passwords', (req, res) => {
