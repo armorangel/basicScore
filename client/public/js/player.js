@@ -3,7 +3,7 @@ if (!window.kara)
 'use strict';
 
 //Init Score(first execute)
-kara.initScore = function(track) {//track: 트랙이름--'track1'
+kara.initScore = function(track) {//track: trackName -- 'track1'
 	kara.menu("1");	//드랙별 악기 콤보 추가
 	kara.svgContain(track);
 	kara.textSVG(track);
@@ -60,7 +60,8 @@ kara.menu = function(trackN){	//trackN: trackNumber -- '1'
 	kara.scoreInfo.track[track].instrument = 0;//처음 Acoustic Grand Piano로 세팅
 	
 	// 메뉴 바에 Select a track 문구 추가
-	$("#menu").append("<form action='#'><fieldset><label for='instrument" + trackN + "'>Select a track" + trackN+ "</label><select name='instrument" + trackN +"' id='instrument" + trackN +"'></fieldset></form>");
+	$("#menu").append("<form action='#'><fieldset><label for='instrument" + trackN + "'>Select a track" + trackN+ "</label><select name='instrument" + trackN 							+"' id='instrument" + trackN +"'></fieldset></form>");
+	
 	$("#instrument" + trackN)
 		.selectmenu({width: 200})
 		.selectmenu( "menuWidget" )
@@ -196,89 +197,49 @@ kara.menu = function(trackN){	//trackN: trackNumber -- '1'
 	$("#instrument" + trackN).append("<option value = '126'>Applause</option>");
 	$("#instrument" + trackN).append("<option value = '127'>Gunshot</option>");
 
+	
 	$("#instrument" + trackN).selectmenu({
-	  change: function(event, ui) {
+		
+		// 콤보 박스 변경시 호출
+		change: function(event, ui) {
+		  
 			console.log(trackN);
-			track = "track" + trackN;
+			track = "track" + trackN;//트랙 번호
 			console.log(track);
-			kara.scoreInfo.track[track].instrument = ui.item.value;
+			kara.scoreInfo.track[track].instrument = ui.item.value;//해당 악기 셋팅
 	  }
 	});
 
 	$("#instrument" + trackN).selectmenu("refresh");
 };
 
-kara.numToInstrument = function(num){
+
+//악기 번호 변환(번호 to 악기)
+kara.numToInstrument = function(num){//num: instrumentNumber -- '0'
 	switch (num) {
-		case 0:
-			return "acoustic_grand_piano";
-			break;
-		case 1:
-			return "bright_acoustic_piano";
-			break;
-		case 2:
-			return "electric_grand_piano";
-			break;
-		case 3:
-			return "honkytonk_piano";
-			break;
-		case 4:
-			return "electric_piano_1";
-			break;
-		case 5:
-			return "electric_piano_2";
-			break;
-		case 6:
-			return "harpsichord";
-			break;
-		case 7:
-			return "clavinet";
-			break;
-		case 8:
-			return "celesta";
-			break;
-		case 9:
-			return "glockenspiel";
-			break;
-		case 10:
-			return "music_box";
-			break;
-		case 11:
-			return "vibraphone";
-			break;
-		case 12:
-			return "marimba";
-			break;
-		case 13:
-			return "xylophone";
-			break;
-		case 14:
-			return "tubular_bells";
-			break;
-		case 15:
-			return "dulcimer";
-			break;
-		case 16:
-			return "drawbar_organ";
-			break;
-		case 17:
-			return "percussive_organ";
-			break;
-		case 18:
-			return "rock_organ";
-			break;
-		case 19:
-			return "church_organ";
-			break;
-		case 20:
-			return "reed_organ";
-			break;
-		case 21:
-			return "Accordion";
-			break;
-		case 22:
-			return "harmonica";
-			break;
+		case 0: return "acoustic_grand_piano";
+		case 1: return "bright_acoustic_piano";
+		case 2: return "electric_grand_piano";
+		case 3: return "honkytonk_piano";break;
+		case 4: return "electric_piano_1";break;
+		case 5: return "electric_piano_2";break;
+		case 6: return "harpsichord";break;
+		case 7: return "clavinet";break;
+		case 8: return "celesta";break;
+		case 9: return "glockenspiel";break;
+		case 10: return "music_box";break;
+		case 11: return "vibraphone";break;
+		case 12: return "marimba";break;
+		case 13: return "xylophone";break;
+		case 14: return "tubular_bells";break;
+		case 15: return "dulcimer";break;
+		case 16: return "drawbar_organ";break;
+		case 17: return "percussive_organ";break;
+		case 18:return "rock_organ";break;
+		case 19:return "church_organ";break;
+		case 20:return "reed_organ";break;
+		case 21:return "Accordion";break;
+		case 22:return "harmonica";break;
 		case 23:
 			return "tango_accordion";
 			break;
@@ -599,7 +560,7 @@ kara.numToInstrument = function(num){
 	}
 };
 
-//악기 번호 변환
+//악기 번호 변환(악기 to 번호)
 kara.instrumentTonum = function(instrument){
 	switch (instrument) {
 		case "acoustic_grand_piano":
