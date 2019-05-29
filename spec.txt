@@ -1,3 +1,4 @@
+/*FUNCTION*/
 karaoke.js
 
 
@@ -5,10 +6,27 @@ karaoke.js
 
 player.js
 
-	kara.initScore :: Init Score(first execute) (track) Param:: track: trackName -- 'track1'
+	kara.initScore :: Init Score(first execute) (track) Param:: track: Track Name -- 'track1'
 	
-	kara.menu :: Set ComboList of Instruments on Each Track (trackN) Param :: trackN: trackNumber -- '1'
+	kara.menu :: Add Combo to select Instruments on Each Track (trackN) Param :: trackN: Track Number -- '1'
 	
-	kara.numToInstrument :: Convert InstrumentNumber to InstrumentName (num) Param :: num: instrumentNumber -- '0' return InstrumentName
+	kara.numToInstrument :: Convert Instrument Number to Instrument Name (num) Param :: num: Instrument Number -- '0' return Instrument Name
 	
-	kara.instrumentTonum :: Convert InstrumentName to InstrumentNumber (instrument) Param :: instrument: instrumentName -- 'acoustic_grand_piano'
+	kara.instrumentTonum :: Convert Instrument Name to Instrument Number (instrument) Param :: instrument: Instrument Name -- 'acoustic_grand_piano'
+
+edit.js
+
+	
+	
+/*VARIABLE*/
+
+
+/*COMPONENT*/
+
+#menu :: 좌측 메뉴바 - 악기 콤보 목록
+#instrument1 :: 악기 콤보
+.in_bar :: 악기 선택 영역 g(svg
+
+
+
+)

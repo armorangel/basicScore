@@ -51,6 +51,7 @@ app.get('*', (req, res) => {
 	//res.sendFile(path.join(__dirname + '/client/build/index.html'));
 	
 	fs.readFile('public/exMidi.html', function(err, data) {
+		if(err) console.log(err);
 		res.writeHead(200, {'Content-Type': 'text/html'});
 		res.write(data);
 		res.end();
