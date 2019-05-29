@@ -254,6 +254,7 @@ $('#tabs').click(function(e) {
 
 // 선택한 음을 배열에 담는다
 var notepush = {
+	
 	parentId:"",
 	id:"",
 	bNum:"",
@@ -279,22 +280,23 @@ var notepush = {
 		// this.klass = klass_split[1];
 	},
 	setNote: function(meter) {
+		
 		this.meter = meter;
 		var bNum = this.bNum.split('_'); // 마디번호
 		var nNum = this.nNum.split('_'); // 음표번호
 		var track = this.track;
 
-		switch(meter){
+		switch(meter) {
 			case 1: //온음표
 				if(kara.meterCal(bNum[1], nNum[1], "whole", track) == -1) { // 마디 초과
 					return;
-				}
-				else if(kara.meterCal(bNum[1], nNum[1], "whole", track) == 0) { //마디 꽉차서
+					
+				} else if(kara.meterCal(bNum[1], nNum[1], "whole", track) == 0) { //마디 꽉차서
 					let bbNum = bNum[1];
 					bbNum = bbNum + 1;
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", track); // push
-				}
-				else {
+					
+				} else {
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", track);
 				}
 				break;
@@ -302,29 +304,23 @@ var notepush = {
 			case 2: //2분음표
 				if(kara.meterCal(bNum[1], nNum[1], "half", track) == -1) { // 마디 초과
 					return;
-				}
-				else if(kara.meterCal(bNum[1], nNum[1], "half", track) == 0) { //마디 꽉차서
+				} else if(kara.meterCal(bNum[1], nNum[1], "half", track) == 0) { //마디 꽉차서
 					let bbNum = bNum[1];
 					bbNum = bbNum+1;
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", track); // push
-				}
-				else {
+				} else {
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", track);
 				}
 				break;
 				
 			case 4: //4분음표 "quarter"
 				if(kara.meterCal(bNum[1], nNum[1], "quarter", track) == -1) { // 마디 초과
-					console.log("첫 경우");
 					return;
-				}
-				else if(kara.meterCal(bNum[1], nNum[1], "quarter", track) == 0) { //마디 꽉차서
-					console.log("둘 경우");
+				} else if(kara.meterCal(bNum[1], nNum[1], "quarter", track) == 0) { //마디 꽉차서
 					let bbNum = bNum[1];
 					bbNum = bbNum+1;
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "quarter", track); // push
-				}
-				else {
+				} else {
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "quarter", track);
 				}
 				break;
@@ -332,13 +328,11 @@ var notepush = {
 			case 8: //8분음표 "8th"
 			if(kara.meterCal(bNum[1], nNum[1], "8th", track) == -1) { // 마디 초과
 				return;
-			}
-			else if(kara.meterCal(bNum[1], nNum[1], "8th", track) == 0) { //마디 꽉차서
+			} else if(kara.meterCal(bNum[1], nNum[1], "8th", track) == 0) { //마디 꽉차서
 				let bbNum = bNum[1];
 				bbNum = bbNum + 1;
 				kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track); // push
-			}
-			else {
+			} else {
 				kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track);
 			}
 			break;
@@ -346,13 +340,11 @@ var notepush = {
 			case 16: //16분음표
 			if(kara.meterCal(bNum[1], nNum[1], "16th", track) == -1) { // 마디 초과
 				return;
-			}
-			else if(kara.meterCal(bNum[1], nNum[1], "16th", track) == 0) { //마디 꽉차서
+			} else if(kara.meterCal(bNum[1], nNum[1], "16th", track) == 0) { //마디 꽉차서
 				var bbNum = bNum[1];
 				bbNum = bbNum + 1;
 				kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track); // push
-			}
-			else {
+			} else {
 				kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track);
 			}
 			break;
@@ -395,7 +387,7 @@ var boxWidth = function(meter){
 	var N = M[keySplit[1]];
 	var X = kara.XY.X();
 
-	var a = N*12+70;
+	var a = N * 12 + 70;
 	var ac = (X-a)/4;
 	var x = a;
 	var width = (X-a)/4;
