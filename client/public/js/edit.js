@@ -731,11 +731,11 @@ kara.maxLength = function(chordArray) {
 	var longlen = 0;
 	var nowlen = 0;
 
-	for(var o = 0; o<chordArray.length; o++) {
-		for(var oo = 0; oo<chordArray[o].length; oo++) {
+	for(var o = 0; o < chordArray.length; o++) {
+		for(var oo = 0; oo < chordArray[o].length; oo++) {
 			nowlen = nowlen + kara.noteMeter.head[chordArray[o][oo][1]];
 		}
-		if(nowlen>=longlen) {
+		if(nowlen >= longlen) {
 			longlen = nowlen;
 		}
 		nowlen = 0;
