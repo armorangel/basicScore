@@ -153,8 +153,6 @@ kara.keyTrueofFalse = function(key){// key :: key -- 'major C'
 	}
 };
 
-
-
 kara.keyvalue = function(key){
 	
 	var keyupper = key[0].toUpperCase();
