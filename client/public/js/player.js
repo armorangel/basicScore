@@ -214,8 +214,8 @@ kara.menu = function(trackN){	//trackN: trackNumber -- '1'
 };
 
 
-//악기 번호 변환(번호 to 악기)
-kara.numToInstrument = function(num){//num: instrumentNumber -- '0'
+// Convert InstrumentNumber to InstrumentName
+kara.numToInstrument = function(num) {// num: instrumentNumber -- '0'
 	switch (num) {
 		case 0: return "acoustic_grand_piano";
 		case 1: return "bright_acoustic_piano";
@@ -302,530 +302,185 @@ kara.numToInstrument = function(num){//num: instrumentNumber -- '0'
 		case 82: return "lead_3_calliope";
 		case 83: return "lead_4_chiff";
 		case 84: return "lead_5_charang";
-			
-		case 85:
-			return "lead_6_voice";
-			break;
-		case 86:
-			return "lead_7_fifths";
-			break;
-		case 87:
-			return "lead_8_bass__lead";
-			break;
-		case 88:
-			return "pad_1_new_age";
-			break;
-		case 89:
-			return "pad_2_warm";
-			break;
-		case 90:
-			return "pad_3_polysynth";
-			break;
-		case 91:
-			return "pad_4_choir";
-			break;
-		case 92:
-			return "pad_5_bowed";
-			break;
-		case 93:
-			return "pad_6_metallic";
-			break;
-		case 94:
-			return "pad_7_halo";
-			break;
-		case 95:
-			return "pad_8_sweep";
-			break;
-		case 96:
-			return "fx_1_rain";
-			break;
-		case 97:
-			return "fx_2_soundtrack";
-			break;
-		case 98:
-			return "fx_3_crystal";
-			break;
-		case 99:
-			return "fx_4_atmosphere";
-			break;
-		case 100:
-			return "fx_5_brightness";
-			break;
-		case 101:
-			return "fx_6_goblins";
-			break;
-		case 102:
-			return "fx_7_echoes";
-			break;
-		case 103:
-			return "fx_8_scifi";
-			break;
-		case 104:
-			return "sitar";
-			break;
-		case 105:
-			return "Banjo";
-			break;
-		case 106:
-			return "shamisen";
-			break;
-		case 107:
-			return "koto";
-			break;
-		case 108:
-			return "kalimba";
-			break;
-		case 109:
-			return "Bagpipe";
-			break;
-		case 110:
-			return "fiddle";
-			break;
-		case 111:
-			return "shanai";
-			break;
-		case 112:
-			return "tinkle_bell";
-			break;
-		case 113:
-			return "agogo";
-			break;
-		case 114:
-			return "steel_drums";
-			break;
-		case 115:
-			return "woodblock";
-			break;
-		case 116:
-			return "taiko_drum";
-			break;
-		case 117:
-			return "melodic_tom";
-			break;
-		case 118:
-			return "synth_drum";
-			break;
-		case 119:
-			return "reverse_cymbal";
-			break;
-		case 120:
-			return "guitar_fret_noise";
-			break;
-		case 121:
-			return "breath_noise";
-			break;
-		case 122:
-			return "seashore";
-			break;
-		case 123:
-			return "bird_tweet";
-			break;
-		case 124:
-			return "telephone_ring";
-			break;
-		case 125:
-			return "helicopter";
-			break;
-		case 126:
-			return "Applause";
-			break;
-		case 127:
-			return "gunshot";
-			break;
-		default:
-			break;
+		case 85: return "lead_6_voice";
+		case 86: return "lead_7_fifths";
+		case 87: return "lead_8_bass__lead";
+		case 88: return "pad_1_new_age";
+		case 89: return "pad_2_warm";
+		case 90: return "pad_3_polysynth";
+		case 91: return "pad_4_choir";
+		case 92: return "pad_5_bowed";
+		case 93: return "pad_6_metallic";
+		case 94: return "pad_7_halo";
+		case 95: return "pad_8_sweep";
+		case 96: return "fx_1_rain";
+		case 97: return "fx_2_soundtrack";
+		case 98: return "fx_3_crystal";
+		case 99: return "fx_4_atmosphere";
+		case 100: return "fx_5_brightness";
+		case 101: return "fx_6_goblins";
+		case 102: return "fx_7_echoes";
+		case 103: return "fx_8_scifi";
+		case 104: return "sitar";
+		case 105: return "Banjo";
+		case 106: return "shamisen";
+		case 107: return "koto";
+		case 108: return "kalimba";
+		case 109: return "Bagpipe";
+		case 110: return "fiddle";
+		case 111: return "shanai";
+		case 112: return "tinkle_bell";
+		case 113: return "agogo";
+		case 114: return "steel_drums";
+		case 115: return "woodblock";
+		case 116: return "taiko_drum";
+		case 117: return "melodic_tom";
+		case 118: return "synth_drum";
+		case 119: return "reverse_cymbal";
+		case 120: return "guitar_fret_noise";
+		case 121: return "breath_noise";
+		case 122: return "seashore";
+		case 123: return "bird_tweet";
+		case 124: return "telephone_ring";
+		case 125: return "helicopter";
+		case 126: return "Applause";
+		case 127: return "gunshot";
+		default: return "";
 	}
 };
 
-//악기 번호 변환(악기 to 번호)
-kara.instrumentTonum = function(instrument){
+// Convert InstrumentName to InstrumentNumber
+kara.instrumentTonum = function(instrument) {// instrument: instrumentName -- 'acoustic_grand_piano'
 	switch (instrument) {
-		case "acoustic_grand_piano":
-			return 0;
-			break;
-		case "bright_acoustic_piano":
-			return 1;
-			break;
-		case "electric_grand_piano":
-			return 2;
-			break;
-		case "honkytonk_piano":
-			return 3;
-			break;
-		case "electric_piano_1":
-			return 4;
-			break;
-		case "electric_piano_2":
-			return 5;
-			break;
-		case "harpsichord":
-			return 6;
-			break;
-		case "clavinet":
-			return 7;
-			break;
-		case "celesta":
-			return 8;
-			break;
-		case "glockenspiel":
-			return 9;
-			break;
-		case "music_box":
-			return 10;
-			break;
-		case "vibraphone":
-			return 11;
-			break;
-		case "marimba":
-			return 12;
-			break;
-		case "xylophone":
-			return 13;
-			break;
-		case "tubular_bells":
-			return 14;
-			break;
-		case "dulcimer":
-			return 15;
-			break;
-		case "drawbar_organ":
-			return 16;
-			break;
-		case "percussive_organ":
-			return 17;
-			break;
-		case "rock_organ":
-			return 18;
-			break;
-		case "church_organ":
-			return 19;
-			break;
-		case "reed_organ":
-			return 20;
-			break;
-		case "Accordion":
-			return 21;
-			break;
-		case "harmonica":
-			return 22;
-			break;
-		case "tango_accordion":
-			return 23;
-			break;
-		case "acoustic_guitar_nylon":
-			return 24;
-			break;
-		case "acoustic_guitar_steel":
-			return 25;
-			break;
-		case "electric_guitar_jazz":
-			return 26;
-			break;
-		case "electric_guitar_clean":
-			return 27;
-			break;
-		case "electric_guitar_muted":
-			return 28;
-			break;
-		case "overdriven_guitar":
-			return 29;
-			break;
-		case "distortion_guitar":
-			return 30;
-			break;
-		case "guitar_harmonics":
-			return 31;
-			break;
-		case "Acoustic_Bass":
-			return 32;
-			break;
-		case "electric_bass_finger":
-			return 33;
-			break;
-		case "electric_bass_pick":
-			return 34;
-			break;
-		case "fretless_bass":
-			return 35;
-			break;
-		case "slap_bass_1":
-			return 36;
-			break;
-		case "slap_bass_2":
-			return 37;
-			break;
-		case "synth_bass_1":
-			return 38;
-			break;
-		case "synth_bass_2":
-			return 39;
-			break;
-		case "violin":
-			return 40;
-			break;
-		case "viola":
-			return 41;
-			break;
-		case "cello":
-			return 42;
-			break;
-		case "contrabass":
-			return 43;
-			break;
-		case "tremolo_strings":
-			return 44;
-			break;
-		case "pizzicato_strings":
-			return 45;
-			break;
-		case "orchestral_harp":
-			return 46;
-			break;
-		case "timpani":
-			return 47;
-			break;
-		case "string_ensemble_1":
-			return 48;
-			break;
-		case "string_ensemble_2":
-			return 49;
-			break;
-		case "synth_strings_1":
-			return 50;
-			break;
-		case "synth_strings_2":
-			return 51;
-			break;
-		case "choir_aahs":
-			return 52;
-			break;
-		case "voice_oohs":
-			return 53;
-			break;
-		case "synth_choir":
-			return 54;
-			break;
-		case "orchestra_hit":
-			return 55;
-			break;
-		case "trumpet":
-			return 56;
-			break;
-		case "trombone":
-			return 57;
-			break;
-		case "tuba":
-			return 58;
-			break;
-		case "muted_trumpet":
-			return 59;
-			break;
-		case "french_horn":
-			return 60;
-			break;
-		case "Brass_Section":
-			return 61;
-			break;
-		case "synth_brass_1":
-			return 62;
-			break;
-		case "synth_brass_2":
-			return 63;
-			break;
-		case "soprano_sax":
-			return 64;
-			break;
-		case "Alto_Sax":
-			return 65;
-			break;
-		case "tenor_sax":
-			return 66;
-			break;
-		case "Baritone_Sax":
-			return 67;
-			break;
-		case "oboe":
-			return 68;
-			break;
-		case "english_horn":
-			return 69;
-			break;
-		case "Bassoon":
-			return 70;
-			break;
-		case "clarinet":
-			return 71;
-			break;
-		case "piccolo":
-			return 72;
-			break;
-		case "flute":
-			return 73;
-			break;
-		case "recorder":
-			return 74;
-			break;
-		case "pan_flute":
-			return 75;
-			break;
-		case "Bottle_Blow":
-			return 76;
-			break;
-		case "shakuhachi":
-			return 77;
-			break;
-		case "whistle":
-			return 78;
-			break;
-		case "ocarina":
-			return 79;
-			break;
-		case "lead_1_square":
-			return 80;
-			break;
-		case "lead_2_sawtooth":
-			return 81;
-			break;
-		case "lead_3_calliope":
-			return 82;
-			break;
-		case "lead_4_chiff":
-			return 83;
-			break;
-		case "lead_5_charang":
-			return 84;
-			break;
-		case "lead_6_voice":
-			return 85;
-			break;
-		case "lead_7_fifths":
-			return 86;
-			break;
-		case "lead_8_bass__lead":
-			return 87;
-			break;
-		case "pad_1_new_age":
-			return 88;
-			break;
-		case "pad_2_warm":
-			return 98;
-			break;
-		case "pad_3_polysynth":
-			return 90;
-			break;
-		case "pad_4_choir":
-			return 91;
-			break;
-		case "pad_5_bowed":
-			return 92;
-			break;
-		case "pad_6_metallic":
-			return 93;
-			break;
-		case "pad_7_halo":
-			return 94;
-			break;
-		case "pad_8_sweep":
-			return 95;
-			break;
-		case "fx_1_rain":
-			return 96;
-			break;
-		case "fx_2_soundtrack":
-			return 97;
-			break;
-		case "fx_3_crystal":
-			return 98;
-			break;
-		case "fx_4_atmosphere":
-			return 99;
-			break;
-		case "fx_5_brightness":
-			return 100;
-			break;
-		case "fx_6_goblins":
-			return 101;
-			break;
-		case "fx_7_echoes":
-			return 102;
-			break;
-		case "fx_8_scifi":
-			return 103;
-			break;
-		case "sitar":
-			return 104;
-			break;
-		case "Banjo":
-			return 105;
-			break;
-		case "shamisen":
-			return 106;
-			break;
-		case "koto":
-			return 107;
-			break;
-		case "kalimba":
-			return 108;
-			break;
-		case "Bagpipe":
-			return 109;
-			break;
-		case "fiddle":
-			return 110;
-			break;
-		case "shanai":
-			return 111;
-			break;
-		case "tinkle_bell":
-			return 112;
-			break;
-		case "agogo":
-			return 113;
-			break;
-		case "steel_drums":
-			return 114;
-			break;
-		case "woodblock":
-			return 115;
-			break;
-		case "taiko_drum":
-			return 116;
-			break;
-		case "melodic_tom":
-			return 117;
-			break;
-		case "synth_drum":
-			return 118;
-			break;
-		case "reverse_cymbal":
-			return 119;
-			break;
-		case "guitar_fret_noise":
-			return 120;
-			break;
-		case "breath_noise":
-			return 121;
-			break;
-		case "seashore":
-			return 122;
-			break;
-		case "bird_tweet":
-			return 123;
-			break;
-		case "telephone_ring":
-			return 124;
-			break;
-		case "helicopter":
-			return 125;
-			break;
-		case "Applause":
-			return 126;
-			break;
-		case "gunshot":
-			return 127;
-			break;
-		default:
-			break;
+		case "acoustic_grand_piano":	return 0;
+		case "bright_acoustic_piano":	return 1;
+		case "electric_grand_piano":	return 2;
+		case "honkytonk_piano":			return 3;
+		case "electric_piano_1":		return 4;
+		case "electric_piano_2":		return 5;
+		case "harpsichord":				return 6;
+		case "clavinet":				return 7;
+		case "celesta":					return 8;
+		case "glockenspiel":			return 9;
+		case "music_box":				return 10;
+		case "vibraphone":				return 11;
+		case "marimba":					return 12;
+		case "xylophone":				return 13;
+		case "tubular_bells":			return 14;
+		case "dulcimer":				return 15;
+		case "drawbar_organ":			return 16;
+		case "percussive_organ":		return 17;
+		case "rock_organ":				return 18;
+		case "church_organ":			return 19;
+		case "reed_organ":				return 20;
+		case "Accordion":				return 21;
+		case "harmonica":				return 22;
+		case "tango_accordion":			return 23;
+		case "acoustic_guitar_nylon":	return 24;
+		case "acoustic_guitar_steel":	return 25;
+		case "electric_guitar_jazz":	return 26;
+		case "electric_guitar_clean":	return 27;
+		case "electric_guitar_muted":	return 28;
+		case "overdriven_guitar":		return 29;
+		case "distortion_guitar":		return 30;
+		case "guitar_harmonics":		return 31;
+		case "Acoustic_Bass":			return 32;
+		case "electric_bass_finger":	return 33;
+		case "electric_bass_pick":		return 34;
+		case "fretless_bass":			return 35;
+		case "slap_bass_1":				return 36;
+		case "slap_bass_2":				return 37;
+		case "synth_bass_1":			return 38;
+		case "synth_bass_2":			return 39;
+		case "violin":					return 40;
+		case "viola":					return 41;
+		case "cello":					return 42;
+		case "contrabass":				return 43;
+		case "tremolo_strings":			return 44;
+		case "pizzicato_strings":		return 45;
+		case "orchestral_harp":			return 46;
+		case "timpani":					return 47;
+		case "string_ensemble_1":		return 48;
+		case "string_ensemble_2":		return 49;
+		case "synth_strings_1":			return 50;
+		case "synth_strings_2":			return 51;
+		case "choir_aahs":				return 52;
+		case "voice_oohs":				return 53;
+		case "synth_choir":				return 54;
+		case "orchestra_hit":			return 55;
+		case "trumpet":					return 56;
+		case "trombone":				return 57;
+		case "tuba":					return 58;
+		case "muted_trumpet":			return 59;
+		case "french_horn":				return 60;
+		case "Brass_Section":			return 61;
+		case "synth_brass_1":			return 62;
+		case "synth_brass_2":			return 63;
+		case "soprano_sax":				return 64;
+		case "Alto_Sax":				return 65;
+		case "tenor_sax":				return 66;
+		case "Baritone_Sax":			return 67;
+		case "oboe":					return 68;
+		case "english_horn":			return 69;
+		case "Bassoon":					return 70;
+		case "clarinet":				return 71;
+		case "piccolo":					return 72;
+		case "flute":					return 73;
+		case "recorder":				return 74;
+		case "pan_flute":				return 75;
+		case "Bottle_Blow":				return 76;
+		case "shakuhachi":				return 77;
+		case "whistle":					return 78;
+		case "ocarina":					return 79;
+		case "lead_1_square":			return 80;
+		case "lead_2_sawtooth":			return 81;
+		case "lead_3_calliope":			return 82;
+		case "lead_4_chiff":			return 83;
+		case "lead_5_charang":			return 84;
+		case "lead_6_voice":			return 85;
+		case "lead_7_fifths":			return 86;
+		case "lead_8_bass__lead":		return 87;
+		case "pad_1_new_age":			return 88;		
+		case "pad_2_warm":				return 89;
+		case "pad_3_polysynth":			return 90;
+		case "pad_4_choir":				return 91;
+		case "pad_5_bowed":				return 92;
+		case "pad_6_metallic":			return 93;
+		case "pad_7_halo":				return 94;
+		case "pad_8_sweep":				return 95;
+		case "fx_1_rain":				return 96;
+		case "fx_2_soundtrack":			return 97;
+		case "fx_3_crystal":			return 98;
+		case "fx_4_atmosphere":			return 99;
+		case "fx_5_brightness":			return 100;
+		case "fx_6_goblins":			return 101;
+		case "fx_7_echoes":				return 102;
+		case "fx_8_scifi":				return 103;
+		case "sitar":					return 104;
+		case "Banjo":					return 105;
+		case "shamisen":				return 106;
+		case "koto":					return 107;
+		case "kalimba":					return 108;
+		case "Bagpipe":					return 109;
+		case "fiddle":					return 110;
+		case "shanai":					return 111;
+		case "tinkle_bell":				return 112;
+		case "agogo":					return 113;
+		case "steel_drums":				return 114;
+		case "woodblock":				return 115;
+		case "taiko_drum":				return 116;
+		case "melodic_tom":				return 117;
+		case "synth_drum":				return 118;
+		case "reverse_cymbal":			return 119;
+		case "guitar_fret_noise":		return 120;
+		case "breath_noise":			return 121;
+		case "seashore":				return 122;
+		case "bird_tweet":				return 123;
+		case "telephone_ring":			return 124;
+		case "helicopter":				return 125;
+		case "Applause":				return 126;
+		case "gunshot":					return 127;
+		default:						return -1;
 	}
 };
 

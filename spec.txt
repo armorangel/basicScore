@@ -9,6 +9,6 @@ player.js
 	
 	kara.menu :: Set ComboList of Instruments on Each Track (trackN) Param :: trackN: trackNumber -- '1'
 	
-	kara.numToInstrument :: Convert Number to InstrumentName (num) Param :: num: instrumentNumber -- '0' return InstrumentName
+	kara.numToInstrument :: Convert InstrumentNumber to InstrumentName (num) Param :: num: instrumentNumber -- '0' return InstrumentName
 	
-	
+	kara.instrumentTonum :: Convert InstrumentName to InstrumentNumber (instrument) Param :: instrument: instrumentName -- 'acoustic_grand_piano'
