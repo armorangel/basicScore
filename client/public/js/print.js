@@ -1,8 +1,8 @@
-if (!window.kara)
-	window.kara = {};
+if(!window.kara) window.kara = {};
 
 'use strict';
 
+//악보 트랙별 SVG 저장 객체
 kara.svg = {
 	"track1":{
 		svgContainer: null,
@@ -86,31 +86,32 @@ kara.svg = {
 	}
 };
 
-kara.svgContain = function(track){
-	var trac = kara.svg[track];
+kara.svgContain = function(track){// track: Track Name -- 'track1'
+	var trac = kara.svg[track];//  kara.svg['track1']
 	var svgContainer;
 	var svgText;
 	var svgLine;
 	var svgSymbol;
 	var svgNote;
 	var svgBox;
-	var width = $("#tabs").width();
+	var width = $("#tabs").width();// 악보 탭 넓이
 
+	//#score :: 악보영역
 	svgContainer = d3.select("#"+track).append("svg")
 		.attr("id", "score")
 		.style("width", width-43)
-		.style("height", "400");
+		.style("height", "400");//최초 높이
 
 	svgText = svgContainer.append("g") //title, tempo, writer
-		.attr("id", "text");
+						   .attr("id", "text");
 	svgLine = svgContainer.append("g") //line
-		.attr("id", "lines");
+						   .attr("id", "lines");
 	svgSymbol = svgContainer.append("g") //clef
-		.attr("id", "symbol");
+							.attr("id", "symbol");
 	svgNote = svgContainer.append("g") //note
-		.attr("id", "note");
+						  .attr("id", "note");
 	svgBox = svgContainer.append("g")
-		.attr("id", "boxs");
+						 .attr("id", "boxs");
 
 	trac.svgContainer = svgContainer;
 	trac.svgText = svgText;
@@ -128,11 +129,11 @@ kara.textSVG = function(track){ // title, tempo, name svg
 	var tempo = kara.scoreInfo.tempo;
 	var writer = kara.scoreInfo.writer;
 	var position;
-  var x;
-  var y;
-  var width;
-  var height;
-	var opacity = "0.3";
+	var x;
+	var y;
+	var width;
+	var height;
+	var opacity = "0.0";
 //Title
 	svg.append("text")
 		.attr("id", "title")

@@ -1,3 +1,7 @@
+|: | 0 0 G4_half| 0 1 E4_half :|
+|: | 1 0 G4_half| 1 1 A4_half :|
+|: | 2 0 B4_8th| 2 1 F4_8th| 2 2 E4_8th| 2 3 F4_8th| 2 4 F4_8th| 2 5 E4_8th| 2 6 F4_8th| 2 7 F4_8th :|
+
 /*FUNCTION*/
 karaoke.js
 
@@ -24,8 +28,9 @@ edit.js
 /*COMPONENT*/
 
 #menu :: 좌측 메뉴바 - 악기 콤보 목록
+#score :: 악보영역
 #instrument1 :: 악기 콤보
-.in_bar :: 악기 선택 영역 g(svg
+.in_bar :: 악기 선택 영역 g(svg)
 
 
 
