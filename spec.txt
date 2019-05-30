@@ -28,7 +28,9 @@ edit.js
 /*COMPONENT*/
 
 #menu :: 좌측 메뉴바 - 악기 콤보 목록
-#score :: 악보영역
+#score :: 악보
+#editClef :: 음자리표 선택영역(수정)
+#editKey :: 조표 선택영역(수정)
 #instrument1 :: 악기 콤보
 .in_bar :: 악기 선택 영역 g(svg)
 
