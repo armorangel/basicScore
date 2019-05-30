@@ -2,7 +2,7 @@ if(!window.kara) window.kara = {};
 
 'use strict';
 
-//악보 트랙별 SVG 저장 객체
+//악보 트랙별 SVG 객체
 kara.svg = {
 	"track1":{
 		svgContainer: null,
@@ -86,32 +86,28 @@ kara.svg = {
 	}
 };
 
+//해당 트랙 svg 구성요소들 SVG 객체 저장
 kara.svgContain = function(track){// track: Track Name -- 'track1'
 	var trac = kara.svg[track];//  kara.svg['track1']
-	var svgContainer;
-	var svgText;
-	var svgLine;
-	var svgSymbol;
+	var svgContainer;	//#track1 SVG 트랙영역
+	var svgText;		//title, tempo, writer SVG
+	var svgLine;		//line(오선지) SVG
+	var svgSymbol;		//clef, 플렛, 샵, 4/4 SVG
 	var svgNote;
-	var svgBox;
+	var svgBox;			//선택영역 SVG
 	var width = $("#tabs").width();// 악보 탭 넓이
 
-	//#score :: 악보영역
+	
 	svgContainer = d3.select("#"+track).append("svg")
-		.attr("id", "score")
-		.style("width", width-43)
-		.style("height", "400");//최초 높이
+									   .attr("id", "score")			//#score :: 악보영역
+									   .style("width", width-43)	//넓이
+									   .style("height", "400");		//높이
 
-	svgText = svgContainer.append("g") //title, tempo, writer
-						   .attr("id", "text");
-	svgLine = svgContainer.append("g") //line
-						   .attr("id", "lines");
-	svgSymbol = svgContainer.append("g") //clef
-							.attr("id", "symbol");
-	svgNote = svgContainer.append("g") //note
-						  .attr("id", "note");
-	svgBox = svgContainer.append("g")
-						 .attr("id", "boxs");
+	svgText = svgContainer.append("g").attr("id", "text");		//title, tempo, writer
+	svgLine = svgContainer.append("g").attr("id", "lines");		//line(오선지)
+	svgSymbol = svgContainer.append("g").attr("id", "symbol");	//clef, 플렛, 샵, 4/4	
+	svgNote = svgContainer.append("g") .attr("id", "note");		//note
+	svgBox = svgContainer.append("g").attr("id", "boxs");		//선택영역
 
 	trac.svgContainer = svgContainer;
 	trac.svgText = svgText;
@@ -133,19 +129,19 @@ kara.textSVG = function(track){ // title, tempo, name svg
 	var y;
 	var width;
 	var height;
-	var opacity = "0.0";
+	var opacity = "0.3";
 //Title
 	svg.append("text")
 		.attr("id", "title")
-		.attr("class", "in_bar")
-		.attr("font-size", "60px")
-    .attr("x", "50%")
-    .attr("y", "50")
+		.attr("class", "in_bar")	//.in_bar :: 초기화 영역
+		.attr("font-size", "60px")	//font size 60px
+    .attr("x", "50%")				//가운데
+    .attr("y", "50")				//위에서 50
     .attr("dy", ".47em")
-    .style("text-anchor", "middle")
+    .style("text-anchor", "middle")	//가운데 정렬
     .style("fill", "#000000")
     .style("font-weight", "bold")
-    .text(title);
+    .text(title);//악보정보객체의 TITLE
 
 	position = jQuery("#title").position();
 	x = position.left - kara.scorePosition.left("track1");
@@ -154,7 +150,7 @@ kara.textSVG = function(track){ // title, tempo, name svg
 	height = $('#title').height();
 
 	svg.append("rect")
-		.attr("id", "editTitle")
+		.attr("id", "editTitle")//#editTitle :: TITLE 선택영역(수정용)
 		.attr("class", "in_bar")
 		.attr("x", x)
 		.attr("y", y)
@@ -340,19 +336,19 @@ kara.keySVG = function(Y, key, track){ //조표 SVG
 					for(var i=0;i<M[keySplit[1]];i++){
 						switch (i) {
 							case 0:
-								y = Y-5 //G_F
+								y = Y-5; //G_F
 								break;
 							case 1:
-								y = Y+12 //D_C
+								y = Y+12; //D_C
 								break;
 							case 2:
-								y = Y-10 //A_G
+								y = Y-10; //A_G
 								break;
 							case 3:
-								y = Y+7 //E_D
+								y = Y+7; //E_D
 								break;
 							case 4:
-								y = Y+25 //B_A
+								y = Y+25; //B_A
 								break;
 						}
 						kara.printSymbol("accidentals.sharp", 50+(i*10), y, track);
@@ -398,9 +394,9 @@ kara.keySVG = function(Y, key, track){ //조표 SVG
 		}
 	}
 	x = 40;
-  y = Y - 17;
-  width = N*10+15;
-  height = 74;
+	y = Y - 17;
+	width = N*10+15;
+	height = 74;
 
 	svg.append("rect")
 		.attr("id", "editKey")
@@ -412,7 +408,6 @@ kara.keySVG = function(Y, key, track){ //조표 SVG
     	.style("height", height)
     	.style("fill", "#00ffff")
 		.style("fill-opacity", "0.3");
-
 };
 
 kara.meterSVG = function(Y, track){ //박자 SVG
