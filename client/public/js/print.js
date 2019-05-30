@@ -130,7 +130,7 @@ kara.textSVG = function(track) {
 	var y;
 	var width;
 	var height;
-	var opacity = "0.3";
+	var opacity = "0.3";	// 투명도
 	
 	// Title
 	svg.append("text")
@@ -145,20 +145,20 @@ kara.textSVG = function(track) {
 		.style("font-weight", "bold")
 		.text(title);					//악보정보객체의 TITLE
 
-	position = jQuery("#title").position();
+	position = jQuery("#title").position();//제목 위치리턴 객체 left, top
 	x = position.left - kara.scorePosition.left("track1");
 	y = position.top - kara.scorePosition.top("track1");
 	width = $('#title').width();
 	height = $('#title').height();
-
+	alert(width + ", " + height);
 	svg.append("rect")
 		.attr("id", "editTitle")// #editTitle :: TITLE 선택영역(수정용)
-		.attr("class", "in_bar")
+		.attr("class", "in_bar")// .in_bar :: 삭제영역
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", "kara.editTitle('" + track + "')")
-		.style("width", width)
-		.style("height", height)
+		.attr("onclick", "kara.editTitle('" + track + "')")//Click Event(제목 수정)
+		.style("width", width)// 0 ISSUE
+		.style("height", height)// 0 ISSUE
 		.style("fill", "#000000")
 		.style("fill-opacity", opacity);
 	
@@ -183,12 +183,12 @@ kara.textSVG = function(track) {
 
 	svg.append("rect")
 		.attr("id", "editTempo")
-		.attr("class", "in_bar")
+		.attr("class", "in_bar")// .in_bar :: 삭제영역
 		.attr("x", x)
 		.attr("y", y)
 		.attr("onclick", "kara.editTempo('" + track + "')")
-		.style("width", width)
-		.style("height", height)
+		.style("width", width)// 0 ISSUE
+		.style("height", height)// 0 ISSUE
 		.style("fill", "#000000")
 		.style("fill-opacity", opacity);
 	
@@ -581,6 +581,7 @@ kara.hLine = function(y, track) {
 
 //마디
 kara.vLine = function(x, y, track) {
+	
 	var svg = kara.svg[track].svgLine;
 	var pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y+48);
 	svg.append("path")
@@ -589,7 +590,9 @@ kara.vLine = function(x, y, track) {
 		.style("stroke", "black");
 };
 
-kara.notevLine = function(x, y, track){ //음표 막대
+//음표 막대
+kara.notevLine = function(x, y, track) {
+	
 	var svg = kara.svg[track].svgNote;
 	var pathString = kara.sprintf("M %f %f L %f %f", x+10, y, x+10, y-30);
 	svg.append("path")
@@ -600,6 +603,7 @@ kara.notevLine = function(x, y, track){ //음표 막대
 
 //음표 막대
 kara.notevLow = function(x, y, pitch, meter, track) {
+	
 	var svg = kara.svg[track].svgNote;
 	var pathString;
 	var m = 0, n = 0;
@@ -612,37 +616,42 @@ kara.notevLow = function(x, y, pitch, meter, track) {
 	else if(pitch === "C2") y = y;
 	else return;
 
-	switch(meter){
+	switch(meter) {
 		case 'whole':
 			x = x-3.5;
 			m = x + 22;
 			n = y;
 			console.log(meter);
 			break;
+			
 		case 'half':
 			x = x-4;
 			m = x + 18;
 			n = y;
 			console.log(meter);
 			break;
+			
 		case 'quarter':
 			x = x-3;
 			m = x + 18.5;
 			n = y;
 			console.log(meter);
 			break;
+			
 		case '8th':
 			x = x-3;
 			m = x + 18.5;
 			n = y;
 			console.log(meter);
 			break;
+			
 		case '16th':
 			x = x-3;
 			m = x + 18.5;
 			n = y;
 			console.log(meter);
 			break;
+			
 		default:
 			break;
 	}
@@ -666,8 +675,8 @@ kara.noteBox = {
 		var i = 0;
 		var j = 0;
 
-		var a = N*12+70;
-		var ac = (X-a)/4;
+		var a = N * 12 + 70;
+		var ac = (X - a) / 4;
 		// kara.vLine(a, Y+12); // 없어도 됨
 		// kara.vLine(ac*1+a, Y+12);
 		// kara.vLine(ac*2+a, Y+12);
@@ -676,7 +685,7 @@ kara.noteBox = {
 		var x = a;
 		var y = Y-15;
 
-		var width = (X-a)/4;
+		var width = (X - a) / 4;
 		var height = 6;
 
 		switch(meter){
