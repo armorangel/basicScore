@@ -88,6 +88,7 @@ kara.svg = {
 
 //해당 트랙 svg 구성요소들 SVG 객체 저장
 kara.svgContain = function(track) {// track: Track Name -- 'track1'
+	
 	var trac = kara.svg[track];//  kara.svg['track1']
 	var svgContainer;	// #track1 SVG 트랙영역
 	var svgText;		// title, tempo, writer SVG
@@ -97,10 +98,10 @@ kara.svgContain = function(track) {// track: Track Name -- 'track1'
 	var svgBox;			// 선택영역 SVG
 	var width = $("#tabs").width();	// 악보 탭 넓이
 
-	svgContainer = d3.select("#"+track)
+	svgContainer = d3.select("#"+track)	// '#track1'
 					.append("svg")
 					.attr("id", "score")		//#score :: 악보영역
-					.style("width", width-43)	//넓이
+					.style("width", width - 43)	//넓이
 					.style("height", "400");	//높이
 
 	svgText = svgContainer.append("g").attr("id", "text");		// title, tempo, writer
@@ -148,15 +149,15 @@ kara.textSVG = function(track) {
 	position = jQuery("#title").position();//제목 위치리턴 객체 left, top
 	x = position.left - kara.scorePosition.left("track1");
 	y = position.top - kara.scorePosition.top("track1");
-	width = $('#title').width();
-	height = $('#title').height();
-	alert(width + ", " + height);
+	width = $('#title').width();	// 0 ISSUE
+	height = $('#title').height();	// 0 ISSUE
+	
 	svg.append("rect")
 		.attr("id", "editTitle")// #editTitle :: TITLE 선택영역(수정용)
-		.attr("class", "in_bar")// .in_bar :: 삭제영역
-		.attr("x", x)
-		.attr("y", y)
-		.attr("onclick", "kara.editTitle('" + track + "')")//Click Event(제목 수정)
+		.attr("class", "in_bar")// .in_bar :: 악보 초기화 영역
+		.attr("x", x)// 0 ISSUE
+		.attr("y", y)// 0 ISSUE
+		.attr("onclick", "kara.editTitle('" + track + "')")// Click Event(제목 수정)
 		.style("width", width)// 0 ISSUE
 		.style("height", height)// 0 ISSUE
 		.style("fill", "#000000")
@@ -165,7 +166,7 @@ kara.textSVG = function(track) {
 	//Tempo
 	svg.append("text")
 		.attr("id", "tempo")
-		.attr("class", "in_bar")
+		.attr("class", "in_bar")// .in_bar :: 악보 초기화 영역
 		.attr("font-size", "16px")
 		.attr("x", "5%")
 		.attr("y", "140")

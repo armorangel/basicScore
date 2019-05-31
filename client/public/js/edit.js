@@ -20,6 +20,7 @@ kara.editTitle = function(track) {
 	// 악보 정보 객체에 제목 저장
 	kara.scoreInfo.title = title;
 
+	//왜 다지우지
 	d3.select("#title").remove();
 	d3.select("#editTitle").remove();
 	d3.select("#tempo").remove();
@@ -38,7 +39,7 @@ kara.editTempo = function(track) {
   	var tempo = prompt("tempo");
 	
 	// 템포 정합성 검사
-	if(tempo == ""){
+	if(tempo == "") {
 		alert("숫자를 입력하세요.");
 		return;
 	}

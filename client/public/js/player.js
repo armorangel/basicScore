@@ -25,14 +25,18 @@ kara.addTabs = function() {
 	var trackN;// 트랙이름 'track1'
 	var track = 1;// 트랙번호
 
-	for (var key in kara.svg) {
-		if (kara.svg.hasOwnProperty(key)) {
-			if(kara.svg[key].svgContainer !== null){
-				track++;
+	//kara.svg :: 악보 트랙별 SVG 객체 return ['track1', 'track2', ..., 'track10']
+	//마지막 트랙번호 설정
+	for (var key in kara.svg) {// 트랙별 svg
+		if (kara.svg.hasOwnProperty(key)) {// kara.svg에 트랙이 존재하면
+			if(kara.svg[key].svgContainer !== null) {
+				track++;//1부터 시작 아직 생성안된 트랙까지
 				console.log(track);
 			}
 		}
 	}
+	
+	console.log(track);
 	
 	// 트랙 10개 제한
 	if(track == 11) return;
@@ -47,7 +51,6 @@ kara.addTabs = function() {
 
 
 	$( "#tabs" ).tabs( "refresh" );
-	console.log(track);
 
 	trackN = "track" + track;
 	console.log(trackN + typeof(trackN));
@@ -70,7 +73,7 @@ kara.menu = function(trackN){	//trackN: trackNumber -- '1'
 	$("#instrument" + trackN)
 		.selectmenu({width: 200})
 		.selectmenu( "menuWidget" )
-		.addClass( "overflow" );//overflow클래스 추가
+		.addClass( "overflow" );// overflow클래스 추가
 
 	//악기 콤보 추가
 	$("#instrument" + trackN).append("<option value = '0'>Acoustic Grand Piano</option>");
@@ -202,24 +205,21 @@ kara.menu = function(trackN){	//trackN: trackNumber -- '1'
 	$("#instrument" + trackN).append("<option value = '126'>Applause</option>");
 	$("#instrument" + trackN).append("<option value = '127'>Gunshot</option>");
 
-	
 	// 콤보 이벤트 추가
 	$("#instrument" + trackN).selectmenu({
 		
 		// 콤보 박스 변경시 호출
 		change: function(event, ui) {
 		  
-			console.log(trackN);
 			track = "track" + trackN;//트랙 번호
 			console.log(track);
 			kara.scoreInfo.track[track].instrument = ui.item.value;// 해당 악기 셋팅
-	  }
+		}
 	});
 
 	// 콤보 갱신
 	$("#instrument" + trackN).selectmenu("refresh");
 };
-
 
 // Convert Instrument Number to Instrument Name
 kara.numToInstrument = function(num) {// num: instrument Number -- '0'
@@ -494,7 +494,7 @@ kara.instrumentTonum = function(instrument) {// instrument: Instrument Name -- '
 // 악보 초기화
 kara.refresh = function() {
 	
-	$(".in_bar").remove();// 음표선택 박스 삭제
+	$(".in_bar").remove();// 악보 삭제영역 삭제
 	
 	for (var key in kara.scoreInfo.track) {
 		if(kara.scoreInfo.track.hasOwnProperty(key)) {
@@ -505,7 +505,6 @@ kara.refresh = function() {
 		}
 	}
 };
-
 
 // 마디 여러등분으로 나눠 음정
 // 마디 여러 등분으로 나누기
