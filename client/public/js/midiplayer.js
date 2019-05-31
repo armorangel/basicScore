@@ -69,10 +69,10 @@ kara.play = {
 				for (var key in note) {
 					if (note.hasOwnProperty(key)) {
 						if(note[key].clef !== ""){
-							for(var i=0; i<note[key].notes.length; i++){
-								for(var j = 0; j < note[key].notes[i].length; j++){
+							for(var i=0; i<note[key].notes.length; i++) {
+								for(var j = 0; j < note[key].notes[i].length; j++) {
 
-									if(!jQuery.isArray(chord[m])){ // 2차원배열이 아니면2차원 배열 생성
+									if(!jQuery.isArray(chord[m])) { // 2차원배열이 아니면2차원 배열 생성
 										chord[m] = []; //[m][] 배열 생성(new Array())
 									}
 									if(!jQuery.isArray(chord[m][n])) { //3차원배열이 아니면2차원 배열 생성
@@ -88,6 +88,7 @@ kara.play = {
 						}
 					}
 				}
+				
 				m = 0;
 				n = 0;
 
@@ -114,9 +115,9 @@ kara.play = {
 							} catch(err) {
 								player[r] = 1;
 							}
-							try{
+							try {
 								MIDI.chordOn(r, chord[r][ind][0], velocity, delay);
-							} catch(err){
+							} catch(err) {
 								MIDI.chordOn(r, 0, 0, delay);
 							}
 

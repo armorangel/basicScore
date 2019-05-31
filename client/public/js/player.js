@@ -72,8 +72,8 @@ kara.menu = function(trackN){	//trackN: trackNumber -- '1'
 	
 	$("#instrument" + trackN)
 		.selectmenu({width: 200})
-		.selectmenu( "menuWidget" )
-		.addClass( "overflow" );// overflow클래스 추가
+		.selectmenu("menuWidget")
+		.addClass("overflow");// overflow클래스 추가
 
 	//악기 콤보 추가
 	$("#instrument" + trackN).append("<option value = '0'>Acoustic Grand Piano</option>");
