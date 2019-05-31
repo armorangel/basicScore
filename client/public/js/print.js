@@ -319,6 +319,7 @@ kara.clefSVG = function(x, y, Y, track) {
 	width = 40;
 	height = 90;
 
+	//음자리표 선택영역 APPEND
 	svg.append("rect")
 		.attr("id", "editClef")//#editClef :: 음자리표 선택영역(수정)
 		.attr("class", "in_bar" + " " + track)
@@ -329,10 +330,11 @@ kara.clefSVG = function(x, y, Y, track) {
 		.style("height", height)
 		.style("fill", "#00ff01")
 		.style("fill-opacity", "0.3");
-
 };
 
-kara.keySVG = function(Y, key, track){ //조표 SVG
+// 조표 SVG 그리기
+kara.keySVG = function(Y, key, track) {
+	
 	var svg = kara.svg[track].svgBox;
 	var keySplit = key.split(' ');
 	var M = kara.key[keySplit[0]];
@@ -357,6 +359,7 @@ kara.keySVG = function(Y, key, track){ //조표 SVG
 				case 'C#m':
 				case 'B': //5
 				case 'G#m':
+					
 					//#그리기
 					for(var i=0;i<M[keySplit[1]];i++) {
 						switch (i) {
@@ -376,7 +379,7 @@ kara.keySVG = function(Y, key, track){ //조표 SVG
 								y = Y+25; //B_A
 								break;
 						}
-						kara.printSymbol("accidentals.sharp", 50+(i*10), y, track);
+						kara.printSymbol("accidentals.sharp", 50 + (i * 10), y, track);
 					}
 					break;
 				case 'Gb': //6
@@ -392,25 +395,25 @@ kara.keySVG = function(Y, key, track){ //조표 SVG
 				case 'F': //1
 				case 'Dm':
 					//b 그리기
-					for(var i=0;i<M[keySplit[1]];i++) {
+					for(var i = 0; i < M[keySplit[1]]; i++) {
 						switch (i) {
 							case 0:
-								y = Y+19; //Gb_b
+								y = Y + 19; //Gb_b
 								break;
 							case 1:
-								y = Y+1; //Ab_e
+								y = Y + 1; //Ab_e
 								break;
 							case 2:
-								y = Y+25; //Db_a
+								y = Y + 25; //Db_a
 								break;
 							case 3:
-								y = Y+7; //Eb_d
+								y = Y + 7; //Eb_d
 								break;
 							case 4:
-								y = Y+31; //Bb_g
+								y = Y + 31; //Bb_g
 								break;
 							case 5:
-								y = Y+13; //F_c
+								y = Y + 13; //F_c
 								break;
 						}
 						kara.printSymbol("accidentals.flat", 50+(i*10), y, track);
@@ -421,9 +424,10 @@ kara.keySVG = function(Y, key, track){ //조표 SVG
 	}
 	x = 40;
 	y = Y - 17;
-	width = N*10+15;
+	width = N * 10 + 15;
 	height = 74;
 
+	// 조표 선택영역 SVG DRAW
 	svg.append("rect")
 		.attr("id", "editKey")//#editKey :: 조표 선택영역(수정)
 		.attr("class", "in_bar" + " " + track)
@@ -449,11 +453,11 @@ kara.meterSVG = function(Y, track) {
 	var width;
 	var height;
 
-	var meter = kara.scoreInfo.meter;
+	var meter = kara.scoreInfo.meter;// 악보정보 객체 박자
 	var meterSplit = meter.split('/');
 
-	var pathString = this.pathClone(kara.glyphs[meterSplit[0]].d, 45+(N*10), Y/1.4+24.7);
-	var pathString2 = this.pathClone(kara.glyphs[meterSplit[1]].d, 45+(N*10), Y/1.4+41.7);
+	var pathString = this.pathClone(kara.glyphs[meterSplit[0]].d, 45 + (N * 10), Y / 1.4 + 24.7);
+	var pathString2 = this.pathClone(kara.glyphs[meterSplit[1]].d, 45 + (N * 10), Y / 1.4 + 41.7);
 	
 	svg.append("path")
 		.attr("id", "meter")
@@ -461,6 +465,7 @@ kara.meterSVG = function(Y, track) {
 		.attr("d", pathString)
 		.style("transform", "scale(1.2,1.4)")
 		.style("stroke", "black");
+	
 	svg.append("path")
 		.attr("class", "in_bar" + " " + track)
 		.attr("d", pathString2)
@@ -486,9 +491,13 @@ kara.meterSVG = function(Y, track) {
 
 //꼬리 SVG
 kara.printflag = function(symb, x, y, track) {
+	
 	var svg = kara.svg[track].svgSymbol;
+	
 	if (!kara.glyphs[symb]) return null;
+	
 	var pathString = this.pathClone(kara.glyphs[symb].d, x+10.35, y-29);
+	
 	svg.append("path")
 		.attr("class", "in_bar" + " " + track)
 		.attr("d", pathString)
@@ -502,6 +511,7 @@ kara.printSymbol = function(symb, x, y, track) {
 	if (!kara.glyphs[symb]) return null;
 	
 	var pathString = this.pathClone(kara.glyphs[symb].d, x, y);
+	
 	svg.append("path")
 		.attr("class", "in_bar" + " " + track)
 		.attr("d", pathString)
@@ -522,11 +532,16 @@ kara.print_s_p = function(symb, x, y, track) {
 		.style("stroke", "black");
 };
 
-kara.pathClone = function (pathString, x, y) { //심볼을 찾아옴
+// 심볼을 찾아옴
+kara.pathClone = function (pathString, x, y) {
+	
 	var res = [];
 	var res1;
+	
 	for(var i = 0; i < pathString.length; i++) {
+		
 		res[i] = [];
+		
 		for(var j=0;j<pathString[i].length;j++) {
 			res[i][j] = pathString[i][j];
 
@@ -574,6 +589,7 @@ kara.hLine = function(y, track) {
 
 	var a = N*12+70;
 	var ac = (X-a)/4;
+	
 	// kara.vLine(a, Y+12); // 없어도 됨
 	kara.vLine(ac*1+a, Y+12, track);
 	kara.vLine(ac*2+a, Y+12, track);
@@ -585,6 +601,7 @@ kara.vLine = function(x, y, track) {
 	
 	var svg = kara.svg[track].svgLine;
 	var pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y+48);
+	
 	svg.append("path")
 		.attr("class", "in_bar" + " " + track)
 		.attr("d", pathString)
@@ -596,6 +613,7 @@ kara.notevLine = function(x, y, track) {
 	
 	var svg = kara.svg[track].svgNote;
 	var pathString = kara.sprintf("M %f %f L %f %f", x+10, y, x+10, y-30);
+	
 	svg.append("path")
 		.attr("class", "in_bar" + " " + track)
 		.attr("d", pathString)
@@ -712,7 +730,7 @@ kara.noteBox = {
 			.attr("id", "bar_" + bNum)
 			.attr("class", "in_bar" + " " + track);
 
-		switch(clef){
+		switch(clef) {
 			case "G":
 				i = 14; //A3~ C6 17 j = 30
 				j = i+16;
@@ -722,26 +740,27 @@ kara.noteBox = {
 				i = 26;
 				j = i+16;
 				break;
-			case "P":
-				break;
+				
+			case "P": break;
 		}
-		for(i;i<=j;i++){  //a3 ~ b7
-			if((i%2) == 1){
+		for(i; i <= j; i++) {  //a3 ~ b7
+			if((i%2) == 1) {
+				
 				var m = 50 - i;
 				var p = pitch_select.selection(m);
 
 				svgVar.append("rect")
 					.attr("id", p)
 					.attr("class", "in_bar " + "bar_" + bNum + " " + "note_" + nNum + " " + track) //마디,  음표 번호
-			    .attr("x", x)
-			    .attr("y", y)
+					.attr("x", x)
+					.attr("y", y)
 					.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")
-			    .style("width", width)
-			    .style("height", height)
-			    .style("fill", "#6666FF")
+					.style("width", width)
+					.style("height", height)
+			    	.style("fill", "#6666FF")
 					.style("fill-opacity", "0.3");
 				y = height + y;
-			}else{
+			} else {
 				var m = 50 - i;
 				var p = pitch_select.selection(m);
 
@@ -762,7 +781,7 @@ kara.noteBox = {
 };
 
 kara.noteBox_ = {
-	print: function(X, Y , bNum, nNum, meter, track){
+	print: function(X, Y , bNum, nNum, meter, track) {
 		var note = kara.scoreInfo.track[track].notes;
 		var svg = kara.svg[track].svgContainer;
 		var key = kara.scoreInfo.key;
@@ -778,8 +797,7 @@ kara.noteBox_ = {
 			bNum--;
 			nNum = note[bNum].length-1;
 			flag = 1;
-		}
-		else nNum = nNum-1;
+		} else nNum = nNum-1;
 		
 		// var pitch = note[bNum][nNum][0];
 		var pre_meter = note[bNum][nNum][1];
@@ -800,13 +818,13 @@ kara.noteBox_ = {
 		var height = 6;
 
 		// 원래 상태로 돌려놓는다
-		if(flag == 1){ 
+		if(flag == 1) { 
 			bNum++;
 			nNum = 0;
 		}
 		else nNum = nNum+1;
 
-		switch(pre_meter){
+		switch(pre_meter) {
 			case 'whole': //온음표
 				x = x + width;
 				break;
@@ -847,8 +865,7 @@ kara.noteBox_ = {
 				width = width/16;
 
 				break;
-			default:
-				break;
+			default: break;
 		}
 
 		//마디 번호
@@ -856,7 +873,7 @@ kara.noteBox_ = {
 			.attr("id", "bar_" + bNum)
 			.attr("class", "in_bar" + " " + track);
 
-		switch(clef){
+		switch(clef) {
 			case "G":
 				i = 14; //A3~ C6 17 j = 30
 				j = i+16;
@@ -869,8 +886,8 @@ kara.noteBox_ = {
 			case "P": break;
 		}
 
-		for(i; i <= j; i++){  //a3 ~ b7
-			if((i % 2) == 1){
+		for(i; i <= j; i++) {  //a3 ~ b7
+			if((i % 2) == 1) {
 				var m = 50 - i;
 				var p = pitch_select.selection(m);
 
@@ -885,7 +902,7 @@ kara.noteBox_ = {
 					.style("fill", "#6666FF")
 					.style("fill-opacity", "0.3");
 				y = height + y;
-			}else{
+			} else {
 				var m = 50 - i;
 				var p = pitch_select.selection(m);
 
@@ -935,15 +952,15 @@ kara.noteBox_last = {
 		var width = (X-a)/4;
 		var height = 6;
 
-		nNum = nNum+1;
+		nNum = nNum + 1;
 
-		switch(meter){
+		switch(meter) {
 			case 'whole': //온음표
 				width = width;
 				x = x + (X-a)/4;
 
-				if(kara.meterCal_box(bNum, track)){ //마디 꽉차서
-					bNum = bNum+1;
+				if(kara.meterCal_box(bNum, track)) { //마디 꽉차서
+					bNum = bNum + 1;
 					nNum = 0;
 				}
 				break;
