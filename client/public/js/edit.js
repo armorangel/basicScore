@@ -3,117 +3,80 @@ if(!window.kara) window.kara = {};
 'use strict';
 
 // 타이틀 수정
-kara.editTitle = function(track) {
+kara.editTitle = function(track) {// track Track Name :: 'track1'
 	
 	//제목 입력
 	var title = prompt("Title");
 	
 	// 제목 정합성 검사
-	if(title == "") {
+	if(title === "" || title === null) {
 		alert("제목을 입력하세요");
 		return;
 	}
-	
-	// 제목 정합성 검사
-	if(title === null) return;
 
 	// 악보 정보 객체에 제목 저장
 	kara.scoreInfo.title = title;
 
-	//왜 다지우지
-	d3.select("#title").remove();
-	d3.select("#editTitle").remove();
-	d3.select("#tempo").remove();
-	d3.select("#editTempo").remove();
-	d3.select("#writer").remove();
-	d3.select("#editWriter").remove();
-
-	kara.textSVG(track);
+	kara.textSVG(track);// 해당 트랙 SVG 요소 그리기
 	kara.refresh();
 };
 
 // 템포 수정
-kara.editTempo = function(track) {
+kara.editTempo = function(track) {// track Track Name :: 'track1'
 	
 	// 템포 입력
   	var tempo = prompt("tempo");
 	
 	// 템포 정합성 검사
-	if(tempo == "") {
+	if(tempo === "" || tempo === null || isNaN(tempo)) {//isNaN(숫자) ==> false 
 		alert("숫자를 입력하세요.");
 		return;
 	}
-	
-	// 템포 정합성 검사
-	if(tempo === null) return;
 
-	if(tempo < 10) {
-		alert("템포는 10이상 입력하세요.");
-		return;
-	}
-	else if(tempo > 300) {
-		alert("템포는 300이하 입력하세요.");
+	// 템포는 10에서 300사이
+	if(tempo < 10 || tempo > 300) {
+		alert("템포는 10이상 300이하만 입력할 수 있습니다.");
 		return;
 	}
 
-	// 악보 정보 객체에 제목 저장
+	// 악보 정보 객체에 템포 저장
 	kara.scoreInfo.tempo = tempo;
-
-	d3.select("#title").remove();
-	d3.select("#editTitle").remove();
-	d3.select("#tempo").remove();
-	d3.select("#editTempo").remove();
-	d3.select("#writer").remove();
-	d3.select("#editWriter").remove();
 	
- 	kara.textSVG(track);
+ 	kara.textSVG(track);// 해당 트랙 SVG 요소 그리기
 	kara.refresh();
 };
 
 // 작곡가 수정
-kara.editWriter = function(track) {
+kara.editWriter = function(track) {// track Track Name :: 'track1'
 	
 	// 작곡가 입력
   	var writer = prompt("Writer");
 	
 	// 작곡가 정합성 검사
-	if(writer == ""){
+	if(writer == "" || writer === null){
 		alert("작곡가명을 입력하세요.");
 		return;
 	}
-	
-	// 작곡가 정합성 검사
-	if(writer === null) return;
 
 	// 악보 정보 객체에 작곡가 저장
 	kara.scoreInfo.writer = writer;
-
-	d3.select("#title").remove();
-	d3.select("#editTitle").remove();
-	d3.select("#tempo").remove();
-	d3.select("#editTempo").remove();
-	d3.select("#writer").remove();
-	d3.select("#editWriter").remove();
 	
-  	kara.textSVG(track);
+  	kara.textSVG(track);// 해당 트랙 SVG 요소 그리기
 	kara.refresh();
 };
 
 // 조표 수정
-kara.editKey = function(){
+kara.editKey = function() {
 	
 	// 조표 입력
 	var key = prompt("Key");
 	
 	// 조표 정합성 검사
-	if(key == ""){
+	if(key == "" || key === null) {
 		alert("조표를 입력하세요");
 		return;
 	}
-	
-	// 조표 정합성 검사
-	if(key === null) return;
-	
+
 	key = kara.keyvalue(key);
 	
 	if(!kara.keyTrueofFalse(key)) return;
@@ -124,7 +87,7 @@ kara.editKey = function(){
 };
 
 // 정해진 조표 입력 검사
-kara.keyTrueofFalse = function(key){// key :: key -- 'major C'
+kara.keyTrueofFalse = function(key) {// key :: key -- 'major C'
 	switch (key) {
 		case "major C":
 		case "major G":

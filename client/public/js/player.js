@@ -494,7 +494,8 @@ kara.instrumentTonum = function(instrument) {// instrument: Instrument Name -- '
 // 악보 초기화
 kara.refresh = function() {
 	
-	$(".in_bar").remove();// 악보 삭제영역 삭제
+	// 악보 삭제영역 삭제
+	$(".in_bar").remove();
 	
 	for (var key in kara.scoreInfo.track) {
 		if(kara.scoreInfo.track.hasOwnProperty(key)) {

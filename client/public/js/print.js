@@ -82,7 +82,7 @@ kara.svgContain = function(track) {// track: Track Name -- 'track1'
 	svgSymbol = svgContainer.append("g").attr("id", "symbol");	// clef(음자리표), 조표 4/4	
 	svgNote = svgContainer.append("g") .attr("id", "note");		// note
 	svgBox = svgContainer.append("g").attr("id", "boxs");		// 선택영역
-
+	
 	trac.svgContainer = svgContainer;
 	trac.svgText = svgText;
 	trac.svgLine = svgLine;
@@ -105,6 +105,14 @@ kara.textSVG = function(track) {
 	var width;
 	var height;
 	var opacity = "0.3";	// 투명도
+	
+	// SVG 요소 삭제
+	d3.select("#title").remove();		// 타이틀 제거
+	d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
+	d3.select("#tempo").remove();		// 템포 제거
+	d3.select("#editTempo").remove();	// 템포 선택 영억 제거
+	d3.select("#writer").remove();		// 작곡가 제거
+	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
 	
 	// Title
 	svg.append("text")
@@ -163,8 +171,10 @@ kara.textSVG = function(track) {
 		.attr("x", x)
 		.attr("y", y)
 		.attr("onclick", "kara.editTempo('" + track + "')")
-		.style("width", width)// 0 ISSUE
-		.style("height", height)// 0 ISSUE
+		//.style("width", width)// 0 ISSUE
+		//.style("height", height)// 0 ISSUE
+		.style("width", "100")// 0 ISSUE
+		.style("height", "25")// 0 ISSUE
 		.style("fill", "#000000")
 		.style("fill-opacity", opacity);
 	
@@ -193,8 +203,10 @@ kara.textSVG = function(track) {
 		.attr("x", x)
 		.attr("y", y)
 		.attr("onclick", "kara.editWriter('" + track + "')")
-		.style("width", width)
-		.style("height", height)
+		//.style("width", width)
+		//.style("height", height)
+		.style("width", "100")
+		.style("height", "25")
 		.style("fill", "#000000")
 		.style("fill-opacity", "0.3");
 };
