@@ -4,7 +4,7 @@ if(!window.kara) window.kara = {};
 
 //악보 트랙별 SVG 객체
 kara.svg = {
-	"track1":{
+	"track1": {
 		svgContainer: null,
 		svgLine: null,
 		svgText: null,
@@ -12,77 +12,50 @@ kara.svg = {
 		svgNote: null,
 		svgBox: null
 	},
-	"track2":{
-		svgContainer: null,
-		svgLine: null,
-		svgText: null,
-		svgSymbol: null,
-		svgNote: null,
-		svgBox: null
+	"track2": {
+		svgContainer: null,svgLine: null,
+		svgText: null,svgSymbol: null,
+		svgNote: null,svgBox: null
 	},
-	"track3":{
-		svgContainer: null,
-		svgLine: null,
-		svgText: null,
-		svgSymbol: null,
-		svgNote: null,
-		svgBox: null
+	"track3": {
+		svgContainer: null,svgLine: null,
+		svgText: null,svgSymbol: null,
+		svgNote: null,svgBox: null
 	},
-	"track4":{
-		svgContainer: null,
-		svgLine: null,
-		svgText: null,
-		svgSymbol: null,
-		svgNote: null,
-		svgBox: null
+	"track4": {
+		svgContainer: null,svgLine: null,
+		svgText: null,svgSymbol: null,
+		svgNote: null,svgBox: null
 	},
-	"track5":{
-		svgContainer: null,
-		svgLine: null,
-		svgText: null,
-		svgSymbol: null,
-		svgNote: null,
-		svgBox: null
+	"track5": {
+		svgContainer: null,svgLine: null,
+		svgText: null,svgSymbol: null,
+		svgNote: null,svgBox: null
 	},
-	"track6":{
-		svgContainer: null,
-		svgLine: null,
-		svgText: null,
-		svgSymbol: null,
-		svgNote: null,
-		svgBox: null
+	"track6": {
+		svgContainer: null,svgLine: null,
+		svgText: null,svgSymbol: null,
+		svgNote: null,svgBox: null
 	},
-	"track7":{
-		svgContainer: null,
-		svgLine: null,
-		svgText: null,
-		svgSymbol: null,
-		svgNote: null,
-		svgBox: null
+	"track7": {
+		svgContainer: null,svgLine: null,
+		svgText: null,svgSymbol: null,
+		svgNote: null,svgBox: null
 	},
-	"track8":{
-		svgContainer: null,
-		svgLine: null,
-		svgText: null,
-		svgSymbol: null,
-		svgNote: null,
-		svgBox: null
+	"track8": {
+		svgContainer: null,svgLine: null,
+		svgText: null,svgSymbol: null,
+		svgNote: null,svgBox: null
 	},
-	"track9":{
-		svgContainer: null,
-		svgLine: null,
-		svgText: null,
-		svgSymbol: null,
-		svgNote: null,
-		svgBox: null
+	"track9": {
+		svgContainer: null,svgLine: null,
+		svgText: null,svgSymbol: null,
+		svgNote: null,svgBox: null
 	},
-	"track10":{
-		svgContainer: null,
-		svgLine: null,
-		svgText: null,
-		svgSymbol: null,
-		svgNote: null,
-		svgBox: null
+	"track10": {
+		svgContainer: null,svgLine: null,
+		svgText: null,svgSymbol: null,
+		svgNote: null,svgBox: null
 	}
 };
 
@@ -90,12 +63,12 @@ kara.svg = {
 kara.svgContain = function(track) {// track: Track Name -- 'track1'
 	
 	var trac = kara.svg[track];//  kara.svg['track1']
-	var svgContainer;	// #track1 SVG 트랙영역
-	var svgText;		// title, tempo, writer SVG
-	var svgLine;		// line(오선지) SVG
-	var svgSymbol;		// clef(음자리표), 조표 4/4	
+	var svgContainer;				// #track1 SVG 트랙영역
+	var svgText;					// title, tempo, writer SVG
+	var svgLine;					// line(오선지) SVG
+	var svgSymbol;					// clef(음자리표), 조표 4/4	
 	var svgNote;
-	var svgBox;			// 선택영역 SVG
+	var svgBox;						// 선택영역 SVG
 	var width = $("#tabs").width();	// 악보 탭 넓이
 
 	svgContainer = d3.select("#"+track)	// '#track1'
@@ -136,17 +109,17 @@ kara.textSVG = function(track) {
 	// Title
 	svg.append("text")
 		.attr("id", "title")
-		.attr("class", "in_bar")		//.in_bar :: 초기화 영역
-		.attr("font-size", "60px")		//font size 60px
-		.attr("x", "50%")				//가운데
-		.attr("y", "50")				//위에서 50
+		.attr("class", "in_bar")		// .in_bar :: 초기화 영역
+		.attr("font-size", "60px")		// font size 60px
+		.attr("x", "50%")				// 가운데
+		.attr("y", "50")				// 위에서 50
 		.attr("dy", ".47em")
-		.style("text-anchor", "middle")	//가운데 정렬
+		.style("text-anchor", "middle")	// 가운데 정렬
 		.style("fill", "#000000")
 		.style("font-weight", "bold")
-		.text(title);					//악보정보객체의 TITLE
+		.text(title);					// 악보정보객체의 TITLE
 
-	position = jQuery("#title").position();//제목 위치리턴 객체 left, top
+	position = jQuery("#title").position();	// 제목 위치리턴 객체 left, top
 	x = position.left - kara.scorePosition.left("track1");
 	y = position.top - kara.scorePosition.top("track1");
 	width = $('#title').width();	// 0 ISSUE
@@ -158,8 +131,10 @@ kara.textSVG = function(track) {
 		.attr("x", x)// 0 ISSUE
 		.attr("y", y)// 0 ISSUE
 		.attr("onclick", "kara.editTitle('" + track + "')")// Click Event(제목 수정)
-		.style("width", width)// 0 ISSUE
-		.style("height", height)// 0 ISSUE
+		//.style("width", width)// 0 ISSUE
+		//.style("height", height)// 0 ISSUE
+		.style("width", "100")// 변경해야됨
+		.style("height", "80")// 변경해야됨
 		.style("fill", "#000000")
 		.style("fill-opacity", opacity);
 	

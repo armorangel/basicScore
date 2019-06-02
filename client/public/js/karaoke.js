@@ -1,21 +1,20 @@
-if (!window.kara)
-	window.kara = {};
+if(!window.kara) window.kara = {};
 
 'use strict';
 
 //악보 정보 객체
 kara.scoreInfo = {
-	title: "title",		//타이틀 저장
-	tempo: "120",		//템포 저장
-	writer: "writer",	//작가 저장
-	key: "major Db",	//키 저장
-	meter: "4/4",		//박자저장
-	time: "",			//최초 저장 시간
+	title: "title",		// 타이틀 저장
+	tempo: "120",		// 템포 저장
+	writer: "writer",	// 작가 저장
+	key: "major Db",	// 키 저장
+	meter: "4/4",		// 박자저장
+	time: "",			// 최초 저장 시간
 	track: {
 		"track1":{
-			clef: "G",
-			notes: [],
-			instrument: 0
+			clef: "G",		// 음자리표
+			notes: [],		// 음표배열
+			instrument: 0	// 악기번호
 		},
 		"track2":{
 			clef: "",
@@ -62,22 +61,23 @@ kara.scoreInfo = {
 			notes: [],
 			instrument: ""
 		},
-	} //노트 저장
+	} // 노트 저장
 };
 
-//노트 길이
+// 노트 길이
 kara.noteMeter = {
 	head: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1},
 	rest: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1}
 };
 
-//키 종류
+// 키 종류
 kara.key = {
 	major:{'C':0, 'G':1, 'D':2, 'A':3, 'E':4, 'B':5, 'Gb':6, 'Db':5, 'Ab':4, 'Eb':3, 'Bb':2, 'F':1},
 	minor:{'Am':0, 'Em':1, 'Bm':2, 'F#m':3, 'C#m':4, 'G#m':5, 'Ebm':6, 'Bbm':5, 'Fm':4, 'Cm':3, 'Gm':2, 'Dm':1}
 };
 
-kara.printNote = function(track) {	// 배열의 값을 가져와서 음표를 그린다
+// 배열의 값을 가져와서 음표를 그린다
+kara.printNote = function(track) {
 	var note = kara.scoreInfo.track[track].notes;
 	var meter = kara.scoreInfo.meter.split('/');
 	var limited = meter[0]*meter[1]; //마디 제한
@@ -86,17 +86,23 @@ kara.printNote = function(track) {	// 배열의 값을 가져와서 음표를 �
 	var four_check=0;
 	var pageInc = 0;
 	
-	kara.hLine(0, track);	//한줄 긋고 시작
-	if(note[0] === undefined) { //첫마디가 없으면 노트박스 생성
+	kara.hLine(0, track);	// 한줄 긋고 시작
+	
+	if(note[0] === undefined) { // 첫마디가 없으면 노트박스 생성
 		kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, "whole", track);
 	}
 	
-	//마디 찍기
+	// 마디 찍기
 	for(var i=0; i<note.length; i++) {
+		
 		var four_enter = i%4;
+		
 		if(four_enter === 0 && i>=4) {
+			
 			var four = i/4;
-			kara.hLine(four, track);  //4번째 마디마다 새 오선지 찍기
+			
+			// 4번째 마디마다 새 오선지 찍기
+			kara.hLine(four, track);
 			four_boxEnter++;
 		}
 		
@@ -132,12 +138,13 @@ kara.printNote = function(track) {	// 배열의 값을 가져와서 음표를 �
 
 				pitchSplit = pitch.split(",");
 
-				for(var pi = 0; pi<pitchSplit.length;pi++) {
+				for(var pi = 0; pi < pitchSplit.length; pi++) {
 					if(pitchSplit[pi] === "rest"){
 						position = $("#A4" + ".bar_"+ i + ".note_" + j + "." + track).position();
 					} else {
 						position = $("#" + pitchSplit[pi] + ".bar_"+ i + ".note_" + j + "." + track).position();
 					}
+					
 					var x = position.left - kara.scorePosition.left(track);
 					var y = position.top - kara.scorePosition.top(track) + 3;
 
@@ -286,6 +293,8 @@ kara.noteSelect = {
 	}
 };
 
+// 마디에 음표 추가시 음표 추가 가능 여부 검사
+// return -1 :: 불가능, 0 :: 가능 마디 꽉참, 1 :: 가능
 kara.meterCal = function(bNum, nNum, nowMeter, track) {
 	
 	var note = kara.scoreInfo.track[track].notes;
