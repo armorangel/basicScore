@@ -62,7 +62,7 @@ kara.svg = {
 //해당 트랙 svg 구성요소들 SVG 객체 저장
 kara.svgContain = function(track) {// track: Track Name -- 'track1'
 	
-	var trac = kara.svg[track];//  kara.svg['track1']
+	var trac = kara.svg[track];		// kara.svg['track1']
 	var svgContainer;				// #track1 SVG 트랙영역
 	var svgText;					// title, tempo, writer SVG
 	var svgLine;					// line(오선지) SVG
@@ -93,7 +93,7 @@ kara.svgContain = function(track) {// track: Track Name -- 'track1'
 
 // title, tempo, name svg
 kara.textSVG = function(track) {
-	
+	console.log('call textSVG ' + track);
 	var svg = kara.svg[track].svgText;
 	var box = kara.svg[track].svgBox;
 	var title = kara.scoreInfo.title;
@@ -105,14 +105,6 @@ kara.textSVG = function(track) {
 	var width;
 	var height;
 	var opacity = "0.3";	// 투명도
-	
-	// SVG 요소 삭제
-	d3.select("#title").remove();		// 타이틀 제거
-	d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
-	d3.select("#tempo").remove();		// 템포 제거
-	d3.select("#editTempo").remove();	// 템포 선택 영억 제거
-	d3.select("#writer").remove();		// 작곡가 제거
-	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
 	
 	// Title
 	svg.append("text")
@@ -126,18 +118,18 @@ kara.textSVG = function(track) {
 		.style("fill", "#000000")
 		.style("font-weight", "bold")
 		.text(title);					// 악보정보객체의 TITLE
-
+	
 	position = jQuery("#title").position();	// 제목 위치리턴 객체 left, top
-	x = position.left - kara.scorePosition.left("track1");
-	y = position.top - kara.scorePosition.top("track1");
+	x = position.left - kara.scorePosition.left(track);
+	y = position.top - kara.scorePosition.top(track);
 	width = $('#title').width();	// 0 ISSUE
 	height = $('#title').height();	// 0 ISSUE
 	
 	svg.append("rect")
 		.attr("id", "editTitle")// #editTitle :: TITLE 선택영역(수정용)
 		.attr("class", "in_bar")// .in_bar :: 악보 초기화 영역
-		.attr("x", x)// 0 ISSUE
-		.attr("y", y)// 0 ISSUE
+		.attr("x", x)
+		.attr("y", y)
 		.attr("onclick", "kara.editTitle('" + track + "')")// Click Event(제목 수정)
 		//.style("width", width)// 0 ISSUE
 		//.style("height", height)// 0 ISSUE
@@ -160,8 +152,8 @@ kara.textSVG = function(track) {
 		.text("♩ = " + tempo);
 
 	position = $('#tempo').position();
-	x = position.left - kara.scorePosition.left("track1");
-	y = position.top - kara.scorePosition.top("track1");
+	x = position.left - kara.scorePosition.left(track);
+	y = position.top - kara.scorePosition.top(track);
 	width = $('#tempo').width();
 	height = $('#tempo').height();
 
@@ -192,8 +184,8 @@ kara.textSVG = function(track) {
 		.text(writer);
 
 	position = $('#writer').position();
-	x = position.left - kara.scorePosition.left("track1");
-	y = position.top - kara.scorePosition.top("track1");
+	x = position.left - kara.scorePosition.left(track);
+	y = position.top - kara.scorePosition.top(track);
 	width = $('#writer').width();
 	height = $('#writer').height();
 

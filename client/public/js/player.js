@@ -503,6 +503,7 @@ kara.refresh = function() {
 			if(kara.scoreInfo.track[key].clef === "") continue;
 			kara.printNote(key);
 			kara.textSVG(key);
+			console.log('call kara.printNote, kara.textSVG');
 		}
 	}
 };
