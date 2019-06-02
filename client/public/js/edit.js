@@ -103,6 +103,7 @@ kara.editKey = function() {
 
 	key = kara.keyvalue(key);
 	
+	// 정해진 조표 입력 검사
 	if(!kara.keyTrueofFalse(key)) return;
 	
 	kara.scoreInfo.key = key.toString();

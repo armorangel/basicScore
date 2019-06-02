@@ -22,16 +22,17 @@ kara.delay = function delay(gap) { /* gap is in millisecs */
 
 //트랙 추가
 kara.addTabs = function() {
-	var trackN;// 트랙이름 'track1'
-	var track = 1;// 트랙번호
+	
+	var trackN;		// 트랙이름 'track1'
+	var track = 1;	// 트랙번호
 
 	//kara.svg :: 악보 트랙별 SVG 객체 return ['track1', 'track2', ..., 'track10']
 	//마지막 트랙번호 설정
 	for (var key in kara.svg) {// 트랙별 svg
 		if (kara.svg.hasOwnProperty(key)) {// kara.svg에 트랙이 존재하면
 			if(kara.svg[key].svgContainer !== null) {
-				track++;//1부터 시작 아직 생성안된 트랙까지
-				console.log(track);
+				track++;	// 1부터 시작 아직 생성안된 트랙까지
+				console.log('added TrackNUM ' + track);
 			}
 		}
 	}
@@ -49,23 +50,23 @@ kara.addTabs = function() {
 			  .last()
 			  .after("<div id='track" + track +"'></div>");
 
-
+	// 탭 refresh
 	$( "#tabs" ).tabs( "refresh" );
 
-	trackN = "track" + track;
+	trackN = "track" + track;	// 'track1'
 	console.log(trackN + typeof(trackN));
 
-	kara.svgContain(trackN);
-	kara.textSVG(trackN);
-	kara.printNote(trackN);
-	kara.menu(track);// 악기선택 콤보 추가
+	kara.svgContain(trackN);	// 'track1'
+	kara.textSVG(trackN);		// 'track1'
+	kara.printNote(trackN);		// 'track1'
+	kara.menu(track);			// 악기선택 콤보 추가
 };
 
 // Add Combo to select Instruments on Each Track
 kara.menu = function(trackN){	//trackN: trackNumber -- '1'
 	
-	var track = "track" + trackN;// 'track1'
-	kara.scoreInfo.track[track].instrument = 0;//처음 Acoustic Grand Piano로 세팅
+	var track = "track" + trackN;				// 'track1'
+	kara.scoreInfo.track[track].instrument = 0;	//처음 Acoustic Grand Piano로 세팅
 	
 	// 메뉴 바에 Select a track 문구, 콤보 추가
 	$("#menu").append("<form action='#'><fieldset><label for='instrument" + trackN + "'>Select a track" + trackN+ "</label><select name='instrument" + trackN 							+"' id='instrument" + trackN +"'></fieldset></form>");
@@ -210,10 +211,9 @@ kara.menu = function(trackN){	//trackN: trackNumber -- '1'
 		
 		// 콤보 박스 변경시 호출
 		change: function(event, ui) {
-		  
-			track = "track" + trackN;//트랙 번호
+			track = "track" + trackN;	// 트랙 번호
 			console.log(track);
-			kara.scoreInfo.track[track].instrument = ui.item.value;// 해당 악기 셋팅
+			kara.scoreInfo.track[track].instrument = ui.item.value;	// 해당 악기 셋팅
 		}
 	});
 
@@ -498,12 +498,12 @@ kara.refresh = function() {
 	$(".in_bar").remove();
 	
 	for (var key in kara.scoreInfo.track) {
-		if(kara.scoreInfo.track.hasOwnProperty(key)) {
+		if(kara.scoreInfo.track.hasOwnProperty(key)) {// 객체가 특정 프로퍼티를 가지고 있는지
 			
+			// 해당 트랙이 초기화 되었는지 판단
 			if(kara.scoreInfo.track[key].clef === "") continue;
 			kara.printNote(key);
 			kara.textSVG(key);
-			console.log('call kara.printNote, kara.textSVG');
 		}
 	}
 };
