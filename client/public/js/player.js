@@ -1,7 +1,5 @@
 if(!window.kara) window.kara = {};
 
-'use strict';
-
 //Init Score(Execute first)
 kara.initScore = function(track) {// track: Track Name -- 'track1'
 	
@@ -47,16 +45,12 @@ kara.addTabs = function() {
 	//kara.svg :: 악보 트랙별 SVG 객체 return ['track1', 'track2', ..., 'track10']
 	//마지막 트랙번호 설정
 	for (var key in kara.svg) {	// 트랙별 svg
-		if (kara.svg.hasOwnProperty(key)) {// kara.svg에 트랙이 존재하면
-			if(kara.svg[key].svgContainer !== null) {
-				trcNum++;	// 1부터 시작 아직 생성안된 트랙까지
-				console.log('added TrackNumber :: ' + trcNum);
-			}
-		}
+		if(kara.svg[key].svgContainer !== null)
+			trcNum++;	// 1부터 시작 아직 생성안된 트랙까지
 	}
 	
 	// 트랙 10개 제한
-	if(trcNum == 11) return;
+	if(trcNum === 11) return;
 	
 	//탭 태그 생성
 	$("#tab").children().last().before("<li><a href='#track" + trcNum + "'>track " + trcNum + "</a></li>");

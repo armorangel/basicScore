@@ -1,7 +1,5 @@
 if(!window.kara) window.kara = {};
 
-'use strict';
-
 //악보 트랙별 SVG 객체
 kara.svg = {
 	"track1": {
@@ -25,36 +23,24 @@ kara.svg = {
 };
 
 //해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성
-kara.svgContain = function(track) {// track: Track Name -- 'track1'
+kara.svgContain = function(trcNm) {	// track: Track Name -- 'track1'
 	
-	var trac = kara.svg[track];		// kara.svg['track1']
+	var trcSvg = kara.svg[trcNm];	// kara.svg['track1'] 트랙별 SVG 객체
 	var svgContainer;				// #track1 SVG 트랙영역
-	var svgText;					// title, tempo, writer SVG
-	var svgLine;					// line(오선지) SVG
-	var svgSymbol;					// clef(음자리표), 조표 4/4	
-	var svgNote;					// 음표 SVG, 음표 막대 SVG
-	var svgBox;						// 선택영역 SVG
 	var width = $("#tabs").width();	// 악보 탭 넓이
 
-	svgContainer = d3.select("#" + track)		// '#track1'
-					.append("svg")
-					.attr("id", "score")		// #score :: 악보영역
-					.style("width", width - 43)	// 넓이
-					.style("height", "400");	// 높이
-
-	svgText = svgContainer.append("g").attr("id", "text");		// title, tempo, writer
+	svgContainer = d3.select("#" + trcNm)			// '#track1'
+					.append("svg")					// SVG 객체 생성
+					.attr("id", "score")			// #score :: 악보영역
+					.style("width", width - 43)		// 넓이
+					.style("height", "400");		// 높이
 	
-	svgLine = svgContainer.append("g").attr("id", "lines");		// line(오선지)
-	svgSymbol = svgContainer.append("g").attr("id", "symbol");	// clef(음자리표), 조표 4/4	
-	svgNote = svgContainer.append("g") .attr("id", "note");		// 음표, 음표 막대 SVG
-	svgBox = svgContainer.append("g").attr("id", "boxs");		// 선택영역
-	
-	trac.svgContainer	= svgContainer;
-	trac.svgText		= svgText;
-	trac.svgLine		= svgLine;
-	trac.svgSymbol		= svgSymbol;
-	trac.svgNote		= svgNote;
-	trac.svgBox			= svgBox;
+	trcSvg.svgContainer	= svgContainer;
+	trcSvg.svgText		= svgContainer.append("g").attr("id", "text");		// title, tempo, writer
+	trcSvg.svgLine		= svgContainer.append("g").attr("id", "lines");		// line(오선지)
+	trcSvg.svgSymbol	= svgContainer.append("g").attr("id", "symbol");	// clef(음자리표), 조표 4/4	
+	trcSvg.svgNote		= svgContainer.append("g").attr("id", "note");		// 음표, 음표 막대 SVG
+	trcSvg.svgBox		= svgContainer.append("g").attr("id", "boxs");		// 선택영역
 };
 
 // Draw title, tempo, name SVG
