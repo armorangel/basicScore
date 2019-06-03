@@ -23,12 +23,13 @@ kara.svg = {
 };
 
 //해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성
-kara.svgContain = function(trcNm) {	// track: Track Name -- 'track1'
+kara.svgContain = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
-	var trcSvg = kara.svg[trcNm];	// kara.svg['track1'] 트랙별 SVG 객체
-	var svgContainer;				// #track1 > #score SVG 트랙영역
-	var width = $("#tabs").width();	// 악보 탭 넓이
+	const trcSvg = kara.svg[trcNm];		// kara.svg['track1'] 트랙별 SVG 객체
+	const width = $("#tabs").width();	// 악보 탭 넓이
+	let svgContainer;					// #track1 > #score SVG 트랙영역
 
+	// 악보영역 생성후 저장
 	svgContainer = d3.select("#" + trcNm)			// '#track1'
 					.append("svg")					// SVG 객체 생성
 					.attr("id", 'score')			// #score :: 악보영역
@@ -79,7 +80,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.attr("class", "in_bar")// .in_bar :: 악보 초기화 영역
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", "kara.editTitle('" + track + "')")// Click Event(제목 수정)
+		.attr("onclick", `kara.editTitle('${track}')`)// Click Event(제목 수정)
 		//.style("width", width)// 0 ISSUE
 		//.style("height", height)// 0 ISSUE
 		.style("width", "100")// 변경해야됨
@@ -111,7 +112,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.attr("class", "in_bar")// .in_bar :: 삭제영역
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", "kara.editTempo('" + track + "')")
+		.attr("onclick", `kara.editTempo('${track}')`)
 		//.style("width", width)// 0 ISSUE
 		//.style("height", height)// 0 ISSUE
 		.style("width", "100")// 0 ISSUE
