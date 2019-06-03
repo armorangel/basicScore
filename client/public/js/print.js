@@ -37,9 +37,9 @@ kara.svgContain = function(track) {// track: Track Name -- 'track1'
 
 	svgContainer = d3.select("#"+track)	// '#track1'
 					.append("svg")
-					.attr("id", "score")		//#score :: 악보영역
-					.style("width", width - 43)	//넓이
-					.style("height", "400");	//높이
+					.attr("id", "score")		// #score :: 악보영역
+					.style("width", width - 43)	// 넓이
+					.style("height", "400");	// 높이
 
 	svgText = svgContainer.append("g").attr("id", "text");		// title, tempo, writer
 	svgLine = svgContainer.append("g").attr("id", "lines");		// line(오선지)
@@ -57,17 +57,14 @@ kara.svgContain = function(track) {// track: Track Name -- 'track1'
 
 // Draw title, tempo, name SVG
 kara.textSVG = function(track) {// track :: Track Name 'track1'
-	console.log('call textSVG ' + track);
+	
 	var svg = kara.svg[track].svgText;
 	var box = kara.svg[track].svgBox;
 	var title = kara.scoreInfo.title;
 	var tempo = kara.scoreInfo.tempo;
 	var writer = kara.scoreInfo.writer;
 	var position;
-	var x;
-	var y;
-	var width;
-	var height;
+	var x, y, width, height;
 	var opacity = "0.3";	// 투명도
 	
 	// Title
@@ -168,6 +165,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 };
 
 kara.scorePosition = {
+	
 	left: function(track) {
 		var position = jQuery("#"+ track + " > #score");
 		return position.position().left;
@@ -192,12 +190,10 @@ kara.XY = {
 // 음자리표 SVG 그리기
 kara.clefSVG = function(x, y, Y, track) {
 	
-	var clef = kara.scoreInfo.track[track].clef;// 현재 음자리표
+	var clef = kara.scoreInfo.track[track].clef;	// 현재 음자리표
 	var svg = kara.svg[track].svgSymbol;
-	var box_x;
-	var box_y;
-	var width;
-	var height;
+	var box_x, box_y;
+	var width, height;
 	var pathString;
 	
 	switch(clef) {
@@ -365,7 +361,7 @@ kara.keySVG = function(Y, key, track) {	// 217, major Db, track1
 			}
 		}
 	}
-	x = 40;//악보 좌측부터 40
+	x = 40;	// 악보 좌측부터 40
 	y = Y - 17;
 	width = N * 10 + 15;
 	height = 74;
@@ -483,7 +479,7 @@ kara.pathClone = function (pathString, x, y) {
 		
 		res[i] = [];
 		
-		for(var j=0;j<pathString[i].length;j++) {
+		for(var j = 0; j < pathString[i].length; j++) {
 			res[i][j] = pathString[i][j];
 
 			if(i==0 && j==0) {
@@ -501,6 +497,7 @@ kara.pathClone = function (pathString, x, y) {
 
 // 오선지
 kara.hLine = function(y, track) {
+	
 	var line = kara.svg[track].svgLine;
 	var X = kara.XY.X();
 	var Y = kara.XY.Y(y);
@@ -529,7 +526,7 @@ kara.hLine = function(y, track) {
 	kara.meterSVG(Y, track);		//박자
 
 	var a = N*12+70;
-	var ac = (X-a)/4;
+	var ac = (X - a) / 4;
 	
 	// kara.vLine(a, Y+12); // 없어도 됨
 	kara.vLine(ac*1+a, Y+12, track);
@@ -549,20 +546,20 @@ kara.vLine = function(x, y, track) {
 		.style("stroke", "black");
 };
 
-//음표 막대
-kara.notevLine = function(x, y, track) {
+//음표 막대 그리기
+kara.notevLine = function(x, y, track) {// 235.6875, 242, track1
 	
 	var svg = kara.svg[track].svgNote;
 	var pathString = kara.sprintf("M %f %f L %f %f", x+10, y, x+10, y-30);
 	
 	svg.append("path")
-		.attr("class", "in_bar" + " " + track)
+		.attr("class", "in_bar" + " " + track)//삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
 
 //음표 막대
-kara.notevLow = function(x, y, pitch, meter, track) {
+kara.notevLow = function(x, y, pitch, meter, track) {//147.9375, 230, C5, half, track1
 	
 	var svg = kara.svg[track].svgNote;
 	var pathString;
@@ -625,15 +622,16 @@ kara.notevLow = function(x, y, pitch, meter, track) {
 };
 
 kara.noteBox = {
+	
 	print: function(X, Y , bNum, nNum, meter, track) {
+		
 		var svg = kara.svg[track].svgContainer;
 		var key = kara.scoreInfo.key;
 		var keySplit = key.split(' ');
 		var M = kara.key[keySplit[0]];
 		var N = M[keySplit[1]];
 		var clef = kara.scoreInfo.track[track].clef;
-		var i = 0;
-		var j = 0;
+		var i = 0, j = 0;
 
 		var a = N * 12 + 70;
 		var ac = (X - a) / 4;
@@ -667,17 +665,17 @@ kara.noteBox = {
 			default:
 				break;
 		}
-		var svgVar = svg.append("g") //마디 번호
+		var svgVar = svg.append("g")	// 마디 번호
 			.attr("id", "bar_" + bNum)
 			.attr("class", "in_bar" + " " + track);
 
 		switch(clef) {
 			case "G":
-				i = 14; //A3~ C6 17 j = 30
+				i = 14; // A3~ C6 17 j = 30
 				j = i+16;
 
 				break;
-			case "F":  //C2~E4 =
+			case "F":  // C2~E4 =
 				i = 26;
 				j = i+16;
 				break;
@@ -722,7 +720,9 @@ kara.noteBox = {
 };
 
 kara.noteBox_ = {
+	
 	print: function(X, Y , bNum, nNum, meter, track) {
+		
 		var note = kara.scoreInfo.track[track].notes;
 		var svg = kara.svg[track].svgContainer;
 		var key = kara.scoreInfo.key;
@@ -730,9 +730,7 @@ kara.noteBox_ = {
 		var M = kara.key[keySplit[0]];
 		var N = M[keySplit[1]];
 		var clef = kara.scoreInfo.track[track].clef;
-		var i = 0;
-		var j = 0;
-		var flag = 0;
+		var i = 0, j = 0, flag = 0;
 		
 		if(nNum == 0) { //이전  마디의 정보를 얻어옴
 			bNum--;
@@ -762,24 +760,23 @@ kara.noteBox_ = {
 		if(flag == 1) { 
 			bNum++;
 			nNum = 0;
-		}
-		else nNum = nNum+1;
+		} else nNum = nNum + 1;
 
 		switch(pre_meter) {
-			case 'whole': //온음표
+			case 'whole': // 온음표
 				x = x + width;
 				break;
-			case 'half': //2분음표
-				x = x + width/2;
+			case 'half': // 2분음표
+				x = x + width / 2;
 				break;
-			case 'quarter': //4분음표
-				x = x + width/4;
+			case 'quarter': // 4분음표
+				x = x + width / 4;
 				break;
-			case '8th': //8분음표
-				x = x + width/8;
+			case '8th': // 8분음표
+				x = x + width / 8;
 				break;
-			case '16th': //16분음표
-				x = x + width/16;
+			case '16th': // 16분음표
+				x = x + width / 16;
 				break;
 			default:
 				break;
@@ -791,19 +788,19 @@ kara.noteBox_ = {
 
 				break;
 			case 'half': //2분음표
-				width = width/2;
+				width = width / 2;
 
 				break;
 			case 'quarter': //4분음표
-				width = width/4;
+				width = width / 4;
 
 				break;
 			case '8th': //8분음표
-				width = width/8;
+				width = width / 8;
 
 				break;
 			case '16th': //16분음표
-				width = width/16;
+				width = width / 16;
 
 				break;
 			default: break;
@@ -865,6 +862,7 @@ kara.noteBox_ = {
 
 
 kara.noteBox_last = {
+	
 	print: function(X, Y , bNum, nNum, meter, set, track) {
 		var note = kara.scoreInfo.track[track].notes;
 		var svg = kara.svg[track].svgContainer;
@@ -970,8 +968,9 @@ kara.noteBox_last = {
 				break;
 		}
 
-		for(var i4;i<=j;i++) {  //a3 ~ b7
-			if((i % 2) == 1){
+		for(var i4; i <= j; i++) {  //a3 ~ b7
+			if((i % 2) == 1) {
+				
 				var m = 50 - i;
 				var p = pitch_select.selection(m);
 
@@ -987,6 +986,7 @@ kara.noteBox_last = {
 					.style("fill-opacity", "0.3");
 				y = height + y;
 			} else {
+				
 				var m = 50 - i;
 				var p = pitch_select.selection(m);
 
@@ -1000,6 +1000,7 @@ kara.noteBox_last = {
 					.style("height", height)
 					.style("fill", "#660000")
 					.style("fill-opacity", "0.5");
+				
 				y = height + y;
 			}
 		}
