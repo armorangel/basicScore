@@ -81,11 +81,11 @@ kara.printNote = function(track) {
 			var N = M[keySplit[1]];
 			var X = kara.XY.X();
 			var Y = kara.XY.Y(i);
-			var a = N*12+70;
-			var ac = (X-a)/4;
-			var _whole = ac/2-8;
-			var _half = _whole/2;
-			var _quarter = _half/2;
+			var a = N * 12 + 70;
+			var ac = (X - a) / 4;
+			var _whole = ac / 2 - 8;
+			var _half = _whole / 2;
+			var _quarter = _half / 2;
 			var _8th = _quarter/2;
 			var _16th = _8th/2-8;
 			var position;
@@ -94,9 +94,12 @@ kara.printNote = function(track) {
 			var meter = note[i][j][1];
 			
 			if(four_boxEnter == four_check) {
+
+				// 첫 음표
 				kara.noteBox.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, track);
 				four_check++;
 			} else {
+				// 두번째 부터
 				kara.noteBox_.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, track);
 				console.log("그릴 박스는 i는" + i + "j " +  j);
 			}

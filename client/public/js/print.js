@@ -492,7 +492,7 @@ kara.pathClone = function (pathString, x, y) {
 };
 
 // 오선지
-kara.hLine = function(y, track) {
+kara.hLine = function(y, track) {//y :: 오선지 줄 번호 :: 1, track :: Track Name 'track1'
 	
 	var line = kara.svg[track].svgLine;
 	var X = kara.XY.X();
@@ -507,8 +507,8 @@ kara.hLine = function(y, track) {
 	//간격조절
 	for(i = 1; i <= 5; i++) {
 		
-		//간격 12씩 5줄
-		var pathString = kara.sprintf("M %f %f L %f %f", 0, (i*gab)+Y, X, (i*gab)+Y);
+		//간격 12씩 5줄 그리기
+		var pathString = kara.sprintf("M %f %f L %f %f", 0, (i * gab) + Y, X, (i * gab) + Y);
 		
 		line.append("path")
 			.attr("class", "in_bar" + " " + track)
@@ -524,7 +524,6 @@ kara.hLine = function(y, track) {
 	var a = N*12+70;
 	var ac = (X - a) / 4;
 	
-	// kara.vLine(a, Y+12); // 없어도 됨
 	kara.vLine(ac*1+a, Y+12, track);
 	kara.vLine(ac*2+a, Y+12, track);
 	kara.vLine(ac*3+a, Y+12, track);
@@ -568,41 +567,38 @@ kara.notevLow = function(x, y, pitch, meter, track) {// 147.9375, 230, C5, half,
 	else if(pitch === "D2") y = y - 4;
 	else if(pitch === "C2") y = y;
 	else return;
-
+	
+	console.log(meter);
 	switch(meter) {
 		case 'whole':
 			x = x-3.5;
 			m = x + 22;
 			n = y;
-			console.log(meter);
+			
 			break;
 			
 		case 'half':
 			x = x-4;
 			m = x + 18;
 			n = y;
-			console.log(meter);
 			break;
 			
 		case 'quarter':
 			x = x-3;
 			m = x + 18.5;
 			n = y;
-			console.log(meter);
 			break;
 			
 		case '8th':
 			x = x-3;
 			m = x + 18.5;
 			n = y;
-			console.log(meter);
 			break;
 			
 		case '16th':
 			x = x-3;
 			m = x + 18.5;
 			n = y;
-			console.log(meter);
 			break;
 			
 		default:
@@ -638,6 +634,7 @@ kara.noteBox = {
 
 		var width = (X - a) / 4;
 		var height = 6;
+		var fill_opacity = '0.3';
 
 		switch(meter){
 			case 'whole': //온음표
@@ -660,34 +657,33 @@ kara.noteBox = {
 		}
 		
 		//마디 생성
-		var svgVar = svg.append("g")	// 마디 번호
-			.attr("id", "bar_" + bNum)
+		var svgVar = svg.append("g")	
+			.attr("id", "bar_" + bNum)	// 마디 번호
 			.attr("class", "in_bar" + " " + track);
-
+		
 		switch(clef) {
-			case "G":
-				i = 14;		// A3 ~ C6 (14 ~ 30)
-				j = i + 16;	// j = 30 17개 음
-
-				break;
-				
-			case "F":  
-				i = 26;		// C2 ~ E4
-				j = i + 16;	// j = 42 17개 음
-				
-				break;
-				
+			case "G": i = 14; break;	// A3 ~ C6 (14 ~ 30)	
+			case "F": i = 26; break;	// C2 ~ E4
 			case "P": break;
 		}
+		/*
+		switch(clef) {
+			case "G": i = 36; break;	// A3 ~ C6 (14 ~ 30)	
+			case "F": i = 26; break;	// C2 ~ E4
+			case "P": break;
+		}
+		*/
+		j = i + 16;	// j = 42 17개 음
+
 		for(i; i <= j; i++) {  // A3 ~ C6 (34 ~ 61)
-			
+			//var m = i;
 			var m = 50 - i;	// 36 ~ 20
 			var p = pitch_select.selection(m);	//선택한 음높이 계산 // return C6 m::36 p::C6
 			var fill = '';
 			
 			//색상 선택
-			if((i % 2) == 1) fill = '#6666FF';// 홀수 층
-			else fill = '#66FFFF';// 짝수 층
+			if((i % 2) == 1) fill = '#6666FF';	// 홀수 층
+			else fill = '#66FFFF';				// 짝수 층
 			
 			// 악보 선택 영역 추가
 			svgVar.append("rect")
@@ -697,9 +693,9 @@ kara.noteBox = {
 				.attr("y", y)
 				.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
 				.style("width", width)
-				.style("height", height)// 6
+				.style("height", height)	// 6
 				.style("fill", fill)
-				.style("fill-opacity", "0.3");
+				.style("fill-opacity", fill_opacity);	//0.3
 		
 			y += height;
 		}
@@ -708,7 +704,7 @@ kara.noteBox = {
 
 kara.noteBox_ = {
 	
-	print: function(X, Y , bNum, nNum, meter, track) {
+	print: function(X, Y , bNum, nNum, meter, track) {// 1166, 200, 0, 2, quarter, track1
 		
 		var note = kara.scoreInfo.track[track].notes;
 		var svg = kara.svg[track].svgContainer;
@@ -719,11 +715,12 @@ kara.noteBox_ = {
 		var clef = kara.scoreInfo.track[track].clef;
 		var i = 0, j = 0, flag = 0;
 		
-		if(nNum == 0) { //이전  마디의 정보를 얻어옴
+		// 이전 마디의 정보를 얻어옴
+		if(nNum == 0) {
 			bNum--;
-			nNum = note[bNum].length-1;
+			nNum = note[bNum].length - 1;
 			flag = 1;
-		} else nNum = nNum-1;
+		} else nNum = nNum - 1;
 		
 		// var pitch = note[bNum][nNum][0];
 		var pre_meter = note[bNum][nNum][1];
@@ -772,23 +769,18 @@ kara.noteBox_ = {
 		switch(meter){
 			case 'whole': //온음표
 				width = width;
-
 				break;
 			case 'half': //2분음표
 				width = width / 2;
-
 				break;
 			case 'quarter': //4분음표
 				width = width / 4;
-
 				break;
 			case '8th': //8분음표
 				width = width / 8;
-
 				break;
 			case '16th': //16분음표
 				width = width / 16;
-
 				break;
 			default: break;
 		}
@@ -799,54 +791,41 @@ kara.noteBox_ = {
 			.attr("class", "in_bar" + " " + track);
 
 		switch(clef) {
-			case "G":
-				i = 14; // A3~ C6 17 j = 30
-				j = i + 16;
-
-				break;
-			case "F":  // C2~E4 =
-				i = 26;
-				j = i + 16;
-				break;
+			case "G": i = 14; break;// A3~ C6 17 j = 30
+			case "F": i = 26; break; // C2~E4 =
 			case "P": break;
 		}
-
+		
+		j = i + 16;
+		
 		for(i; i <= j; i++) {  //a3 ~ b7
+			
+			var m = 50 - i;
+			var p = pitch_select.selection(m);// 선택한 음높이 계산 in edit.js
+			var fill;
+			var fill_opacity;
+			
 			if((i % 2) == 1) {
-				var m = 50 - i;
-				var p = pitch_select.selection(m);	// 선택한 음높이 계산 in edit.js
-				
-				console.log('p::' + p);
-				//음표 선택 영역 추가
-				svgVar.append("rect")
-					.attr("id", p)
-					.attr("class", "in_bar " + "bar_"+ bNum + " "+"note_" + nNum + " " + track) //마디,  음표 번호
-					.attr("x", x)
-					.attr("y", y)
-					.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")
-					.style("width", width)
-					.style("height", height)
-					.style("fill", "#6666FF")
-					.style("fill-opacity", "0.3");
-				y = height + y;
+				fill = '#6666FF';
+				fill_opacity = '0.3';
 			} else {
-				var m = 50 - i;
-				var p = pitch_select.selection(m);
-				
-				console.log('else');
-				console.log('p::' + p);
-				svgVar.append("rect")
-					.attr("id", p)
-					.attr("class", "in_bar " + "bar_"+ bNum + " "+"note_" + nNum + " " + track) //마디,  음표 번호
-					.attr("x", x)
-					.attr("y", y)
-					.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")
-					.style("width", width)
-					.style("height", height)
-					.style("fill", "#66FFFF")
-					.style("fill-opacity", "0.5");
-				y = height + y;
+				fill = '#66FFFF';
+				fill_opacity = '0.5';
 			}
+			
+			//음표 선택 영역 추가
+			svgVar.append("rect")
+				.attr("id", p)
+				.attr("class", "in_bar " + "bar_"+ bNum + " "+"note_" + nNum + " " + track) //마디,  음표 번호
+				.attr("x", x)
+				.attr("y", y)
+				.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")
+				.style("width", width)
+				.style("height", height)
+				.style("fill", fill)
+				.style("fill-opacity", fill_opacity);
+			
+			y = height + y;
 		}
 	}
 };
