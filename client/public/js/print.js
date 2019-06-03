@@ -26,14 +26,14 @@ kara.svg = {
 kara.svgContain = function(trcNm) {	// track: Track Name -- 'track1'
 	
 	var trcSvg = kara.svg[trcNm];	// kara.svg['track1'] 트랙별 SVG 객체
-	var svgContainer;				// #track1 SVG 트랙영역
+	var svgContainer;				// #track1 > #score SVG 트랙영역
 	var width = $("#tabs").width();	// 악보 탭 넓이
 
 	svgContainer = d3.select("#" + trcNm)			// '#track1'
 					.append("svg")					// SVG 객체 생성
 					.attr("id", "score")			// #score :: 악보영역
-					.style("width", width - 43)		// 넓이
-					.style("height", "400");		// 높이
+					.style("width", width - 43)		// 악보 넓이 //우측부터 43
+					.style("height", "400");		// 악보 높이
 	
 	trcSvg.svgContainer	= svgContainer;
 	trcSvg.svgText		= svgContainer.append("g").attr("id", "text");		// title, tempo, writer
@@ -154,12 +154,14 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 
 kara.scorePosition = {
 	
-	left: function(track) {
-		var position = jQuery("#"+ track + " > #score");
+	//#score 악보 영역 left 좌표 반환
+	left: function(trcNm) {// trcNm :: Track Name -- 'track1'
+		var position = $("#"+ trcNm + " > #score");
 		return position.position().left;
 	},
-	top: function(track) {
-		var position = jQuery("#"+ track + " > #score");
+	// #score 악보 영억 top 좌표 반환
+	top: function(trcNm) {// trcNm :: Track Name -- 'track1'
+		var position = $("#"+ trcNm + " > #score");
 		return position.position().top;
 	}
 };
@@ -191,12 +193,14 @@ kara.clefSVG = function(x, y, Y, track) {
 			
 			//clefs.G 없으면 null
 			if (!kara.glyphs["clefs.G"]) return null;
+			
 			pathString = this.pathClone(kara.glyphs["clefs.G"].d, x, y);
 			svg.append("path")
 				.attr("class", "in_bar" + " " + track)
 				.attr("d", pathString)
 				.style("transform", "scale(1.2,1.4)") //크기조절
 				.style("stroke", "black");
+			
 			break;
 			
 		case "F":	// 낮은 음자리표
@@ -204,12 +208,14 @@ kara.clefSVG = function(x, y, Y, track) {
 			y = y / 1.7 + 35;
 			
 			if (!kara.glyphs["clefs.F"]) return null;
+			
 			pathString = this.pathClone(kara.glyphs["clefs.F"].d, x-5, y-20); //-5//-45
 			svg.append("path")
 				.attr("class", "in_bar" + " " + track)
 				.attr("d", pathString)
 				.style("transform", "scale(1.4,1.7)")	// 크기조절
 				.style("stroke", "black");
+			
 			break;
 			
 		case "P":
@@ -217,12 +223,14 @@ kara.clefSVG = function(x, y, Y, track) {
 			y = y / 1.5 + 35;
 			
 			if (!kara.glyphs["clefs.perc"]) return null;
+			
 			pathString = this.pathClone(kara.glyphs["clefs.perc"].d, x-5, y-20.5);
 			svg.append("path")
 				.attr("class", "in_bar" + " " + track)
 				.attr("d", pathString)
 				.style("transform", "scale(1.2,1.5)")	// 크기조절
 				.style("stroke", "black");
+			
 			break;
 			
 		default:
@@ -609,6 +617,7 @@ kara.notevLow = function(x, y, pitch, meter, track) {// 147.9375, 230, C5, half,
 		.style("stroke-width", "1.5px");
 };
 
+// 악보 선택 영역 그리기
 kara.noteBox = {
 	
 	print: function(X, Y , bNum, nNum, meter, track) {
@@ -623,10 +632,6 @@ kara.noteBox = {
 
 		var a = N * 12 + 70;
 		var ac = (X - a) / 4;
-		// kara.vLine(a, Y+12); // 없어도 됨
-		// kara.vLine(ac*1+a, Y+12);
-		// kara.vLine(ac*2+a, Y+12);
-		// kara.vLine(ac*3+a, Y+12);
 
 		var x = a;
 		var y = Y - 15;
@@ -653,56 +658,50 @@ kara.noteBox = {
 			default:
 				break;
 		}
+		
+		//마디 생성
 		var svgVar = svg.append("g")	// 마디 번호
 			.attr("id", "bar_" + bNum)
 			.attr("class", "in_bar" + " " + track);
 
 		switch(clef) {
 			case "G":
-				i = 14; // A3~ C6 17 j = 30
-				j = i+16;
+				i = 14;		// A3 ~ C6 (14 ~ 30)
+				j = i + 16;	// j = 30 17개 음
 
 				break;
-			case "F":  // C2~E4 =
-				i = 26;
-				j = i+16;
+				
+			case "F":  
+				i = 26;		// C2 ~ E4
+				j = i + 16;	// j = 42 17개 음
+				
 				break;
 				
 			case "P": break;
 		}
-		for(i; i <= j; i++) {  //a3 ~ b7
-			if((i%2) == 1) {
-				
-				var m = 50 - i;
-				var p = pitch_select.selection(m);
-
-				svgVar.append("rect")
-					.attr("id", p)
-					.attr("class", "in_bar " + "bar_" + bNum + " " + "note_" + nNum + " " + track) //마디,  음표 번호
-					.attr("x", x)
-					.attr("y", y)
-					.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")
-					.style("width", width)
-					.style("height", height)
-			    	.style("fill", "#6666FF")
-					.style("fill-opacity", "0.3");
-				y = height + y;
-			} else {
-				var m = 50 - i;
-				var p = pitch_select.selection(m);
-
-				svgVar.append("rect")
-					.attr("id", p)
-					.attr("class", "in_bar " + "bar_" + bNum + " " + "note_" + nNum + " " + track) //마디,  음표 번호
-					.attr("x", x)
-					.attr("y", y)
-					.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")
-					.style("width", width)
-					.style("height", height)
-					.style("fill", "#66FFFF")
-					.style("fill-opacity", "0.3");
-				y = height + y;
-			}
+		for(i; i <= j; i++) {  // A3 ~ C6 (34 ~ 61)
+			
+			var m = 50 - i;	// 36 ~ 20
+			var p = pitch_select.selection(m);	//선택한 음높이 계산 // return C6 m::36 p::C6
+			var fill = '';
+			
+			//색상 선택
+			if((i % 2) == 1) fill = '#6666FF';// 홀수 층
+			else fill = '#66FFFF';// 짝수 층
+			
+			// 악보 선택 영역 추가
+			svgVar.append("rect")
+				.attr("id", p)
+				.attr("class", "in_bar " + "bar_" + bNum + " " + "note_" + nNum + " " + track) //마디,  음표 번호
+				.attr("x", x)
+				.attr("y", y)
+				.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
+				.style("width", width)
+				.style("height", height)// 6
+				.style("fill", fill)
+				.style("fill-opacity", "0.3");
+		
+			y += height;
 		}
 	}
 };
@@ -815,8 +814,10 @@ kara.noteBox_ = {
 		for(i; i <= j; i++) {  //a3 ~ b7
 			if((i % 2) == 1) {
 				var m = 50 - i;
-				var p = pitch_select.selection(m);
-
+				var p = pitch_select.selection(m);	// 선택한 음높이 계산 in edit.js
+				
+				console.log('p::' + p);
+				//음표 선택 영역 추가
 				svgVar.append("rect")
 					.attr("id", p)
 					.attr("class", "in_bar " + "bar_"+ bNum + " "+"note_" + nNum + " " + track) //마디,  음표 번호
@@ -831,7 +832,9 @@ kara.noteBox_ = {
 			} else {
 				var m = 50 - i;
 				var p = pitch_select.selection(m);
-
+				
+				console.log('else');
+				console.log('p::' + p);
 				svgVar.append("rect")
 					.attr("id", p)
 					.attr("class", "in_bar " + "bar_"+ bNum + " "+"note_" + nNum + " " + track) //마디,  음표 번호

@@ -1,7 +1,5 @@
 if(!window.kara) window.kara = {};
 
-'use strict';
-
 // 타이틀 수정
 kara.editTitle = function(track) {// track Track Name :: 'track1'
 	
@@ -354,23 +352,30 @@ var notepush = {
 var pitch_select = {
 	
 	note: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
-	selection: function(pitch){
+	//음 높이 계산 높이에 따른 계이름 반환
+	selection: function(pitch) {	// pitch 36 return C6
+		
 		var m = 1;
-		var n = 7;
-		for(var i = 1; i <= 7; i++) {
-			if(m <= pitch && pitch <= n) {  //m<=pitch && pitch>=n   n <=pitch
-				if(pitch%7 == 0){
+		var n = m + 6;	// 7
+		
+		for(var i = 1; i <= 7; i++) {		// 1옥타브 부터 7옥타브까지 검사
+			if(m <= pitch && pitch <= n) {  // 음높이 계산 현재 범위에 있는 지
+				
+				if(pitch % 7 == 0){
 					return this.note[6] + i;
 				}
+				
 				return this.note[(pitch % 7) - 1] + i;
 			}
-			m = m + 7;
-			n = n + 7;
+			
+			// 해당 범위 안에 있지 않으면 한 옥타브 올려서 계산
+			m = m + 7;	// 1 옥타브 올리기
+			n = n + 7;	// 1 옥타브 올리기
 		}
 	}
 };
 
-var boxWidth = function(meter){
+var boxWidth = function(meter) {
 	var key = kara.scoreInfo.key;
 	var keySplit = key.split(' ');
 	var M = kara.key[keySplit[0]];

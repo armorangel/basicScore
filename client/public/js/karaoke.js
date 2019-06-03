@@ -46,7 +46,7 @@ kara.printNote = function(track) {
 	
 	var note = kara.scoreInfo.track[track].notes;
 	var meter = kara.scoreInfo.meter.split('/');
-	var limited = meter[0] * meter[1];	//마디 제한
+	var limited = meter[0] * meter[1];	// 마디 제한
 	var nowMeter = 0;					// 현재 마디
 	var four_boxEnter = 0;
 	var four_check = 0;
