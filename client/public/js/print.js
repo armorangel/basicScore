@@ -12,6 +12,7 @@ kara.svg = {
 		svgNote: null,
 		svgBox: null
 	},
+	// 10개 트랙 생성
 	"track2": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	"track3": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	"track4": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
@@ -23,7 +24,7 @@ kara.svg = {
 	"track10": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null}
 };
 
-//해당 트랙 svg 구성요소들 SVG 객체 저장
+//해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성
 kara.svgContain = function(track) {// track: Track Name -- 'track1'
 	
 	var trac = kara.svg[track];		// kara.svg['track1']
@@ -31,28 +32,29 @@ kara.svgContain = function(track) {// track: Track Name -- 'track1'
 	var svgText;					// title, tempo, writer SVG
 	var svgLine;					// line(오선지) SVG
 	var svgSymbol;					// clef(음자리표), 조표 4/4	
-	var svgNote;
+	var svgNote;					// 음표 SVG, 음표 막대 SVG
 	var svgBox;						// 선택영역 SVG
 	var width = $("#tabs").width();	// 악보 탭 넓이
 
-	svgContainer = d3.select("#"+track)	// '#track1'
+	svgContainer = d3.select("#" + track)		// '#track1'
 					.append("svg")
 					.attr("id", "score")		// #score :: 악보영역
 					.style("width", width - 43)	// 넓이
 					.style("height", "400");	// 높이
 
 	svgText = svgContainer.append("g").attr("id", "text");		// title, tempo, writer
+	
 	svgLine = svgContainer.append("g").attr("id", "lines");		// line(오선지)
 	svgSymbol = svgContainer.append("g").attr("id", "symbol");	// clef(음자리표), 조표 4/4	
-	svgNote = svgContainer.append("g") .attr("id", "note");		// note
+	svgNote = svgContainer.append("g") .attr("id", "note");		// 음표, 음표 막대 SVG
 	svgBox = svgContainer.append("g").attr("id", "boxs");		// 선택영역
 	
-	trac.svgContainer = svgContainer;
-	trac.svgText = svgText;
-	trac.svgLine = svgLine;
-	trac.svgSymbol = svgSymbol;
-	trac.svgNote = svgNote;
-	trac.svgBox = svgBox;
+	trac.svgContainer	= svgContainer;
+	trac.svgText		= svgText;
+	trac.svgLine		= svgLine;
+	trac.svgSymbol		= svgSymbol;
+	trac.svgNote		= svgNote;
+	trac.svgBox			= svgBox;
 };
 
 // Draw title, tempo, name SVG
@@ -559,13 +561,13 @@ kara.notevLine = function(x, y, track) {// 235.6875, 242, track1
 };
 
 //음표 막대
-kara.notevLow = function(x, y, pitch, meter, track) {//147.9375, 230, C5, half, track1
+kara.notevLow = function(x, y, pitch, meter, track) {// 147.9375, 230, C5, half, track1
 	
 	var svg = kara.svg[track].svgNote;
 	var pathString;
 	var m = 0, n = 0;
 
-	if(pitch === "C4") y = y;
+	if(pitch === "C4")		y = y;
 	else if(pitch === "B3") y = y - 4;
 	else if(pitch === "A3") y = y;
 	else if(pitch === "E2") y = y;
@@ -641,7 +643,7 @@ kara.noteBox = {
 		// kara.vLine(ac*3+a, Y+12);
 
 		var x = a;
-		var y = Y-15;
+		var y = Y - 15;
 
 		var width = (X - a) / 4;
 		var height = 6;
@@ -813,13 +815,13 @@ kara.noteBox_ = {
 
 		switch(clef) {
 			case "G":
-				i = 14; //A3~ C6 17 j = 30
-				j = i+16;
+				i = 14; // A3~ C6 17 j = 30
+				j = i + 16;
 
 				break;
-			case "F":  //C2~E4 =
+			case "F":  // C2~E4 =
 				i = 26;
-				j = i+16;
+				j = i + 16;
 				break;
 			case "P": break;
 		}
@@ -896,8 +898,8 @@ kara.noteBox_last = {
 		switch(meter) {
 			case 'whole': //온음표
 				width = width;
-				x = x + (X-a)/4;
-
+				x = x + (X - a) / 4;
+				
 				if(kara.meterCal_box(bNum, track)) { //마디 꽉차서
 					bNum = bNum + 1;
 					nNum = 0;

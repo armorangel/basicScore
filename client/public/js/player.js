@@ -4,10 +4,28 @@ if(!window.kara) window.kara = {};
 
 //Init Score(Execute first)
 kara.initScore = function(track) {// track: Track Name -- 'track1'
-	kara.menu("1");	//드랙별 악기 콤보 추가
-	kara.svgContain(track);
-	kara.textSVG(track);
-	kara.printNote(track);
+	
+	kara.menu(1);			// 트랙별 악기 콤보 추가
+	kara.svgContain(track);	// 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
+	kara.textSVG(track);	// Draw title, tempo, name SVG in print.js
+	kara.printNote(track);	// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
+};
+
+// 악보 초기화
+kara.refresh = function() {
+	
+	// 악보 삭제영역 삭제
+	$(".in_bar").remove();
+	
+	for (var key in kara.scoreInfo.track) {
+		if(kara.scoreInfo.track.hasOwnProperty(key)) {// 객체가 특정 프로퍼티를 가지고 있는지
+			
+			// 해당 트랙이 초기화 되었는지 판단
+			if(kara.scoreInfo.track[key].clef === "") continue;
+			kara.printNote(key);
+			kara.textSVG(key);
+		}
+	}
 };
 
 // 시간지연
@@ -20,7 +38,7 @@ kara.delay = function delay(gap) { /* gap is in millisecs */
 	}
 };
 
-//트랙 추가
+//트랙 탭 추가
 kara.addTabs = function() {
 	
 	var trackN;		// 트랙이름 'track1'
@@ -28,7 +46,7 @@ kara.addTabs = function() {
 
 	//kara.svg :: 악보 트랙별 SVG 객체 return ['track1', 'track2', ..., 'track10']
 	//마지막 트랙번호 설정
-	for (var key in kara.svg) {// 트랙별 svg
+	for (var key in kara.svg) {	// 트랙별 svg
 		if (kara.svg.hasOwnProperty(key)) {// kara.svg에 트랙이 존재하면
 			if(kara.svg[key].svgContainer !== null) {
 				track++;	// 1부터 시작 아직 생성안된 트랙까지
@@ -37,188 +55,52 @@ kara.addTabs = function() {
 		}
 	}
 	
-	console.log(track);
-	
 	// 트랙 10개 제한
 	if(track == 11) return;
 	
-	$("#tab").children()
-			 .last()
-			 .before("<li><a href='#track"+ track + "'>track "+ track + "</a></li>");
-
-	$("#tabs").children()
-			  .last()
-			  .after("<div id='track" + track +"'></div>");
+	$("#tab").children().last().before("<li><a href='#track" + track + "'>track " + track + "</a></li>");
+	$("#tabs").children().last().after("<div id='track" + track + "'></div>");
 
 	// 탭 refresh
 	$( "#tabs" ).tabs( "refresh" );
 
 	trackN = "track" + track;	// 'track1'
-	console.log(trackN + typeof(trackN));
 
-	kara.svgContain(trackN);	// 'track1'
-	kara.textSVG(trackN);		// 'track1'
+	kara.svgContain(trackN);	// 'track1' 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
+	kara.textSVG(trackN);		// 'track1' Draw title, tempo, name SVG in print.js
 	kara.printNote(trackN);		// 'track1'
-	kara.menu(track);			// 악기선택 콤보 추가
+	kara.menu(track);			// 트랙별 악기 콤보 추가
 };
 
 // Add Combo to select Instruments on Each Track
-kara.menu = function(trackN){	//trackN: trackNumber -- '1'
+kara.menu = function(trcNum){	//trackN: trackNumber -- 1
+
+	var trcNm = "track" + trcNum;	// 'track1'
 	
-	var track = "track" + trackN;				// 'track1'
-	kara.scoreInfo.track[track].instrument = 0;	//처음 Acoustic Grand Piano로 세팅
+	kara.scoreInfo.track[trcNm].instrument = 0;	//처음 Acoustic Grand Piano로 세팅
 	
 	// 메뉴 바에 Select a track 문구, 콤보 추가
-	$("#menu").append("<form action='#'><fieldset><label for='instrument" + trackN + "'>Select a track" + trackN+ "</label><select name='instrument" + trackN 							+"' id='instrument" + trackN +"'></fieldset></form>");
+	$("#menu").append("<form action='#'><fieldset><label for='instrument" + trcNum + "'>Select a track" + trcNum + "</label><select name='instrument" + trcNum 							+ "' id='instrument" + trcNum + "'></fieldset></form>");
 	
-	$("#instrument" + trackN)
+	$("#instrument" + trcNum)
 		.selectmenu({width: 200})
 		.selectmenu("menuWidget")
-		.addClass("overflow");// overflow클래스 추가
+		.addClass("overflow");	// overflow클래스 추가
 
-	//악기 콤보 추가
-	$("#instrument" + trackN).append("<option value = '0'>Acoustic Grand Piano</option>");
-	$("#instrument" + trackN).append("<option value = '1'>Bright Acoustic Piano</option>");
-	$("#instrument" + trackN).append("<option value = '2'>Electric Grand Piano</option>");
-	$("#instrument" + trackN).append("<option value = '3'>Honky-tonk Piano</option>");
-	$("#instrument" + trackN).append("<option value = '4'>Rhodes Piano</option>");
-	$("#instrument" + trackN).append("<option value = '5'>Chorused Piano</option>");
-	$("#instrument" + trackN).append("<option value = '6'>Harpsichord</option>");
-	$("#instrument" + trackN).append("<option value = '7'>Clavinet</option>");
-	$("#instrument" + trackN).append("<option value = '8'>Celesta</option>");
-	$("#instrument" + trackN).append("<option value = '9'>Glockenspiel</option>");
-	$("#instrument" + trackN).append("<option value = '10'>Music Box</option>");
-	$("#instrument" + trackN).append("<option value = '11'>Vibraphone</option>");
-	$("#instrument" + trackN).append("<option value = '12'>Marimba</option>");
-	$("#instrument" + trackN).append("<option value = '13'>Xylophone</option>");
-	$("#instrument" + trackN).append("<option value = '14'>Tubular Bells</option>");
-	$("#instrument" + trackN).append("<option value = '15'>Dulcimer</option>");
-	$("#instrument" + trackN).append("<option value = '16'>Hammond Organ</option>");
-	$("#instrument" + trackN).append("<option value = '17'>Percussive Organ</option>");
-	$("#instrument" + trackN).append("<option value = '18'>Rock Organ</option>");
-	$("#instrument" + trackN).append("<option value = '19'>Church Organ</option>");
-	$("#instrument" + trackN).append("<option value = '20'>Reed Organ</option>");
-	$("#instrument" + trackN).append("<option value = '21'>Accordion</option>");
-	$("#instrument" + trackN).append("<option value = '22'>Harmonica</option>");
-	$("#instrument" + trackN).append("<option value = '23'>Tango Accordion</option>");
-	$("#instrument" + trackN).append("<option value = '24'>Acoustic Guitar (nylon)</option>");
-	$("#instrument" + trackN).append("<option value = '25'>Acoustic Guitar (steel)</option>");
-	$("#instrument" + trackN).append("<option value = '26'>Electric Guitar (jazz)</option>");
-	$("#instrument" + trackN).append("<option value = '27'>Electric Guitar (clean)</option>");
-	$("#instrument" + trackN).append("<option value = '28'>Electric Guitar (muted)</option>");
-	$("#instrument" + trackN).append("<option value = '29'>Overdriven Guitar</option>");
-	$("#instrument" + trackN).append("<option value = '30'>Distortion Guitar</option>");
-	$("#instrument" + trackN).append("<option value = '31'>Guitar Harmonics</option>");
-	$("#instrument" + trackN).append("<option value = '32'>Acoustic Bass</option>");
-	$("#instrument" + trackN).append("<option value = '33'>Electric Bass (finger)</option>");
-	$("#instrument" + trackN).append("<option value = '34'>Electric Bass (pick)</option>");
-	$("#instrument" + trackN).append("<option value = '35'>Fretless Bass</option>");
-	$("#instrument" + trackN).append("<option value = '36'>Slap Bass 1</option>");
-	$("#instrument" + trackN).append("<option value = '37'>Slap Bass 2</option>");
-	$("#instrument" + trackN).append("<option value = '38'>Synth Bass 1</option>");
-	$("#instrument" + trackN).append("<option value = '39'>Synth Bass 2</option>");
-	$("#instrument" + trackN).append("<option value = '40'>Violin</option>");
-	$("#instrument" + trackN).append("<option value = '41'>Viola</option>");
-	$("#instrument" + trackN).append("<option value = '42'>Cello</option>");
-	$("#instrument" + trackN).append("<option value = '43'>Contrabass</option>");
-	$("#instrument" + trackN).append("<option value = '44'>Tremolo Strings</option>");
-	$("#instrument" + trackN).append("<option value = '45'>Pizzicato Strings</option>");
-	$("#instrument" + trackN).append("<option value = '46'>Orchestral Harp</option>");
-	$("#instrument" + trackN).append("<option value = '47'>Timpani</option>");
-	$("#instrument" + trackN).append("<option value = '48'>String Ensemble 1</option>");
-	$("#instrument" + trackN).append("<option value = '49'>String Ensemble 2</option>");
-	$("#instrument" + trackN).append("<option value = '50'>SynthStrings 1</option>");
-	$("#instrument" + trackN).append("<option value = '51'>SynthStrings 2</option>");
-	$("#instrument" + trackN).append("<option value = '52'>Choir Aahs</option>");
-	$("#instrument" + trackN).append("<option value = '53'>Voice Oohs</option>");
-	$("#instrument" + trackN).append("<option value = '54'>Synth Voice</option>");
-	$("#instrument" + trackN).append("<option value = '55'>Orchestra Hit</option>");
-	$("#instrument" + trackN).append("<option value = '56'>Trumpet</option>");
-	$("#instrument" + trackN).append("<option value = '57'>Trombone</option>");
-	$("#instrument" + trackN).append("<option value = '58'>Tuba</option>");
-	$("#instrument" + trackN).append("<option value = '59'>Muted Trumpet</option>");
-	$("#instrument" + trackN).append("<option value = '60'>French Horn</option>");
-	$("#instrument" + trackN).append("<option value = '61'>Brass Section</option>");
-	$("#instrument" + trackN).append("<option value = '62'>Synth Brass 1</option>");
-	$("#instrument" + trackN).append("<option value = '63'>Synth Brass 2</option>");
-	$("#instrument" + trackN).append("<option value = '64'>Soprano Sax</option>");
-	$("#instrument" + trackN).append("<option value = '65'>Alto Sax</option>");
-	$("#instrument" + trackN).append("<option value = '66'>Tenor Sax</option>");
-	$("#instrument" + trackN).append("<option value = '67'>Baritone Sax</option>");
-	$("#instrument" + trackN).append("<option value = '68'>Oboe</option>");
-	$("#instrument" + trackN).append("<option value = '69'>English Horn</option>");
-	$("#instrument" + trackN).append("<option value = '70'>Bassoon</option>");
-	$("#instrument" + trackN).append("<option value = '71'>Clarinet</option>");
-	$("#instrument" + trackN).append("<option value = '72'>Piccolo</option>");
-	$("#instrument" + trackN).append("<option value = '73'>Flute</option>");
-	$("#instrument" + trackN).append("<option value = '74'>Recorder</option>");
-	$("#instrument" + trackN).append("<option value = '75'>Pan Flute</option>");
-	$("#instrument" + trackN).append("<option value = '76'>Bottle Blow</option>");
-	$("#instrument" + trackN).append("<option value = '77'>Shakuhachi</option>");
-	$("#instrument" + trackN).append("<option value = '78'>Whistle</option>");
-	$("#instrument" + trackN).append("<option value = '79'>Ocarina</option>");
-	$("#instrument" + trackN).append("<option value = '80'>Lead 1 (square)</option>");
-	$("#instrument" + trackN).append("<option value = '81'>Lead 2 (sawtooth)</option>");
-	$("#instrument" + trackN).append("<option value = '82'>Lead 3 (calliope lead)</option>");
-	$("#instrument" + trackN).append("<option value = '83'>Lead 4 (chiff lead)</option>");
-	$("#instrument" + trackN).append("<option value = '84'>Lead 5 (charang)</option>");
-	$("#instrument" + trackN).append("<option value = '85'>Lead 6 (voice)</option>");
-	$("#instrument" + trackN).append("<option value = '86'>Lead 7 (fifths)</option>");
-	$("#instrument" + trackN).append("<option value = '87'>Lead 8 (bass + lead)</option>");
-	$("#instrument" + trackN).append("<option value = '88'>Pad 1 (new age)</option>");
-	$("#instrument" + trackN).append("<option value = '89'>Pad 2 (warm)</option>");
-	$("#instrument" + trackN).append("<option value = '90'>Pad 3 (polysynth)</option>");
-	$("#instrument" + trackN).append("<option value = '91'>Pad 4 (choir)</option>");
-	$("#instrument" + trackN).append("<option value = '92'>Pad 5 (bowed)</option>");
-	$("#instrument" + trackN).append("<option value = '93'>Pad 6 (metallic)</option>");
-	$("#instrument" + trackN).append("<option value = '94'>Pad 7 (halo)</option>");
-	$("#instrument" + trackN).append("<option value = '95'>Pad 8 (sweep)</option>");
-	$("#instrument" + trackN).append("<option value = '96'>FX 1 (rain)</option>");
-	$("#instrument" + trackN).append("<option value = '97'>FX 2 (soundtrack)</option>");
-	$("#instrument" + trackN).append("<option value = '98'>FX 3 (crystal)</option>");
-	$("#instrument" + trackN).append("<option value = '99'>FX 4 (atmosphere)</option>");
-	$("#instrument" + trackN).append("<option value = '100'>FX 5 (brightness)</option>");
-	$("#instrument" + trackN).append("<option value = '101'>FX 6 (goblins)</option>");
-	$("#instrument" + trackN).append("<option value = '102'>FX 7 (echoes)</option>");
-	$("#instrument" + trackN).append("<option value = '103'>FX 8 (sci-fi)</option>");
-	$("#instrument" + trackN).append("<option value = '104'>Sitar</option>");
-	$("#instrument" + trackN).append("<option value = '105'>Banjo</option>");
-	$("#instrument" + trackN).append("<option value = '106'>Shamisen</option>");
-	$("#instrument" + trackN).append("<option value = '107'>Koto</option>");
-	$("#instrument" + trackN).append("<option value = '108'>Kalimba</option>");
-	$("#instrument" + trackN).append("<option value = '109'>Bagpipe</option>");
-	$("#instrument" + trackN).append("<option value = '110'>Fiddle</option>");
-	$("#instrument" + trackN).append("<option value = '111'>Shanai</option>");
-	$("#instrument" + trackN).append("<option value = '112'>Tinkle Bell</option>");
-	$("#instrument" + trackN).append("<option value = '113'>Agogo</option>");
-	$("#instrument" + trackN).append("<option value = '114'>Steel Drums</option>");
-	$("#instrument" + trackN).append("<option value = '115'>Woodblock</option>");
-	$("#instrument" + trackN).append("<option value = '116'>Taiko Drum</option>");
-	$("#instrument" + trackN).append("<option value = '117'>Melodic Tom</option>");
-	$("#instrument" + trackN).append("<option value = '118'>Synth Drum</option>");
-	$("#instrument" + trackN).append("<option value = '119'>Reverse Cymbal</option>");
-	$("#instrument" + trackN).append("<option value = '120'>Guitar Fret Noise</option>");
-	$("#instrument" + trackN).append("<option value = '121'>Breath Noise</option>");
-	$("#instrument" + trackN).append("<option value = '122'>Seashore</option>");
-	$("#instrument" + trackN).append("<option value = '123'>Bird Tweet</option>");
-	$("#instrument" + trackN).append("<option value = '124'>Telephone Ring</option>");
-	$("#instrument" + trackN).append("<option value = '125'>Helicopter</option>");
-	$("#instrument" + trackN).append("<option value = '126'>Applause</option>");
-	$("#instrument" + trackN).append("<option value = '127'>Gunshot</option>");
+	//악기 콤보 요소 추가 add option tag
+	kara.addInstrOptCombo(trcNum);	// 1
 
 	// 콤보 이벤트 추가
-	$("#instrument" + trackN).selectmenu({
+	$("#instrument" + trcNum).selectmenu({
 		
 		// 콤보 박스 변경시 호출
 		change: function(event, ui) {
-			track = "track" + trackN;	// 트랙 번호
-			console.log(track);
-			kara.scoreInfo.track[track].instrument = ui.item.value;	// 해당 악기 셋팅
+			kara.scoreInfo.track[trcNm].instrument = ui.item.value;	// 선택된 악기번호 악보 정보 객체에 저장
 		}
 	});
 
 	// 콤보 갱신
-	$("#instrument" + trackN).selectmenu("refresh");
+	$("#instrument" + trcNum).selectmenu("refresh");
 };
 
 // Convert Instrument Number to Instrument Name
@@ -491,21 +373,136 @@ kara.instrumentTonum = function(instrument) {// instrument: Instrument Name -- '
 	}
 };
 
-// 악보 초기화
-kara.refresh = function() {
-	
-	// 악보 삭제영역 삭제
-	$(".in_bar").remove();
-	
-	for (var key in kara.scoreInfo.track) {
-		if(kara.scoreInfo.track.hasOwnProperty(key)) {// 객체가 특정 프로퍼티를 가지고 있는지
-			
-			// 해당 트랙이 초기화 되었는지 판단
-			if(kara.scoreInfo.track[key].clef === "") continue;
-			kara.printNote(key);
-			kara.textSVG(key);
-		}
-	}
+//악기 콤보 요소 추가
+kara.addInstrOptCombo = function(trcNum) {	// trcNum :: Track Number - '1'
+	$("#instrument" + trcNum).append("<option value = '0'>Acoustic Grand Piano</option>");
+	$("#instrument" + trcNum).append("<option value = '1'>Bright Acoustic Piano</option>");
+	$("#instrument" + trcNum).append("<option value = '2'>Electric Grand Piano</option>");
+	$("#instrument" + trcNum).append("<option value = '3'>Honky-tonk Piano</option>");
+	$("#instrument" + trcNum).append("<option value = '4'>Rhodes Piano</option>");
+	$("#instrument" + trcNum).append("<option value = '5'>Chorused Piano</option>");
+	$("#instrument" + trcNum).append("<option value = '6'>Harpsichord</option>");
+	$("#instrument" + trcNum).append("<option value = '7'>Clavinet</option>");
+	$("#instrument" + trcNum).append("<option value = '8'>Celesta</option>");
+	$("#instrument" + trcNum).append("<option value = '9'>Glockenspiel</option>");
+	$("#instrument" + trcNum).append("<option value = '10'>Music Box</option>");
+	$("#instrument" + trcNum).append("<option value = '11'>Vibraphone</option>");
+	$("#instrument" + trcNum).append("<option value = '12'>Marimba</option>");
+	$("#instrument" + trcNum).append("<option value = '13'>Xylophone</option>");
+	$("#instrument" + trcNum).append("<option value = '14'>Tubular Bells</option>");
+	$("#instrument" + trcNum).append("<option value = '15'>Dulcimer</option>");
+	$("#instrument" + trcNum).append("<option value = '16'>Hammond Organ</option>");
+	$("#instrument" + trcNum).append("<option value = '17'>Percussive Organ</option>");
+	$("#instrument" + trcNum).append("<option value = '18'>Rock Organ</option>");
+	$("#instrument" + trcNum).append("<option value = '19'>Church Organ</option>");
+	$("#instrument" + trcNum).append("<option value = '20'>Reed Organ</option>");
+	$("#instrument" + trcNum).append("<option value = '21'>Accordion</option>");
+	$("#instrument" + trcNum).append("<option value = '22'>Harmonica</option>");
+	$("#instrument" + trcNum).append("<option value = '23'>Tango Accordion</option>");
+	$("#instrument" + trcNum).append("<option value = '24'>Acoustic Guitar (nylon)</option>");
+	$("#instrument" + trcNum).append("<option value = '25'>Acoustic Guitar (steel)</option>");
+	$("#instrument" + trcNum).append("<option value = '26'>Electric Guitar (jazz)</option>");
+	$("#instrument" + trcNum).append("<option value = '27'>Electric Guitar (clean)</option>");
+	$("#instrument" + trcNum).append("<option value = '28'>Electric Guitar (muted)</option>");
+	$("#instrument" + trcNum).append("<option value = '29'>Overdriven Guitar</option>");
+	$("#instrument" + trcNum).append("<option value = '30'>Distortion Guitar</option>");
+	$("#instrument" + trcNum).append("<option value = '31'>Guitar Harmonics</option>");
+	$("#instrument" + trcNum).append("<option value = '32'>Acoustic Bass</option>");
+	$("#instrument" + trcNum).append("<option value = '33'>Electric Bass (finger)</option>");
+	$("#instrument" + trcNum).append("<option value = '34'>Electric Bass (pick)</option>");
+	$("#instrument" + trcNum).append("<option value = '35'>Fretless Bass</option>");
+	$("#instrument" + trcNum).append("<option value = '36'>Slap Bass 1</option>");
+	$("#instrument" + trcNum).append("<option value = '37'>Slap Bass 2</option>");
+	$("#instrument" + trcNum).append("<option value = '38'>Synth Bass 1</option>");
+	$("#instrument" + trcNum).append("<option value = '39'>Synth Bass 2</option>");
+	$("#instrument" + trcNum).append("<option value = '40'>Violin</option>");
+	$("#instrument" + trcNum).append("<option value = '41'>Viola</option>");
+	$("#instrument" + trcNum).append("<option value = '42'>Cello</option>");
+	$("#instrument" + trcNum).append("<option value = '43'>Contrabass</option>");
+	$("#instrument" + trcNum).append("<option value = '44'>Tremolo Strings</option>");
+	$("#instrument" + trcNum).append("<option value = '45'>Pizzicato Strings</option>");
+	$("#instrument" + trcNum).append("<option value = '46'>Orchestral Harp</option>");
+	$("#instrument" + trcNum).append("<option value = '47'>Timpani</option>");
+	$("#instrument" + trcNum).append("<option value = '48'>String Ensemble 1</option>");
+	$("#instrument" + trcNum).append("<option value = '49'>String Ensemble 2</option>");
+	$("#instrument" + trcNum).append("<option value = '50'>SynthStrings 1</option>");
+	$("#instrument" + trcNum).append("<option value = '51'>SynthStrings 2</option>");
+	$("#instrument" + trcNum).append("<option value = '52'>Choir Aahs</option>");
+	$("#instrument" + trcNum).append("<option value = '53'>Voice Oohs</option>");
+	$("#instrument" + trcNum).append("<option value = '54'>Synth Voice</option>");
+	$("#instrument" + trcNum).append("<option value = '55'>Orchestra Hit</option>");
+	$("#instrument" + trcNum).append("<option value = '56'>Trumpet</option>");
+	$("#instrument" + trcNum).append("<option value = '57'>Trombone</option>");
+	$("#instrument" + trcNum).append("<option value = '58'>Tuba</option>");
+	$("#instrument" + trcNum).append("<option value = '59'>Muted Trumpet</option>");
+	$("#instrument" + trcNum).append("<option value = '60'>French Horn</option>");
+	$("#instrument" + trcNum).append("<option value = '61'>Brass Section</option>");
+	$("#instrument" + trcNum).append("<option value = '62'>Synth Brass 1</option>");
+	$("#instrument" + trcNum).append("<option value = '63'>Synth Brass 2</option>");
+	$("#instrument" + trcNum).append("<option value = '64'>Soprano Sax</option>");
+	$("#instrument" + trcNum).append("<option value = '65'>Alto Sax</option>");
+	$("#instrument" + trcNum).append("<option value = '66'>Tenor Sax</option>");
+	$("#instrument" + trcNum).append("<option value = '67'>Baritone Sax</option>");
+	$("#instrument" + trcNum).append("<option value = '68'>Oboe</option>");
+	$("#instrument" + trcNum).append("<option value = '69'>English Horn</option>");
+	$("#instrument" + trcNum).append("<option value = '70'>Bassoon</option>");
+	$("#instrument" + trcNum).append("<option value = '71'>Clarinet</option>");
+	$("#instrument" + trcNum).append("<option value = '72'>Piccolo</option>");
+	$("#instrument" + trcNum).append("<option value = '73'>Flute</option>");
+	$("#instrument" + trcNum).append("<option value = '74'>Recorder</option>");
+	$("#instrument" + trcNum).append("<option value = '75'>Pan Flute</option>");
+	$("#instrument" + trcNum).append("<option value = '76'>Bottle Blow</option>");
+	$("#instrument" + trcNum).append("<option value = '77'>Shakuhachi</option>");
+	$("#instrument" + trcNum).append("<option value = '78'>Whistle</option>");
+	$("#instrument" + trcNum).append("<option value = '79'>Ocarina</option>");
+	$("#instrument" + trcNum).append("<option value = '80'>Lead 1 (square)</option>");
+	$("#instrument" + trcNum).append("<option value = '81'>Lead 2 (sawtooth)</option>");
+	$("#instrument" + trcNum).append("<option value = '82'>Lead 3 (calliope lead)</option>");
+	$("#instrument" + trcNum).append("<option value = '83'>Lead 4 (chiff lead)</option>");
+	$("#instrument" + trcNum).append("<option value = '84'>Lead 5 (charang)</option>");
+	$("#instrument" + trcNum).append("<option value = '85'>Lead 6 (voice)</option>");
+	$("#instrument" + trcNum).append("<option value = '86'>Lead 7 (fifths)</option>");
+	$("#instrument" + trcNum).append("<option value = '87'>Lead 8 (bass + lead)</option>");
+	$("#instrument" + trcNum).append("<option value = '88'>Pad 1 (new age)</option>");
+	$("#instrument" + trcNum).append("<option value = '89'>Pad 2 (warm)</option>");
+	$("#instrument" + trcNum).append("<option value = '90'>Pad 3 (polysynth)</option>");
+	$("#instrument" + trcNum).append("<option value = '91'>Pad 4 (choir)</option>");
+	$("#instrument" + trcNum).append("<option value = '92'>Pad 5 (bowed)</option>");
+	$("#instrument" + trcNum).append("<option value = '93'>Pad 6 (metallic)</option>");
+	$("#instrument" + trcNum).append("<option value = '94'>Pad 7 (halo)</option>");
+	$("#instrument" + trcNum).append("<option value = '95'>Pad 8 (sweep)</option>");
+	$("#instrument" + trcNum).append("<option value = '96'>FX 1 (rain)</option>");
+	$("#instrument" + trcNum).append("<option value = '97'>FX 2 (soundtrack)</option>");
+	$("#instrument" + trcNum).append("<option value = '98'>FX 3 (crystal)</option>");
+	$("#instrument" + trcNum).append("<option value = '99'>FX 4 (atmosphere)</option>");
+	$("#instrument" + trcNum).append("<option value = '100'>FX 5 (brightness)</option>");
+	$("#instrument" + trcNum).append("<option value = '101'>FX 6 (goblins)</option>");
+	$("#instrument" + trcNum).append("<option value = '102'>FX 7 (echoes)</option>");
+	$("#instrument" + trcNum).append("<option value = '103'>FX 8 (sci-fi)</option>");
+	$("#instrument" + trcNum).append("<option value = '104'>Sitar</option>");
+	$("#instrument" + trcNum).append("<option value = '105'>Banjo</option>");
+	$("#instrument" + trcNum).append("<option value = '106'>Shamisen</option>");
+	$("#instrument" + trcNum).append("<option value = '107'>Koto</option>");
+	$("#instrument" + trcNum).append("<option value = '108'>Kalimba</option>");
+	$("#instrument" + trcNum).append("<option value = '109'>Bagpipe</option>");
+	$("#instrument" + trcNum).append("<option value = '110'>Fiddle</option>");
+	$("#instrument" + trcNum).append("<option value = '111'>Shanai</option>");
+	$("#instrument" + trcNum).append("<option value = '112'>Tinkle Bell</option>");
+	$("#instrument" + trcNum).append("<option value = '113'>Agogo</option>");
+	$("#instrument" + trcNum).append("<option value = '114'>Steel Drums</option>");
+	$("#instrument" + trcNum).append("<option value = '115'>Woodblock</option>");
+	$("#instrument" + trcNum).append("<option value = '116'>Taiko Drum</option>");
+	$("#instrument" + trcNum).append("<option value = '117'>Melodic Tom</option>");
+	$("#instrument" + trcNum).append("<option value = '118'>Synth Drum</option>");
+	$("#instrument" + trcNum).append("<option value = '119'>Reverse Cymbal</option>");
+	$("#instrument" + trcNum).append("<option value = '120'>Guitar Fret Noise</option>");
+	$("#instrument" + trcNum).append("<option value = '121'>Breath Noise</option>");
+	$("#instrument" + trcNum).append("<option value = '122'>Seashore</option>");
+	$("#instrument" + trcNum).append("<option value = '123'>Bird Tweet</option>");
+	$("#instrument" + trcNum).append("<option value = '124'>Telephone Ring</option>");
+	$("#instrument" + trcNum).append("<option value = '125'>Helicopter</option>");
+	$("#instrument" + trcNum).append("<option value = '126'>Applause</option>");
+	$("#instrument" + trcNum).append("<option value = '127'>Gunshot</option>");
 };
 
 // 마디 여러등분으로 나눠 음정

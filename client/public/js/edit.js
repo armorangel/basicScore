@@ -26,7 +26,7 @@ kara.editTitle = function(track) {// track Track Name :: 'track1'
 	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
 
 	kara.textSVG(track);// 해당 트랙 SVG 요소 그리기
-	kara.refresh();//삭제영역 제거 후 악보 다시 그리기
+	kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
 };
 
 // 템포 수정
@@ -147,7 +147,7 @@ kara.keyvalue = function(key){
 	var keyupper = key[0].toUpperCase();
 	var k = "";
 	var returnKey = "";
-	for(var i=1;i<key.length;i++){
+	for(var i = 1; i < key.length; i++){
 		returnKey = returnKey + key[i];
 	}
 	k = keyupper + returnKey;
@@ -189,11 +189,12 @@ kara.keyvalue = function(key){
 kara.editMeter = function() {
 	
 	var meter = prompt("meter");
-	if(meter == ""){
+	
+	// 박자 정합성 검사
+	if(meter == "" || meter === null){
 		alert("박자를 입력하세요");
 		return;
 	}
-	if(meter === null) return;
 	
 	var meterSplit = meter.split("/");
 	kara.scoreInfo.meter = meterSplit[1] + "/" +meterSplit[0];
@@ -204,7 +205,7 @@ kara.editMeter = function() {
 };
 
 // 음자리표 수정
-kara.editClef = function(track){
+kara.editClef = function(track) {
 	
 	var ttrack = track.toString();
 	var clef = prompt("Clef");
@@ -272,20 +273,18 @@ var notepush = {
 	setNote: function(meter) {
 		
 		this.meter = meter;
-		var bNum = this.bNum.split('_'); // 마디번호
-		var nNum = this.nNum.split('_'); // 음표번호
+		var bNum = this.bNum.split('_');	// 마디번호
+		var nNum = this.nNum.split('_');	// 음표번호
 		var track = this.track;
 
 		switch(meter) {
 			case 1: //온음표
-				if(kara.meterCal(bNum[1], nNum[1], "whole", track) == -1) { // 마디 초과
+				if(kara.meterCal(bNum[1], nNum[1], "whole", track) == -1) {	// 마디 초과
 					return;
-					
 				} else if(kara.meterCal(bNum[1], nNum[1], "whole", track) == 0) { //마디 꽉차서
 					let bbNum = bNum[1];
 					bbNum = bbNum + 1;
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", track); // push
-					
 				} else {
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", track);
 				}
@@ -316,28 +315,28 @@ var notepush = {
 				break;
 				
 			case 8: //8분음표 "8th"
-			if(kara.meterCal(bNum[1], nNum[1], "8th", track) == -1) { // 마디 초과
-				return;
-			} else if(kara.meterCal(bNum[1], nNum[1], "8th", track) == 0) { //마디 꽉차서
-				let bbNum = bNum[1];
-				bbNum = bbNum + 1;
-				kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track); // push
-			} else {
-				kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track);
-			}
-			break;
+				if(kara.meterCal(bNum[1], nNum[1], "8th", track) == -1) { // 마디 초과
+					return;
+				} else if(kara.meterCal(bNum[1], nNum[1], "8th", track) == 0) { //마디 꽉차서
+					let bbNum = bNum[1];
+					bbNum = bbNum + 1;
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track); // push
+				} else {
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track);
+				}
+				break;
 				
 			case 16: //16분음표
-			if(kara.meterCal(bNum[1], nNum[1], "16th", track) == -1) { // 마디 초과
-				return;
-			} else if(kara.meterCal(bNum[1], nNum[1], "16th", track) == 0) { //마디 꽉차서
-				var bbNum = bNum[1];
-				bbNum = bbNum + 1;
-				kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track); // push
-			} else {
-				kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track);
-			}
-			break;
+				if(kara.meterCal(bNum[1], nNum[1], "16th", track) == -1) { // 마디 초과
+					return;
+				} else if(kara.meterCal(bNum[1], nNum[1], "16th", track) == 0) { //마디 꽉차서
+					var bbNum = bNum[1];
+					bbNum = bbNum + 1;
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track); // push
+				} else {
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track);
+				}
+				break;
 				
 			default:
 				kara.scoreInfo.track[track].notes[bNum[1]][nNum[1]][0] = "rest";
