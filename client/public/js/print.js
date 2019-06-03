@@ -495,7 +495,7 @@ kara.pathClone = function (pathString, x, y) {
 };
 
 // 오선지
-kara.hLine = function(y, track) {//y :: 오선지 줄 번호 :: 1, track :: Track Name 'track1'
+kara.hLine = function(y, track) {// y :: 오선지 줄 번호 :: 1, track :: Track Name 'track1'
 	
 	var line = kara.svg[track].svgLine;
 	var X = kara.XY.X();
@@ -519,45 +519,46 @@ kara.hLine = function(y, track) {//y :: 오선지 줄 번호 :: 1, track :: Trac
 			.style("stroke", "black");
 	}
 	
+	//분리 해야됨
 	kara.clefSVG(10, Y, Y, track);	//높은 음자리 //1.4+35
 	kara.vLine(X, Y+12, track);		//끝 줄
 	kara.keySVG(Y+17, key, track);	//조표 그리기
 	kara.meterSVG(Y, track);		//박자
 
-	var a = N*12+70;
+	var a = N * 12 + 70;
 	var ac = (X - a) / 4;
 	
-	kara.vLine(ac*1+a, Y+12, track);
-	kara.vLine(ac*2+a, Y+12, track);
-	kara.vLine(ac*3+a, Y+12, track);
+	kara.vLine(ac * 1 + a, Y + 12, track);	// 첫마디 끝 구분선
+	kara.vLine(ac * 2 + a, Y + 12, track);	// 두번째 마디 끝 구분선
+	kara.vLine(ac * 3 + a, Y + 12, track);	// 세번째 마디 끝 구분선
 };
 
 //마디
 kara.vLine = function(x, y, track) {
 	
 	var svg = kara.svg[track].svgLine;
-	var pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y+48);
+	var pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y + 48);
 	
 	svg.append("path")
-		.attr("class", "in_bar" + " " + track)
+		.attr("class", `in_bar ${track}`)// 삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
 
 //음표 막대 그리기
-kara.notevLine = function(x, y, track) {// 235.6875, 242, track1
+kara.notevLine = function(x, y, track) {	// 235.6875, 242, track1
 	
 	var svg = kara.svg[track].svgNote;
-	var pathString = kara.sprintf("M %f %f L %f %f", x+10, y, x+10, y-30);
+	var pathString = kara.sprintf("M %f %f L %f %f", x + 10, y, x + 10, y - 30);
 	
 	svg.append("path")
-		.attr("class", "in_bar" + " " + track)//삭제영역
+		.attr("class", `in_bar ${track}`)// 삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
 
 //음표 막대
-kara.notevLow = function(x, y, pitch, meter, track) {// 147.9375, 230, C5, half, track1
+kara.notevLow = function(x, y, pitch, meter, track) {	// 147.9375, 230, C5, half, track1
 	
 	var svg = kara.svg[track].svgNote;
 	var pathString;
@@ -572,45 +573,45 @@ kara.notevLow = function(x, y, pitch, meter, track) {// 147.9375, 230, C5, half,
 	else return;
 	
 	console.log(meter);
+	
 	switch(meter) {
 		case 'whole':
-			x = x-3.5;
+			x = x - 3.5;
 			m = x + 22;
 			n = y;
 			
 			break;
 			
 		case 'half':
-			x = x-4;
+			x = x - 4;
 			m = x + 18;
 			n = y;
 			break;
 			
 		case 'quarter':
-			x = x-3;
+			x = x - 3;
 			m = x + 18.5;
 			n = y;
 			break;
 			
 		case '8th':
-			x = x-3;
+			x = x - 3;
 			m = x + 18.5;
 			n = y;
 			break;
 			
 		case '16th':
-			x = x-3;
+			x = x - 3;
 			m = x + 18.5;
 			n = y;
 			break;
 			
-		default:
-			break;
+		default: break;
 	}
 
 	pathString = kara.sprintf("M %f %f L %f %f", x, y, m, n);
 	svg.append("path")
-		.attr("class", "in_bar" + " " + track)
+		.attr("class", `in_bar ${track}`)// 삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black")
 		.style("stroke-width", "1.5px");
@@ -619,7 +620,7 @@ kara.notevLow = function(x, y, pitch, meter, track) {// 147.9375, 230, C5, half,
 // 악보 선택 영역 그리기
 kara.noteBox = {
 	// 악보 선택 영역 그리기
-	print: function(X, Y , bNum, nNum, meter, track) {
+	print: function(X, Y, bNum, nNum, meter, track) {
 		
 		var svg = kara.svg[track].svgContainer;
 		var key = kara.scoreInfo.key;

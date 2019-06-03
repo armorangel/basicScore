@@ -60,7 +60,7 @@ kara.printNote = function(track) {
 		
 		var four_enter = i % 4;
 		
-		if(four_enter === 0 && i >= 4) {	//4마디 검사
+		if(four_enter === 0 && i >= 4) {	// 4마디 검사
 			
 			var four = i / 4;
 			
