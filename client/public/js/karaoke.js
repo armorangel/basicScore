@@ -52,16 +52,15 @@ kara.printNote = function(track) {
 	
 	kara.hLine(0, track);	// 한줄 긋고 시작
 	
-	if(note[0] === undefined) { // 첫마디가 없으면 노트박스 생성
-		kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, "whole", track);
-	}
+	// 첫마디가 없으면 노트박스 생성
+	if(note[0] === undefined) kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, "whole", track);
 	
 	// 마디 찍기
 	for(var i = 0; i < note.length; i++) {
 		
 		var four_enter = i % 4;
 		
-		if(four_enter === 0 && i >= 4) {
+		if(four_enter === 0 && i >= 4) {	//4마디 검사
 			
 			var four = i / 4;
 			
@@ -93,11 +92,11 @@ kara.printNote = function(track) {
 			
 			if(four_boxEnter == four_check) {
 
-				// 첫 음표
+				// 첫 음표 // 악보 선택 영역 그리기
 				kara.noteBox.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, track);
 				four_check++;
 			} else {
-				// 두번째 부터
+				// 두번째 부터 // 악보 선택 영역 그리기
 				kara.noteBox_.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, track);
 				console.log("그릴 박스는 i는" + i + "j " +  j);
 			}
@@ -108,6 +107,7 @@ kara.printNote = function(track) {
 			pitchSplit = pitch.split(",");
 
 			for(var pi = 0; pi < pitchSplit.length; pi++) {
+				
 				if(pitchSplit[pi] === "rest"){
 					position = $("#A4" + ".bar_"+ i + ".note_" + j + "." + track).position();
 				} else {
@@ -122,14 +122,16 @@ kara.printNote = function(track) {
 						if(pitchSplit[pi] === "rest"){
 							kara.printSymbol('rests.whole', x + _whole, y, track);
 						} else {
+							
 							kara.printSymbol('noteheads.whole', x + _whole, y, track);
 							kara.notevLow(x + _whole, y, pitchSplit[pi], meter, track);
 
 							if(kara.key_er(pitchSplit[pi]) === 1) { //#
-								kara.print_s_p("accidentals.sharp", x + _whole-5, y-5, track);
+								kara.print_s_p("accidentals.sharp", x + _whole - 5, y - 5, track);// 음표에 sharp 붙이기
 							}
+							
 							if(kara.key_er(pitchSplit[pi]) === -1) { //b
-								kara.print_s_p("accidentals.flat", x + _whole-5, y-5, track);
+								kara.print_s_p("accidentals.flat", x + _whole - 5, y - 5, track);// 음표에 flat 붙이기
 							}
 						}
 						break;
@@ -138,15 +140,16 @@ kara.printNote = function(track) {
 						if(pitchSplit[pi] === "rest") {
 							kara.printSymbol('rests.half', x + _half, y, track);
 						} else {
+							
 							kara.printSymbol('noteheads.half', x + _half, y, track);
 							kara.notevLine(x + _half, y, track);
 							kara.notevLow(x + _half, y, pitchSplit[pi], meter, track);
 
 							if(kara.key_er(pitchSplit[pi]) === 1) { //#
-								kara.print_s_p("accidentals.sharp", x + _half-5, y-5, track);
+								kara.print_s_p("accidentals.sharp", x + _half - 5, y - 5, track);
 							}
 							if(kara.key_er(pitchSplit[pi]) === -1) { //b
-								kara.print_s_p("accidentals.flat", x + _half-5, y-5, track);
+								kara.print_s_p("accidentals.flat", x + _half - 5, y - 5, track);
 							}
 						}
 
@@ -156,6 +159,7 @@ kara.printNote = function(track) {
 						if(pitchSplit[pi] === "rest") {
 							kara.printSymbol('rests.quarter', x + _quarter, y, track);
 						} else {
+							
 							kara.printSymbol('noteheads.quarter', x + _quarter, y, track);
 							kara.notevLine(x + _quarter, y, track);
 							kara.notevLow(x + _quarter, y, pitchSplit[pi], meter, track);
@@ -214,7 +218,7 @@ kara.printNote = function(track) {
 				var ii = i + 1;
 				var four2 = ii % 4;
 
-				if(four2 == 0 && ii>=4) {
+				if(four2 == 0 && ii >= 4) {
 					if(kara.meterCal_box(i, track)===1) {
 						$("#" + track + "> #score").height(four_boxEnter2 * 120 + 300);
 						kara.hLine(four_boxEnter2, track);
