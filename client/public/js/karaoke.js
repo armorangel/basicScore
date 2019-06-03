@@ -1,7 +1,5 @@
 if(!window.kara) window.kara = {};
 
-'use strict';
-
 //악보 정보 객체
 kara.scoreInfo = {
 	title: "title",			// 타이틀 저장
@@ -153,6 +151,7 @@ kara.printNote = function(track) {
 						}
 
 						break;
+						
 					case 'quarter': //4분음표
 						if(pitchSplit[pi] === "rest") {
 							kara.printSymbol('rests.quarter', x + _quarter, y, track);
@@ -211,9 +210,9 @@ kara.printNote = function(track) {
 
 			if(i === note.length-1 && j === note[i].length-1) {
 
-				var four_boxEnter2 = four_boxEnter+1;
-				var ii = i+1;
-				var four2 = ii%4;
+				var four_boxEnter2 = four_boxEnter + 1;
+				var ii = i + 1;
+				var four2 = ii % 4;
 
 				if(four2 == 0 && ii>=4) {
 					if(kara.meterCal_box(i, track)===1) {
@@ -263,8 +262,8 @@ kara.noteSelect = {
 		kara.scoreInfo.track[track].notes = note;
 		$(".in_bar" + "." + track).remove();
 
-		kara.printNote(track);
-		kara.test(track);
+		kara.printNote(track);//음표 그리기
+		kara.test(track);//배열값 표시
 	}
 };
 
@@ -280,13 +279,13 @@ kara.meterCal = function(bNum, nNum, nowMeter, track) {
 	
 	if(note[bNum] == undefined) return;
 
-	for(var i = 0;i<note[bNum].length;i++) {
+	for(var i = 0; i < note[bNum].length; i++) {
 		var note_meter = noteMeter.head[note[bNum][i][1]];
 		now = now + note_meter;
 	}
 	
 	// 지금까지의 마디와 현재 마디를 더하면 초과인가
-	if((now+noteMeter.head[nowMeter]) > limited) {
+	if((now + noteMeter.head[nowMeter]) > limited) {
 		if(note[bNum][nNum][1] === undefined) {
 			alert("마디 초과");
 			return -1; // 넣지 못합
@@ -318,7 +317,7 @@ kara.meterCal_box = function(bNum, track) {
 	var noteMeter = kara.noteMeter;
 	
 	if(note[bNum] == undefined) return;
-	for(var i=0; i<note[bNum].length; i++) {
+	for(let i=0; i<note[bNum].length; i++) {
 
 		var note_meter = noteMeter.head[note[bNum][i][1]];
 		now = now + note_meter;
@@ -357,9 +356,9 @@ kara.barsort = function(bNum, nNum , nowmeter, track) {
 		i++;
 	}
 	nNum++;
-	for(var j = nNum; j < barLength; j++) {
+	for(let j = nNum; j < barLength; j++) {
 		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][i])) {
-			kara.scoreInfo.track[track].notes[bNum][i] = new Array();
+			kara.scoreInfo.track[track].notes[bNum][i] = [];	// new Array();
 		}
 		kara.scoreInfo.track[track].notes[bNum][i][0] = copynote[j][0];
 		kara.scoreInfo.track[track].notes[bNum][i][1] = copynote[j][1];
