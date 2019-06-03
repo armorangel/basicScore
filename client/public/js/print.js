@@ -412,6 +412,7 @@ kara.meterSVG = function(Y, track) {
 	width = N + 20;
 	height = 50;
 
+	// 박사 선택영역 추가
 	box.append("rect")
 		.attr("id", "editMeter")
 		.attr("class", `in_bar ${track}`)// 삭제 영역
@@ -439,28 +440,26 @@ kara.printflag = function(symb, x, y, track) {
 		.style("stroke", "black");
 };
 
-kara.printSymbol = function(symb, x, y, track) {
+kara.printSymbol = function(symbol, x, y, trcNm) {
 	
-	var svg = kara.svg[track].svgSymbol;
+	if (!kara.glyphs[symbol]) return null;
 	
-	if (!kara.glyphs[symb]) return null;
-	
-	var pathString = this.pathClone(kara.glyphs[symb].d, x, y);
+	var svg = kara.svg[trcNm].svgSymbol;
+	var pathString = this.pathClone(kara.glyphs[symbol].d, x, y);
 	
 	svg.append("path")
-		.attr("class", `in_bar ${track}`)// 삭제 영역
+		.attr("class", `in_bar ${trcNm}`)// 삭제 영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
 
 // 음표에 sharp, flat 붙이기
-kara.print_s_p = function(symb, x, y, trcNm) {// accidentals.flat, 204.75000381469727, 231.00001525878906, track1
+kara.print_s_p = function(symbol, x, y, trcNm) {// accidentals.flat, 204.75000381469727, 231.00001525878906, track1
+	
+	if (!kara.glyphs[symbol]) return null;
 	
 	let svg = kara.svg[trcNm].svgSymbol;
-	
-	if (!kara.glyphs[symb]) return null;
-	
-	let pathString = this.pathClone(kara.glyphs[symb].d, x / 0.7, y / 0.7);
+	let pathString = this.pathClone(kara.glyphs[symbol].d, x / 0.7, y / 0.7);
 	
 	svg.append("path")
 		.attr("class", `in_bar ${trcNm}`)// 삭제 영역

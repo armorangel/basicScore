@@ -126,10 +126,12 @@ kara.printNote = function(track) {
 							kara.printSymbol('noteheads.whole', x + _whole, y, track);
 							kara.notevLow(x + _whole, y, pitchSplit[pi], meter, track);
 
+							// 해당 음표에 sharp이 있으면
 							if(kara.key_er(pitchSplit[pi]) === 1) { //#
 								kara.print_s_p("accidentals.sharp", x + _whole - 5, y - 5, track);// 음표에 sharp 붙이기
 							}
 							
+							// 해당 음표에 flat이 있으면
 							if(kara.key_er(pitchSplit[pi]) === -1) { //b
 								kara.print_s_p("accidentals.flat", x + _whole - 5, y - 5, track);// 음표에 flat 붙이기
 							}
@@ -145,10 +147,12 @@ kara.printNote = function(track) {
 							kara.notevLine(x + _half, y, track);
 							kara.notevLow(x + _half, y, pitchSplit[pi], meter, track);
 
-							if(kara.key_er(pitchSplit[pi]) === 1) { //#
+							// 해당 음표에 sharp이 있으면
+							if(kara.key_er(pitchSplit[pi]) === 1) {
 								kara.print_s_p("accidentals.sharp", x + _half - 5, y - 5, track);
 							}
-							if(kara.key_er(pitchSplit[pi]) === -1) { //b
+							// 해당 음표에 flat이 있으면
+							if(kara.key_er(pitchSplit[pi]) === -1) {
 								kara.print_s_p("accidentals.flat", x + _half - 5, y - 5, track);
 							}
 						}
@@ -164,10 +168,12 @@ kara.printNote = function(track) {
 							kara.notevLine(x + _quarter, y, track);
 							kara.notevLow(x + _quarter, y, pitchSplit[pi], meter, track);
 
-							if(kara.key_er(pitchSplit[pi]) === 1) { //#
+							// 해당 음표에 sharp이 있으면
+							if(kara.key_er(pitchSplit[pi]) === 1) {
 								kara.print_s_p("accidentals.sharp", x + _quarter-5, y-5, track);
 							}
-							if(kara.key_er(pitchSplit[pi]) === -1) { //b
+							// 해당 음표에 flat이 있으면
+							if(kara.key_er(pitchSplit[pi]) === -1) {
 								kara.print_s_p("accidentals.flat", x + _quarter-5, y-5, track);
 							}
 						}
@@ -182,9 +188,12 @@ kara.printNote = function(track) {
 							kara.notevLow(x + _8th, y, pitchSplit[pi], meter, track);
 
 							if(pi === 0) kara.printflag('flags.u8th', x + _8th, y, track);
+							
+							// 해당 음표에 sharp이 있으면
 							if(kara.key_er(pitchSplit[pi]) === 1) { //#
 								kara.print_s_p("accidentals.sharp", x + _8th-5, y-5, track);
 							}
+							// 해당 음표에 flat이 있으면
 							if(kara.key_er(pitchSplit[pi]) === -1) { //b
 								kara.print_s_p("accidentals.flat", x + _8th-5, y-5, track);
 							}
@@ -200,11 +209,14 @@ kara.printNote = function(track) {
 							kara.notevLow(x + _16th, y, pitchSplit[pi], meter, track);
 
 							if(pi === 0) kara.printflag('flags.u16th', x + _16th, y, track);
-							if(kara.key_er(pitchSplit[pi]) === 1){ //#
-								kara.print_s_p("accidentals.sharp", x + _16th-5, y-5, track);
+							
+							// 해당 음표에 sharp이 있으면
+							if(kara.key_er(pitchSplit[pi]) === 1){
+								kara.print_s_p("accidentals.sharp", x + _16th - 5, y - 5, track);
 							}
-							if(kara.key_er(pitchSplit[pi]) === -1){ //b
-								kara.print_s_p("accidentals.flat", x + _16th-5, y-5, track);
+							// 해당 음표에 flat이 있으면
+							if(kara.key_er(pitchSplit[pi]) === -1){
+								kara.print_s_p("accidentals.flat", x + _16th - 5, y - 5, track);
 							}
 						}
 						break;
@@ -212,7 +224,7 @@ kara.printNote = function(track) {
 				}
 			}
 
-			if(i === note.length-1 && j === note[i].length-1) {
+			if(i === note.length - 1 && j === note[i].length - 1) {
 
 				var four_boxEnter2 = four_boxEnter + 1;
 				var ii = i + 1;
@@ -338,10 +350,9 @@ kara.barsort = function(bNum, nNum , nowmeter, track) {
 	var noteMeter = kara.noteMeter;
 	var pre_meter = kara.scoreInfo.track[track].notes[bNum][nNum][1];
 	var remain_meter = 0;
-	var i = 0;
-	var j = 0;
+	var i = 0, j = 0;
 
-	for(var k=0;k<note[bNum].length;k++) {
+	for(var k = 0; k < note[bNum].length; k++) {
 		copynote[k] = [];	// new Array();
 		copynote[k][0] = note[bNum][k][0];
 		copynote[k][1] = note[bNum][k][1];
@@ -352,14 +363,16 @@ kara.barsort = function(bNum, nNum , nowmeter, track) {
 		kara.scoreInfo.track[track].notes[bNum][i][1] = copynote[i][1];
 		i++;
 	}
+	
 	remain_meter = noteMeter.head[pre_meter] - noteMeter.head[nowmeter];
-
 	i = Number(nNum) + 1;
+	
 	while(remain_meter > 0) {
 		remain_meter = kara.remain_meter(remain_meter, bNum, i, track);
 		i++;
 	}
 	nNum++;
+	
 	for(let j = nNum; j < barLength; j++) {
 		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][i])) {
 			kara.scoreInfo.track[track].notes[bNum][i] = [];	// new Array();
@@ -377,7 +390,7 @@ kara.remain_meter = function(remain_meter, bNum, nNum, track) {
 	
 	if(remain_meter >= noteMeter.head["half"]) {
 		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum])) {
-			kara.scoreInfo.track[track].notes[bNum][nNum] = [];// new Array();
+			kara.scoreInfo.track[track].notes[bNum][nNum] = [];	// new Array();
 		}
 		kara.scoreInfo.track[track].notes[bNum][nNum][0] = "rest";
 		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "half";

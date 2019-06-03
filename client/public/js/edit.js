@@ -1,7 +1,7 @@
 if(!window.kara) window.kara = {};
 
 // 타이틀 수정
-kara.editTitle = function(track) {// track Track Name :: 'track1'
+kara.editTitle = function(trcNm) {// track Track Name :: 'track1'
 	
 	//제목 입력
 	var title = prompt("Title");
@@ -22,8 +22,9 @@ kara.editTitle = function(track) {// track Track Name :: 'track1'
 	d3.select("#editTempo").remove();	// 템포 선택 영억 제거
 	d3.select("#writer").remove();		// 작곡가 제거
 	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
+	
 
-	kara.textSVG(track);// 해당 트랙 SVG 요소 그리기
+	kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
 	kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
 };
 
@@ -109,8 +110,27 @@ kara.editKey = function() {
 	kara.refresh();
 };
 
+// 박자 수정
+kara.editMeter = function() {
+	
+	var meter = prompt("meter");
+	
+	// 박자 정합성 검사
+	if(meter == "" || meter === null){
+		alert("박자를 입력하세요");
+		return;
+	}
+	
+	var meterSplit = meter.split("/");
+	kara.scoreInfo.meter = meterSplit[1] + "/" +meterSplit[0];
+
+	$(".in_bar").remove();
+	kara.printNote();
+};
+
 // 정해진 조표 입력 검사
 kara.keyTrueofFalse = function(key) {// key :: key -- 'major C'
+	
 	switch (key) {
 		case "major C":
 		case "major G":
@@ -140,12 +160,12 @@ kara.keyTrueofFalse = function(key) {// key :: key -- 'major C'
 	}
 };
 
-kara.keyvalue = function(key){
+kara.keyvalue = function(key) {
 	
 	var keyupper = key[0].toUpperCase();
 	var k = "";
 	var returnKey = "";
-	for(var i = 1; i < key.length; i++){
+	for(var i = 1; i < key.length; i++) {
 		returnKey = returnKey + key[i];
 	}
 	k = keyupper + returnKey;
@@ -181,25 +201,6 @@ kara.keyvalue = function(key){
 			key = keyupper[0].toLowerCase();
 			return key + returnKey;
 	}
-};
-
-// 박자 수정
-kara.editMeter = function() {
-	
-	var meter = prompt("meter");
-	
-	// 박자 정합성 검사
-	if(meter == "" || meter === null){
-		alert("박자를 입력하세요");
-		return;
-	}
-	
-	var meterSplit = meter.split("/");
-	kara.scoreInfo.meter = meterSplit[1] + "/" +meterSplit[0];
-	console.log(kara.scoreInfo);
-
-	$(".in_bar").remove();
-	kara.printNote();
 };
 
 // 음자리표 수정
@@ -360,11 +361,7 @@ var pitch_select = {
 		
 		for(var i = 1; i <= 7; i++) {		// 1옥타브 부터 7옥타브까지 검사
 			if(m <= pitch && pitch <= n) {  // 음높이 계산 현재 범위에 있는 지
-				
-				if(pitch % 7 == 0){
-					return this.note[6] + i;
-				}
-				
+				if(pitch % 7 == 0) return this.note[6] + i;
 				return this.note[(pitch % 7) - 1] + i;
 			}
 			
@@ -376,14 +373,15 @@ var pitch_select = {
 };
 
 var boxWidth = function(meter) {
-	var key = kara.scoreInfo.key;
+	
+	var key = kara.scoreInfo.key;//현재 악보 키
 	var keySplit = key.split(' ');
 	var M = kara.key[keySplit[0]];
 	var N = M[keySplit[1]];
 	var X = kara.XY.X();
 
 	var a = N * 12 + 70;
-	var ac = (X-a)/4;
+	var ac = (X - a) / 4;
 	var x = a;
 	var width = (X-a)/4;
 	switch(meter){
@@ -391,31 +389,28 @@ var boxWidth = function(meter) {
 			width = width;
 			break;
 		case 'half': //2분음표
-			width = width/2;
+			width = width / 2;
 			break;
 		case 'quarter': //4분음표
-			width = width/4;
+			width = width / 4;
 			break;
 		case '8th': //8분음표
-			width = width/8;
+			width = width / 8;
 			break;
 		case '16th': //16분음표
-			width = width/16;
+			width = width / 16;
 			break;
-		case 32:
-			break;
-		case 64:
-			break;
-		case 128:
-			break;
-		default:
-			break;
+		case 32: break;
+		case 64: break;
+		case 128: break;
+		default: break;
 	}
 	return width;
 };
 
 //음표선택 팝업 호출
 var PopLayer = {
+	
 	nowLayer : "",
 	openLayer : "",
 	Xpos : "",
@@ -460,7 +455,7 @@ kara.noteToKey = function(keyArray) {
 	var split = keyArray.split(",");
 	var leng = split.length;
 	var key = new Array(leng);
-	
+
 	for(var i = 0; i < split.length; i++) {
 		switch(split[i]){
 		  case "A0"://21
@@ -664,22 +659,22 @@ kara.noteToKey = function(keyArray) {
   return key;
 };
 
-kara.key_er = function(pitch){  // b = -1 return, natural = 0, # = 1;
+// sharp 또는 flat이 붙은 음표인지 검사
+// return 1 :: sharp이 있으면, -1 :: flat이 있으면, 아무것도 없으면 0
+kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 	var sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/];
 	var flatArray = [/B/, /E/, /A/, /D/, /G/, /C/, /F/];
 	var key = kara.scoreInfo.key;
 	var keySplit = key.split(" ");
-	var keyNum = kara.key[keySplit[0]][keySplit[1]]; //변환될 음표의 개수
+	var keyNum = kara.key[keySplit[0]][keySplit[1]]; // 변환될 음표의 개수
 	var M = kara.key[keySplit[0]];
 	var regexp;
 
-	for (var key in M) {
+	for (let key in M) {
 		if (key == keySplit[1]) {
 			switch(key){
-				case 'C': //0
-					return 0;
-				case 'Am':
-					return 0;
+				case 'C': return 0;	// 아무것도 없으면 0
+				case 'Am': return 0;// 아무것도 없으면 0
 				case 'G': //1
 				case 'Em':
 				case 'D': //2
@@ -690,11 +685,10 @@ kara.key_er = function(pitch){  // b = -1 return, natural = 0, # = 1;
 				case 'C#m':
 				case 'B': //5
 				case 'G#m':
-					for(var i=0;i<M[keySplit[1]];i++) {
+					for(let i = 0; i < M[keySplit[1]]; i++) {
 						regexp = sharpArray[i];
-						if(regexp.test(pitch)) {
-							return 1; // 그 음이 #이 붙으면 1을 리턴
-						}
+						// 그 음이 #이 붙으면 1을 리턴
+						if(regexp.test(pitch)) return 1;
 					}
 					break;
 				case 'Gb': //6
@@ -709,16 +703,18 @@ kara.key_er = function(pitch){  // b = -1 return, natural = 0, # = 1;
 				case 'Gm':
 				case 'F': //1
 				case 'Dm':
-					for(var i=0;i<M[keySplit[1]];i++) {
+					for(let i = 0; i < M[keySplit[1]]; i++) {
 						regexp = flatArray[i];
 						if(regexp.test(pitch)) {
-							return -1; //그 음이 #이 붙으면 1을 리턴
+							return -1; //그 음이 b이 붙으면 -11을 리턴
 						}
 					}
 					break;
 			}
 		}
 	}
+	
+	return 0;// 아무것도 없으면
 };
 
 kara.maxLength = function(chordArray) {
