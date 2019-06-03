@@ -352,6 +352,7 @@ var notepush = {
 
 //선택한 음높이 계산
 var pitch_select = {
+	
 	note: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
 	selection: function(pitch){
 		var m = 1;

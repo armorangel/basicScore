@@ -18,13 +18,13 @@ kara.refresh = function() {
 	$(".in_bar").remove();
 	
 	for (var key in kara.scoreInfo.track) {
-		if(kara.scoreInfo.track.hasOwnProperty(key)) {// 객체가 특정 프로퍼티를 가지고 있는지
 			
-			// 해당 트랙이 초기화 되었는지 판단
-			if(kara.scoreInfo.track[key].clef === "") continue;
-			kara.printNote(key);
-			kara.textSVG(key);
-		}
+		// 해당 트랙이 초기화 되었는지 판단
+		if(kara.scoreInfo.track[key].clef === "") continue;
+		
+		// 초기화된 트랙만 그리기
+		kara.printNote(key);
+		kara.textSVG(key); 
 	}
 };
 
@@ -41,46 +41,48 @@ kara.delay = function delay(gap) { /* gap is in millisecs */
 //트랙 탭 추가
 kara.addTabs = function() {
 	
-	var trackN;		// 트랙이름 'track1'
-	var track = 1;	// 트랙번호
+	var trcNm;
+	var trcNum = 1;
 
 	//kara.svg :: 악보 트랙별 SVG 객체 return ['track1', 'track2', ..., 'track10']
 	//마지막 트랙번호 설정
 	for (var key in kara.svg) {	// 트랙별 svg
 		if (kara.svg.hasOwnProperty(key)) {// kara.svg에 트랙이 존재하면
 			if(kara.svg[key].svgContainer !== null) {
-				track++;	// 1부터 시작 아직 생성안된 트랙까지
-				console.log('added TrackNUM ' + track);
+				trcNum++;	// 1부터 시작 아직 생성안된 트랙까지
+				console.log('added TrackNumber :: ' + trcNum);
 			}
 		}
 	}
 	
 	// 트랙 10개 제한
-	if(track == 11) return;
+	if(trcNum == 11) return;
 	
-	$("#tab").children().last().before("<li><a href='#track" + track + "'>track " + track + "</a></li>");
-	$("#tabs").children().last().after("<div id='track" + track + "'></div>");
+	//탭 태그 생성
+	$("#tab").children().last().before("<li><a href='#track" + trcNum + "'>track " + trcNum + "</a></li>");
+	$("#tabs").children().last().after("<div id='track" + trcNum + "'></div>");
 
 	// 탭 refresh
 	$( "#tabs" ).tabs( "refresh" );
 
-	trackN = "track" + track;	// 'track1'
+	trcNm = "track" + trcNum;	// 'track1'
 
-	kara.svgContain(trackN);	// 'track1' 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
-	kara.textSVG(trackN);		// 'track1' Draw title, tempo, name SVG in print.js
-	kara.printNote(trackN);		// 'track1'
-	kara.menu(track);			// 트랙별 악기 콤보 추가
+	kara.svgContain(trcNm);	// 'track1' 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
+	kara.textSVG(trcNm);	// 'track1' Draw title, tempo, name SVG in print.js
+	kara.printNote(trcNm);	// 'track1'
+	kara.menu(trcNum);		// 트랙별 악기 콤보 추가
 };
 
 // Add Combo to select Instruments on Each Track
 kara.menu = function(trcNum){	//trackN: trackNumber -- 1
 
-	var trcNm = "track" + trcNum;	// 'track1'
+	var trcNm = 'track' + trcNum;	// 'track1'
+	var menuTtl = 'Select a track';
 	
 	kara.scoreInfo.track[trcNm].instrument = 0;	//처음 Acoustic Grand Piano로 세팅
 	
 	// 메뉴 바에 Select a track 문구, 콤보 추가
-	$("#menu").append("<form action='#'><fieldset><label for='instrument" + trcNum + "'>Select a track" + trcNum + "</label><select name='instrument" + trcNum 							+ "' id='instrument" + trcNum + "'></fieldset></form>");
+	$("#menu").append("<form action='#'><fieldset><label for='instrument" + trcNum + "'>" + menuTtl + trcNum + "</label><select name='instrument" + trcNum 							+ "' id='instrument" + trcNum + "'></fieldset></form>");
 	
 	$("#instrument" + trcNum)
 		.selectmenu({width: 200})
