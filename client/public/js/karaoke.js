@@ -135,19 +135,19 @@ kara.printNote = function(trcNm) {// trcNm :: Track Name 'track1'
 					case 'quarter': //4분음표
 						
 						//4분음표 그리기
-						kara.printQuarter(trcNm, x, _quarter, y, meter, pitchSplit[pi]);
+						kara.print8th16thQuarter(trcNm, x, _quarter, y, meter, pitchSplit[pi], pi, meter);
 						break;
 						
 					case '8th': //8분음표
 						
 						//8분음표 그리기
-						kara.print8th(trcNm, x, _8th, y, meter, pitchSplit[pi], pi);
+						kara.print8th16thQuarter(trcNm, x, _8th, y, meter, pitchSplit[pi], pi, meter);
 						break;
 						
 					case '16th': // 16분음표
 						
 						//16분음표 그리기
-						kara.print16th(trcNm, x, _16th, y, meter, pitchSplit[pi], pi);
+						kara.print8th16thQuarter(trcNm, x, _16th, y, meter, pitchSplit[pi], pi, meter);
 						break;
 						
 					default: break;
@@ -407,71 +407,24 @@ kara.printHalf = function(trcNm, x, _half, y, meter, pitchSplit_pi) {
 	}
 };
 
-//4분음표 그리기
-kara.printQuarter = function(trcNm, x, _quarter, y, meter, pitchSplit_pi) {
+kara.print8th16thQuarter = function(trcNm, x, leng, y, meter, pitchSplit_pi, pi, type) {
 	
 	if(pitchSplit_pi === "rest") {
-		kara.printSymbol('rests.quarter', x + _quarter, y, trcNm);
+		kara.printSymbol(`rests.${type}`, x + leng, y, trcNm);
 	} else {
+		kara.printSymbol('noteheads.quarter', x + leng, y, trcNm);
+		kara.notevLine(x + leng, y, trcNm);
+		kara.notevLow(x + leng, y, pitchSplit_pi, meter, trcNm);
 
-		kara.printSymbol('noteheads.quarter', x + _quarter, y, trcNm);
-		kara.notevLine(x + _quarter, y, trcNm);
-		kara.notevLow(x + _quarter, y, pitchSplit_pi, meter, trcNm);
-
-		// 해당 음표에 sharp이 있으면
-		if(kara.key_er(pitchSplit_pi) === 1) {
-			kara.print_s_p("accidentals.sharp", x + _quarter - 5, y - 5, trcNm);
-		}
-		// 해당 음표에 flat이 있으면
-		if(kara.key_er(pitchSplit_pi) === -1) {
-			kara.print_s_p("accidentals.flat", x + _quarter - 5, y - 5, trcNm);
-		}
-	}
-};
-
-//8분음표 그리기
-kara.print8th = function(trcNm, x, _8th, y, meter, pitchSplit_pi, pi) {
-	
-	if(pitchSplit_pi === "rest") {
-		kara.printSymbol('rests.8th', x + _8th, y, trcNm);
-	} else {
-		kara.printSymbol('noteheads.quarter', x + _8th, y, trcNm);
-		kara.notevLine(x + _8th, y, trcNm);
-		kara.notevLow(x + _8th, y, pitchSplit_pi, meter, trcNm);
-
-		if(pi === 0) kara.printflag('flags.u8th', x + _8th, y, trcNm);
-
-		// 해당 음표에 sharp이 있으면
-		if(kara.key_er(pitchSplit_pi) === 1) { //#
-			kara.print_s_p("accidentals.sharp", x + _8th - 5, y - 5, trcNm);
-		}
-		// 해당 음표에 flat이 있으면
-		if(kara.key_er(pitchSplit_pi) === -1) { //b
-			kara.print_s_p("accidentals.flat", x + _8th - 5, y - 5, trcNm);
-		}
-	}
-};
-
-//16분음표 그리기
-kara.print16th = function(trcNm, x, _16th, y, meter, pitchSplit_pi, pi) {
-	
-	if(pitchSplit_pi === "rest") {
-		kara.printSymbol('rests.16th', x + _16th, y, trcNm);
-	} else {
-		kara.printSymbol('noteheads.quarter', x + _16th, y, trcNm);
-		kara.notevLine(x + _16th, y, trcNm);
-		kara.notevLow(x + _16th, y, pitchSplit_pi, meter, trcNm);
-
-		if(pi === 0) kara.printflag('flags.u16th', x + _16th, y, trcNm);
+		if(pi === 0) kara.printflag(`flags.u${type}`, x + leng, y, trcNm);
 
 		// 해당 음표에 sharp이 있으면
 		if(kara.key_er(pitchSplit_pi) === 1){
-			kara.print_s_p("accidentals.sharp", x + _16th - 5, y - 5, trcNm);
+			kara.print_s_p("accidentals.sharp", x + leng - 5, y - 5, trcNm);
 		}
 		// 해당 음표에 flat이 있으면
 		if(kara.key_er(pitchSplit_pi) === -1){
-			kara.print_s_p("accidentals.flat", x + _16th - 5, y - 5, trcNm);
+			kara.print_s_p("accidentals.flat", x + leng - 5, y - 5, trcNm);
 		}
 	}
 };
-
