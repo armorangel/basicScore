@@ -28,7 +28,7 @@ kara.scoreInfo = {
 };
 
 // 노트 길이
-kara.noteMeter = {
+kara.noteMeter = {// 왜 같은걸 두개로 해놨지
 	head: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1},
 	rest: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1}
 };
@@ -40,20 +40,20 @@ kara.key = {// 심볼 갯수 객체
 };
 
 // 배열의 값을 가져와서 음표를 그린다
-kara.printNote = function(track) {
+kara.printNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	
-	var note = kara.scoreInfo.track[track].notes;
-	var meter = kara.scoreInfo.meter.split('/');
-	var limited = meter[0] * meter[1];	// 마디 제한
+	var note = kara.scoreInfo.track[trcNm].notes;	// Array [["E5", "half"], ["E5", "half"]]
+	var meter = kara.scoreInfo.meter.split('/');	// ["4", "4"]
+	var limited = meter[0] * meter[1];	// 마디 제한 16
 	var nowMeter = 0;					// 현재 마디
 	var four_boxEnter = 0;
 	var four_check = 0;
 	var pageInc = 0;
 	
-	kara.hLine(0, track);	// 한줄 긋고 시작
+	kara.hLine(0, trcNm);	// 한줄 긋고 시작
 	
 	// 첫마디가 없으면 노트박스 생성
-	if(note[0] === undefined) kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, "whole", track);
+	if(note[0] === undefined) kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, "whole", trcNm);
 	
 	// 마디 찍기
 	for(var i = 0; i < note.length; i++) {
@@ -65,7 +65,7 @@ kara.printNote = function(track) {
 			var four = i / 4;
 			
 			// 4번째 마디마다 새 오선지 찍기
-			kara.hLine(four, track);
+			kara.hLine(four, trcNm);
 			four_boxEnter++;
 		}
 		
@@ -80,11 +80,13 @@ kara.printNote = function(track) {
 			var Y = kara.XY.Y(i);
 			var a = N * 12 + 70;
 			var ac = (X - a) / 4;
+			
 			var _whole = ac / 2 - 8;
 			var _half = _whole / 2;
 			var _quarter = _half / 2;
 			var _8th = _quarter/2;
 			var _16th = _8th/2-8;
+			
 			var position;
 
 			var pitch = note[i][j][0];
@@ -93,67 +95,67 @@ kara.printNote = function(track) {
 			if(four_boxEnter == four_check) {
 
 				// 첫 음표 // 악보 선택 영역 그리기
-				kara.noteBox.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, track);
+				kara.noteBox.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, trcNm);
 				four_check++;
 			} else {
 				// 두번째 부터 // 악보 선택 영역 그리기
-				kara.noteBox_.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, track);
+				kara.noteBox_.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, trcNm);
 				console.log("그릴 박스는 i는" + i + "j " +  j);
 			}
-
-			var width = $(".bar_"+ i + ".note_" + j + "." + track).width();
-			d3.select(".bar_"+ i + ".note_" + j + "#" + pitch + "." + track).style("fill", "#ffffff");
+			
+			var width = $(`.bar_${i}.note_${j}.${trcNm}`).width();//.bar_1.note_2.track1
+			d3.select(`.bar_${i}.note_${j}#${pitch}.${trcNm}`).style("fill", "#ffffff");
 
 			pitchSplit = pitch.split(",");
 
 			for(var pi = 0; pi < pitchSplit.length; pi++) {
 				
 				if(pitchSplit[pi] === "rest"){
-					position = $("#A4" + ".bar_"+ i + ".note_" + j + "." + track).position();
+					position = $(`#A4.bar_${i}.note_${j}.${trcNm}`).position();
 				} else {
-					position = $("#" + pitchSplit[pi] + ".bar_"+ i + ".note_" + j + "." + track).position();
+					position = $(`#${pitchSplit[pi]}.bar_${i}.note_${j}.${trcNm}`).position();
 				}
 					
-				var x = position.left - kara.scorePosition.left(track);
-				var y = position.top - kara.scorePosition.top(track) + 3;
+				var x = position.left - kara.scorePosition.left(trcNm);
+				var y = position.top - kara.scorePosition.top(trcNm) + 3;
 
 				switch(meter) {
 					case 'whole': //온음표
 						if(pitchSplit[pi] === "rest"){
-							kara.printSymbol('rests.whole', x + _whole, y, track);
+							kara.printSymbol('rests.whole', x + _whole, y, trcNm);
 						} else {
 							
-							kara.printSymbol('noteheads.whole', x + _whole, y, track);
-							kara.notevLow(x + _whole, y, pitchSplit[pi], meter, track);
+							kara.printSymbol('noteheads.whole', x + _whole, y, trcNm);
+							kara.notevLow(x + _whole, y, pitchSplit[pi], meter, trcNm);
 
 							// 해당 음표에 sharp이 있으면
 							if(kara.key_er(pitchSplit[pi]) === 1) { //#
-								kara.print_s_p("accidentals.sharp", x + _whole - 5, y - 5, track);// 음표에 sharp 붙이기
+								kara.print_s_p("accidentals.sharp", x + _whole - 5, y - 5, trcNm);// 음표에 sharp 붙이기
 							}
 							
 							// 해당 음표에 flat이 있으면
 							if(kara.key_er(pitchSplit[pi]) === -1) { //b
-								kara.print_s_p("accidentals.flat", x + _whole - 5, y - 5, track);// 음표에 flat 붙이기
+								kara.print_s_p("accidentals.flat", x + _whole - 5, y - 5, trcNm);// 음표에 flat 붙이기
 							}
 						}
 						break;
 						
 					case 'half': //2분음표
 						if(pitchSplit[pi] === "rest") {
-							kara.printSymbol('rests.half', x + _half, y, track);
+							kara.printSymbol('rests.half', x + _half, y, trcNm);
 						} else {
 							
-							kara.printSymbol('noteheads.half', x + _half, y, track);
+							kara.printSymbol('noteheads.half', x + _half, y, trcNm);
 							kara.notevLine(x + _half, y, track);
-							kara.notevLow(x + _half, y, pitchSplit[pi], meter, track);
+							kara.notevLow(x + _half, y, pitchSplit[pi], meter, trcNm);
 
 							// 해당 음표에 sharp이 있으면
 							if(kara.key_er(pitchSplit[pi]) === 1) {
-								kara.print_s_p("accidentals.sharp", x + _half - 5, y - 5, track);
+								kara.print_s_p("accidentals.sharp", x + _half - 5, y - 5, trcNm);
 							}
 							// 해당 음표에 flat이 있으면
 							if(kara.key_er(pitchSplit[pi]) === -1) {
-								kara.print_s_p("accidentals.flat", x + _half - 5, y - 5, track);
+								kara.print_s_p("accidentals.flat", x + _half - 5, y - 5, trcNm);
 							}
 						}
 
@@ -161,62 +163,62 @@ kara.printNote = function(track) {
 						
 					case 'quarter': //4분음표
 						if(pitchSplit[pi] === "rest") {
-							kara.printSymbol('rests.quarter', x + _quarter, y, track);
+							kara.printSymbol('rests.quarter', x + _quarter, y, trcNm);
 						} else {
 							
-							kara.printSymbol('noteheads.quarter', x + _quarter, y, track);
-							kara.notevLine(x + _quarter, y, track);
-							kara.notevLow(x + _quarter, y, pitchSplit[pi], meter, track);
+							kara.printSymbol('noteheads.quarter', x + _quarter, y, trcNm);
+							kara.notevLine(x + _quarter, y, trcNm);
+							kara.notevLow(x + _quarter, y, pitchSplit[pi], meter, trcNm);
 
 							// 해당 음표에 sharp이 있으면
 							if(kara.key_er(pitchSplit[pi]) === 1) {
-								kara.print_s_p("accidentals.sharp", x + _quarter-5, y-5, track);
+								kara.print_s_p("accidentals.sharp", x + _quarter-5, y-5, trcNm);
 							}
 							// 해당 음표에 flat이 있으면
 							if(kara.key_er(pitchSplit[pi]) === -1) {
-								kara.print_s_p("accidentals.flat", x + _quarter-5, y-5, track);
+								kara.print_s_p("accidentals.flat", x + _quarter-5, y-5, trcNm);
 							}
 						}
 						break;
 						
 					case '8th': //8분음표
 						if(pitchSplit[pi] === "rest") {
-							kara.printSymbol('rests.8th', x + _8th, y, track);
+							kara.printSymbol('rests.8th', x + _8th, y, trcNm);
 						} else {
-							kara.printSymbol('noteheads.quarter', x + _8th, y, track);
-							kara.notevLine(x + _8th, y, track);
-							kara.notevLow(x + _8th, y, pitchSplit[pi], meter, track);
+							kara.printSymbol('noteheads.quarter', x + _8th, y, trcNm);
+							kara.notevLine(x + _8th, y, trcNm);
+							kara.notevLow(x + _8th, y, pitchSplit[pi], meter, trcNm);
 
-							if(pi === 0) kara.printflag('flags.u8th', x + _8th, y, track);
+							if(pi === 0) kara.printflag('flags.u8th', x + _8th, y, trcNm);
 							
 							// 해당 음표에 sharp이 있으면
 							if(kara.key_er(pitchSplit[pi]) === 1) { //#
-								kara.print_s_p("accidentals.sharp", x + _8th-5, y-5, track);
+								kara.print_s_p("accidentals.sharp", x + _8th-5, y-5, trcNm);
 							}
 							// 해당 음표에 flat이 있으면
 							if(kara.key_er(pitchSplit[pi]) === -1) { //b
-								kara.print_s_p("accidentals.flat", x + _8th-5, y-5, track);
+								kara.print_s_p("accidentals.flat", x + _8th-5, y-5, trcNm);
 							}
 						}
 						break;
 						
 					case '16th': //16분음표
 						if(pitchSplit[pi] === "rest") {
-							kara.printSymbol('rests.16th', x + _16th, y, track);
+							kara.printSymbol('rests.16th', x + _16th, y, trcNm);
 						} else {
-							kara.printSymbol('noteheads.quarter', x + _16th, y, track);
-							kara.notevLine(x + _16th, y, track);
-							kara.notevLow(x + _16th, y, pitchSplit[pi], meter, track);
+							kara.printSymbol('noteheads.quarter', x + _16th, y, trcNm);
+							kara.notevLine(x + _16th, y, trcNm);
+							kara.notevLow(x + _16th, y, pitchSplit[pi], meter, trcNm);
 
-							if(pi === 0) kara.printflag('flags.u16th', x + _16th, y, track);
+							if(pi === 0) kara.printflag('flags.u16th', x + _16th, y, trcNm);
 							
 							// 해당 음표에 sharp이 있으면
 							if(kara.key_er(pitchSplit[pi]) === 1){
-								kara.print_s_p("accidentals.sharp", x + _16th - 5, y - 5, track);
+								kara.print_s_p("accidentals.sharp", x + _16th - 5, y - 5, trcNm);
 							}
 							// 해당 음표에 flat이 있으면
 							if(kara.key_er(pitchSplit[pi]) === -1){
-								kara.print_s_p("accidentals.flat", x + _16th - 5, y - 5, track);
+								kara.print_s_p("accidentals.flat", x + _16th - 5, y - 5, trcNm);
 							}
 						}
 						break;
@@ -231,15 +233,15 @@ kara.printNote = function(track) {
 				var four2 = ii % 4;
 
 				if(four2 == 0 && ii >= 4) {
-					if(kara.meterCal_box(i, track)===1) {
-						$("#" + track + "> #score").height(four_boxEnter2 * 120 + 300);
-						kara.hLine(four_boxEnter2, track);
-						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter2), i, j, meter, 1, track);
+					if(kara.meterCal_box(i, trcNm)===1) {
+						$(`#${trcNm} > #score`).height(four_boxEnter2 * 120 + 300);
+						kara.hLine(four_boxEnter2, trcNm);
+						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter2), i, j, meter, 1, trcNm);
 					} else {
-						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, track);
+						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, trcNm);
 					}
 				} else {
-					kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, track);
+					kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, trcNm);
 				}
 			}
 		}
