@@ -118,40 +118,21 @@ kara.printNote = function(trcNm) {// trcNm :: Track Name 'track1'
 					
 				var x = position.left - kara.scorePosition.left(trcNm);
 				var y = position.top - kara.scorePosition.top(trcNm) + 3;
+				
+				var leng = 0;//x 길이 추가
 
+				//길이 대입
 				switch(meter) {
-					case 'whole': //온음표
-						
-						//온음표 그리기
-						kara.printWhole(trcNm, x, _whole, y, meter, pitchSplit[pi]);
-						break;
-						
-					case 'half': //2분음표
-						
-						//2분음표 그리기
-						kara.printHalf(trcNm, x, _half, y, meter, pitchSplit[pi]);
-						break;
-						
-					case 'quarter': //4분음표
-						
-						//4분음표 그리기
-						kara.print8th16thQuarter(trcNm, x, _quarter, y, meter, pitchSplit[pi], pi, meter);
-						break;
-						
-					case '8th': //8분음표
-						
-						//8분음표 그리기
-						kara.print8th16thQuarter(trcNm, x, _8th, y, meter, pitchSplit[pi], pi, meter);
-						break;
-						
-					case '16th': // 16분음표
-						
-						//16분음표 그리기
-						kara.print8th16thQuarter(trcNm, x, _16th, y, meter, pitchSplit[pi], pi, meter);
-						break;
-						
+					case 'whole': leng = _whole; break;		// 온음표
+					case 'half': leng = _half; break;		// 2분음표
+					case 'quarter': leng = _quarter; break;	// 4분음표
+					case '8th': leng = _8th; break;			// 8분음표
+					case '16th': leng = _16th; break;		// 16분음표
 					default: break;
 				}
+				
+				//음표 그리기
+				kara.print8th16thQuarterHalfWhole(trcNm, x, leng, y, meter, pitchSplit[pi], pi, meter);
 			}
 
 			if(i === note.length - 1 && j === note[i].length - 1) {
@@ -407,13 +388,23 @@ kara.printHalf = function(trcNm, x, _half, y, meter, pitchSplit_pi) {
 	}
 };
 
-kara.print8th16thQuarter = function(trcNm, x, leng, y, meter, pitchSplit_pi, pi, type) {
+kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSplit_pi, pi, type) {
+	
+	var head = type;
+	
+	if(type !=='whole' && type !== 'half')
+		head = 'quarter';
 	
 	if(pitchSplit_pi === "rest") {
+		
 		kara.printSymbol(`rests.${type}`, x + leng, y, trcNm);
+		
 	} else {
-		kara.printSymbol('noteheads.quarter', x + leng, y, trcNm);
-		kara.notevLine(x + leng, y, trcNm);
+		
+		if(type !== 'whole')
+			kara.notevLine(x + leng, y, trcNm);
+		
+		kara.printSymbol(`noteheads.${head}`, x + leng, y, trcNm);
 		kara.notevLow(x + leng, y, pitchSplit_pi, meter, trcNm);
 
 		if(pi === 0) kara.printflag(`flags.u${type}`, x + leng, y, trcNm);
