@@ -158,12 +158,12 @@ kara.scorePosition = {
 	
 	//#score 악보 영역 left 좌표 반환
 	left: function(trcNm) {// trcNm :: Track Name -- 'track1'
-		var position = $("#" + trcNm + " > #score");
+		var position = $('#' + trcNm + ' > #score');
 		return position.position().left;
 	},
 	// #score 악보 영억 top 좌표 반환
 	top: function(trcNm) {// trcNm :: Track Name -- 'track1'
-		var position = $("#" + trcNm + " > #score");
+		var position = $('#' + trcNm + ' > #score');
 		return position.position().top;
 	}
 };
@@ -260,7 +260,7 @@ kara.clefSVG = function(x, y, Y, track) {
 	//음자리표 선택영역 APPEND
 	svg.append("rect")
 		.attr("id", "editClef")	// #editClef :: 음자리표 선택영역(수정)
-		.attr("class", `in_bar ${track}`)
+		.attr("class", 'in_bar ' + track)
 		.attr("x", box_x)
 		.attr("y", box_y)
 		.attr("onclick", "kara.editClef('" + track + "')")
@@ -369,7 +369,7 @@ kara.keySVG = function(Y, key, track) {	// 217, major Db, track1
 	// 조표 선택영역 SVG DRAW
 	svg.append("rect")
 		.attr("id", "editKey")	// #editKey :: 조표 선택영역(수정)
-		.attr("class", `in_bar ${track}`)// 삭제 영역
+		.attr("class", 'in_bar ' + track)// 삭제 영역
     	.attr("x", x)
    		.attr("y", y)
 		.attr("onclick", "kara.editKey('" + track + "')")	// 조표 수정 클릭 이벤트
@@ -384,10 +384,11 @@ kara.meterSVG = function(Y, track) {
 	
 	var svg = kara.svg[track].svgSymbol;
 	var box = kara.svg[track].svgBox;
-	var key = kara.scoreInfo.key;
+	var key = kara.scoreInfo.key;	// 'major Db'
 	var keySplit = key.split(' ');
-	var M = kara.key[keySplit[0]];
-	var N = M[keySplit[1]];
+	var M = kara.key[keySplit[0]];// A: 3, Ab: 4, B: 5, Bb: 2, C: 0, D: 2, Db: 5, E: 4, Eb: 3, F: 1, G: 1, Gb: 6
+	var N = M[keySplit[1]];	// 5
+
 	var x, y, width, height;
 
 	var meter = kara.scoreInfo.meter;	// 악보정보 객체 박자
@@ -409,7 +410,8 @@ kara.meterSVG = function(Y, track) {
 		.style("transform", "scale(1.2,1.4)")
 		.style("stroke", "black");
 
-	x = 55 + (N * 10);
+	//박자 변경을 위한 선택역역 BOX 생성
+	x = 55 + (N * 10);// 조표의 갯수에 맞게 박자박스 SVG x 좌표 위치 조정
 	y = Y + 11;
 	width = N + 20;
 	height = 50;
