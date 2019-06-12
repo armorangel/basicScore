@@ -61,7 +61,7 @@ kara.editTempo = function(track) {// track Track Name :: 'track1'
 };
 
 // 작곡가 수정
-kara.editWriter = function(track) {// track Track Name :: 'track1'
+kara.editWriter = function(trcNm) {// track Track Name :: 'track1'
 	
 	// 작곡가 입력
   	var writer = prompt("Writer");
@@ -83,7 +83,7 @@ kara.editWriter = function(track) {// track Track Name :: 'track1'
 	d3.select("#writer").remove();		// 작곡가 제거
 	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
 	
-  	kara.textSVG(track);// 해당 트랙 SVG 요소 그리기
+  	kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
 	kara.refresh();
 };
 
@@ -94,7 +94,7 @@ kara.editKey = function() {
 	var key = prompt("Key");
 	
 	// 조표 정합성 검사
-	if(key == "" || key === null) {
+	if(key === null || key === '') {
 		alert("조표를 입력하세요");
 		return;
 	}
@@ -115,7 +115,7 @@ kara.editMeter = function() {
 	var meter = prompt("meter");
 	
 	// 박자 정합성 검사
-	if(meter == "" || meter === null){
+	if(meter == "" || meter === null) {
 		alert("박자를 입력하세요");
 		return;
 	}
@@ -205,7 +205,6 @@ kara.editClef = function(track) {
 		alert("음자리표를 입력하세요.");
 		return;
 	}
-	if(clef === null) return;
 	
 	kara.scoreInfo.track[track].clef = clef.toUpperCase();
 
@@ -286,7 +285,7 @@ var notepush = {
 					return;
 				} else if(kara.meterCal(bNum[1], nNum[1], "half", track) == 0) { //마디 꽉차서
 					let bbNum = bNum[1];
-					bbNum = bbNum+1;
+					bbNum = bbNum + 1;
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", track); // push
 				} else {
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", track);
@@ -376,6 +375,7 @@ var boxWidth = function(meter) {
 	var ac = (X - a) / 4;
 	var x = a;
 	var width = (X-a)/4;
+	
 	switch(meter){
 		case 'whole': //온음표
 			width = width;
@@ -634,7 +634,7 @@ kara.noteToKey = function(keyArray) {
     }
   }
 
-	for(var j=0;j<split.length;j++){
+	for(var j = 0; j < split.length; j++){
 		if(kara.key_er(split[j]) === 1){
 			var temp = key[j];
 			key[j] = temp + 1;
@@ -654,6 +654,7 @@ kara.noteToKey = function(keyArray) {
 // sharp 또는 flat이 붙은 음표인지 검사
 // return 1 :: sharp이 있으면, -1 :: flat이 있으면, 아무것도 없으면 0
 kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
+	
 	var sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/];
 	var flatArray = [/B/, /E/, /A/, /D/, /G/, /C/, /F/];
 	var key = kara.scoreInfo.key;
@@ -697,16 +698,16 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 				case 'Dm':
 					for(let i = 0; i < M[keySplit[1]]; i++) {
 						regexp = flatArray[i];
-						if(regexp.test(pitch)) {
-							return -1; //그 음이 b이 붙으면 -11을 리턴
-						}
+						
+						//그 음이 b이 붙으면 -11을 리턴
+						if(regexp.test(pitch)) return -1;
 					}
 					break;
 			}
 		}
 	}
 	
-	return 0;// 아무것도 없으면
+	return 0;	// 아무것도 없으면
 };
 
 kara.maxLength = function(chordArray) {
