@@ -26,7 +26,7 @@ kara.svg = {
 kara.svgContain = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
 	const trcSvg = kara.svg[trcNm];		// kara.svg['track1'] 트랙별 SVG 객체
-	const width = $("#tabs").width();	// 악보 탭 넓이
+	const width = $('#tabs').width();	// 악보 탭 넓이
 	let svgContainer;					// #track1 > #score SVG 트랙영역
 
 	// 악보영역 생성후 저장
@@ -45,21 +45,21 @@ kara.svgContain = function(trcNm) {	// trcNm: Track Name -- 'track1'
 };
 
 // Draw title, tempo, name SVG
-kara.textSVG = function(track) {// track :: Track Name 'track1'
-	
-	var svg = kara.svg[track].svgText;
-	var box = kara.svg[track].svgBox;
+kara.textSVG = function(trcNm) {// trcNm :: Track Name 'track1'
+		
+	var svg = kara.svg[trcNm].svgText;
+	var box = kara.svg[trcNm].svgBox;
 	var title = kara.scoreInfo.title;
 	var tempo = kara.scoreInfo.tempo;
 	var writer = kara.scoreInfo.writer;
 	var position;
 	var x, y, width, height;
-	var opacity = "0.3";	// 투명도
+	var opacity = '0.3';	// 투명도
 	
 	// Title
-	svg.append("text")
-		.attr("id", "title")
-		.attr("class", "in_bar")		// .in_bar :: 초기화 영역
+	svg.append('text')
+		.attr('id', 'title')
+		.attr('class', 'in_bar')		// .in_bar :: 초기화 영역
 		.attr("font-size", "60px")		// font size 60px
 		.attr("x", "50%")				// 가운데
 		.attr("y", "50")				// 위에서 50
@@ -70,8 +70,8 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.text(title);					// 악보정보객체의 TITLE
 	
 	position = jQuery("#title").position();	// 제목 위치리턴 객체 left, top
-	x = position.left - kara.scorePosition.left(track);
-	y = position.top - kara.scorePosition.top(track);
+	x = position.left - kara.scorePosition.left(trcNm);
+	y = position.top - kara.scorePosition.top(trcNm);
 	width = $('#title').width();	// 0 ISSUE
 	height = $('#title').height();	// 0 ISSUE
 	
@@ -80,7 +80,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.attr("class", "in_bar")// .in_bar :: 악보 초기화 영역
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", "kara.editTitle('" + track + "')")// Click Event(제목 수정)
+		.attr("onclick", "kara.editTitle('" + trcNm + "')")// Click Event(제목 수정)
 		//.style("width", width)// 0 ISSUE
 		//.style("height", height)// 0 ISSUE
 		.style("width", "100")// 변경해야됨
@@ -102,8 +102,8 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.text("♩ = " + tempo);
 
 	position = $('#tempo').position();
-	x = position.left - kara.scorePosition.left(track);
-	y = position.top - kara.scorePosition.top(track);
+	x = position.left - kara.scorePosition.left(trcNm);
+	y = position.top - kara.scorePosition.top(trcNm);
 	width = $('#tempo').width();
 	height = $('#tempo').height();
 
@@ -112,7 +112,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.attr("class", "in_bar")// .in_bar :: 삭제영역
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", "kara.editTempo('" + track + "')")
+		.attr("onclick", "kara.editTempo('" + trcNm + "')")
 		//.style("width", width)// 0 ISSUE
 		//.style("height", height)// 0 ISSUE
 		.style("width", "100")// 0 ISSUE
@@ -134,8 +134,8 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.text(writer);
 
 	position = $('#writer').position();
-	x = position.left - kara.scorePosition.left(track);
-	y = position.top - kara.scorePosition.top(track);
+	x = position.left - kara.scorePosition.left(trcNm);
+	y = position.top - kara.scorePosition.top(trcNm);
 	width = $('#writer').width();
 	height = $('#writer').height();
 
@@ -144,7 +144,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.attr("class", "in_bar")
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", "kara.editWriter('" + track + "')")
+		.attr("onclick", "kara.editWriter('" + trcNm + "')")
 		//.style("width", width)
 		//.style("height", height)
 		.style("width", "100")
