@@ -30,7 +30,7 @@ kara.svgContain = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	let svgContainer;					// #track1 > #score SVG 트랙영역
 
 	// 악보영역 생성후 저장
-	svgContainer = d3.select("#" + trcNm)			// '#track1'
+	svgContainer = d3.select('#' + trcNm)			// '#track1'
 					.append("svg")					// SVG 객체 생성
 					.attr("id", 'score')			// #score :: 악보영역
 					.style("width", width - 43)		// 악보 넓이 //우측부터 43
@@ -80,7 +80,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.attr("class", "in_bar")// .in_bar :: 악보 초기화 영역
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", `kara.editTitle('${track}')`)// Click Event(제목 수정)
+		.attr("onclick", "kara.editTitle('" + track + "')")// Click Event(제목 수정)
 		//.style("width", width)// 0 ISSUE
 		//.style("height", height)// 0 ISSUE
 		.style("width", "100")// 변경해야됨
@@ -91,7 +91,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 	//Tempo
 	svg.append("text")
 		.attr("id", "tempo")
-		.attr("class", "in_bar")// .in_bar :: 악보 초기화 영역
+		.attr("class", "in_bar")	// .in_bar :: 악보 초기화 영역
 		.attr("font-size", "16px")
 		.attr("x", "5%")
 		.attr("y", "140")
@@ -112,7 +112,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.attr("class", "in_bar")// .in_bar :: 삭제영역
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", `kara.editTempo('${track}')`)
+		.attr("onclick", "kara.editTempo('" + track + "')")
 		//.style("width", width)// 0 ISSUE
 		//.style("height", height)// 0 ISSUE
 		.style("width", "100")// 0 ISSUE
@@ -144,7 +144,7 @@ kara.textSVG = function(track) {// track :: Track Name 'track1'
 		.attr("class", "in_bar")
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", `kara.editWriter('${track}')`)
+		.attr("onclick", "kara.editWriter('" + track + "')")
 		//.style("width", width)
 		//.style("height", height)
 		.style("width", "100")
@@ -158,12 +158,12 @@ kara.scorePosition = {
 	
 	//#score 악보 영역 left 좌표 반환
 	left: function(trcNm) {// trcNm :: Track Name -- 'track1'
-		var position = $(`#${trcNm} > #score`);
+		var position = $("#" + trcNm + " > #score");
 		return position.position().left;
 	},
 	// #score 악보 영억 top 좌표 반환
 	top: function(trcNm) {// trcNm :: Track Name -- 'track1'
-		var position = $(`#${trcNm} > #score`);
+		var position = $("#" + trcNm + " > #score");
 		return position.position().top;
 	}
 };
@@ -199,7 +199,7 @@ kara.clefSVG = function(x, y, Y, track) {
 			
 			pathString = this.pathClone(kara.glyphs["clefs.G"].d, x, y);
 			svg.append("path")
-				.attr("class", `in_bar ${track}`)
+				.attr("class", "in_bar " + track)
 				.attr("d", pathString)
 				.style("transform", "scale(1.2,1.4)") //크기조절
 				.style("stroke", "black");
@@ -214,7 +214,7 @@ kara.clefSVG = function(x, y, Y, track) {
 			
 			pathString = this.pathClone(kara.glyphs["clefs.F"].d, x-5, y-20); //-5//-45
 			svg.append("path")
-				.attr("class", `in_bar ${track}`)
+				.attr("class", "in_bar " + track)
 				.attr("d", pathString)
 				.style("transform", "scale(1.4,1.7)")	// 크기조절
 				.style("stroke", "black");
@@ -229,7 +229,7 @@ kara.clefSVG = function(x, y, Y, track) {
 			
 			pathString = this.pathClone(kara.glyphs["clefs.perc"].d, x-5, y-20.5);
 			svg.append("path")
-				.attr("class", `in_bar ${track}`)
+				.attr("class", "in_bar " + track)
 				.attr("d", pathString)
 				.style("transform", "scale(1.2,1.5)")	// 크기조절
 				.style("stroke", "black");
@@ -245,7 +245,7 @@ kara.clefSVG = function(x, y, Y, track) {
 			kara.scoreInfo.track[track].clef = "G";
 			pathString = this.pathClone(kara.glyphs["clefs.G"].d, x, y);
 			svg.append("path")
-				.attr("class", `in_bar ${track}`)
+				.attr("class", "in_bar " + track)
 				.attr("d", pathString)
 				.style("transform", "scale(1.2,1.4)")	// 크기조절
 				.style("stroke", "black");
@@ -263,7 +263,7 @@ kara.clefSVG = function(x, y, Y, track) {
 		.attr("class", `in_bar ${track}`)
 		.attr("x", box_x)
 		.attr("y", box_y)
-		.attr("onclick", `kara.editClef('${track}')`)
+		.attr("onclick", "kara.editClef('" + track + "')")
 		.style("width", width)
 		.style("height", height)
 		.style("fill", "#00ff01")
@@ -372,7 +372,7 @@ kara.keySVG = function(Y, key, track) {	// 217, major Db, track1
 		.attr("class", `in_bar ${track}`)// 삭제 영역
     	.attr("x", x)
    		.attr("y", y)
-		.attr("onclick", `kara.editKey('${track}')`)	// 조표 수정 클릭 이벤트
+		.attr("onclick", "kara.editKey('" + track + "')")	// 조표 수정 클릭 이벤트
     	.style("width", width)
     	.style("height", height)
     	.style("fill", "#00ffff")
@@ -398,13 +398,13 @@ kara.meterSVG = function(Y, track) {
 	
 	svg.append("path")
 		.attr("id", "meter")
-		.attr("class", `in_bar ${track}`)// 삭제 영역
+		.attr("class", "in_bar " + track)// 삭제 영역
 		.attr("d", pathString)
 		.style("transform", "scale(1.2,1.4)")
 		.style("stroke", "black");
 	
 	svg.append("path")
-		.attr("class", `in_bar ${track}`)// 삭제 영역
+		.attr("class", "in_bar " + track)// 삭제 영역
 		.attr("d", pathString2)
 		.style("transform", "scale(1.2,1.4)")
 		.style("stroke", "black");
@@ -417,7 +417,7 @@ kara.meterSVG = function(Y, track) {
 	// 박사 선택영역 추가
 	box.append("rect")
 		.attr("id", "editMeter")
-		.attr("class", `in_bar ${track}`)// 삭제 영역
+		.attr("class", "in_bar " + track)// 삭제 영역
 		.attr("x", x)
 		.attr("y", y)
 		.attr("onclick", "kara.editMeter()")
@@ -437,7 +437,7 @@ kara.printflag = function(symb, x, y, track) {
 	var pathString = this.pathClone(kara.glyphs[symb].d, x + 10.35, y - 29);
 	
 	svg.append("path")
-		.attr("class", `in_bar ${track}`)// 삭제 영역
+		.attr("class", "in_bar " + track)// 삭제 영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
@@ -450,7 +450,7 @@ kara.printSymbol = function(symbol, x, y, trcNm) {
 	var pathString = this.pathClone(kara.glyphs[symbol].d, x, y);
 	
 	svg.append("path")
-		.attr("class", `in_bar ${trcNm}`)// 삭제 영역
+		.attr("class", "in_bar " + trcNm)// 삭제 영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
@@ -464,7 +464,7 @@ kara.print_s_p = function(symbol, x, y, trcNm) {// accidentals.flat, 204.7500038
 	let pathString = this.pathClone(kara.glyphs[symbol].d, x / 0.7, y / 0.7);
 	
 	svg.append("path")
-		.attr("class", `in_bar ${trcNm}`)// 삭제 영역
+		.attr("class", "in_bar " + trcNm)// 삭제 영역
 		.attr("d", pathString)
 		.style("transform", "scale(0.7,0.7)")
 		.style("stroke", "black");
@@ -486,8 +486,8 @@ kara.pathClone = function (pathString, x, y) {
 			if(i == 0 && j == 0) {
 				res1 = res[i][j];
 			} else {
-				if(i==0 && j==1) {res[0][1] += x;}
-				if(i==0 && j==2) {res[0][2] += y;}
+				if(i == 0 && j == 1) {res[0][1] += x;}
+				if(i == 0 && j == 2) {res[0][2] += y;}
 
 				res1 = res1 + ' ' + res[i][j];
 			}
@@ -497,9 +497,9 @@ kara.pathClone = function (pathString, x, y) {
 };
 
 // 오선지
-kara.hLine = function(y, track) {// y :: 오선지 줄 번호 :: 1, track :: Track Name 'track1'
-	
-	var line = kara.svg[track].svgLine;
+kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Track Name 'track1'
+		
+	var line = kara.svg[trcNm].svgLine;
 	var X = kara.XY.X();
 	var Y = kara.XY.Y(y);
 	var key = kara.scoreInfo.key;
@@ -516,23 +516,23 @@ kara.hLine = function(y, track) {// y :: 오선지 줄 번호 :: 1, track :: Tra
 		var pathString = kara.sprintf("M %f %f L %f %f", 0, (i * gab) + Y, X, (i * gab) + Y);
 		
 		line.append("path")
-			.attr("class", "in_bar" + " " + track)
+			.attr("class", "in_bar" + " " + trcNm)
 			.attr("d", pathString)
 			.style("stroke", "black");
 	}
 	
 	//분리 해야됨
-	kara.clefSVG(10, Y, Y, track);	//높은 음자리 //1.4+35
-	kara.vLine(X, Y+12, track);		//끝 줄
-	kara.keySVG(Y+17, key, track);	//조표 그리기
-	kara.meterSVG(Y, track);		//박자
+	kara.clefSVG(10, Y, Y, trcNm);	//높은 음자리 //1.4+35
+	kara.vLine(X, Y+12, trcNm);		//끝 줄
+	kara.keySVG(Y+17, key, trcNm);	//조표 그리기
+	kara.meterSVG(Y, trcNm);		//박자
 
 	var a = N * 12 + 70;
 	var ac = (X - a) / 4;
 	
-	kara.vLine(ac * 1 + a, Y + 12, track);	// 첫마디 끝 구분선
-	kara.vLine(ac * 2 + a, Y + 12, track);	// 두번째 마디 끝 구분선
-	kara.vLine(ac * 3 + a, Y + 12, track);	// 세번째 마디 끝 구분선
+	kara.vLine(ac * 1 + a, Y + 12, trcNm);	// 첫마디 끝 구분선
+	kara.vLine(ac * 2 + a, Y + 12, trcNm);	// 두번째 마디 끝 구분선
+	kara.vLine(ac * 3 + a, Y + 12, trcNm);	// 세번째 마디 끝 구분선
 };
 
 //마디
@@ -542,7 +542,7 @@ kara.vLine = function(x, y, track) {
 	var pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y + 48);
 	
 	svg.append("path")
-		.attr("class", `in_bar ${track}`)// 삭제영역
+		.attr("class", "in_bar " + track)// 삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
@@ -554,7 +554,7 @@ kara.notevLine = function(x, y, track) {	// 235.6875, 242, track1
 	var pathString = kara.sprintf("M %f %f L %f %f", x + 10, y, x + 10, y - 30);
 	
 	svg.append("path")
-		.attr("class", `in_bar ${track}`)// 삭제영역
+		.attr("class", "in_bar " + track)// 삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
@@ -613,7 +613,7 @@ kara.notevLow = function(x, y, pitch, meter, track) {	// 147.9375, 230, C5, half
 
 	pathString = kara.sprintf("M %f %f L %f %f", x, y, m, n);
 	svg.append("path")
-		.attr("class", `in_bar ${track}`)// 삭제영역
+		.attr("class", "in_bar " + track)// 삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black")
 		.style("stroke-width", "1.5px");
@@ -794,7 +794,7 @@ kara.noteBox_ = {
 
 		//마디 번호
 		var svgVar = svg.append("g")
-			.attr("id", `bar_${bNum}`)
+			.attr("id", "bar_" + bNum)
 			.attr("class", `in_bar ${track}`);
 
 		switch(clef) {
