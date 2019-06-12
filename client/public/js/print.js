@@ -515,10 +515,10 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 		//간격 12씩 5줄 그리기
 		var pathString = kara.sprintf("M %f %f L %f %f", 0, (i * gab) + Y, X, (i * gab) + Y);
 		
-		line.append("path")
-			.attr("class", "in_bar" + " " + trcNm)
-			.attr("d", pathString)
-			.style("stroke", "black");
+		line.append('path')
+			.attr('class', 'in_bar' + ' ' + trcNm)
+			.attr('d', pathString)
+			.style('stroke', 'black');
 	}
 	
 	//분리 해야됨
@@ -536,15 +536,16 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 };
 
 //마디
-kara.vLine = function(x, y, track) {
+kara.vLine = function(x, y, trcNm) {//trcNm :: Track Name 'track1'
+	//1051, 212, track1
 	
-	var svg = kara.svg[track].svgLine;
+	var svg = kara.svg[trcNm].svgLine;
 	var pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y + 48);
 	
-	svg.append("path")
-		.attr("class", "in_bar " + track)// 삭제영역
-		.attr("d", pathString)
-		.style("stroke", "black");
+	svg.append('path')
+		.attr('class', 'in_bar ' + trcNm)// 삭제영역
+		.attr('d', pathString)
+		.style('stroke', 'black');
 };
 
 //음표 막대 그리기
@@ -554,7 +555,7 @@ kara.notevLine = function(x, y, track) {	// 235.6875, 242, track1
 	var pathString = kara.sprintf("M %f %f L %f %f", x + 10, y, x + 10, y - 30);
 	
 	svg.append("path")
-		.attr("class", "in_bar " + track)// 삭제영역
+		.attr("class", "in_bar " + track)	// 삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
@@ -692,8 +693,8 @@ kara.noteBox = {
 			else fill = '#66FFFF';				// 짝수 층
 			
 			// 악보 선택 영역 추가
-			svgVar.append("rect")
-				.attr("id", p)
+			svgVar.append('rect')
+				.attr('id', p)
 				.attr("class", "in_bar " + "bar_" + bNum + " " + "note_" + nNum + " " + track) //마디,  음표 번호
 				.attr("x", x)
 				.attr("y", y)
