@@ -121,11 +121,11 @@ kara.printNote = function(trcNm) {// trcNm :: Track Name 'track1'
 
 				//길이 대입
 				switch(meter) {
-					case 'whole': leng = _whole; break;		// 온음표
-					case 'half': leng = _half; break;		// 2분음표
-					case 'quarter': leng = _quarter; break;	// 4분음표
-					case '8th': leng = _8th; break;			// 8분음표
-					case '16th': leng = _16th; break;		// 16분음표
+					case 'whole':	leng = _whole; break;		// 온음표
+					case 'half':	leng = _half; break;		// 2분음표
+					case 'quarter':	leng = _quarter; break;		// 4분음표
+					case '8th':		leng = _8th; break;			// 8분음표
+					case '16th':	leng = _16th; break;		// 16분음표
 					default: break;
 				}
 				
@@ -160,6 +160,7 @@ kara.printNote = function(trcNm) {// trcNm :: Track Name 'track1'
 // 배열에 음표 담기
 kara.noteSelect = {
 	push: function(i, j,  pitch, note_meter, track) { // i: 마디 번호 j: 음표 번호
+		
 		var note = kara.scoreInfo.track[track].notes; // 배열을 받아온다
 
 		if(!jQuery.isArray(note[i])) { //2차원배열이 아니면 2차원 배열 생성
@@ -244,7 +245,7 @@ kara.meterCal_box = function(bNum, track) {
 	var noteMeter = kara.noteMeter;
 	
 	if(note[bNum] == undefined) return;
-	for(let i=0; i<note[bNum].length; i++) {
+	for(let i=0; i < note[bNum].length; i++) {
 
 		var note_meter = noteMeter.head[note[bNum][i][1]];
 		now = now + note_meter;

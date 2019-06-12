@@ -15,7 +15,7 @@ kara.editTitle = function(trcNm) {// track Track Name :: 'track1'
 	// 악보 정보 객체에 제목 저장
 	kara.scoreInfo.title = title;
 	
-		// SVG 요소 삭제
+	// SVG 요소 삭제
 	d3.select("#title").remove();		// 타이틀 제거
 	d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
 	d3.select("#tempo").remove();		// 템포 제거
@@ -23,7 +23,6 @@ kara.editTitle = function(trcNm) {// track Track Name :: 'track1'
 	d3.select("#writer").remove();		// 작곡가 제거
 	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
 	
-
 	kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
 	kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
 };
@@ -122,7 +121,7 @@ kara.editMeter = function() {
 	}
 	
 	var meterSplit = meter.split("/");
-	kara.scoreInfo.meter = meterSplit[1] + "/" +meterSplit[0];
+	kara.scoreInfo.meter = meterSplit[1] + "/" + meterSplit[0];
 
 	$(".in_bar").remove();
 	kara.printNote();
@@ -160,18 +159,13 @@ kara.keyTrueofFalse = function(key) {// key :: key -- 'major C'
 	}
 };
 
-kara.keyvalue = function(key) {
+// 조표에 해당하는 key로 변경하여 리턴
+// 입력 조표가 major인지 minor인지
+kara.keyvalue = function(key) {// key :: 조표 'F'
+
+	// 'G' 입력받은 key의 첫 문자를 대문자로
+	var k = key.charAt(0).toUpperCase() + key.slice(1);
 	
-	var keyupper = key[0].toUpperCase();
-	var k = "";
-	var returnKey = "";
-	for(var i = 1; i < key.length; i++) {
-		returnKey = returnKey + key[i];
-	}
-	k = keyupper + returnKey;
-
-	console.log(k);
-
 	switch (k) {
 		case "C":
 		case "G":
@@ -184,7 +178,7 @@ kara.keyvalue = function(key) {
 		case "Ab":
 		case "Eb":
 		case "Bb":
-		case "F":	return "major " + k;
+		case "F":	return 'major ' + k;
 		case "Am":
 		case "Em":
 		case "Bm":
@@ -196,10 +190,8 @@ kara.keyvalue = function(key) {
 		case "Fm":
 		case "Cm":
 		case "Gm":
-		case "Dm":	return "minor " + k;
-		default:
-			key = keyupper[0].toLowerCase();
-			return key + returnKey;
+		case "Dm":	return 'minor ' + k;
+		default: return '';
 	}
 };
 
@@ -208,7 +200,8 @@ kara.editClef = function(track) {
 	
 	var ttrack = track.toString();
 	var clef = prompt("Clef");
-	if(clef == ""){
+	
+	if(clef === null || clef === '') {
 		alert("음자리표를 입력하세요.");
 		return;
 	}
@@ -223,7 +216,6 @@ kara.editClef = function(track) {
 // 탭 클릭시 트랙 변경 이벤트
 $('#tab').click(function(e) {
 	// 탭 변경 후 악보 리셋
-	console.log('탭 변경 후 악보 리셋');
 	kara.refresh();
 });
 
@@ -232,7 +224,7 @@ $('#tabs').click(function(e) {
 	
 	var klass = e.target.getAttribute('class');
 	var id = e.target.getAttribute('id');
-	var id_P = $("#"+id).parent();
+	var id_P = $('#' + id).parent();
 
 	// if(klass != "in_bar") return;
 	// var parent = $("#"+id).parent();
@@ -245,11 +237,11 @@ $('#tabs').click(function(e) {
 // 선택한 음을 배열에 담는다
 var notepush = {
 	
-	parentId:"",
-	id:"",
-	bNum:"",
-	nNum:"",
-	track:"",
+	parentId:'',
+	id:'',
+	bNum:'',
+	nNum:'',
+	track:'',
 	setId: function(id) {
 		this.id = id;
 	},
@@ -277,10 +269,10 @@ var notepush = {
 		var track = this.track;
 
 		switch(meter) {
-			case 1: //온음표
+			case 1: // 온음표
 				if(kara.meterCal(bNum[1], nNum[1], "whole", track) == -1) {	// 마디 초과
 					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "whole", track) == 0) { //마디 꽉차서
+				} else if(kara.meterCal(bNum[1], nNum[1], "whole", track) == 0) { // 마디 꽉차서
 					let bbNum = bNum[1];
 					bbNum = bbNum + 1;
 					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", track); // push
@@ -289,7 +281,7 @@ var notepush = {
 				}
 				break;
 				
-			case 2: //2분음표
+			case 2: // 2분음표
 				if(kara.meterCal(bNum[1], nNum[1], "half", track) == -1) { // 마디 초과
 					return;
 				} else if(kara.meterCal(bNum[1], nNum[1], "half", track) == 0) { //마디 꽉차서
@@ -301,7 +293,7 @@ var notepush = {
 				}
 				break;
 				
-			case 4: //4분음표 "quarter"
+			case 4: // 4분음표 "quarter"
 				if(kara.meterCal(bNum[1], nNum[1], "quarter", track) == -1) { // 마디 초과
 					return;
 				} else if(kara.meterCal(bNum[1], nNum[1], "quarter", track) == 0) { //마디 꽉차서
@@ -313,7 +305,7 @@ var notepush = {
 				}
 				break;
 				
-			case 8: //8분음표 "8th"
+			case 8: // 8분음표 "8th"
 				if(kara.meterCal(bNum[1], nNum[1], "8th", track) == -1) { // 마디 초과
 					return;
 				} else if(kara.meterCal(bNum[1], nNum[1], "8th", track) == 0) { //마디 꽉차서
@@ -374,7 +366,7 @@ var pitch_select = {
 
 var boxWidth = function(meter) {
 	
-	var key = kara.scoreInfo.key;//현재 악보 키
+	var key = kara.scoreInfo.key;	//현재 악보 키
 	var keySplit = key.split(' ');
 	var M = kara.key[keySplit[0]];
 	var N = M[keySplit[1]];
