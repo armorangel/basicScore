@@ -124,16 +124,16 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 				console.log("그릴 박스는 i는" + i + "j " +  j);
 			}
 			
-			var width = $(`.bar_${i}.note_${j}.${trcNm}`).width();//.bar_1.note_2.track1
-			d3.select(`.bar_${i}.note_${j}#${pitch}.${trcNm}`).style("fill", "#ffffff");
+			var width = $('.bar_' + i + '.note_' + j + '.' + trcNm).width();//.bar_1.note_2.track1
+			d3.select('.bar_' + i + '.note_' + j + '#' + pitch + '.' + trcNm).style("fill", "#ffffff");
 
 			pitchSplit = pitch.split(",");// ["B4", "C6"] 같은 박자에 있는 음표들
 
 			for(var pi = 0; pi < pitchSplit.length; pi++) {
 				
 				//쉼표 일때는 A4높이에 그리기
-				if(pitchSplit[pi] === "rest") position = $(`#A4.bar_${i}.note_${j}.${trcNm}`).position();
-				else position = $(`#${pitchSplit[pi]}.bar_${i}.note_${j}.${trcNm}`).position();
+				if(pitchSplit[pi] === "rest") position = $('#A4.bar_' + i + '.note_' + j + '.' + trcNm).position();
+				else position = $('#' + pitchSplit[pi] + '.bar_' + i + '.note_' + j + '.' + trcNm).position();
 					
 				var x = position.left - kara.scorePos.left(trcNm);
 				var y = position.top - kara.scorePos.top(trcNm) + 3;
@@ -164,7 +164,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 
 				if(four2 == 0 && ii >= 4) {
 					if(kara.meterCal_box(i, trcNm)===1) {
-						$(`#${trcNm} > #score`).height(four_boxEnter2 * 120 + 300);
+						$('#' + trcNm + ' > #score').height(four_boxEnter2 * 120 + 300);
 						kara.hLine(four_boxEnter2, trcNm);
 						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter2), i, j, meter, 1, trcNm);
 					} else {
@@ -799,7 +799,7 @@ kara.noteBox_ = {
 		//마디 번호
 		var svgVar = svg.append("g")
 			.attr("id", "bar_" + bNum)
-			.attr("class", `in_bar ${track}`);
+			.attr("class", 'in_bar ' + track);
 
 		switch(clef) {
 			case "G": i = 14; break;// A3~ C6 17 j = 30
