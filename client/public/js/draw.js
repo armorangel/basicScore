@@ -7,6 +7,10 @@ kara.draw = {
 		
 		const txt = kara.svg[trcNm].svgText;
 		const box = kara.svg[trcNm].svgBox;
+		
+		// SVG 요소 삭제
+		d3.select('#' + trcNm + ' #title').remove();	// 타이틀 제거
+		d3.select('#' + trcNm + ' #edtTtl').remove();	// 타이틀 선택 영역 제거
 	
 		txt.append("text")
 			.attr("id", "title")
@@ -20,14 +24,14 @@ kara.draw = {
 			.style('font-weight', 'bold')
 			.text(title);					// 악보정보객체의 TITLE
 		
-		const position = $('#title').position();	// 제목 위치리턴 객체 left, top
+		const position = $('#' + trcNm + ' #title').position();	// 제목 위치리턴 객체 left, top
 		const x = position.left - kara.scorePosition.left(trcNm);
 		const y = position.top - kara.scorePosition.top(trcNm);
-		const width = $('#title').width();		// 0 ISSUE
-		const height = $('#title').height();	// 0 ISSUE
+		const width = $('#' + trcNm + ' #title').width();		// 0 ISSUE
+		const height = $('#' + trcNm + ' #title').height();	// 0 ISSUE
 	
 		box.append('rect')
-			.attr('id', 'edtTtl')// #editTitle :: TITLE 선택영역(수정용)
+			.attr('id', 'edtTtl')	// #editTitle :: TITLE 선택영역(수정용)
 			.attr('class', 'in_bar')// .in_bar :: 악보 초기화 영역
 			.attr('x', x)
 			.attr('y', y)
@@ -43,6 +47,10 @@ kara.draw = {
 		const txt = kara.svg[trcNm].svgText;
 		const box = kara.svg[trcNm].svgBox;
 		
+		// SVG 요소 삭제
+		d3.select('#' + trcNm + ' #tempo').remove();	// 템포 제거
+		d3.select('#' + trcNm + ' #edtTem').remove();	// 템포 선택 영억 제거
+		
 		txt.append("text")
 			.attr("id", "tempo")
 			.attr("class", "in_bar")	// .in_bar :: 악보 초기화 영역
@@ -55,11 +63,11 @@ kara.draw = {
 			.style("font-weight", "bold")
 			.text("♩ = " + tempo);
 		
-		const position = $('#tempo').position();
+		const position = $('#' + trcNm + ' #tempo').position();
 		const x = position.left - kara.scorePosition.left(trcNm);
 		const y = position.top - kara.scorePosition.top(trcNm);
-		const width = $('#tempo').width();
-		const height = $('#tempo').height();
+		const width = $('#' + trcNm + ' #tempo').width();
+		const height = $('#' + trcNm + ' #tempo').height();
 
 		box.append("rect")
 			.attr("id", "edtTem")
@@ -77,6 +85,10 @@ kara.draw = {
 		const txt = kara.svg[trcNm].svgText;
 		const box = kara.svg[trcNm].svgBox;
 		
+		// SVG 요소 삭제
+		d3.select('#' + trcNm + ' #writer').remove();	// 작곡가 제거
+		d3.select('#' + trcNm + ' #edtWtr').remove();	// 작곡가 선택 영역 제거
+		
 		txt.append("text")
 			.attr("id", "writer")
 			.attr("class", "in_bar")
@@ -89,11 +101,11 @@ kara.draw = {
 			.style("font-weight", "bold")
 			.text(writer);
 
-		const position = $('#writer').position();
+		const position = $('#' + trcNm + ' #writer').position();
 		const x = position.left - kara.scorePosition.left(trcNm);
 		const y = position.top - kara.scorePosition.top(trcNm);
-		const width = $('#writer').width();
-		const height = $('#writer').height();
+		const width = $('#' + trcNm + ' #writer').width();
+		const height = $('#' + trcNm + ' #writer').height();
 
 		box.append('rect')
 			.attr('id', 'edtWtr')
@@ -101,8 +113,6 @@ kara.draw = {
 			.attr("x", x)
 			.attr("y", y)
 			.attr("onclick", "kara.edit.writer('" + trcNm + "')")
-			//.style("width", width)
-			//.style("height", height)
 			.style("width", "100")
 			.style("height", "25")
 			.style("fill", "#000000")

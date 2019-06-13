@@ -17,15 +17,6 @@ kara.edit = {
 		// 악보 정보 객체에 제목 저장
 		kara.scoreInfo.title = title;
 
-		// SVG 요소 삭제
-		d3.select('#title').remove();		// 타이틀 제거
-		d3.select('#editTitle').remove();	// 타이틀 선택 영역 제거
-		d3.select('#tempo').remove();		// 템포 제거
-		d3.select('#editTempo').remove();	// 템포 선택 영억 제거
-		d3.select('#writer').remove();		// 작곡가 제거
-		d3.select('#editWriter').remove();	// 작곡가 선택 영역 제거
-
-		kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
 		kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
 	},
 	
@@ -50,15 +41,6 @@ kara.edit = {
 		// 악보 정보 객체에 템포 저장
 		kara.scoreInfo.tempo = tempo;
 
-		// SVG 요소 삭제
-		d3.select("#title").remove();		// 타이틀 제거
-		d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
-		d3.select("#tempo").remove();		// 템포 제거
-		d3.select("#editTempo").remove();	// 템포 선택 영억 제거
-		d3.select("#writer").remove();		// 작곡가 제거
-		d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
-
-		kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
 		kara.refresh();
 	},
 	
@@ -75,16 +57,7 @@ kara.edit = {
 
 		// 악보 정보 객체에 작곡가 저장
 		kara.scoreInfo.writer = writer;
-
-		// SVG 요소 삭제
-		d3.select("#title").remove();		// 타이틀 제거
-		d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
-		d3.select("#tempo").remove();		// 템포 제거
-		d3.select("#editTempo").remove();	// 템포 선택 영억 제거
-		d3.select("#writer").remove();		// 작곡가 제거
-		d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
-
-		kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
+		
 		kara.refresh();
 	},
 	

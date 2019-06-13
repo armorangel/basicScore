@@ -1,7 +1,7 @@
 if(!window.kara) window.kara = {};
 
 //악보 트랙별 SVG 객체
-kara.svg = {
+kara.svg = {	
 	"track1": {
 		svgContainer: null,
 		svgLine: null,
@@ -45,7 +45,7 @@ kara.svgContain = function(trcNm) {	// trcNm: Track Name -- 'track1'
 };
 
 // Draw title, tempo, name SVG
-kara.textSVG = function(trcNm) {// trcNm :: Track Name 'track1'
+kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 	
 	const title = kara.scoreInfo.title;
 	const tempo = kara.scoreInfo.tempo;
