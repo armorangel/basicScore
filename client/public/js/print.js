@@ -260,8 +260,8 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 	height = 74;
 
 	// 조표 선택영역 SVG DRAW
-	svg.append("rect")
-		.attr("id", "editKey")	// #editKey :: 조표 선택영역(수정)
+	svg.append('rect')
+		.attr('id', 'editKey')	// #editKey :: 조표 선택영역(수정)
 		.attr("class", 'in_bar ' + trcNm)// 삭제 영역
     	.attr("x", x)
    		.attr("y", y)

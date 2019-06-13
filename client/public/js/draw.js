@@ -9,7 +9,7 @@ kara.draw = {
 	
 	setTrack: function(trcNm) {
 		
-		if(!trcNm) return;
+		if(!trcNm) trcNm = 'track1';
 		
 		this.track = trcNm;
 		this.txt = kara.svg[trcNm].svgText;
@@ -34,7 +34,6 @@ kara.draw = {
 		const height = $('#' + this.track + ' ' + tag).height();// 0 ISSUE
 		
 		return {
-			
 			position: position,
 			x: x,
 			y: y,
