@@ -2,56 +2,89 @@ if(!window.kara) window.kara = {};
 
 kara.draw = {
 	
-	// text
-	title: function(trcNm, title) {// 제목 그리기
-		
-		const txt = kara.svg[trcNm].svgText;
-		const box = kara.svg[trcNm].svgBox;
-		
-		// SVG 요소 삭제
-		d3.select('#' + trcNm + ' #title').remove();	// 타이틀 제거
-		d3.select('#' + trcNm + ' #edtTtl').remove();	// 타이틀 선택 영역 제거
+	track: '',
+	txt: null,
+	box: null,
+	symbol: null,
 	
-		txt.append("text")
-			.attr("id", "title")
-			.attr("class", "in_bar")		// .in_bar :: 초기화 영역
-			.attr("font-size", "60px")		// font size 60px
-			.attr('x', '50%')				// 가운데
-			.attr('y', '50')				// 위에서 50
-			.attr('dy', '.47em')
-			.style('text-anchor', 'middle')	// 가운데 정렬
-			.style('fill', '#000000')
-			.style('font-weight', 'bold')
-			.text(title);					// 악보정보객체의 TITLE
+	setTrack: function(trcNm) {
 		
-		const position = $('#' + trcNm + ' #title').position();	// 제목 위치리턴 객체 left, top
-		const x = position.left - kara.scorePosition.left(trcNm);
-		const y = position.top - kara.scorePosition.top(trcNm);
-		const width = $('#' + trcNm + ' #title').width();		// 0 ISSUE
-		const height = $('#' + trcNm + ' #title').height();	// 0 ISSUE
-	
-		box.append('rect')
-			.attr('id', 'edtTtl')	// #editTitle :: TITLE 선택영역(수정용)
-			.attr('class', 'in_bar')// .in_bar :: 악보 초기화 영역
-			.attr('x', x)
-			.attr('y', y)
-			.attr('onclick', "kara.edit.title('" + trcNm + "')")// Click Event(제목 수정)
-			.style('width', '100')// 변경해야됨
-			.style('height', '80')// 변경해야됨
-			.style('fill', '#000000')
-			.style('fill-opacity', '0.3');
+		if(!trcNm) return;
+		
+		this.track = trcNm;
+		this.txt = kara.svg[trcNm].svgText;
+		this.box = kara.svg[trcNm].svgBox;
+		this.symbol = kara.svg[trcNm].svgSymbol;
+		
+		return this;
 	},
 	
-	tempo: function(trcNm, tempo) {
+	removeSvg: function(tag) {
 		
-		const txt = kara.svg[trcNm].svgText;
-		const box = kara.svg[trcNm].svgBox;
+		// 해당 트랙의 SVG 요소 삭제
+		d3.select('#' + this.track + ' ' + tag).remove();
+	},
+	
+	getBoxSize: function(tag) {
+		
+		const position = $('#' + this.track + ' ' + tag).position();// 제목 위치리턴 객체 left, top
+		const x = position.left - kara.scorePosition.left(this.track);
+		const y = position.top - kara.scorePosition.top(this.track);
+		const width = $('#' + this.track + ' ' + tag).width();// 0 ISSUE
+		const height = $('#' + this.track + ' ' + tag).height();// 0 ISSUE
+		
+		return {
+			
+			position: position,
+			x: x,
+			y: y,
+			width: width,	
+			height: height	// 0 ISSUE
+		};
+		
+	},
+	
+	// text
+	title: function(title) {	// 제목 그리기
+		
+		this.removeSvg('#title');	// 타이틀 제거
+		this.removeSvg('#edtTtl');	// 타이틀 선택 영역 제거
+	
+		this.txt.append("text")
+				.attr("id", "title")
+				.attr("class", "in_bar")		// .in_bar :: 초기화 영역
+				.attr("font-size", "60px")		// font size 60px
+				.attr('x', '50%')				// 가운데
+				.attr('y', '50')				// 위에서 50
+				.attr('dy', '.47em')
+				.style('text-anchor', 'middle')	// 가운데 정렬
+				.style('fill', '#000000')
+				.style('font-weight', 'bold')
+				.text(title);					// 악보정보객체의 TITLE
+
+		var boxSize = this.getBoxSize('#title');
+	
+		this.box.append('rect')
+				.attr('id', 'edtTtl')	// #editTitle :: TITLE 선택영역(수정용)
+				.attr('class', 'in_bar')// .in_bar :: 악보 초기화 영역
+				.attr('x', boxSize.x)
+				.attr('y', boxSize.y)
+				.attr('onclick', "kara.edit.title('" + this.track + "')")// Click Event(제목 수정)
+				.style('width', '100')// 변경해야됨
+				.style('height', '80')// 변경해야됨
+				.style('fill', '#000000')
+				.style('fill-opacity', '0.3');
+		
+		return this;
+	},
+	
+	tempo: function(tempo) {
 		
 		// SVG 요소 삭제
-		d3.select('#' + trcNm + ' #tempo').remove();	// 템포 제거
-		d3.select('#' + trcNm + ' #edtTem').remove();	// 템포 선택 영억 제거
+		this.removeSvg('#tempo');	// 템포 제거
+		this.removeSvg('#edtTem');	// 템포 선택 영억 제거
 		
-		txt.append("text")
+		this.txt.append("text")
 			.attr("id", "tempo")
 			.attr("class", "in_bar")	// .in_bar :: 악보 초기화 영역
 			.attr("font-size", "16px")
@@ -63,33 +96,28 @@ kara.draw = {
 			.style("font-weight", "bold")
 			.text("♩ = " + tempo);
 		
-		const position = $('#' + trcNm + ' #tempo').position();
-		const x = position.left - kara.scorePosition.left(trcNm);
-		const y = position.top - kara.scorePosition.top(trcNm);
-		const width = $('#' + trcNm + ' #tempo').width();
-		const height = $('#' + trcNm + ' #tempo').height();
+		var boxSize = this.getBoxSize('#tempo');
 
-		box.append("rect")
+		this.box.append("rect")
 			.attr("id", "edtTem")
 			.attr("class", "in_bar")// .in_bar :: 삭제영역
-			.attr("x", x)
-			.attr("y", y)
-			.attr("onclick", "kara.edit.tempo('" + trcNm + "')")
+			.attr("x", boxSize.x)
+			.attr("y", boxSize.y)
+			.attr("onclick", "kara.edit.tempo('" + this.track + "')")
 			.style("width", "100")// 0 ISSUE
 			.style("height", "25")// 0 ISSUE
 			.style("fill", "#000000")
 			.style("fill-opacity", '0.3');
-	},
-	writer: function(trcNm, writer) {
 		
-		const txt = kara.svg[trcNm].svgText;
-		const box = kara.svg[trcNm].svgBox;
+		return this;
+	},
+	writer: function(writer) {
 		
 		// SVG 요소 삭제
-		d3.select('#' + trcNm + ' #writer').remove();	// 작곡가 제거
-		d3.select('#' + trcNm + ' #edtWtr').remove();	// 작곡가 선택 영역 제거
+		this.removeSvg('#writer');	// 작곡가 제거
+		this.removeSvg('#edtWtr');	// 작곡가 선택 영역 제거
 		
-		txt.append("text")
+		this.txt.append("text")
 			.attr("id", "writer")
 			.attr("class", "in_bar")
 			.attr("font-size", "16px")
@@ -100,19 +128,15 @@ kara.draw = {
 			.style("fill", "#000000")
 			.style("font-weight", "bold")
 			.text(writer);
+		
+		var boxSize = this.getBoxSize('#writer');
 
-		const position = $('#' + trcNm + ' #writer').position();
-		const x = position.left - kara.scorePosition.left(trcNm);
-		const y = position.top - kara.scorePosition.top(trcNm);
-		const width = $('#' + trcNm + ' #writer').width();
-		const height = $('#' + trcNm + ' #writer').height();
-
-		box.append('rect')
+		this.box.append('rect')
 			.attr('id', 'edtWtr')
 			.attr("class", "in_bar")
-			.attr("x", x)
-			.attr("y", y)
-			.attr("onclick", "kara.edit.writer('" + trcNm + "')")
+			.attr("x", boxSize.x)
+			.attr("y", boxSize.y)
+			.attr("onclick", "kara.edit.writer('" + this.track + "')")
 			.style("width", "100")
 			.style("height", "25")
 			.style("fill", "#000000")

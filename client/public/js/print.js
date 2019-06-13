@@ -51,9 +51,10 @@ kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 	const tempo = kara.scoreInfo.tempo;
 	const writer = kara.scoreInfo.writer;
 	
-	kara.draw.title(trcNm, title);		// Draw Title
-	kara.draw.tempo(trcNm, tempo);		// Draw Tempo
-	kara.draw.writer(trcNm, writer);	// Draw Writer
+	kara.draw.setTrack(trcNm)
+			.title(title)		// Draw Title
+			.tempo(tempo)		// Draw Tempo
+			.writer(writer);	// Draw Writer
 };
 
 //악보 위치 반환
@@ -299,11 +300,11 @@ kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 
 	// 박사 선택영역 추가
 	box.append("rect")
-		.attr("id", "editMeter")
-		.attr("class", "in_bar " + trcNm)// 삭제 영역
+		.attr("id", "edtMtr")
+		.attr("class", "in_bar " + trcNm)	// 삭제 영역
 		.attr("x", x)
 		.attr("y", y)
-		.attr("onclick", "kara.editMeter()")
+		.attr("onclick", "kara.edit.meter()")
 		.style("width", width)
 		.style("height", height)
 		.style("fill", "#00ff00")

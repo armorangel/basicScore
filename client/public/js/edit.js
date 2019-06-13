@@ -84,7 +84,7 @@ kara.edit = {
 	},
 	
 	// 박자 수정
-	meter: function() {
+	meter: function() {//edtMtr
 		
 		var meter = prompt("meter");
 	
@@ -95,10 +95,10 @@ kara.edit = {
 		}
 
 		var meterSplit = meter.split("/");
-		kara.scoreInfo.meter = meterSplit[1] + "/" + meterSplit[0];
+		kara.scoreInfo.meter = meterSplit[0] + "/" + meterSplit[1];
 
 		$(".in_bar").remove();
-		kara.printNote();
+		kara.refresh();
 	},
 	
 	// 음자리표 수정
