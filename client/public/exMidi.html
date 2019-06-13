@@ -3,12 +3,15 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Karaoke</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
 	<link href="./css/sticky-footer-navbar.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.js" integrity="sha256-vSmnWtpaSGbnsDppQdGsUdfbXlGSn620VQ3dvXL4LcA=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.min.js" integrity="sha256-DSAVgUuz6YXM7pUOvn+Lc40Ek6cWvBgCBU1jsx72Dqg=" crossorigin="anonymous"></script>
+	
 	<style>
 		#tabs {
 			overflow: auto;
@@ -148,6 +151,13 @@
 	</div>
 	<script>
 		window.onload = function() {
+			
+			if(SVG.supported) {
+				
+			} else {
+				alert('SVG not supported');
+			}
+			
 			$(function() {
 				$("#tabs").tabs();
 			});
@@ -174,7 +184,6 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="./js/template.js"></script>
 	<script src="./js/draw.js"></script>
-
 </body>
 
 </html>

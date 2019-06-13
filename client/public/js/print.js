@@ -33,11 +33,24 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	let svgContainer;					// #track1 > #score SVG 트랙영역
 
 	// 악보영역 생성후 저장
+	
+	
+	//var svgTag = "<svg id='score' xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'></svg>";
+	
+	//$('#' + trcNm).append(svgTag);
+	
+	//svgContainer = SVG('score');
+
+	
 	svgContainer = d3.select('#' + trcNm)			// '#track1'
 					.append('svg')					// SVG 객체 생성
 					.attr('id', 'score')			// #score :: 악보영역
+					.attr('xmlns', 'http://www.w3.org/2000/svg')
+					.attr('version', '1.1')
+					.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
 					.style('width', width - 43)		// 악보 넓이 //우측부터 43
 					.style('height', '400');		// 악보 높이
+	/**/
 	
 	trcSvg.svgContainer	= svgContainer;
 	trcSvg.svgText		= svgContainer.append("g").attr("id", "text");		// title, tempo, writer
