@@ -308,7 +308,7 @@ var notepush = {
 				kara.scoreInfo.track[trcNm].notes[bNum[1]][nNum[1]][0] = "rest";
 				$(".in_bar" + "." + trcNm).remove();
 
-				kara.prntNote(trcNm);
+				kara.prtNote(trcNm);
 				kara.test(trcNm);
 				break;
 		}

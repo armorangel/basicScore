@@ -61,7 +61,7 @@ kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 };
 
 // 배열의 값을 가져와서 음표를 그린다
-kara.prntNote = function(trcNm) {// trcNm :: Track Name 'track1'
+kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	
 	var note = kara.scoreInfo.track[trcNm].notes;	// Array [["E5", "half"], ["E5", "half"]]
 	var meter = kara.scoreInfo.meter.split('/');	// ["4", "4"]

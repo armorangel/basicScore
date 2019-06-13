@@ -72,7 +72,7 @@ kara.noteSelect = {
 		kara.scoreInfo.track[track].notes = note;
 		$(".in_bar" + "." + track).remove();
 
-		kara.prntNote(track);	// 음표 그리기
+		kara.prtNote(track);	// 음표 그리기
 		kara.test(track);		// 배열값 표시
 	}
 };

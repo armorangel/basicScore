@@ -5,10 +5,10 @@ kara.initScore = function(trcNm) {// trcNm: Track Name -- 'track1'
 	
 	var trcNum = trcNm.slice(-1);
 	
-	kara.menu(trcNum);		// 트랙별 악기 콤보 추가
+	kara.addInstr(trcNum);		// 트랙별 악기 콤보 추가
 	kara.initSvg(trcNm);	// 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
 	kara.txtSVG(trcNm);		// Draw title, tempo, name SVG in print.js
-	kara.prntNote(trcNm);	// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
+	kara.prtNote(trcNm);	// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
 };
 
 // 악보 초기화
@@ -17,14 +17,14 @@ kara.refresh = function() {
 	// 악보 삭제영역 삭제
 	$(".in_bar").remove();
 	
-	for (var key in kara.scoreInfo.track) {
+	for (var trcNm in kara.scoreInfo.track) {
 			
 		// 해당 트랙이 초기화 되었는지 판단
-		if(kara.scoreInfo.track[key].clef === "") continue;
+		if(kara.scoreInfo.track[trcNm].clef === "") continue;
 		
 		// 초기화된 트랙만 그리기
-		kara.prntNote(key);	// print Notes
-		kara.txtSVG(key); 	// print Text
+		kara.prtNote(trcNm);	// print Notes
+		kara.txtSVG(trcNm); 	// print Text
 	}
 };
 
@@ -65,7 +65,7 @@ kara.addTabs = function() {
 };
 
 // Add Combo to select Instruments on Each Track
-kara.menu = function(trcNum){	//trackN: trackNumber -- 1
+kara.addInstr = function(trcNum){	//trackN: trackNumber -- 1
 
 	var trcNm = 'track' + trcNum;	// 'track1'
 	var menuTtl = 'Select a track';
