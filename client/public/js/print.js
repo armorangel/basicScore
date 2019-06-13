@@ -89,10 +89,11 @@ kara.XY = {
 };
 
 // 음자리표 SVG 그리기
-kara.clefSVG = function(x, y, Y, track) {
+kara.clefSVG = function(x, y, Y, trcNm) {
+	// 10, 200, 200, 'track1'
 	
-	var clef = kara.scoreInfo.track[track].clef;	// 현재 음자리표
-	var svg = kara.svg[track].svgSymbol;
+	var clef = kara.scoreInfo.track[trcNm].clef;	// 현재 음자리표
+	var svg = kara.svg[trcNm].svgSymbol;
 	var box_x, box_y;
 	var width, height;
 	var pathString;
@@ -106,11 +107,9 @@ kara.clefSVG = function(x, y, Y, track) {
 			if (!kara.glyphs["clefs.G"]) return null;
 			
 			pathString = this.pathClone(kara.glyphs["clefs.G"].d, x, y);
-			svg.append("path")
-				.attr("class", "in_bar " + track)
-				.attr("d", pathString)
-				.style("transform", "scale(1.2,1.4)") //크기조절
-				.style("stroke", "black");
+			
+			// 높은 음자리표 그리기
+			kara.draw.clefs_G(trcNm, pathString);
 			
 			break;
 			
@@ -120,12 +119,10 @@ kara.clefSVG = function(x, y, Y, track) {
 			
 			if (!kara.glyphs["clefs.F"]) return null;
 			
-			pathString = this.pathClone(kara.glyphs["clefs.F"].d, x-5, y-20); //-5//-45
-			svg.append("path")
-				.attr("class", "in_bar " + track)
-				.attr("d", pathString)
-				.style("transform", "scale(1.4,1.7)")	// 크기조절
-				.style("stroke", "black");
+			pathString = this.pathClone(kara.glyphs["clefs.F"].d, x - 5, y - 20); //-5//-45
+			
+			// 낮은 음자리표 그리기
+			kara.draw.clefs_F(trcNm, pathString);
 			
 			break;
 			
@@ -135,12 +132,8 @@ kara.clefSVG = function(x, y, Y, track) {
 			
 			if (!kara.glyphs["clefs.perc"]) return null;
 			
-			pathString = this.pathClone(kara.glyphs["clefs.perc"].d, x-5, y-20.5);
-			svg.append("path")
-				.attr("class", "in_bar " + track)
-				.attr("d", pathString)
-				.style("transform", "scale(1.2,1.5)")	// 크기조절
-				.style("stroke", "black");
+			pathString = this.pathClone(kara.glyphs["clefs.perc"].d, x - 5, y - 20.5);
+			kara.draw.clefs_perc(trcNm, pathString);
 			
 			break;
 			
@@ -150,28 +143,26 @@ kara.clefSVG = function(x, y, Y, track) {
 			
 			if (!kara.glyphs["clefs.G"]) return null;
 
-			kara.scoreInfo.track[track].clef = "G";
+			kara.scoreInfo.track[trcNm].clef = "G";
 			pathString = this.pathClone(kara.glyphs["clefs.G"].d, x, y);
-			svg.append("path")
-				.attr("class", "in_bar " + track)
-				.attr("d", pathString)
-				.style("transform", "scale(1.2,1.4)")	// 크기조절
-				.style("stroke", "black");
+			
+			// 높은 음자리표 그리기
+			kara.draw.clefs_G(trcNm, pathString);
 			
 			break;
 	}
 	box_x = 0;
-	box_y = Y-10;
+	box_y = Y - 10;
 	width = 40;
 	height = 90;
 
 	//음자리표 선택영역 APPEND
 	svg.append("rect")
 		.attr("id", "editClef")	// #editClef :: 음자리표 선택영역(수정)
-		.attr("class", 'in_bar ' + track)
+		.attr("class", 'in_bar ' + trcNm)
 		.attr("x", box_x)
 		.attr("y", box_y)
-		.attr("onclick", "kara.editClef('" + track + "')")
+		.attr("onclick", "kara.editClef('" + trcNm + "')")
 		.style("width", width)
 		.style("height", height)
 		.style("fill", "#00ff01")
@@ -352,6 +343,7 @@ kara.printflag = function(symb, x, y, track) {
 		.style("stroke", "black");
 };
 
+// Draw Sharp, Flat, Rest, head
 kara.printSymbol = function(symbol, x, y, trcNm) {
 	
 	if (!kara.glyphs[symbol]) return null;
@@ -763,11 +755,6 @@ kara.noteBox_last = {
 
 		var a = N * 12 + 70;
 		var ac = (X - a) / 4;
-		// kara.vLine(a, Y+12); // 없어도 됨
-		// kara.vLine(ac*1+a, Y+12);
-		// kara.vLine(ac*2+a, Y+12);
-		// kara.vLine(ac*3+a, Y+12);
-
 
 		var x = position.left - kara.scorePosition.left(track);
 		var y = Y - 15;

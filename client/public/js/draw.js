@@ -2,14 +2,15 @@ if(!window.kara) window.kara = {};
 
 kara.draw = {
 	
+	// text
 	title: function(trcNm, title) {// 제목 그리기
 		
-		var svg = kara.svg[trcNm].svgText;
+		var txt = kara.svg[trcNm].svgText;
 		var box = kara.svg[trcNm].svgBox;
 	
-		svg.append('text')
-			.attr('id', 'title')
-			.attr('class', 'in_bar')		// .in_bar :: 초기화 영역
+		txt.append("text")
+			.attr("id", "title")
+			.attr("class", "in_bar")		// .in_bar :: 초기화 영역
 			.attr('font-size', '60px')		// font size 60px
 			.attr('x', '50%')				// 가운데
 			.attr('y', '50')				// 위에서 50
@@ -42,10 +43,10 @@ kara.draw = {
 	
 	tempo: function(trcNm, tempo) {
 		
-		var svg = kara.svg[trcNm].svgText;
+		var txt = kara.svg[trcNm].svgText;
 		var box = kara.svg[trcNm].svgBox;
 		
-		svg.append("text")
+		txt.append("text")
 			.attr("id", "tempo")
 			.attr("class", "in_bar")	// .in_bar :: 악보 초기화 영역
 			.attr("font-size", "16px")
@@ -78,10 +79,10 @@ kara.draw = {
 	},
 	writer: function(trcNm, writer) {
 		
-		var svg = kara.svg[trcNm].svgText;
+		var txt = kara.svg[trcNm].svgText;
 		var box = kara.svg[trcNm].svgBox;
 		
-		svg.append("text")
+		txt.append("text")
 			.attr("id", "writer")
 			.attr("class", "in_bar")
 			.attr("font-size", "16px")
@@ -111,5 +112,39 @@ kara.draw = {
 			.style("height", "25")
 			.style("fill", "#000000")
 			.style("fill-opacity", "0.3");
+	},
+	
+	// 음자리표
+	clefs_G: function(trcNm, pathString) {
+		
+		var symbol = kara.svg[trcNm].svgSymbol;
+		
+		symbol.append("path")
+				.attr("class", "in_bar " + trcNm)
+				.attr("d", pathString)
+				.style("transform", "scale(1.2,1.4)") //크기조절
+				.style("stroke", "black");
+		
+		
+	},
+	clefs_F: function(trcNm, pathString) {
+		
+		var symbol = kara.svg[trcNm].svgSymbol;
+		
+		symbol.append("path")
+				.attr("class", "in_bar " + trcNm)
+				.attr("d", pathString)
+				.style("transform", "scale(1.4,1.7)")	// 크기조절
+				.style("stroke", "black");
+	},
+	clefs_perc: function(trcNm, pathString) {
+		
+		var symbol = kara.svg[trcNm].svgSymbol;
+		
+		symbol.append("path")
+				.attr("class", "in_bar " + trcNm)
+				.attr("d", pathString)
+				.style("transform", "scale(1.2,1.5)")	// 크기조절
+				.style("stroke", "black");
 	}
 };
