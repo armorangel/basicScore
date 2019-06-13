@@ -1,130 +1,150 @@
 if(!window.kara) window.kara = {};
 
-// 타이틀 수정
-kara.editTitle = function(trcNm) {// track Track Name :: 'track1'
+
+kara.edit = {
 	
-	//제목 입력
-	var title = prompt('Title');
+	// Edit Title
+	title: function(trcNm) {// track Track Name :: 'track1'
+		//제목 입력
+		var title = prompt('Title');
+
+		// 제목 정합성 검사
+		if(title === '' || title === null) {
+			alert('제목을 입력하세요');
+			return;
+		}
+
+		// 악보 정보 객체에 제목 저장
+		kara.scoreInfo.title = title;
+
+		// SVG 요소 삭제
+		d3.select('#title').remove();		// 타이틀 제거
+		d3.select('#editTitle').remove();	// 타이틀 선택 영역 제거
+		d3.select('#tempo').remove();		// 템포 제거
+		d3.select('#editTempo').remove();	// 템포 선택 영억 제거
+		d3.select('#writer').remove();		// 작곡가 제거
+		d3.select('#editWriter').remove();	// 작곡가 선택 영역 제거
+
+		kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
+		kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
+	},
 	
-	// 제목 정합성 검사
-	if(title === '' || title === null) {
-		alert('제목을 입력하세요');
-		return;
+	// 템포 수정
+	tempo: function(trcNm) {// trcNm Track Name :: 'track1'
+		
+		// 템포 입력
+		var tempo = prompt("tempo");
+
+		// 템포 정합성 검사
+		if(tempo === "" || tempo === null || isNaN(tempo)) {//isNaN(숫자) ==> false 
+			alert("숫자를 입력하세요.");
+			return;
+		}
+
+		// 템포는 10에서 300사이
+		if(tempo < 10 || tempo > 300) {
+			alert("템포는 10이상 300이하만 입력할 수 있습니다.");
+			return;
+		}
+
+		// 악보 정보 객체에 템포 저장
+		kara.scoreInfo.tempo = tempo;
+
+		// SVG 요소 삭제
+		d3.select("#title").remove();		// 타이틀 제거
+		d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
+		d3.select("#tempo").remove();		// 템포 제거
+		d3.select("#editTempo").remove();	// 템포 선택 영억 제거
+		d3.select("#writer").remove();		// 작곡가 제거
+		d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
+
+		kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
+		kara.refresh();
+	},
+	
+	// 작곡가 수정
+	writer: function(trcNm) {// track Track Name :: 'track1'
+		// 작곡가 입력
+		var writer = prompt("Writer");
+
+		// 작곡가 정합성 검사
+		if(writer == "" || writer === null){
+			alert("작곡가명을 입력하세요.");
+			return;
+		}
+
+		// 악보 정보 객체에 작곡가 저장
+		kara.scoreInfo.writer = writer;
+
+		// SVG 요소 삭제
+		d3.select("#title").remove();		// 타이틀 제거
+		d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
+		d3.select("#tempo").remove();		// 템포 제거
+		d3.select("#editTempo").remove();	// 템포 선택 영억 제거
+		d3.select("#writer").remove();		// 작곡가 제거
+		d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
+
+		kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
+		kara.refresh();
+	},
+	
+	// 조표 수정
+	key: function() {
+		
+		// 조표 입력
+		var key = prompt("Key");
+
+		// 조표 정합성 검사
+		if(key === null || key === '') {
+			alert("조표를 입력하세요");
+			return;
+		}
+
+		key = kara.keyvalue(key);
+
+		// 정해진 조표 입력 검사
+		if(!kara.keyTrueofFalse(key)) return;
+
+		kara.scoreInfo.key = key.toString();
+
+		kara.refresh();
+	},
+	
+	// 박자 수정
+	meter: function() {
+		
+		var meter = prompt("meter");
+	
+		// 박자 정합성 검사
+		if(meter === '' || meter === null) {
+			alert('박자를 입력하세요.');
+			return;
+		}
+
+		var meterSplit = meter.split("/");
+		kara.scoreInfo.meter = meterSplit[1] + "/" + meterSplit[0];
+
+		$(".in_bar").remove();
+		kara.printNote();
+	},
+	
+	// 음자리표 수정
+	clef: function(trcNm) {
+		
+		// 음자리표 입력
+		var clef = prompt("Clef");
+
+		if(clef === null || clef === '') {
+			alert("음자리표를 입력하세요.");
+			return;
+		}
+
+		kara.scoreInfo.track[trcNm].clef = clef.toUpperCase();
+
+		$(".in_bar").remove();
+		kara.refresh();
 	}
-
-	// 악보 정보 객체에 제목 저장
-	kara.scoreInfo.title = title;
 	
-	// SVG 요소 삭제
-	d3.select('#title').remove();		// 타이틀 제거
-	d3.select('#editTitle').remove();	// 타이틀 선택 영역 제거
-	d3.select('#tempo').remove();		// 템포 제거
-	d3.select('#editTempo').remove();	// 템포 선택 영억 제거
-	d3.select('#writer').remove();		// 작곡가 제거
-	d3.select('#editWriter').remove();	// 작곡가 선택 영역 제거
-	
-	kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
-	kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
-};
-
-// 템포 수정
-kara.editTempo = function(trcNm) {// trcNm Track Name :: 'track1'
-	
-	// 템포 입력
-  	var tempo = prompt("tempo");
-	
-	// 템포 정합성 검사
-	if(tempo === "" || tempo === null || isNaN(tempo)) {//isNaN(숫자) ==> false 
-		alert("숫자를 입력하세요.");
-		return;
-	}
-
-	// 템포는 10에서 300사이
-	if(tempo < 10 || tempo > 300) {
-		alert("템포는 10이상 300이하만 입력할 수 있습니다.");
-		return;
-	}
-
-	// 악보 정보 객체에 템포 저장
-	kara.scoreInfo.tempo = tempo;
-	
-	// SVG 요소 삭제
-	d3.select("#title").remove();		// 타이틀 제거
-	d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
-	d3.select("#tempo").remove();		// 템포 제거
-	d3.select("#editTempo").remove();	// 템포 선택 영억 제거
-	d3.select("#writer").remove();		// 작곡가 제거
-	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
-	
- 	kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
-	kara.refresh();
-};
-
-// 작곡가 수정
-kara.editWriter = function(trcNm) {// track Track Name :: 'track1'
-	
-	// 작곡가 입력
-  	var writer = prompt("Writer");
-	
-	// 작곡가 정합성 검사
-	if(writer == "" || writer === null){
-		alert("작곡가명을 입력하세요.");
-		return;
-	}
-
-	// 악보 정보 객체에 작곡가 저장
-	kara.scoreInfo.writer = writer;
-	
-	// SVG 요소 삭제
-	d3.select("#title").remove();		// 타이틀 제거
-	d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
-	d3.select("#tempo").remove();		// 템포 제거
-	d3.select("#editTempo").remove();	// 템포 선택 영억 제거
-	d3.select("#writer").remove();		// 작곡가 제거
-	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
-	
-  	kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
-	kara.refresh();
-};
-
-// 조표 수정
-kara.editKey = function() {
-	
-	// 조표 입력
-	var key = prompt("Key");
-	
-	// 조표 정합성 검사
-	if(key === null || key === '') {
-		alert("조표를 입력하세요");
-		return;
-	}
-
-	key = kara.keyvalue(key);
-	
-	// 정해진 조표 입력 검사
-	if(!kara.keyTrueofFalse(key)) return;
-	
-	kara.scoreInfo.key = key.toString();
-
-	kara.refresh();
-};
-
-// 박자 수정
-kara.editMeter = function() {
-	
-	var meter = prompt("meter");
-	
-	// 박자 정합성 검사
-	if(meter == "" || meter === null) {
-		alert("박자를 입력하세요");
-		return;
-	}
-	
-	var meterSplit = meter.split("/");
-	kara.scoreInfo.meter = meterSplit[1] + "/" + meterSplit[0];
-
-	$(".in_bar").remove();
-	kara.printNote();
 };
 
 // 정해진 조표 입력 검사
@@ -195,22 +215,6 @@ kara.keyvalue = function(key) {// key :: 조표 'F'
 	}
 };
 
-// 음자리표 수정
-kara.editClef = function(track) {
-	
-	var ttrack = track.toString();
-	var clef = prompt("Clef");
-	
-	if(clef === null || clef === '') {
-		alert("음자리표를 입력하세요.");
-		return;
-	}
-	
-	kara.scoreInfo.track[track].clef = clef.toUpperCase();
-
-	$(".in_bar").remove();
-	kara.refresh();
-};
 
 // 탭 클릭시 트랙 변경 이벤트
 $('#tab').click(function(e) {
@@ -225,8 +229,6 @@ $('#tabs').click(function(e) {
 	var id = e.target.getAttribute('id');
 	var id_P = $('#' + id).parent();
 
-	// if(klass != "in_bar") return;
-	// var parent = $("#"+id).parent();
 	notepush.setId(id);
 	notepush.setKlass(klass);
 	
@@ -260,80 +262,82 @@ var notepush = {
 
 		// this.klass = klass_split[1];
 	},
+	
+	// 선택한 음표 배열에 담기
 	setNote: function(meter) {
 		
 		this.meter = meter;
-		var bNum = this.bNum.split('_');	// 마디번호
-		var nNum = this.nNum.split('_');	// 음표번호
-		var track = this.track;
+		var bNum = this.bNum.split('_');	// 마디번호 -- bar,0
+		var nNum = this.nNum.split('_');	// 음표번호 -- note,0
+		var trcNm = this.track;				// 현재 선택된 트랙 -- 'track1'
 
 		switch(meter) {
 			case 1: // 온음표
-				if(kara.meterCal(bNum[1], nNum[1], "whole", track) == -1) {	// 마디 초과
+				if(kara.meterCal(bNum[1], nNum[1], 'whole', trcNm) == -1) {	// 마디 초과
 					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "whole", track) == 0) { // 마디 꽉차서
+				} else if(kara.meterCal(bNum[1], nNum[1], "whole", trcNm) == 0) { // 마디 꽉차서
 					let bbNum = bNum[1];
 					bbNum = bbNum + 1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", track); // push
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", trcNm); // push
 				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", track);
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", trcNm);
 				}
 				break;
 				
 			case 2: // 2분음표
-				if(kara.meterCal(bNum[1], nNum[1], "half", track) == -1) { // 마디 초과
+				if(kara.meterCal(bNum[1], nNum[1], "half", trcNm) == -1) { // 마디 초과
 					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "half", track) == 0) { //마디 꽉차서
+				} else if(kara.meterCal(bNum[1], nNum[1], "half", trcNm) == 0) { //마디 꽉차서
 					let bbNum = bNum[1];
 					bbNum = bbNum + 1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", track); // push
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", trcNm); // push
 				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", track);
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", trcNm);
 				}
 				break;
 				
 			case 4: // 4분음표 "quarter"
-				if(kara.meterCal(bNum[1], nNum[1], "quarter", track) == -1) { // 마디 초과
+				if(kara.meterCal(bNum[1], nNum[1], "quarter", trcNm) == -1) { // 마디 초과
 					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "quarter", track) == 0) { //마디 꽉차서
+				} else if(kara.meterCal(bNum[1], nNum[1], "quarter", trcNm) == 0) { //마디 꽉차서
 					let bbNum = bNum[1];
 					bbNum = bbNum+1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "quarter", track); // push
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "quarter", trcNm); // push
 				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "quarter", track);
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "quarter", trcNm);
 				}
 				break;
 				
 			case 8: // 8분음표 "8th"
-				if(kara.meterCal(bNum[1], nNum[1], "8th", track) == -1) { // 마디 초과
+				if(kara.meterCal(bNum[1], nNum[1], "8th", trcNm) == -1) { // 마디 초과
 					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "8th", track) == 0) { //마디 꽉차서
+				} else if(kara.meterCal(bNum[1], nNum[1], "8th", trcNm) == 0) { //마디 꽉차서
 					let bbNum = bNum[1];
 					bbNum = bbNum + 1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track); // push
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", trcNm); // push
 				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", track);
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", trcNm);
 				}
 				break;
 				
 			case 16: //16분음표
-				if(kara.meterCal(bNum[1], nNum[1], "16th", track) == -1) { // 마디 초과
+				if(kara.meterCal(bNum[1], nNum[1], "16th", trcNm) == -1) { // 마디 초과
 					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "16th", track) == 0) { //마디 꽉차서
+				} else if(kara.meterCal(bNum[1], nNum[1], "16th", trcNm) == 0) { //마디 꽉차서
 					var bbNum = bNum[1];
 					bbNum = bbNum + 1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track); // push
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", trcNm); // push
 				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", track);
+					kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", trcNm);
 				}
 				break;
 				
 			default:
-				kara.scoreInfo.track[track].notes[bNum[1]][nNum[1]][0] = "rest";
-				$(".in_bar" + "." + track).remove();
+				kara.scoreInfo.track[trcNm].notes[bNum[1]][nNum[1]][0] = "rest";
+				$(".in_bar" + "." + trcNm).remove();
 
-				kara.printNote(track);
-				kara.test(track);
+				kara.printNote(trcNm);
+				kara.test(trcNm);
 				break;
 		}
 	}
@@ -374,7 +378,7 @@ var boxWidth = function(meter) {
 	var a = N * 12 + 70;
 	var ac = (X - a) / 4;
 	var x = a;
-	var width = (X-a)/4;
+	var width = (X - a) / 4;
 	
 	switch(meter){
 		case 'whole': //온음표
