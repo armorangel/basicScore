@@ -9,7 +9,7 @@ kara.edit = {
 		var title = prompt('Title');
 
 		// 제목 정합성 검사
-		if(title === '' || title === null) {
+		if(!title) {
 			alert('제목을 입력하세요');
 			return;
 		}
@@ -21,13 +21,13 @@ kara.edit = {
 	},
 	
 	// 템포 수정
-	tempo: function(trcNm) {// trcNm Track Name :: 'track1'
+	tempo: function(trcNm) {	// trcNm Track Name :: 'track1'
 		
 		// 템포 입력
 		var tempo = prompt("tempo");
 
 		// 템포 정합성 검사
-		if(tempo === "" || tempo === null || isNaN(tempo)) {//isNaN(숫자) ==> false 
+		if(!tempo || isNaN(tempo)) {	// isNaN(숫자) ==> false 
 			alert("숫자를 입력하세요.");
 			return;
 		}
@@ -50,7 +50,7 @@ kara.edit = {
 		var writer = prompt("Writer");
 
 		// 작곡가 정합성 검사
-		if(writer == "" || writer === null){
+		if(!writer){
 			alert("작곡가명을 입력하세요.");
 			return;
 		}
@@ -89,13 +89,12 @@ kara.edit = {
 		var meter = prompt("meter");
 	
 		// 박자 정합성 검사
-		if(meter === '' || meter === null) {
+		if(!meter) {
 			alert('박자를 입력하세요.');
 			return;
 		}
 
-		var meterSplit = meter.split("/");
-		kara.scoreInfo.meter = meterSplit[0] + "/" + meterSplit[1];
+		kara.scoreInfo.meter = meter;
 
 		$(".in_bar").remove();
 		kara.refresh();
@@ -309,7 +308,7 @@ var notepush = {
 				kara.scoreInfo.track[trcNm].notes[bNum[1]][nNum[1]][0] = "rest";
 				$(".in_bar" + "." + trcNm).remove();
 
-				kara.printNote(trcNm);
+				kara.prntNote(trcNm);
 				kara.test(trcNm);
 				break;
 		}

@@ -39,124 +39,6 @@ kara.key = {	// 심볼 갯수 객체
 	minor:{'Am':0, 'Em':1, 'Bm':2, 'F#m':3, 'C#m':4, 'G#m':5, 'Ebm':6, 'Bbm':5, 'Fm':4, 'Cm':3, 'Gm':2, 'Dm':1}
 };
 
-// 배열의 값을 가져와서 음표를 그린다
-kara.printNote = function(trcNm) {// trcNm :: Track Name 'track1'
-	
-	var note = kara.scoreInfo.track[trcNm].notes;	// Array [["E5", "half"], ["E5", "half"]]
-	var meter = kara.scoreInfo.meter.split('/');	// ["4", "4"]
-	var limited = meter[0] * meter[1];	// 마디 제한 16
-	var nowMeter = 0;					// 현재 마디
-	var four_boxEnter = 0;
-	var four_check = 0;
-	var pageInc = 0;
-	
-	kara.hLine(0, trcNm);	// 한줄 긋고 시작
-	
-	// 첫마디가 없으면 노트박스 생성
-	if(note[0] === undefined) kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, "whole", trcNm);
-	
-	// 마디 찍기
-	for(var i = 0; i < note.length; i++) {
-		
-		var four_enter = i % 4;
-		
-		if(four_enter === 0 && i >= 4) {	// 4마디 검사
-			
-			var four = i / 4;
-			
-			// 4번째 마디마다 새 오선지 찍기
-			kara.hLine(four, trcNm);
-			four_boxEnter++;
-		}
-		
-		//음표와 음표 박스 찍기
-		for(var j = 0; j < note[i].length; j++) {
-			
-			var key = kara.scoreInfo.key;
-			var keySplit = key.split(' ');
-			var M = kara.key[keySplit[0]];
-			var N = M[keySplit[1]];
-			var X = kara.XY.X();
-			var Y = kara.XY.Y(i);
-			var a = N * 12 + 70;
-			var ac = (X - a) / 4;
-			
-			var _whole = ac / 2 - 8;
-			var _half = _whole / 2;
-			var _quarter = _half / 2;
-			var _8th = _quarter/2;
-			var _16th = _8th/2-8;
-			
-			var position;
-
-			var pitch = note[i][j][0];
-			var meter = note[i][j][1];
-			
-			if(four_boxEnter == four_check) {
-
-				// 첫 음표 // 악보 선택 영역 그리기
-				kara.noteBox.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, trcNm);
-				four_check++;
-			} else {
-				// 두번째 부터 // 악보 선택 영역 그리기
-				kara.noteBox_.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, trcNm);
-				console.log("그릴 박스는 i는" + i + "j " +  j);
-			}
-			
-			var width = $(`.bar_${i}.note_${j}.${trcNm}`).width();//.bar_1.note_2.track1
-			d3.select(`.bar_${i}.note_${j}#${pitch}.${trcNm}`).style("fill", "#ffffff");
-
-			pitchSplit = pitch.split(",");// ["B4", "C6"] 같은 박자에 있는 음표들
-
-			for(var pi = 0; pi < pitchSplit.length; pi++) {
-				
-				//쉼표 일때는 A4높이에 그리기
-				if(pitchSplit[pi] === "rest") position = $(`#A4.bar_${i}.note_${j}.${trcNm}`).position();
-				else position = $(`#${pitchSplit[pi]}.bar_${i}.note_${j}.${trcNm}`).position();
-					
-				var x = position.left - kara.scorePosition.left(trcNm);
-				var y = position.top - kara.scorePosition.top(trcNm) + 3;
-				
-				var leng = 0;	// x 길이 추가
-
-				//길이 대입
-				switch(meter) {
-					case 'whole':	leng = _whole; break;		// 온음표
-					case 'half':	leng = _half; break;		// 2분음표
-					case 'quarter':	leng = _quarter; break;		// 4분음표
-					case '8th':		leng = _8th; break;			// 8분음표
-					case '16th':	leng = _16th; break;		// 16분음표
-					default: break;
-				}
-				
-				//leng -= 10;// x 길이 조정
-				
-				//음표 그리기
-				kara.print8th16thQuarterHalfWhole(trcNm, x, leng, y, meter, pitchSplit[pi], pi, meter);
-			}
-
-			if(i === note.length - 1 && j === note[i].length - 1) {
-
-				var four_boxEnter2 = four_boxEnter + 1;
-				var ii = i + 1;
-				var four2 = ii % 4;
-
-				if(four2 == 0 && ii >= 4) {
-					if(kara.meterCal_box(i, trcNm)===1) {
-						$(`#${trcNm} > #score`).height(four_boxEnter2 * 120 + 300);
-						kara.hLine(four_boxEnter2, trcNm);
-						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter2), i, j, meter, 1, trcNm);
-					} else {
-						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, trcNm);
-					}
-				} else {
-					kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, trcNm);
-				}
-			}
-		}
-	}
-};
-
 // 배열에 음표 담기
 kara.noteSelect = {
 	push: function(i, j,  pitch, note_meter, track) { // i: 마디 번호 j: 음표 번호
@@ -190,7 +72,7 @@ kara.noteSelect = {
 		kara.scoreInfo.track[track].notes = note;
 		$(".in_bar" + "." + track).remove();
 
-		kara.printNote(track);	// 음표 그리기
+		kara.prntNote(track);	// 음표 그리기
 		kara.test(track);		// 배열값 표시
 	}
 };

@@ -7,6 +7,7 @@ kara.draw = {
 	box: null,
 	symbol: null,
 	
+	// 현재 트랙으로 설정
 	setTrack: function(trcNm) {
 		
 		if(!trcNm) trcNm = 'track1';
@@ -19,17 +20,17 @@ kara.draw = {
 		return this;
 	},
 	
+	// 해당 트랙의 SVG 요소 삭제
 	removeSvg: function(tag) {
-		
-		// 해당 트랙의 SVG 요소 삭제
 		d3.select('#' + this.track + ' ' + tag).remove();
 	},
 	
+	//선택 영역 사이즈, 위치 구하기
 	getBoxSize: function(tag) {
 		
 		const position = $('#' + this.track + ' ' + tag).position();// 제목 위치리턴 객체 left, top
-		const x = position.left - kara.scorePosition.left(this.track);
-		const y = position.top - kara.scorePosition.top(this.track);
+		const x = position.left - kara.scorePos.left(this.track);
+		const y = position.top - kara.scorePos.top(this.track);
 		const width = $('#' + this.track + ' ' + tag).width();// 0 ISSUE
 		const height = $('#' + this.track + ' ' + tag).height();// 0 ISSUE
 		
