@@ -4,11 +4,11 @@ if(!window.kara) window.kara = {};
 kara.editTitle = function(trcNm) {// track Track Name :: 'track1'
 	
 	//제목 입력
-	var title = prompt("Title");
+	var title = prompt('Title');
 	
 	// 제목 정합성 검사
-	if(title === "" || title === null) {
-		alert("제목을 입력하세요");
+	if(title === '' || title === null) {
+		alert('제목을 입력하세요');
 		return;
 	}
 
@@ -16,19 +16,19 @@ kara.editTitle = function(trcNm) {// track Track Name :: 'track1'
 	kara.scoreInfo.title = title;
 	
 	// SVG 요소 삭제
-	d3.select("#title").remove();		// 타이틀 제거
-	d3.select("#editTitle").remove();	// 타이틀 선택 영역 제거
-	d3.select("#tempo").remove();		// 템포 제거
-	d3.select("#editTempo").remove();	// 템포 선택 영억 제거
-	d3.select("#writer").remove();		// 작곡가 제거
-	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
+	d3.select('#title').remove();		// 타이틀 제거
+	d3.select('#editTitle').remove();	// 타이틀 선택 영역 제거
+	d3.select('#tempo').remove();		// 템포 제거
+	d3.select('#editTempo').remove();	// 템포 선택 영억 제거
+	d3.select('#writer').remove();		// 작곡가 제거
+	d3.select('#editWriter').remove();	// 작곡가 선택 영역 제거
 	
 	kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
 	kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
 };
 
 // 템포 수정
-kara.editTempo = function(track) {// track Track Name :: 'track1'
+kara.editTempo = function(trcNm) {// trcNm Track Name :: 'track1'
 	
 	// 템포 입력
   	var tempo = prompt("tempo");
@@ -56,7 +56,7 @@ kara.editTempo = function(track) {// track Track Name :: 'track1'
 	d3.select("#writer").remove();		// 작곡가 제거
 	d3.select("#editWriter").remove();	// 작곡가 선택 영역 제거
 	
- 	kara.textSVG(track);// 해당 트랙 SVG 요소 그리기
+ 	kara.textSVG(trcNm);// 해당 트랙 SVG 요소 그리기
 	kara.refresh();
 };
 

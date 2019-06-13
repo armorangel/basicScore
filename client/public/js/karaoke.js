@@ -245,7 +245,7 @@ kara.meterCal_box = function(bNum, track) {
 	var noteMeter = kara.noteMeter;
 	
 	if(note[bNum] == undefined) return;
-	for(let i=0; i < note[bNum].length; i++) {
+	for(let i=0; i <note[bNum].length; i++) {
 
 		var note_meter = noteMeter.head[note[bNum][i][1]];
 		now = now + note_meter;
