@@ -3,6 +3,7 @@ if(!window.kara) window.kara = {};
 kara.draw = {
 	
 	track: '',
+	svgContainer: null,
 	txt: null,
 	box: null,
 	symbol: null,
@@ -13,9 +14,11 @@ kara.draw = {
 		if(!trcNm) trcNm = 'track1';
 		
 		this.track = trcNm;
+		this.svgContainer = kara.svg[trcNm].svgContainer;
 		this.txt = kara.svg[trcNm].svgText;
 		this.box = kara.svg[trcNm].svgBox;
 		this.symbol = kara.svg[trcNm].svgSymbol;
+		this.svgjs = kara.svg[trcNm].svgjs;
 		
 		return this;
 	},
@@ -49,6 +52,27 @@ kara.draw = {
 		
 		this.removeSvg('#title');	// 타이틀 제거
 		this.removeSvg('#edtTtl');	// 타이틀 선택 영역 제거
+		
+
+		/*
+		this.svgContainer.each(function(i, children) {//SVG.js
+			//this.fill({ color: '#f06' });
+			
+			if(this.id() === 'text') {
+				this.text(title)
+					.addClass('in_bar')
+					.move('50%', 50)
+					.font({'size': '60px', 'text-anchor': 'middle', 'font-weight': 'bold', 'dy': '.47em'});
+				
+				this.fire('click');
+				this.click(function() {
+					kara.edit.title(this.track);
+				});
+				
+				//var boxSize = this.getBoxSize('#title');
+			}
+		});
+		*/
 	
 		this.txt.append("text")
 				.attr("id", "title")
@@ -61,7 +85,7 @@ kara.draw = {
 				.style('fill', '#000000')
 				.style('font-weight', 'bold')
 				.text(title);					// 악보정보객체의 TITLE
-
+	
 		var boxSize = this.getBoxSize('#title');
 	
 		this.box.append('rect')
@@ -84,6 +108,21 @@ kara.draw = {
 		this.removeSvg('#tempo');	// 템포 제거
 		this.removeSvg('#edtTem');	// 템포 선택 영억 제거
 		
+		/*
+		this.svgContainer.each(function(i, children) {//SVG.js
+			//this.fill({ color: '#f06' });
+			
+			if(this.id() === 'text') {
+				this.text('♩ = ' + tempo)
+					.move('5%', 140)
+					.font({'size': '16px', 'text-anchor': 'start', 'font-weight': 'bold', 'dy': '.47em'});
+				
+				//var boxSize = this.getBoxSize('#title');
+			}
+		});
+		*/
+		
+		
 		this.txt.append("text")
 			.attr("id", "tempo")
 			.attr("class", "in_bar")	// .in_bar :: 악보 초기화 영역
@@ -96,8 +135,10 @@ kara.draw = {
 			.style("font-weight", "bold")
 			.text("♩ = " + tempo);
 		
+		
 		var boxSize = this.getBoxSize('#tempo');
 
+		
 		this.box.append("rect")
 			.attr("id", "edtTem")
 			.attr("class", "in_bar")// .in_bar :: 삭제영역

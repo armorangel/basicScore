@@ -32,6 +32,7 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	const width = $('#tabs').width();	// 악보 탭 넓이
 	let svgContainer;					// #track1 > #score SVG 트랙영역
 
+	//svgContainer = SVG(trcNm).size(width - 43, 400);// SVG.js test
 	// 악보영역 생성후 저장
 	
 	
@@ -39,7 +40,10 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
 	//$('#' + trcNm).append(svgTag);
 	
-	//svgContainer = SVG('score');
+	//$('#' + trcNm).append(svgTag);
+	
+	
+	//svgContainer = $('#' + trcNm + ' > #score').width(width-43).height(400);
 
 	
 	svgContainer = d3.select('#' + trcNm)			// '#track1'
@@ -50,14 +54,28 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 					.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
 					.style('width', width - 43)		// 악보 넓이 //우측부터 43
 					.style('height', '400');		// 악보 높이
-	/**/
+	
+	/*
+	svgContainer = d3.select('#' + trcNm + ' > #score')	// '#track1'
+					.style('width', width - 43)			// 악보 넓이 //우측부터 43
+					.style('height', '400');			// 악보 높이
+	*/
 	
 	trcSvg.svgContainer	= svgContainer;
+	
 	trcSvg.svgText		= svgContainer.append("g").attr("id", "text");		// title, tempo, writer
 	trcSvg.svgLine		= svgContainer.append("g").attr("id", "lines");		// line(오선지)
 	trcSvg.svgSymbol	= svgContainer.append("g").attr("id", "symbol");	// clef(음자리표), 조표 4/4	
 	trcSvg.svgNote		= svgContainer.append("g").attr("id", "note");		// 음표, 음표 막대 SVG
 	trcSvg.svgBox		= svgContainer.append("g").attr("id", "boxes");		// 선택영역
+	
+	/*
+	trcSvg.svgText	 = svgContainer.group().attr('id', 'text');//SVG.js
+	trcSvg.svgLine	 = svgContainer.group().attr('id', 'lines');//SVG.js
+	trcSvg.svgSymbol = svgContainer.group().attr('id', 'symbol');//SVG.js
+	trcSvg.svgNote	 = svgContainer.group().attr('id', 'note');//SVG.js
+	trcSvg.svgBox	 = svgContainer.group().attr('id', 'boxes');//SVG.js
+	*/
 };
 
 // Draw title, tempo, name SVG

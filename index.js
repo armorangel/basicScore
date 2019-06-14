@@ -19,12 +19,6 @@ mongoose.connect(dbUrl, (err) => { //MongoDB CONNECT
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.static(path.join(__dirname, 'client/public')));
 
-app.get('/dbtest', (req, res) => {
-	
-	console.log('dbtest');
-	res.json('dbtest');
-});
-
 // Put all API endpoints under '/api'
 app.get('/api/passwords', (req, res) => {
 	const count = 5;
@@ -45,6 +39,10 @@ app.get('/api/getList', (req,res) => {
     console.log('Sent list of items');
 });
 
+app.get('/app', (req, res) => {
+	res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
@@ -58,8 +56,7 @@ app.get('*', (req, res) => {
 		if(err) console.log(err);
 		res.writeHead(200, {'Content-Type': 'text/html'});
 		res.write(data);
-		res.end();
-		
+		res.end();		
 	});
 	
 	console.log('Start score');

@@ -10,10 +10,6 @@ class Home extends Component {
 				<Link to={'./list'}>
 					<button variant="raised">My List</button>
 				</Link>
-				
-				<Link to={'./dbtest'}>
-					<button variant="raised">DBTEST</button>
-				</Link>
 			</div>
 		);
 	}

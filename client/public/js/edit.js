@@ -16,7 +16,7 @@ kara.edit = {
 
 		// 악보 정보 객체에 제목 저장
 		kara.scoreInfo.title = title;
-
+		
 		kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
 	},
 	
