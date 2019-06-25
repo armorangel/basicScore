@@ -181,43 +181,41 @@ kara.remain_meter = function(remain_meter, bNum, nNum, track) {
 	
 	var noteMeter = kara.noteMeter;
 	
-	if(remain_meter >= noteMeter.head["half"]) {
-		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum])) {
-			kara.scoreInfo.track[track].notes[bNum][nNum] = [];	// new Array();
-		}
-		kara.scoreInfo.track[track].notes[bNum][nNum][0] = "rest";
+	kara.scoreInfo.track[track].notes[bNum][nNum][0] = "rest";
+	
+	if(remain_meter >= noteMeter.head["half"]) {	// 8
+		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
+			kara.scoreInfo.track[track].notes[bNum][nNum] = [];	// new Array()	배열이 아니면
+		
 		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "half";
 		remain_meter = remain_meter - noteMeter.head["half"];
 
 		return remain_meter;
 	}
-	else if(remain_meter >= noteMeter.head["quarter"]) {
-		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum])) {
+	else if(remain_meter >= noteMeter.head["quarter"]) {	// 4
+		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
 			kara.scoreInfo.track[track].notes[bNum][nNum] = [];// new Array();
-		}
-		kara.scoreInfo.track[track].notes[bNum][nNum][0] = "rest";
+		
 		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "quarter";
 		remain_meter = remain_meter - noteMeter.head["quarter"];
 
 		return remain_meter;
 	}
-	else if(remain_meter >= noteMeter.head["8th"]){
-		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum])) {
+	else if(remain_meter >= noteMeter.head["8th"]){	// 2
+		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
 			kara.scoreInfo.track[track].notes[bNum][nNum] = [];// new Array();
-		}
-		kara.scoreInfo.track[track].notes[bNum][nNum][0] = "rest";
+		
 		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "8th";
 		remain_meter = remain_meter - noteMeter.head["8th"];
 
 		return remain_meter;
 	}
 	else{
-		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum])) {
+		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
 			kara.scoreInfo.track[track].notes[bNum][nNum] = [];// new Array();
-		}
-		kara.scoreInfo.track[track].notes[bNum][nNum][0] = "rest";
+		
 		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "16th";
-		remain_meter = remain_meter - noteMeter.head["16th"];
+		remain_meter = remain_meter - noteMeter.head["16th"];	// 1
 
 		return remain_meter;
 	}
