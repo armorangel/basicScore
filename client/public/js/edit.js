@@ -675,7 +675,7 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 					for(let i = 0; i < M[keySplit[1]]; i++) {
 						regexp = flatArray[i];
 						
-						//그 음이 b이 붙으면 -11을 리턴
+						//그 음이 b이 붙으면 -1을 리턴
 						if(regexp.test(pitch)) return -1;
 					}
 					break;
