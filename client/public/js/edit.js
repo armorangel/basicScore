@@ -204,7 +204,7 @@ $('#tabs').click(function(e) {
 	notepush.setId(id);
 	notepush.setKlass(klass);
 	
-	console.log(notepush.id);
+	//console.log(notepush.id);
 });
 
 // 선택한 음을 배열에 담는다
@@ -228,9 +228,9 @@ var notepush = {
 		this.nNum = klass_split[2];
 		this.track = klass_split[3];
 		
-		console.log(klass_split[1]);
-		console.log(klass_split[2]);
-		console.log(klass_split[3]);
+		//console.log(klass_split[1]);
+		//console.log(klass_split[2]);
+		//console.log(klass_split[3]);
 
 		// this.klass = klass_split[1];
 	},
@@ -420,69 +420,47 @@ var PopLayer = {
 
 kara.noteToKey = function(keyArray) {
 	
+	console.log('kara.noteToKey');
+	console.log(keyArray);
+	
 	var split = keyArray.split(",");
 	var leng = split.length;
 	var key = new Array(leng);
 
 	for(var i = 0; i < split.length; i++) {
-		switch(split[i]){
-		  case "A0"://21
-			key[i] = 21; break;
-		  case "A#0"://22
-			key[i] = 22; break;
-		  case "B0"://23
-			key[i] = 23; break;
+		switch(split[i]) {
+			case 'A0':	key[i] = 21; break;	// 21
+			case 'A#0':	key[i] = 22; break;	// 22
+			case 'B0':	key[i] = 23; break;	// 23
+				
+			case 'C1':	key[i] = 24; break;	// 24
+			case 'C#1':	key[i] = 25; break;	// 25
+			case 'D1':	key[i] = 26; break;	// 26
+			case 'D#1':	key[i] = 27; break;	// 27
+			case 'E1':	key[i] = 28; break;	// 28
+			case 'F1':	key[i] = 29; break;	// 29
+			case 'F#1':	key[i] = 30; break;	// 30
+			case 'G1':	key[i] = 31; break;	// 31
+			case 'G#1':	key[i] = 32; break;	// 32
+			case 'A1':	key[i] = 33; break;	// 33
+			case 'A#1':	key[i] = 34; break;	// 34
+			case 'B1':	key[i] = 35; break;	// 35
 
-		  case "C1"://24
-			key[i] = 24; break;
-		  case "C#1"://25
-			key[i] = 25; break;
-		  case "D1"://26
-			key[i] = 26; break;
-		  case "D#1"://27
-			key[i] = 27; break;
-		  case "E1"://28
-			key[i] = 28; break;
-		  case "F1"://29
-			key[i] = 29; break;
-		  case "F#1"://30
-			key[i] = 30; break;
-		  case "G1"://31
-			key[i] = 31; break;
-		  case "G#1"://32
-			key[i] = 32; break;
-		  case "A1"://33
-			key[i] = 33; break;
-		  case "A#1"://34
-			key[i] = 34; break;
-		  case "B1"://35
-			key[i] = 35; break;
+			case 'C2':	key[i] = 36; break;	// 36
+			case 'C#2':	key[i] = 37; break;	// 37
+			case 'D2':	key[i] = 38; break;	// 38
+			case 'D#2':	key[i] = 39; break;	// 39
+			case 'E2':	key[i] = 40; break;	// 40
+			case 'F2':	key[i] = 41; break;	// 41
+			case 'F#2':	key[i] = 42; break;	// 42
+			case 'G2':	key[i] = 43; break;	// 43
+			case 'G#2':	key[i] = 44; break;	// 44
+			case 'A2':	key[i] = 45; break;	// 45
+			case 'A#2':	key[i] = 46; break;	// 46
+			case 'B2':	key[i] = 47; break;	// 47
 
-		  case "C2"://36
-			key[i] = 36; break;
-		  case "C#2"://37
-			key[i] = 37; break;
-		  case "D2"://38
-			key[i] = 38; break;
-		  case "D#2"://39
-			key[i] = 39; break;
-		  case "E2"://40
-			key[i] = 40; break;
-		  case "F2"://41
-			key[i] = 41; break;
-		  case "F#2"://42
-			key[i] = 42; break;
-		  case "G2"://43
-			key[i] = 43; break;
-		  case "G#2"://44
-			key[i] = 44; break;
-		  case "A2"://45
-			key[i] = 45; break;
-		  case "A#2"://46
-			key[i] = 46; break;
-		  case "B2"://47
-			key[i] = 47; break;
-
+				
+				
 		  case "C3"://48
 			key[i] = 48; break;
 		  case "C#3"://49
@@ -687,7 +665,8 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 };
 
 kara.maxLength = function(chordArray) {
-	
+	console.log('kara.maxLength');
+	console.log(chordArray);
 	var longlen = 0;
 	var nowlen = 0;
 

@@ -152,7 +152,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			} else {
 				// 두번째 부터 // 악보 선택 영역 그리기
 				kara.noteBox_.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, trcNm);
-				console.log("그릴 박스는 i는" + i + "j " +  j);
+				//console.log("그릴 박스는 i는" + i + "j " +  j);
 			}
 			
 			var width = $('.bar_' + i + '.note_' + j + '.' + trcNm).width();//.bar_1.note_2.track1
@@ -767,7 +767,7 @@ kara.noteBox_ = {
 		
 		// var pitch = note[bNum][nNum][0];
 		var pre_meter = note[bNum][nNum][1];
-		console.log(pre_meter);
+		//console.log(pre_meter);
 		var position = $(".bar_"+ bNum + ".note_" + nNum + "." + track).position();
 
 		var a = N * 12 + 70;
@@ -951,7 +951,7 @@ kara.noteBox_last = {
 		}
 
 		if(set === 1){
-			console.log(bNum);
+			//console.log(bNum);
 			x = a;
 		}
 		

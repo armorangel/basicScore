@@ -18,21 +18,21 @@ kara.play = {
 			if (kara.scoreInfo.track.hasOwnProperty(keyInstru)) {
 				if(kara.scoreInfo.track[keyInstru].instrument !== ""){
 					
-					console.log(kara.scoreInfo.track[keyInstru].instrument);
-					console.log(kara.numToInstrument(kara.scoreInfo.track[keyInstru].instrument));
+					//console.log(kara.scoreInfo.track[keyInstru].instrument);
+					//console.log(kara.numToInstrument(kara.scoreInfo.track[keyInstru].instrument));
 					
 					set = kara.scoreInfo.track[keyInstru].instrument;
-					console.log(set);
+					//console.log(set);
 					instru[mn] = kara.numToInstrument(Number(set));
-					console.log(instru[mn]);
-					console.log(instru);
+					//console.log(instru[mn]);
+					//console.log(instru);
 					mn++;
 				}
 			}
 		}
 		
 		kara.play.instru = instru;
-		console.log(instru);
+		//console.log(instru);
 		
 	    MIDI.loadPlugin({
 			soundfontUrl: "./soundfont/",//soundfont path
@@ -45,8 +45,8 @@ kara.play = {
 				console.log("midi set");
 				var note = kara.scoreInfo.track; //note
 				var instru = kara.play.instru;
-				console.log(kara.play.instru);
-				console.log(instru);
+				//console.log(kara.play.instru);
+				//console.log(instru);
 				var chord = [];
 				var tempo = Number(kara.scoreInfo.tempo);
 				var delay = 0; // play one note every quarter second

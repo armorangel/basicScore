@@ -79,7 +79,7 @@ kara.noteSelect = {
 // 마디에 음표 추가시 음표 추가 가능 여부 검사
 // return -1 :: 불가능, 0 :: 가능 마디 꽉참, 1 :: 가능
 kara.meterCal = function(bNum, nNum, nowMeter, track) {
-	
+	console.log(bNum + ", " + nNum + ", " + nowMeter + ", " + track);
 	var note = kara.scoreInfo.track[track].notes;
 	var meter = kara.scoreInfo.meter.split('/');
 	var limited = meter[0]*meter[1]; //마디 제한
@@ -179,13 +179,20 @@ kara.barsort = function(bNum, nNum , nowmeter, track) {
 
 kara.remain_meter = function(remain_meter, bNum, nNum, track) {
 	
+	console.log(remain_meter + ", " + bNum + ", " + nNum + ", " + track);
 	var noteMeter = kara.noteMeter;
+	
+	if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
+			kara.scoreInfo.track[track].notes[bNum][nNum] = [];	// new Array()	배열이 아니면
+	
+	
+	//var arr = kara.scoreInfo.track[track].notes[bNum][nNum];
 	
 	kara.scoreInfo.track[track].notes[bNum][nNum][0] = "rest";
 	
+	//console.log(arr);
+	
 	if(remain_meter >= noteMeter.head.half) {	// 8
-		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
-			kara.scoreInfo.track[track].notes[bNum][nNum] = [];	// new Array()	배열이 아니면
 		
 		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "half";
 		remain_meter = remain_meter - noteMeter.head.half;
@@ -193,8 +200,6 @@ kara.remain_meter = function(remain_meter, bNum, nNum, track) {
 		return remain_meter;
 	}
 	else if(remain_meter >= noteMeter.head.quarter) {	// 4
-		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
-			kara.scoreInfo.track[track].notes[bNum][nNum] = [];// new Array();
 		
 		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "quarter";
 		remain_meter = remain_meter - noteMeter.head.quarter;
@@ -202,18 +207,14 @@ kara.remain_meter = function(remain_meter, bNum, nNum, track) {
 		return remain_meter;
 	}
 	else if(remain_meter >= noteMeter.head["8th"]){	// 2
-		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
-			kara.scoreInfo.track[track].notes[bNum][nNum] = [];// new Array();
-		
+
 		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "8th";
 		remain_meter = remain_meter - noteMeter.head["8th"];
 
 		return remain_meter;
 	}
 	else{
-		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
-			kara.scoreInfo.track[track].notes[bNum][nNum] = [];// new Array();
-		
+
 		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "16th";
 		remain_meter = remain_meter - noteMeter.head["16th"];	// 1
 
