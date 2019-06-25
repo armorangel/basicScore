@@ -7,7 +7,6 @@ kara.scoreInfo = {
 	writer: "writer",		// 작가 저장
 	key: "major Db",		// 키 저장
 	meter: "4/4",			// 박자저장
-	time: "",				// 최초 저장 시간
 	track: {
 		"track1":{
 			clef: "G",		// 음자리표
