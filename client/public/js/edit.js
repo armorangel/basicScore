@@ -1,6 +1,6 @@
 if(!window.kara) window.kara = {};
 
-
+// 악보 정보 수정
 kara.edit = {
 	
 	// Edit Title
@@ -84,7 +84,7 @@ kara.edit = {
 	},
 	
 	// 박자 수정
-	meter: function() {//edtMtr
+	meter: function() {// edtMtr
 		
 		var meter = prompt("meter");
 	
