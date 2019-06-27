@@ -381,7 +381,7 @@ var PopLayer = {
 // 악기 재생을 위해 계이름을 MIDI숫자로 변환
 kara.noteToKey = function(keyArray) {// B4,F4
 		
-	var split = keyArray.split(",");
+	var split = keyArray.split(',');
 	var key = new Array(split.length);	// 반환할 숫자 배열
 
 	// 음 갯수 만큼 반복

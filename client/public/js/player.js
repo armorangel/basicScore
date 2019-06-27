@@ -20,7 +20,7 @@ kara.refresh = function() {
 	for (var trcNm in kara.scoreInfo.track) {
 			
 		// 해당 트랙이 초기화 되었는지 판단
-		if(kara.scoreInfo.track[trcNm].clef === "") continue;
+		if(kara.scoreInfo.track[trcNm].clef === '') continue;
 		
 		// 초기화된 트랙만 그리기
 		kara.prtNote(trcNm);	// print Notes

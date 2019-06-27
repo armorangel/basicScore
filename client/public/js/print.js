@@ -63,11 +63,11 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
 	trcSvg.svgContainer	= svgContainer;
 	
-	trcSvg.svgText		= svgContainer.append("g").attr("id", "text");		// title, tempo, writer
-	trcSvg.svgLine		= svgContainer.append("g").attr("id", "lines");		// line(오선지)
-	trcSvg.svgSymbol	= svgContainer.append("g").attr("id", "symbol");	// clef(음자리표), 조표 4/4	
-	trcSvg.svgNote		= svgContainer.append("g").attr("id", "note");		// 음표, 음표 막대 SVG
-	trcSvg.svgBox		= svgContainer.append("g").attr("id", "boxes");		// 선택영역
+	trcSvg.svgText		= svgContainer.append('g').attr("id", "text");		// title, tempo, writer
+	trcSvg.svgLine		= svgContainer.append('g').attr("id", "lines");		// line(오선지)
+	trcSvg.svgSymbol	= svgContainer.append('g').attr("id", "symbol");	// clef(음자리표), 조표 4/4	
+	trcSvg.svgNote		= svgContainer.append('g').attr("id", "note");		// 음표, 음표 막대 SVG
+	trcSvg.svgBox		= svgContainer.append('g').attr("id", "boxes");		// 선택영역
 	
 	/*
 	trcSvg.svgText	 = svgContainer.group().attr('id', 'text');//SVG.js
@@ -136,8 +136,8 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			var _whole = ac / 2 - 8;
 			var _half = _whole / 2;
 			var _quarter = _half / 2;
-			var _8th = _quarter/2;
-			var _16th = _8th/2-8;
+			var _8th = _quarter / 2;
+			var _16th = _8th / 2 - 8;
 			
 			var position;
 
@@ -185,7 +185,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 				
 				//음표 그리기
 				kara.print8th16thQuarterHalfWhole(trcNm, x, leng, y, meter, pitchSplit[pi], pi, meter);
-			}
+			}	// End of for
 
 			if(i === note.length - 1 && j === note[i].length - 1) {
 
@@ -204,8 +204,8 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 				} else {
 					kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, trcNm);
 				}
-			}
-		}
+			}	// End of if
+		}	// End of for
 	}
 };
 
@@ -247,7 +247,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 	var pathString;
 	
 	switch(clef) {
-		case "G":	// 높은 음자리표
+		case 'G':	// 높은 음자리표
 			
 			y = y / 1.4 + 35;
 			
@@ -260,7 +260,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 			
 			break;
 			
-		case "F":	// 낮은 음자리표
+		case 'F':	// 낮은 음자리표
 			
 			y = y / 1.7 + 35;
 			
@@ -272,7 +272,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 			
 			break;
 			
-		case "P":
+		case 'P':
 			
 			y = y / 1.5 + 35;
 			

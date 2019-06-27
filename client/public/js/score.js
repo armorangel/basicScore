@@ -2,11 +2,11 @@ if(!window.kara) window.kara = {};
 
 //악보 정보 객체
 kara.scoreInfo = {
-	title: "title",			// 타이틀 저장
-	tempo: "120",			// 템포 저장
-	writer: "writer",		// 작가 저장
-	key: "major Db",		// 키 저장
-	meter: "4/4",			// 박자저장
+	title: 'title',			// 타이틀 저장
+	tempo: '120',			// 템포 저장
+	writer: 'writer',		// 작가 저장
+	key: 'major Db',		// 키 저장
+	meter: '4/4',			// 박자저장
 	track: {
 		"track1":{
 			clef: "G",		// 음자리표
@@ -54,14 +54,14 @@ kara.noteSelect = {
 		// 만약 계이름이 없으면
 		if(!note[i][j][0])
 			note[i][j][0] = pitch;	// 그냥 넣어라(A4)
-		else if(note[i][j][0] === "rest")	// 쉼표면
+		else if(note[i][j][0] === 'rest')	// 쉼표면
 			note[i][j][0] = pitch;
 		else { //아니면
-			var split = note[i][j][0].split(",");
+			var split = note[i][j][0].split('','');
 			
 			// 똑같은 음이 없으면 추가
 			if(split.indexOf(pitch) === -1)
-				note[i][j][0] += "," + pitch;// A4
+				note[i][j][0] += ',' + pitch;// A4
 		}
 		
 		note[i][j][1] = note_meter;	// whole
@@ -75,7 +75,7 @@ kara.noteSelect = {
 
 // 마디에 음표 추가시 음표 추가 가능 여부 검사
 // return -1 :: 불가능, 0 :: 가능 마디 꽉참, 1 :: 가능
-kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {// 0, 0, whole, track1
+kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	
 	//Why this function is called twice
 	var note = kara.scoreInfo.track[trcNm].notes;
@@ -109,7 +109,7 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {// 0, 0, whole, track1
 				return -1;	// 그래도 터져
 			}
 		}
-	} else if ((now + noteMeter.head[nowMeter]) === limited) {// 지금까지의 마디와 현재 마디를 더하면 적당한가
+	} else if ((now + noteMeter.head[nowMeter]) === limited) {	// 지금까지의 마디와 현재 마디를 더하면 적당한가
 		return 0; // 넣을 순 있지만 꽉참
 	} else {
 		return 1; // 정상적으로 추가
@@ -165,7 +165,7 @@ kara.barsort = function(bNum, nNum , nowmeter, track) {
 	}
 	nNum++;
 	
-	for(var j = nNum; j < barLength; j++) {
+	for(let j = nNum; j < barLength; j++) {
 		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][i])) {
 			kara.scoreInfo.track[track].notes[bNum][i] = [];	// new Array();
 		}
@@ -183,7 +183,7 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {// 8, 1, 1, track
 	var meterNm;	// half, quarter, 8th, 18th
 	
 	if(!jQuery.isArray(arr[bNum][nNum]))
-			arr[bNum][nNum] = [];	// new Array()	배열이 아니면
+		arr[bNum][nNum] = [];	// new Array()	배열이 아니면
 
 	// 쉼표
 	arr[bNum][nNum][0] = 'rest';
