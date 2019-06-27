@@ -84,7 +84,7 @@ kara.edit = {
 	},
 	
 	// 박자 수정
-	meter: function() {// edtMtr
+	meter: function() {	// edtMtr
 		
 		var meter = prompt("meter");
 	
@@ -549,7 +549,7 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 			switch(key){
 				// Sharp
 				case 'C':
-				case 'Am': return 0;// 아무것도 없으면 0
+				case 'Am': return 0;	// 아무것도 없으면 0
 				case 'G': //1
 				case 'Em':
 				case 'D': //2
@@ -596,18 +596,16 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 kara.maxLength = function(chordArray) {
 	console.log('kara.maxLength');
 	console.log(chordArray);
-	var longlen = 0;
-	var nowlen = 0;
+	var longlen = 0, nowlen = 0;
 
 	for(var o = 0; o < chordArray.length; o++) {
 		for(var oo = 0; oo < chordArray[o].length; oo++) {
 			nowlen = nowlen + kara.noteMeter.head[chordArray[o][oo][1]];
 		}
-		if(nowlen >= longlen) {
-			longlen = nowlen;
-		}
+		if(nowlen >= longlen) longlen = nowlen;
+		
 		nowlen = 0;
-	}
+	}	// End of for
 	return longlen;
 };
 
