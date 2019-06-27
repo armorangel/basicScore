@@ -589,17 +589,22 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 	return 0;	// 아무것도 없으면
 };
 
-kara.maxLength = function(chordArray) {
-	console.log('kara.maxLength');
-	console.log(chordArray);
+// 재생에 필요한 악보 전체 재생 길이 구하기
+// Array(3), Array(5), Array(2) -- (트랙별 마디 갯수)
+kara.maxLength = function(chordArray) {	// [[[61, 77], 'whole'], [[68], 'whole']]
+	
 	var longlen = 0, nowlen = 0;
 
 	for(var o = 0; o < chordArray.length; o++) {
 		for(var oo = 0; oo < chordArray[o].length; oo++) {
-			nowlen = nowlen + kara.noteMeter.head[chordArray[o][oo][1]];
-		}
+			// 음표 길이 중첩
+			nowlen = nowlen + kara.noteMeter.head[chordArray[o][oo][1]];	// 16
+		}	// End of for
+		
+		// 최대 길이
 		if(nowlen >= longlen) longlen = nowlen;
 		
+		// 현재 트랙 길이 초기화
 		nowlen = 0;
 	}	// End of for
 	return longlen;
