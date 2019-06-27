@@ -110,6 +110,7 @@ kara.edit = {
 			alert("음자리표를 입력하세요.");
 			return;
 		}
+		// G, F, C가 아니면
 
 		kara.scoreInfo.track[trcNm].clef = clef.toUpperCase();
 
@@ -159,31 +160,31 @@ kara.keyvalue = function(key) {// key :: 조표 'F'
 	var k = key.charAt(0).toUpperCase() + key.slice(1);
 	
 	switch (k) {
-		case "C":
-		case "G":
-		case "D":
-		case "A":
-		case "E":
-		case "B":
-		case "Gb":
-		case "Db":
-		case "Ab":
-		case "Eb":
-		case "Bb":
-		case "F":	return 'major ' + k;
-		case "Am":
-		case "Em":
-		case "Bm":
-		case "F#m":
-		case "C#m":
-		case "G#m":
-		case "Ebm":
-		case "Bbm":
-		case "Fm":
-		case "Cm":
-		case "Gm":
-		case "Dm":	return 'minor ' + k;
-		default: return '';
+		case 'C':
+		case 'G':
+		case 'D':
+		case 'A':
+		case 'E':
+		case 'B':
+		case 'Gb':
+		case 'Db':
+		case 'Ab':
+		case 'Eb':
+		case 'Bb':
+		case 'F':	return 'major ' + k;
+		case 'Am':
+		case 'Em':
+		case 'Bm':
+		case 'F#m':
+		case 'C#m':
+		case 'G#m':
+		case 'Ebm':
+		case 'Bbm':
+		case 'Fm':
+		case 'Cm':
+		case 'Gm':
+		case 'Dm':	return 'minor ' + k;
+		default: return '';	// 없으면 공백 리턴
 	}
 };
 
@@ -242,76 +243,35 @@ var notepush = {
 		var bNum = this.bNum.split('_');	// 마디번호 -- bar,0
 		var nNum = this.nNum.split('_');	// 음표번호 -- note,0
 		var trcNm = this.track;				// 현재 선택된 트랙 -- 'track1'
+		var meterNm;						// whole, half, quarter, 8th, 16th
 	
 		switch(meter) {
-			case 1: // 온음표
-				if(kara.meterCal(bNum[1], nNum[1], 'whole', trcNm) == -1) {	// 마디 초과
-					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "whole", trcNm) == 0) { // 마디 꽉차서
-					let bbNum = bNum[1];
-					bbNum = bbNum + 1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", trcNm); // push
-				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "whole", trcNm);
-				}
-				break;
-				
-			case 2: // 2분음표
-				if(kara.meterCal(bNum[1], nNum[1], "half", trcNm) == -1) { // 마디 초과
-					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "half", trcNm) == 0) { //마디 꽉차서
-					let bbNum = bNum[1];
-					bbNum = bbNum + 1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", trcNm); // push
-				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "half", trcNm);
-				}
-				break;
-				
-			case 4: // 4분음표 "quarter"
-				if(kara.meterCal(bNum[1], nNum[1], "quarter", trcNm) == -1) { // 마디 초과
-					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "quarter", trcNm) == 0) { //마디 꽉차서
-					let bbNum = bNum[1];
-					bbNum = bbNum+1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "quarter", trcNm); // push
-				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "quarter", trcNm);
-				}
-				break;
-				
-			case 8: // 8분음표 "8th"
-				if(kara.meterCal(bNum[1], nNum[1], "8th", trcNm) == -1) { // 마디 초과
-					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "8th", trcNm) == 0) { //마디 꽉차서
-					let bbNum = bNum[1];
-					bbNum = bbNum + 1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", trcNm); // push
-				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "8th", trcNm);
-				}
-				break;
-				
-			case 16: //16분음표
-				if(kara.meterCal(bNum[1], nNum[1], "16th", trcNm) == -1) { // 마디 초과
-					return;
-				} else if(kara.meterCal(bNum[1], nNum[1], "16th", trcNm) == 0) { //마디 꽉차서
-					var bbNum = bNum[1];
-					bbNum = bbNum + 1;
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", trcNm); // push
-				} else {
-					kara.noteSelect.push(bNum[1], nNum[1], this.id, "16th", trcNm);
-				}
-				break;
-				
-			default:
-				kara.scoreInfo.track[trcNm].notes[bNum[1]][nNum[1]][0] = "rest";
-				$(".in_bar" + "." + trcNm).remove();
+			case 1:		meterNm	= 'whole';	break;	// 온음표
+			case 2:		meterNm	= 'half';	break;	// 2분음표
+			case 4:		meterNm	= 'quarter';break;	// 4분음표
+			case 8:		meterNm	= '8th';	break;	// 8분음표
+			case 16:	meterNm	= '16th';	break;	// 16분음표
 
+			default:	// 해당하는 음표가 없을 때
+				
+				// 쉼표
+				kara.scoreInfo.track[trcNm].notes[bNum[1]][nNum[1]][0] = 'rest';
+				$('.in_bar.' + trcNm).remove();
+
+				// 다시 그리기
 				kara.prtNote(trcNm);
 				kara.test(trcNm);
-				break;
-		}
+				
+				return;
+		}	// End of switch
+		
+		// 마디 초과
+		if(kara.meterCal(bNum[1], nNum[1], meterNm, trcNm) === -1) return;
+		else if(kara.meterCal(bNum[1], nNum[1], meterNm, trcNm) === 0) { // 마디 꽉차서
+			let bbNum = bNum[1];
+			bbNum = bbNum + 1;
+			kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm); // push
+		} else kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm);
 	}
 };
 
@@ -335,7 +295,7 @@ var pitch_select = {
 			// 해당 범위 안에 있지 않으면 한 옥타브 올려서 계산
 			m = m + 7;	// 1 옥타브 올리기
 			n = n + 7;	// 1 옥타브 올리기
-		}
+		}	// End of for
 	}
 };
 
@@ -368,9 +328,9 @@ var boxWidth = function(meter) {
 		case '16th': //16분음표
 			width = width / 16;
 			break;
-		case 32: break;
-		case 64: break;
-		case 128: break;
+		case 32: break;// 지원안함
+		case 64: break;// 지원안함
+		case 128: break;// 지원안함
 		default: break;
 	}
 	return width;
@@ -539,7 +499,7 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 	var sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/];
 	var flatArray = [/B/, /E/, /A/, /D/, /G/, /C/, /F/];
 	var key = kara.scoreInfo.key;
-	var keySplit = key.split(" ");						// major, Db
+	var keySplit = key.split(' ');						// major, Db
 	var keyCnt = kara.key[keySplit[0]][keySplit[1]];	// 변환될 음표의 개수
 	var M = kara.key[keySplit[0]];
 

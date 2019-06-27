@@ -59,7 +59,7 @@ kara.noteSelect = {
 		else { //아니면
 			var split = note[i][j][0].split(",");
 			
-			// 똑같은 음이 없으면 중복해서 넣는다
+			// 똑같은 음이 없으면 추가
 			if(split.indexOf(pitch) === -1)
 				note[i][j][0] += "," + pitch;// A4
 		}
