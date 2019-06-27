@@ -155,7 +155,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 				//console.log("그릴 박스는 i는" + i + "j " +  j);
 			}
 			
-			var width = $('.bar_' + i + '.note_' + j + '.' + trcNm).width();//.bar_1.note_2.track1
+			var width = $('.bar_' + i + '.note_' + j + '.' + trcNm).width();// .bar_1.note_2.track1
 			d3.select('.bar_' + i + '.note_' + j + '#' + pitch + '.' + trcNm).style("fill", "#ffffff");
 
 			pitchSplit = pitch.split(",");// ["B4", "C6"] 같은 박자에 있는 음표들

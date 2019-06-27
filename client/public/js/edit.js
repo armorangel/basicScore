@@ -242,7 +242,7 @@ var notepush = {
 		var bNum = this.bNum.split('_');	// 마디번호 -- bar,0
 		var nNum = this.nNum.split('_');	// 음표번호 -- note,0
 		var trcNm = this.track;				// 현재 선택된 트랙 -- 'track1'
-
+	
 		switch(meter) {
 			case 1: // 온음표
 				if(kara.meterCal(bNum[1], nNum[1], 'whole', trcNm) == -1) {	// 마디 초과
@@ -461,8 +461,8 @@ kara.noteToKey = function(keyArray) {
 
 				
 				
-		  case "C3"://48
-			key[i] = 48; break;
+		  case "C3":
+			key[i] = 48; break;//48
 		  case "C#3"://49
 			key[i] = 49; break;
 		  case "D3"://50

@@ -16,7 +16,7 @@ mongoose.connect(dbUrl, (err) => { //MongoDB CONNECT
 });
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+//app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.static(path.join(__dirname, 'client/public')));
 
 // Put all API endpoints under '/api'

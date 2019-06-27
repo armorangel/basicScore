@@ -40,53 +40,51 @@ kara.key = {	// 심볼 갯수 객체
 
 // 배열에 음표 담기
 kara.noteSelect = {
-	push: function(i, j,  pitch, note_meter, track) { // i: 마디 번호 j: 음표 번호
+	push: function(i, j,  pitch, note_meter, trcNm) { // i: 마디 번호 j: 음표 번호
+		// 0, 0, A4, whole, track1
 		
-		var note = kara.scoreInfo.track[track].notes; // 배열을 받아온다
+		var note = kara.scoreInfo.track[trcNm].notes; // 배열을 받아온다
 
-		if(!jQuery.isArray(note[i])) { //2차원배열이 아니면 2차원 배열 생성
-			note[i] = []; // new Array(); [i][]
-		}
+		// 2차원배열이 아니면 2차원 배열 생성
+		if(!jQuery.isArray(note[i])) note[i] = []; // new Array(); [i][]
 
-		if(!jQuery.isArray(note[i][j])) {
-			note[i][j] = new Array(2); //[0]은 계이름, [1]은 박자
-		}
+		// [0]은 계이름, [1]은 박자
+		if(!jQuery.isArray(note[i][j])) note[i][j] = new Array(2);
 
-		if(note[i][j][0] == undefined) { //만약 계이름이 없으면
-			note[i][j][0] = pitch; //그냥 넣어라
-			
-		} else if(note[i][j][0] == "rest") {
+		// 만약 계이름이 없으면
+		if(!note[i][j][0])
+			note[i][j][0] = pitch;	// 그냥 넣어라(A4)
+		else if(note[i][j][0] === "rest")	// 쉼표면
 			note[i][j][0] = pitch;
-		} else { //아니면
-			
+		else { //아니면
 			var split = note[i][j][0].split(",");
 			
-			if(split.indexOf(pitch) === -1) {					// 똑같은 음이 없으면
-				note[i][j][0] = note[i][j][0] + "," + pitch;	//중복해서 넣는다
-			}
+			// 똑같은 음이 없으면 중복해서 넣는다
+			if(split.indexOf(pitch) === -1)
+				note[i][j][0] += "," + pitch;// A4
 		}
 		
-		note[i][j][1] = note_meter;
+		note[i][j][1] = note_meter;	// whole
 
-		kara.scoreInfo.track[track].notes = note;
-		$(".in_bar" + "." + track).remove();
-
-		kara.prtNote(track);	// 음표 그리기
-		kara.test(track);		// 배열값 표시
+		$('.in_bar.' + trcNm).remove();
+		
+		kara.prtNote(trcNm);	// 음표 그리기
+		kara.test(trcNm);		// 배열값 표시
 	}
 };
 
 // 마디에 음표 추가시 음표 추가 가능 여부 검사
 // return -1 :: 불가능, 0 :: 가능 마디 꽉참, 1 :: 가능
-kara.meterCal = function(bNum, nNum, nowMeter, track) {
-	console.log(bNum + ", " + nNum + ", " + nowMeter + ", " + track);
-	var note = kara.scoreInfo.track[track].notes;
-	var meter = kara.scoreInfo.meter.split('/');
-	var limited = meter[0]*meter[1]; //마디 제한
-	var now = 0;
-	var noteMeter = kara.noteMeter;
+kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {// 0, 0, whole, track1
 	
-	if(note[bNum] == undefined) return;
+	//Why this function is called twice
+	var note = kara.scoreInfo.track[trcNm].notes;
+	var meter = kara.scoreInfo.meter.split('/');
+	var limited = meter[0] * meter[1];	// 마디 제한
+	var now = 0;
+	var noteMeter = kara.noteMeter;	// {head, rest}
+	
+	if(!note[bNum]) return;
 
 	for(var i = 0; i < note[bNum].length; i++) {
 		var note_meter = noteMeter.head[note[bNum][i][1]];
@@ -95,22 +93,23 @@ kara.meterCal = function(bNum, nNum, nowMeter, track) {
 	
 	// 지금까지의 마디와 현재 마디를 더하면 초과인가
 	if((now + noteMeter.head[nowMeter]) > limited) {
-		if(note[bNum][nNum][1] === undefined) {
+		if(!note[bNum][nNum][1]) {
 			alert("마디 초과");
 			return -1; // 넣지 못합
 		} else {
-			now = now - noteMeter.head[note[bNum][nNum][1]] + noteMeter.head[nowMeter] ;
+			now = now - noteMeter.head[note[bNum][nNum][1]] + noteMeter.head[nowMeter];
+			
 			if(now === limited) {
 				return 0;
 			} else if(now < limited) {
-				kara.barsort(bNum, nNum, nowMeter, track);
+				kara.barsort(bNum, nNum, nowMeter, trcNm);
 				return 1;	// 정상 추가인데 쉼표를 넣어줘야되
 			} else {
 				alert("마디 초과");
 				return -1;	// 그래도 터져
 			}
 		}
-	} else if ((now+noteMeter.head[nowMeter]) === limited) {// 지금까지의 마디와 현재 마디를 더하면 적당한가
+	} else if ((now + noteMeter.head[nowMeter]) === limited) {// 지금까지의 마디와 현재 마디를 더하면 적당한가
 		return 0; // 넣을 순 있지만 꽉참
 	} else {
 		return 1; // 정상적으로 추가
@@ -121,13 +120,13 @@ kara.meterCal_box = function(bNum, track) {
 	
 	var note = kara.scoreInfo.track[track].notes;
 	var meter = kara.scoreInfo.meter.split('/');
-	var limited = meter[0]*meter[1]; //마디 제한
+	var limited = meter[0] * meter[1]; //마디 제한
 	var now = 0;
 	var noteMeter = kara.noteMeter;
 	
-	if(note[bNum] == undefined) return;
-	for(let i=0; i <note[bNum].length; i++) {
-
+	if(!note[bNum]) return;
+	
+	for(let i = 0; i < note[bNum].length; i++) {
 		var note_meter = noteMeter.head[note[bNum][i][1]];
 		now = now + note_meter;
 	}
@@ -177,47 +176,34 @@ kara.barsort = function(bNum, nNum , nowmeter, track) {
 };
 
 
-kara.remain_meter = function(remain_meter, bNum, nNum, track) {
+kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {// 8, 1, 1, track1
 	
-	console.log(remain_meter + ", " + bNum + ", " + nNum + ", " + track);
 	var noteMeter = kara.noteMeter;
+	var arr = kara.scoreInfo.track[trcNm].notes;
 	
-	if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][nNum]))
-			kara.scoreInfo.track[track].notes[bNum][nNum] = [];	// new Array()	배열이 아니면
-	
-	
-	//var arr = kara.scoreInfo.track[track].notes[bNum][nNum];
-	
-	kara.scoreInfo.track[track].notes[bNum][nNum][0] = "rest";
-	
-	//console.log(arr);
+	if(!jQuery.isArray(kara.scoreInfo.track[trcNm].notes[bNum][nNum]))
+			kara.scoreInfo.track[trcNm].notes[bNum][nNum] = [];	// new Array()	배열이 아니면
+
+	// kara.scoreInfo.track[trcNm].notes[bNum][nNum][0] = "rest";
+	arr[bNum][nNum][0] = "rest";
 	
 	if(remain_meter >= noteMeter.head.half) {	// 8
 		
-		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "half";
+		arr[bNum][nNum][1] = "half";
 		remain_meter = remain_meter - noteMeter.head.half;
-
-		return remain_meter;
 	}
 	else if(remain_meter >= noteMeter.head.quarter) {	// 4
 		
-		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "quarter";
+		arr[bNum][nNum][1] = "quarter";
 		remain_meter = remain_meter - noteMeter.head.quarter;
-
-		return remain_meter;
 	}
-	else if(remain_meter >= noteMeter.head["8th"]){	// 2
-
-		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "8th";
+	else if(remain_meter >= noteMeter.head["8th"]) {	// 2
+		arr[bNum][nNum][1] = "8th";
 		remain_meter = remain_meter - noteMeter.head["8th"];
-
-		return remain_meter;
 	}
-	else{
-
-		kara.scoreInfo.track[track].notes[bNum][nNum][1] = "16th";
+	else {
+		arr[bNum][nNum][1] = "16th";
 		remain_meter = remain_meter - noteMeter.head["16th"];	// 1
-
-		return remain_meter;
 	}
+	return remain_meter;
 };
