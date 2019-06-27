@@ -69,7 +69,7 @@ kara.play = {
 				for (var key in note) {
 					if (note.hasOwnProperty(key)) {
 						if(note[key].clef !== ""){
-							for(var i=0; i<note[key].notes.length; i++) {
+							for(var i=0; i < note[key].notes.length; i++) {
 								for(var j = 0; j < note[key].notes[i].length; j++) {
 
 									if(!jQuery.isArray(chord[m])) { // 2차원배열이 아니면2차원 배열 생성
@@ -105,7 +105,7 @@ kara.play = {
 				//재생 Interval
 				var play = setInterval(function() {
 
-					console.log("실행중");
+					//console.log("실행중");
 					for(var r = 0; r < chord.length; r++){
 						var meter = player[r];
 						var ind = index[r];
@@ -133,7 +133,7 @@ kara.play = {
 					}
 
 					kara.play.lengs--;
-					console.log("kara.play.lengs는" + kara.play.lengs);
+					//console.log("kara.play.lengs는" + kara.play.lengs);
 
 					if(kara.play.lengs < 0) {
 						//재생 Interval 삭제

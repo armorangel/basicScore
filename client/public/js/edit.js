@@ -422,7 +422,7 @@ var PopLayer = {
 kara.noteToKey = function(keyArray) {// B4,F4
 		
 	var split = keyArray.split(",");
-	var key = new Array(leng);	// 반환할 숫자 배열
+	var key = new Array(split.length);	// 반환할 숫자 배열
 
 	// 음 갯수 만큼 반복
 	for(let i = 0; i < split.length; i++) {
@@ -542,14 +542,13 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 	var keySplit = key.split(" ");						// major, Db
 	var keyCnt = kara.key[keySplit[0]][keySplit[1]];	// 변환될 음표의 개수
 	var M = kara.key[keySplit[0]];
-	var regexp;
 
 	for (let key in M) {
 		if (key === keySplit[1]) {
-			switch(key){
+			switch(key) {
 				// Sharp
-				case 'C':
-				case 'Am': return 0;	// 아무것도 없으면 0
+				//case 'C':
+				//case 'Am': return 0;	// 아무것도 없으면 0
 				case 'G': //1
 				case 'Em':
 				case 'D': //2
@@ -561,9 +560,8 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 				case 'B': //5
 				case 'G#m':
 					for(let i = 0; i < keyCnt; i++) {
-						regexp = sharpArray[i];
-						// 그 음이 #이 붙으면 1을 리턴
-						if(regexp.test(pitch)) return 1;
+						// 해당 음이 #이 붙으면 1을 리턴
+						if(sharpArray[i].test(pitch)) return 1;
 					}
 					break;
 				// Flat
@@ -580,10 +578,8 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 				case 'F': //1
 				case 'Dm':
 					for(let i = 0; i < keyCnt; i++) {
-						regexp = flatArray[i];
-						
-						//그 음이 b이 붙으면 -1을 리턴
-						if(regexp.test(pitch)) return -1;
+						//해당 음이 b이 붙으면 -1을 리턴
+						if(flatArray[i].test(pitch)) return -1;
 					}
 					break;
 			}	// End of switch
