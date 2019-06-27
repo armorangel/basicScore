@@ -499,30 +499,18 @@ kara.noteToKey = function(keyArray) {
 			case 'A#5':	key[i] = 82; break;	// 82
 			case 'B5':	key[i] = 83; break;	// 83
 
-		  case "C6"://84
-			key[i] = 84; break;
-		  case "C#6"://85
-			key[i] = 85; break;
-		  case "D6"://86
-			key[i] = 86; break;
-		  case "D#6"://87
-			key[i] = 87; break;
-		  case "E6"://88
-			key[i] = 88; break;
-		  case "F6"://89
-			key[i] = 89; break;
-		  case "F#6"://90
-			key[i] = 90; break;
-		  case "G6"://91
-			key[i] = 91; break;
-		  case "G#6"://92
-			key[i] = 92; break;
-		  case "A6"://93
-			key[i] = 93; break;
-		  case "A#6"://94
-			key[i] = 94; break;
-		  case "B6"://95
-			key[i] = 95; break;
+			case 'C6':	key[i] = 84; break;	// 84
+			case 'C#6':	key[i] = 85; break;	// 85
+			case 'D6':	key[i] = 86; break;	// 86
+			case 'D#6':	key[i] = 87; break;	// 87
+			case 'E6':	key[i] = 88; break;	// 88
+			case 'F6':	key[i] = 89; break;	// 89
+			case 'F#6':	key[i] = 90; break;	// 90
+			case 'G6':	key[i] = 91; break;	// 91
+			case 'G#6':	key[i] = 92; break;	// 92
+			case 'A6':	key[i] = 93; break;	// 93
+			case 'A#6':	key[i] = 94; break;	// 94
+			case 'B6':	key[i] = 95; break;	// 95
 
 		  case "C7"://96
 			key[i] = 96; break;
