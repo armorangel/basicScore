@@ -180,30 +180,21 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {// 8, 1, 1, track
 	
 	var noteMeter = kara.noteMeter;
 	var arr = kara.scoreInfo.track[trcNm].notes;
+	var meterNm;	// half, quarter, 8th, 18th
 	
-	if(!jQuery.isArray(kara.scoreInfo.track[trcNm].notes[bNum][nNum]))
-			kara.scoreInfo.track[trcNm].notes[bNum][nNum] = [];	// new Array()	배열이 아니면
+	if(!jQuery.isArray(arr[bNum][nNum]))
+			arr[bNum][nNum] = [];	// new Array()	배열이 아니면
 
-	// kara.scoreInfo.track[trcNm].notes[bNum][nNum][0] = "rest";
-	arr[bNum][nNum][0] = "rest";
+	// 쉼표
+	arr[bNum][nNum][0] = 'rest';
 	
-	if(remain_meter >= noteMeter.head.half) {	// 8
-		
-		arr[bNum][nNum][1] = "half";
-		remain_meter = remain_meter - noteMeter.head.half;
-	}
-	else if(remain_meter >= noteMeter.head.quarter) {	// 4
-		
-		arr[bNum][nNum][1] = "quarter";
-		remain_meter = remain_meter - noteMeter.head.quarter;
-	}
-	else if(remain_meter >= noteMeter.head["8th"]) {	// 2
-		arr[bNum][nNum][1] = "8th";
-		remain_meter = remain_meter - noteMeter.head["8th"];
-	}
-	else {
-		arr[bNum][nNum][1] = "16th";
-		remain_meter = remain_meter - noteMeter.head["16th"];	// 1
-	}
+	if(remain_meter >= noteMeter.head.half) meterNm = 'half';				// 8
+	else if(remain_meter >= noteMeter.head.quarter) meterNm = 'quarter';	// 4
+	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th';			// 2
+	else meterNm = '16th';													// 1
+	
+	arr[bNum][nNum][1] = meterNm;
+	remain_meter = remain_meter - noteMeter.head[meterNm];
+	
 	return remain_meter;
 };
