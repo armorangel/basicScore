@@ -78,6 +78,8 @@ kara.play = {
 									if(!jQuery.isArray(chord[m][n])) { //3차원배열이 아니면2차원 배열 생성
 										chord[m][n] = []; //[m][] 배열 생성(new Array())
 									}
+									
+									// 계이름을 MIDI숫자로 변환
 									chord[m][n][0]= kara.noteToKey(note[key].notes[i][j][0]);
 									chord[m][n][1] = note[key].notes[i][j][1];
 									n++;

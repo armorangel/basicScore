@@ -418,16 +418,14 @@ var PopLayer = {
 	}
 };
 
-kara.noteToKey = function(keyArray) {
-	
-	console.log('kara.noteToKey');
-	console.log(keyArray);
-	
+// 악기 재생을 위해 계이름을 MIDI숫자로 변환
+kara.noteToKey = function(keyArray) {// B4,F4
+		
 	var split = keyArray.split(",");
-	var leng = split.length;
-	var key = new Array(leng);
+	var key = new Array(leng);	// 반환할 숫자 배열
 
-	for(var i = 0; i < split.length; i++) {
+	// 음 갯수 만큼 반복
+	for(let i = 0; i < split.length; i++) {
 		switch(split[i]) {
 				
 			case 'A0':	key[i] = 21; break;	// 21
@@ -512,66 +510,45 @@ kara.noteToKey = function(keyArray) {
 			case 'A#6':	key[i] = 94; break;	// 94
 			case 'B6':	key[i] = 95; break;	// 95
 
-		  case "C7"://96
-			key[i] = 96; break;
-		  case "C#7"://97
-			key[i] = 97; break;
-		  case "D7"://98
-			key[i] = 98; break;
-		  case "D#7"://99
-			key[i] = 99; break;
-		  case "E7"://100
-			key[i] = 100; break;
-		  case "F7"://101
-			key[i] = 101; break;
-		  case "F#7"://102
-			key[i] = 102; break;
-		  case "G7"://103
-			key[i] = 103; break;
-		  case "G#7"://104
-			key[i] = 104; break;
-		  case "A7"://105
-			key[i] = 105; break;
-		  case "A#7"://106
-			key[i] = 106; break;
-		  case "B7"://107
-			key[i] = 107; break;
-    }
-  }
+			case "C7":	key[i] = 96; break;	// 96
+			case "C#7":	key[i] = 97; break;	// 97
+			case "D7":	key[i] = 98; break;	// 98
+			case "D#7":	key[i] = 99; break;	// 99
+			case "E7":	key[i] = 100; break;// 100
+			case "F7":	key[i] = 101; break;// 101
+			case "F#7":	key[i] = 102; break;// 102
+			case "G7":	key[i] = 103; break;// 103
+			case "G#7":	key[i] = 104; break;// 104
+			case "A7":	key[i] = 105; break;// 105
+			case "A#7":	key[i] = 106; break;// 106
+			case "B7":	key[i] = 107; break;// 107
+		}	// End of switch
+	}	// End Of for
 
-	for(var j = 0; j < split.length; j++){
-		if(kara.key_er(split[j]) === 1){
-			var temp = key[j];
-			key[j] = temp + 1;
-		}
-		if(kara.key_er(split[j]) === 0){
-			var temp = key[j];
-			key[j] = temp;
-		}
-		if(kara.key_er(split[j]) === -1){
-			var temp = key[j];
-			key[j] = temp - 1;
-		}
-	}
+	//Flat, Sharp 음 높이 조정
+	for(let i = 0; i < split.length; i++)
+		key[i] += kara.key_er(split[i]);
+
   return key;
 };
 
 // sharp 또는 flat이 붙은 음표인지 검사
 // return 1 :: sharp이 있으면, -1 :: flat이 있으면, 아무것도 없으면 0
 kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
-	
+	// Why this funciton is called twice
 	var sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/];
 	var flatArray = [/B/, /E/, /A/, /D/, /G/, /C/, /F/];
 	var key = kara.scoreInfo.key;
-	var keySplit = key.split(" ");
-	var keyNum = kara.key[keySplit[0]][keySplit[1]]; // 변환될 음표의 개수
+	var keySplit = key.split(" ");						// major, Db
+	var keyCnt = kara.key[keySplit[0]][keySplit[1]];	// 변환될 음표의 개수
 	var M = kara.key[keySplit[0]];
 	var regexp;
 
 	for (let key in M) {
-		if (key == keySplit[1]) {
+		if (key === keySplit[1]) {
 			switch(key){
-				case 'C': return 0;	// 아무것도 없으면 0
+				// Sharp
+				case 'C':
 				case 'Am': return 0;// 아무것도 없으면 0
 				case 'G': //1
 				case 'Em':
@@ -583,12 +560,13 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 				case 'C#m':
 				case 'B': //5
 				case 'G#m':
-					for(let i = 0; i < M[keySplit[1]]; i++) {
+					for(let i = 0; i < keyCnt; i++) {
 						regexp = sharpArray[i];
 						// 그 음이 #이 붙으면 1을 리턴
 						if(regexp.test(pitch)) return 1;
 					}
 					break;
+				// Flat
 				case 'Gb': //6
 				case 'Ebm':
 				case 'Ab': //5
@@ -601,16 +579,16 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 				case 'Gm':
 				case 'F': //1
 				case 'Dm':
-					for(let i = 0; i < M[keySplit[1]]; i++) {
+					for(let i = 0; i < keyCnt; i++) {
 						regexp = flatArray[i];
 						
 						//그 음이 b이 붙으면 -1을 리턴
 						if(regexp.test(pitch)) return -1;
 					}
 					break;
-			}
-		}
-	}
+			}	// End of switch
+		}	// End of if
+	}	// End of for
 	
 	return 0;	// 아무것도 없으면
 };
