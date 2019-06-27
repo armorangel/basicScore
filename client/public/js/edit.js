@@ -459,57 +459,31 @@ kara.noteToKey = function(keyArray) {
 			case 'A#2':	key[i] = 46; break;	// 46
 			case 'B2':	key[i] = 47; break;	// 47
 
-				
-				
-		  case "C3":
-			key[i] = 48; break;//48
-		  case "C#3"://49
-			key[i] = 49; break;
-		  case "D3"://50
-			key[i] = 50; break;
-		  case "D#3"://51
-			key[i] = 51; break;
-		  case "E3"://52
-			key[i] = 52; break;
-		  case "F3"://53
-			key[i] = 53; break;
-		  case "F#3"://54
-			key[i] = 54; break;
-		  case "G3"://55
-			key[i] = 55; break;
-		  case "G#3"://56
-			key[i] = 56; break;
-		  case "A3"://57
-			key[i] = 57; break;
-		  case "A#3"://58
-			key[i] = 58; break;
-		  case "B3"://59
-			key[i] = 59; break;
+			case 'C3':	key[i] = 48; break;	// 48
+			case 'C#3':	key[i] = 49; break;	// 49
+			case 'D3':	key[i] = 50; break;	// 50
+			case 'D#3':	key[i] = 51; break;	// 51
+			case 'E3':	key[i] = 52; break;	// 52
+			case 'F3':	key[i] = 53; break;	// 53
+			case 'F#3':	key[i] = 54; break;	// 54
+			case 'G3':	key[i] = 55; break;	// 55
+			case 'G#3':	key[i] = 56; break;	// 56
+			case 'A3':	key[i] = 57; break;	// 57
+			case 'A#3':	key[i] = 58; break;	// 58
+			case 'B3':	key[i] = 59; break;	// 59
 
-		  case "C4"://60
-			key[i] = 60; break;
-		  case "C#4"://61
-			key[i] = 61; break;
-		  case "D4"://62
-			key[i] = 62; break;
-		  case "D#4"://63
-			key[i] = 63; break;
-		  case "E4"://64
-			key[i] = 64; break;
-		  case "F4"://65
-			key[i] = 65; break;
-		  case "F#4"://66
-			key[i] = 66; break;
-		  case "G4"://67
-			key[i] = 67; break;
-		  case "G#4"://68
-			key[i] = 68; break;
-		  case "A4"://69
-			key[i] = 69; break;
-		  case "A#4"://70
-			key[i] = 70; break;
-		  case "B4"://71
-			key[i] = 71; break;
+			case "C4":	key[i] = 60; break;	// 60
+			case "C#4":	key[i] = 61; break;	// 61
+			case "D4":	key[i] = 62; break;	// 62
+			case "D#4":	key[i] = 63; break;	// 63
+			case "E4":	key[i] = 64; break;	// 64
+			case "F4":	key[i] = 65; break;	// 65
+			case "F#4":	key[i] = 66; break;	// 66
+			case "G4":	key[i] = 67; break;	// 67
+			case "G#4":	key[i] = 68; break;	// 68
+			case "A4":	key[i] = 69; break;	//	69
+			case "A#4":	key[i] = 70; break;	//	70
+			case "B4":	key[i] = 71; break;	//	71
 
 		  case "C5"://72
 			key[i] = 72; break;
