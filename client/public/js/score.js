@@ -49,7 +49,7 @@ kara.noteSelect = {
 		if(!jQuery.isArray(note[i])) note[i] = []; // new Array(); [i][]
 
 		// [0]은 계이름, [1]은 박자
-		if(!jQuery.isArray(note[i][j])) note[i][j] = new Array(2);
+		if(!jQuery.isArray(note[i][j])) note[i][j] = [];	//new Array(2);
 
 		// 만약 계이름이 없으면
 		if(!note[i][j][0])
@@ -57,11 +57,11 @@ kara.noteSelect = {
 		else if(note[i][j][0] === 'rest')	// 쉼표면
 			note[i][j][0] = pitch;
 		else { //아니면
-			var split = note[i][j][0].split('','');
+			var split = note[i][j][0].split(',');
 			
 			// 똑같은 음이 없으면 추가
 			if(split.indexOf(pitch) === -1)
-				note[i][j][0] += ',' + pitch;// A4
+				note[i][j][0] += (',' + pitch);// A4
 		}
 		
 		note[i][j][1] = note_meter;	// whole
@@ -93,7 +93,7 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	
 	// 지금까지의 마디와 현재 마디를 더하면 초과인가
 	if((now + noteMeter.head[nowMeter]) > limited) {
-		if(!note[bNum][nNum][1]) {
+		if(note[bNum][nNum][1] == undefined) {
 			alert("마디 초과");
 			return -1; // 넣지 못합
 		} else {
@@ -114,7 +114,6 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	} else {
 		return 1; // 정상적으로 추가
 	}
-	alert('bottom line');
 };
 
 kara.meterCal_box = function(bNum, track) {
