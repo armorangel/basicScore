@@ -49,7 +49,7 @@ kara.noteSelect = {
 		if(!jQuery.isArray(note[i])) note[i] = []; // new Array(); [i][]
 
 		// [0]은 계이름, [1]은 박자
-		if(!jQuery.isArray(note[i][j])) note[i][j] = [];	//new Array(2);
+		if(!jQuery.isArray(note[i][j])) note[i][j] = new Array(2);
 
 		// 만약 계이름이 없으면
 		if(!note[i][j][0])
@@ -87,13 +87,13 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	if(!note[bNum]) return;
 
 	for(var i = 0; i < note[bNum].length; i++) {
-		var note_meter = noteMeter.head[note[bNum][i][1]];
+		let note_meter = noteMeter.head[note[bNum][i][1]];
 		now = now + note_meter;
 	}
 	
 	// 지금까지의 마디와 현재 마디를 더하면 초과인가
 	if((now + noteMeter.head[nowMeter]) > limited) {
-		if(note[bNum][nNum][1] == undefined) {
+		if(note[bNum][nNum][1] === undefined) {
 			alert("마디 초과");
 			return -1; // 넣지 못합
 		} else {
@@ -134,25 +134,25 @@ kara.meterCal_box = function(bNum, track) {
 	if (now == limited) return 1;
 };
 
-kara.barsort = function(bNum, nNum , nowmeter, track) {
+kara.barsort = function(bNum, nNum , nowmeter, trcNm) {	// 0, 0, 16th, track1
 	
-	var note = kara.scoreInfo.track[track].notes;
+	var note = kara.scoreInfo.track[trcNm].notes;
 	var copynote = [];
-	var barLength = kara.scoreInfo.track[track].notes[bNum].length;
+	var barLength = note[bNum].length;
 	var noteMeter = kara.noteMeter;
-	var pre_meter = kara.scoreInfo.track[track].notes[bNum][nNum][1];
+	var pre_meter = note[bNum][nNum][1];
 	var remain_meter = 0;
 	var i = 0, j = 0;
 
-	for(var k = 0; k < note[bNum].length; k++) {
+	for(let k = 0; k < note[bNum].length; k++) {
 		copynote[k] = [];	// new Array();
 		copynote[k][0] = note[bNum][k][0];
 		copynote[k][1] = note[bNum][k][1];
 	}
 
 	while(i < nNum) {
-		kara.scoreInfo.track[track].notes[bNum][i][0] = copynote[i][0];
-		kara.scoreInfo.track[track].notes[bNum][i][1] = copynote[i][1];
+		note[bNum][i][0] = copynote[i][0];
+		note[bNum][i][1] = copynote[i][1];
 		i++;
 	}
 	
@@ -160,40 +160,41 @@ kara.barsort = function(bNum, nNum , nowmeter, track) {
 	i = Number(nNum) + 1;
 	
 	while(remain_meter > 0) {
-		remain_meter = kara.remain_meter(remain_meter, bNum, i, track);
+		remain_meter = kara.remain_meter(remain_meter, bNum, i, trcNm);
 		i++;
 	}
+	
 	nNum++;
 	
 	for(let j = nNum; j < barLength; j++) {
-		if(!jQuery.isArray(kara.scoreInfo.track[track].notes[bNum][i])) {
-			kara.scoreInfo.track[track].notes[bNum][i] = [];	// new Array();
-		}
-		kara.scoreInfo.track[track].notes[bNum][i][0] = copynote[j][0];
-		kara.scoreInfo.track[track].notes[bNum][i][1] = copynote[j][1];
+		
+		if(!jQuery.isArray(note[bNum][i]))
+			note[bNum][i] = [];	// new Array();
+		
+		note[bNum][i][0] = copynote[j][0];
+		note[bNum][i][1] = copynote[j][1];
+		
 		i++;
-	}
+	}	// End of for
 };
 
-
-kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {// 8, 1, 1, track1
+kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, track1
 	
+	var note = kara.scoreInfo.track[trcNm].notes;
 	var noteMeter = kara.noteMeter;
-	var arr = kara.scoreInfo.track[trcNm].notes;
 	var meterNm;	// half, quarter, 8th, 18th
 	
-	if(!jQuery.isArray(arr[bNum][nNum]))
-		arr[bNum][nNum] = [];	// new Array()	배열이 아니면
+	if(!jQuery.isArray(note[bNum][nNum]))
+		note[bNum][nNum] = [];	// new Array()	배열이 아니면
 
-	// 쉼표
-	arr[bNum][nNum][0] = 'rest';
+	note[bNum][nNum][0] = 'rest';	// 쉼표
 	
 	if(remain_meter >= noteMeter.head.half) meterNm = 'half';				// 8
 	else if(remain_meter >= noteMeter.head.quarter) meterNm = 'quarter';	// 4
 	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th';			// 2
 	else meterNm = '16th';													// 1
 	
-	arr[bNum][nNum][1] = meterNm;
+	note[bNum][nNum][1] = meterNm;
 	remain_meter = remain_meter - noteMeter.head[meterNm];
 	
 	return remain_meter;
