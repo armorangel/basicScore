@@ -569,6 +569,7 @@ kara.maxLength = function(chordArray) {	// [[[61, 77], 'whole'], [[68], 'whole']
 		// 현재 트랙 길이 초기화
 		nowlen = 0;
 	}	// End of for
+	
 	return longlen;
 };
 
