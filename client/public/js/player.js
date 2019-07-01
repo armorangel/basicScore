@@ -83,13 +83,13 @@ kara.addTabs = function() {
 		}
 			
 		// 탭 refresh
-		$("#tabs").tabs( "refresh" );
+		$('#tabs').tabs('refresh');
 	});
 
 	// 탭 refresh
-	$( "#tabs" ).tabs( "refresh" );
+	$('#tabs').tabs('refresh');
 
-	kara.initScore("track" + trcNum);	// Init Score
+	kara.initScore('track' + trcNum);	// Init Score
 };
 
 // Add Combo to select Instruments on Each Track
