@@ -265,15 +265,10 @@ var notepush = {
 				return;
 		}	// End of switch
 		
-		// 음표추가 가능 여부
-		var noteAddYn = kara.meterCal(bNum[1], nNum[1], meterNm, trcNm);
+		// 음표추가 가능 여부		
+		if(kara.meterCal(bNum[1], nNum[1], meterNm, trcNm) === -1) return;	// 마디 초과
 		
-		if(noteAddYn === -1) return;	// 마디 초과
-		else if(noteAddYn === 0) {	// 가능하지만 마디 꽉침
-			kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm); // push
-		} else {	// 추가 가능
-			kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm);	
-		}
+		kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm);// 추가 가능
 	}
 };
 

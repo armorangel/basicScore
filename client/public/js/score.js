@@ -93,6 +93,7 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	
 	// 지금까지의 마디와 현재 마디를 더하면 초과인가
 	if((now + noteMeter.head[nowMeter]) > limited) {
+		
 		if(note[bNum][nNum][1] === undefined) {
 			alert("마디 초과");
 			return -1; // 넣지 못합
@@ -109,6 +110,7 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 				return -1;	// 그래도 터져
 			}
 		}
+		
 	} else if ((now + noteMeter.head[nowMeter]) === limited) {	// 지금까지의 마디와 현재 마디를 더하면 적당한가
 		return 0; // 넣을 순 있지만 꽉참
 	} else {
