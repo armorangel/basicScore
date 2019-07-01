@@ -265,16 +265,15 @@ var notepush = {
 				return;
 		}	// End of switch
 		
+		// 음표추가 가능 여부
 		var noteAddYn = kara.meterCal(bNum[1], nNum[1], meterNm, trcNm);
-		alert(noteAddYn);
+		
 		if(noteAddYn === -1) return;	// 마디 초과
 		else if(noteAddYn === 0) {	// 가능하지만 마디 꽉침
-			let bbNum = bNum[1];
-			console.log('bbNum1 : ' + bbNum);
-			bbNum = bbNum + 1; // 이건 뭐지
-			console.log('bbNum2 : ' + bbNum);
 			kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm); // push
-		} else kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm);	// 추가 가능
+		} else {	// 추가 가능
+			kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm);	
+		}
 	}
 };
 
