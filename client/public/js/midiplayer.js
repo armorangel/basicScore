@@ -16,7 +16,7 @@ kara.play = {
 		
 		for (var keyInstru in kara.scoreInfo.track) {
 			if (kara.scoreInfo.track.hasOwnProperty(keyInstru)) {
-				if(kara.scoreInfo.track[keyInstru].instrument !== ""){
+				if(kara.scoreInfo.track[keyInstru].instrument !== ''){
 					
 					//console.log(kara.scoreInfo.track[keyInstru].instrument);
 					//console.log(kara.numToInstrument(kara.scoreInfo.track[keyInstru].instrument));
