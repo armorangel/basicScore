@@ -114,6 +114,7 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	} else {
 		return 1; // 정상적으로 추가
 	}
+	alert('bottom line');
 };
 
 kara.meterCal_box = function(bNum, track) {
