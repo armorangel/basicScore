@@ -37,12 +37,7 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
 	
 	//var svgTag = "<svg id='score' xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'></svg>";
-	
 	//$('#' + trcNm).append(svgTag);
-	
-	//$('#' + trcNm).append(svgTag);
-	
-	
 	//svgContainer = $('#' + trcNm + ' > #score').width(width-43).height(400);
 
 	
@@ -156,18 +151,20 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			}
 			
 			var width = $('.bar_' + i + '.note_' + j + '.' + trcNm).width();// .bar_1.note_2.track1
-			d3.select('.bar_' + i + '.note_' + j + '#' + pitch + '.' + trcNm).style("fill", "#ffffff");
+			d3.select('.bar_' + i + '.note_' + j + '#' + pitch + '.' + trcNm).style('fill', '#ffffff');
 
 			pitchSplit = pitch.split(",");// ["B4", "C6"] 같은 박자에 있는 음표들
 
 			for(var pi = 0; pi < pitchSplit.length; pi++) {
 				
 				//쉼표 일때는 A4높이에 그리기
-				if(pitchSplit[pi] === "rest") position = $('#A4.bar_' + i + '.note_' + j + '.' + trcNm).position();
-				else position = $('#' + pitchSplit[pi] + '.bar_' + i + '.note_' + j + '.' + trcNm).position();
+				if(pitchSplit[pi] === "rest")
+					position = $('#A4.bar_' + i + '.note_' + j + '.' + trcNm).position();
+				else
+					position = $('#' + pitchSplit[pi] + '.bar_' + i + '.note_' + j + '.' + trcNm).position();
 					
 				var x = position.left - kara.scorePos.left(trcNm);
-				var y = position.top - kara.scorePos.top(trcNm) + 3;
+				var y = position.top - kara.scorePos.top(trcNm) + 3;// 3이 뭔지
 				
 				var leng = 0;	// x 길이 추가
 
@@ -304,15 +301,15 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 
 	//음자리표 선택영역 APPEND
 	svg.append('rect')
-		.attr("id", "edtClf")	// #editClef :: 음자리표 선택영역(수정)
-		.attr("class", 'in_bar ' + trcNm)
-		.attr("x", box_x)
-		.attr("y", box_y)
-		.attr("onclick", "kara.edit.clef('" + trcNm + "')")
-		.style("width", width)
-		.style("height", height)
-		.style("fill", "#00ff01")
-		.style("fill-opacity", "0.3");
+		.attr('id', 'edtClf')	// #editClef :: 음자리표 선택영역(수정)
+		.attr('class', 'in_bar ' + trcNm)
+		.attr('x', box_x)
+		.attr('y', box_y)
+		.attr('onclick', "kara.edit.clef('" + trcNm + "')")
+		.style('width', width)
+		.style('height', height)
+		.style('fill', '#00ff01')
+		.style('fill-opacity', '0.3');
 };
 
 // 조표 SVG 그리기
