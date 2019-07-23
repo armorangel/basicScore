@@ -372,14 +372,14 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 								y = Y + 19; 
 								break;// Gb_b
 							case 1:
-								y = Y + 1; // Ab_e
-								break;
+								y = Y + 1; 
+								break;// Ab_e
 							case 2:
-								y = Y + 25; // Db_a
-								break;
+								y = Y + 25; 
+								break;// Db_a
 							case 3:
-								y = Y + 7; // Eb_d
-								break;
+								y = Y + 7; 
+								break;// Eb_d
 							case 4:
 								y = Y + 31; // Bb_g
 								break;
@@ -718,10 +718,10 @@ kara.noteBox = {
 			// 악보 선택 영역 추가
 			svgVar.append('rect')
 				.attr('id', p)
-				.attr("class", "in_bar " + "bar_" + bNum + " " + "note_" + nNum + " " + track) //마디,  음표 번호
-				.attr("x", x)
-				.attr("y", y)
-				.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
+				.attr('class', 'in_bar ' + 'bar_' + bNum + ' ' + 'note_' + nNum + ' ' + track) //마디,  음표 번호
+				.attr('x', x)
+				.attr('y', y)
+				.attr('onmousedown', "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
 				.style("width", width)
 				.style("height", height)	// 6
 				.style("fill", fill)
