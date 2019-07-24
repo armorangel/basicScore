@@ -15,7 +15,7 @@ kara.initScore = function(trcNm) {// trcNm: Track Name -- 'track1'
 kara.refresh = function() {
 	
 	// 악보 삭제영역 삭제
-	$(".in_bar").remove();
+	$('.in_bar').remove();
 	
 	for (var trcNm in kara.scoreInfo.track) {
 			
