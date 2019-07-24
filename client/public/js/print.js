@@ -5,7 +5,7 @@ if(!window.kara) window.kara = {};
 
 //악보 트랙별 SVG 객체
 kara.svg = {	
-	"track1": {
+	'track1': {
 		svgContainer: null,
 		svgLine: null,
 		svgText: null,
@@ -14,10 +14,10 @@ kara.svg = {
 		svgBox: null
 	},
 	// 10개 트랙 생성
-	"track2": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
-	"track3": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
-	"track4": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
-	"track5": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
+	'track2': {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
+	'track3': {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
+	'track4': {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
+	'track5': {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	"track6": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	"track7": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	"track8": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
