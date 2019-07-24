@@ -129,7 +129,7 @@ kara.numToInstrument = function(num) {// num: instrument Number -- '0'
 	switch (num) {
 		case 0: return 'acoustic_grand_piano';
 		case 1: return 'bright_acoustic_piano';
-		case 2: return "electric_grand_piano";
+		case 2: return 'electric_grand_piano';
 		case 3: return "honkytonk_piano";
 		case 4: return "electric_piano_1";
 		case 5: return "electric_piano_2";
