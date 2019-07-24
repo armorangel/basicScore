@@ -18,7 +18,7 @@ kara.svg = {
 	'track3': {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	'track4': {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	'track5': {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
-	"track6": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
+	'track6': {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	"track7": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	"track8": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
 	"track9": {svgContainer: null,svgLine: null,svgText: null,svgSymbol: null,svgNote: null,svgBox: null},
