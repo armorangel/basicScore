@@ -127,7 +127,7 @@ kara.addInstr = function(trcNum){	//trackN: trackNumber -- 1
 // Convert Instrument Number to Instrument Name
 kara.numToInstrument = function(num) {// num: instrument Number -- '0'
 	switch (num) {
-		case 0: return "acoustic_grand_piano";
+		case 0: return 'acoustic_grand_piano';
 		case 1: return "bright_acoustic_piano";
 		case 2: return "electric_grand_piano";
 		case 3: return "honkytonk_piano";
