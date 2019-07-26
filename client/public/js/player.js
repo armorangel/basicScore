@@ -142,11 +142,11 @@ kara.numToInstrument = function(num) {// num: instrument Number -- '0'
 		case 12: return 'marimba';
 		case 13: return 'xylophone';
 		case 14: return 'tubular_bells';
-		case 15: return "dulcimer";
-		case 16: return "drawbar_organ";
-		case 17: return "percussive_organ";
-		case 18: return "rock_organ";
-		case 19: return "church_organ";
+		case 15: return 'dulcimer';
+		case 16: return 'drawbar_organ';
+		case 17: return 'percussive_organ';
+		case 18: return 'rock_organ';
+		case 19: return 'church_organ';
 		case 20: return "reed_organ";
 		case 21: return "Accordion";
 		case 22: return "harmonica";
