@@ -4,7 +4,7 @@ if(!window.kara) window.kara = {};
 kara.edit = {
 	
 	// Edit Title
-	title: function(trcNm) {// track Track Name :: 'track1'
+	title: function(trcNm) {	// track Track Name :: 'track1'
 		//제목 입력
 		var title = prompt('Title');
 
@@ -56,8 +56,7 @@ kara.edit = {
 		}
 
 		// 악보 정보 객체에 작곡가 저장
-		kara.scoreInfo.writer = writer;
-		
+		kara.scoreInfo.writer = writer;		
 		kara.refresh();
 	},
 	
@@ -116,8 +115,7 @@ kara.edit = {
 
 		$(".in_bar").remove();
 		kara.refresh();
-	}
-	
+	}	
 };
 
 // 정해진 조표 입력 검사
