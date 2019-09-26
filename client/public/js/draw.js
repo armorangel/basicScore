@@ -11,7 +11,7 @@ kara.draw = {
 	// 현재 트랙으로 설정
 	setTrack: function(trcNm) {
 		
-		if(!trcNm) trcNm = 'track1';
+		if(!trcNm) trcNm = 'track1';	// default track
 		
 		this.track = trcNm;
 		this.svgContainer = kara.svg[trcNm].svgContainer;
@@ -32,10 +32,10 @@ kara.draw = {
 	getBoxSize: function(tag) {
 		
 		const position = $('#' + this.track + ' ' + tag).position();// 제목 위치리턴 객체 left, top
+		const width = $('#' + this.track + ' ' + tag).width();		// 0 ISSUE
+		const height = $('#' + this.track + ' ' + tag).height();	// 0 ISSUE
 		const x = position.left - kara.scorePos.left(this.track);
 		const y = position.top - kara.scorePos.top(this.track);
-		const width = $('#' + this.track + ' ' + tag).width();// 0 ISSUE
-		const height = $('#' + this.track + ' ' + tag).height();// 0 ISSUE
 		
 		return {
 			position: position,
@@ -123,22 +123,20 @@ kara.draw = {
 		*/
 		
 		
-		this.txt.append("text")
-			.attr("id", "tempo")
-			.attr("class", "in_bar")	// .in_bar :: 악보 초기화 영역
-			.attr("font-size", "16px")
-			.attr("x", "5%")
-			.attr("y", "140")
-			.attr("dy", ".47em")
-			.style("text-anchor", "start")
-			.style("fill", "#000000")
-			.style("font-weight", "bold")
-			.text("♩ = " + tempo);
-		
+		this.txt.append('text')
+			.attr('id', 'tempo')
+			.attr('class', 'in_bar')	// .in_bar :: 악보 초기화 영역
+			.attr('font-size', '16px')
+			.attr('x', '5%')
+			.attr('y', '140')
+			.attr('dy', '.47em')
+			.style('text-anchor', 'start')
+			.style('fill', '#000000')
+			.style('font-weight', 'bold')
+			.text('♩ = ' + tempo);
 		
 		var boxSize = this.getBoxSize('#tempo');
 
-		
 		this.box.append("rect")
 			.attr("id", "edtTem")
 			.attr("class", "in_bar")// .in_bar :: 삭제영역
