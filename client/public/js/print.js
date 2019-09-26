@@ -420,7 +420,7 @@ kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 	var box = kara.svg[trcNm].svgBox;
 	var key = kara.scoreInfo.key;	// 'major Db'
 	var keySplit = key.split(' ');
-	var M = kara.key[keySplit[0]];// A: 3, Ab: 4, B: 5, Bb: 2, C: 0, D: 2, Db: 5, E: 4, Eb: 3, F: 1, G: 1, Gb: 6
+	var M = kara.key[keySplit[0]];	// A: 3, Ab: 4, B: 5, Bb: 2, C: 0, D: 2, Db: 5, E: 4, Eb: 3, F: 1, G: 1, Gb: 6
 	var N = M[keySplit[1]];	// 5
 
 	var x, y, width, height;
@@ -441,16 +441,16 @@ kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 	height = 50;
 
 	// 박사 선택영역 추가
-	box.append("rect")
-		.attr("id", "edtMtr")
-		.attr("class", "in_bar " + trcNm)	// 삭제 영역
-		.attr("x", x)
-		.attr("y", y)
-		.attr("onclick", "kara.edit.meter()")
-		.style("width", width)
-		.style("height", height)
-		.style("fill", "#00ff00")
-		.style("fill-opacity", "0.7");
+	box.append('rect')
+		.attr('id', 'edtMtr')
+		.attr('class', 'in_bar ' + trcNm)	// 삭제 영역
+		.attr('x', x)
+		.attr('y', y)
+		.attr('onclick', 'kara.edit.meter()')
+		.style('width', width)
+		.style('height', height)
+		.style('fill', '#00ff00')
+		.style('fill-opacity', '0.7');
 };
 
 //꼬리 SVG
