@@ -69,7 +69,6 @@ kara.noteSelect = {
 		$('.in_bar.' + trcNm).remove();
 		
 		kara.prtNote(trcNm);	// 음표 그리기
-		kara.test(trcNm);		// 배열값 표시
 	}
 };
 

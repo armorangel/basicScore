@@ -204,6 +204,8 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			}	// End of if
 		}	// End of for
 	}
+	
+	kara.test(trcNm);		// 배열값 표시
 };
 
 //악보 위치 반환
@@ -563,7 +565,7 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 };
 
 //마디
-kara.vLine = function(x, y, trcNm) {//trcNm :: Track Name 'track1'
+kara.vLine = function(x, y, trcNm) {	// trcNm :: Track Name 'track1'
 	//1051, 212, track1
 	
 	var svg = kara.svg[trcNm].svgLine;
@@ -638,8 +640,8 @@ kara.notevLow = function(x, y, pitch, meter, track) {	// 147.9375, 230, C5, half
 	}
 
 	pathString = kara.sprintf("M %f %f L %f %f", x, y, m, n);
-	svg.append("path")
-		.attr("class", "in_bar " + track)// 삭제영역
+	svg.append('path')
+		.attr('class', 'in_bar ' + track)	// 삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black")
 		.style("stroke-width", "1.5px");
@@ -714,8 +716,8 @@ kara.noteBox = {
 			var fill = '';
 			
 			//색상 선택
-			if((i % 2) == 1) fill = '#6666FF';	// 홀수 층
-			else fill = '#66FFFF';				// 짝수 층
+			if((i % 2) == 1) fill = '#6666FF';	// Odd Number
+			else fill = '#66FFFF';				// Even Number
 			
 			// 악보 선택 영역 추가
 			svgVar.append('rect')

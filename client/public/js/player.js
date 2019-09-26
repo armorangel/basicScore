@@ -51,8 +51,8 @@ kara.addTabs = function() {
 			trcNum++;	// 1부터 시작 아직 생성안된 트랙까지
 	}
 	
-	// 트랙 10개 제한
-	if(trcNum === 11) return;
+	// 트랙 9개 제한
+	if(trcNum === 10) return;
 	
 	//탭 태그 생성
 	$("#tab").children().last().before("<li><a href='#track" + trcNum + "'>track " + trcNum + "</a>" +
