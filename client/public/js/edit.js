@@ -307,27 +307,17 @@ var boxWidth = function(meter) {
 	var x = a;
 	var width = (X - a) / 4;
 	
-	switch(meter){
-		case 'whole': //온음표
-			width = width;
-			break;
-		case 'half': //2분음표
-			width = width / 2;
-			break;
-		case 'quarter': //4분음표
-			width = width / 4;
-			break;
-		case '8th': //8분음표
-			width = width / 8;
-			break;
-		case '16th': //16분음표
-			width = width / 16;
-			break;
-		case 32: break;// 지원안함
-		case 64: break;// 지원안함
-		case 128: break;// 지원안함
+	switch(meter) {
+		case 'whole':	width = width; break;		//온음표
+		case 'half':	width = width / 2; break;	//2분음표
+		case 'quarter':	width = width / 4; break;	//4분음표
+		case '8th':		width = width / 8; break;	//8분음표
+		case '16th':	width = width / 16; break;	//16분음표
+		case 32: break;		// 지원안함
+		case 64: break;		// 지원안함
+		case 128: break;	// 지원안함
 		default: break;
-	}
+	}	// End of switch
 	return width;
 };
 
@@ -346,7 +336,7 @@ var PopLayer = {
 			var objOpenLayer = document.getElementById(this.openLayer);
 			objOpenLayer.style.display = "none";
 			this.openLayer = "";
-		}
+		}	// End of if
 		this.openLayer = strLayer;
 		try {
 			strAnchor.onmouseup = PopLayer.Open;
@@ -490,6 +480,7 @@ kara.noteToKey = function(keyArray) {// B4,F4
 // sharp 또는 flat이 붙은 음표인지 검사
 // return 1 :: sharp이 있으면, -1 :: flat이 있으면, 아무것도 없으면 0
 kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
+	
 	// Why this funciton is called twice
 	var sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/];
 	var flatArray = [/B/, /E/, /A/, /D/, /G/, /C/, /F/];
