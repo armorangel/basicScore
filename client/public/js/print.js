@@ -158,7 +158,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			for(var pi = 0; pi < pitchSplit.length; pi++) {
 				
 				//쉼표 일때는 A4높이에 그리기
-				if(pitchSplit[pi] === "rest")
+				if(pitchSplit[pi] === 'rest')
 					position = $('#A4.bar_' + i + '.note_' + j + '.' + trcNm).position();
 				else
 					position = $('#' + pitchSplit[pi] + '.bar_' + i + '.note_' + j + '.' + trcNm).position();
@@ -251,8 +251,8 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 			y = y / 1.4 + 35;
 			
 			//clefs.G 없으면 null
-			if (!kara.glyphs["clefs.G"]) return null;
-			pathString = this.pathClone(kara.glyphs["clefs.G"].d, x, y);
+			if (!kara.glyphs['clefs.G']) return null;
+			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y);
 			
 			// 높은 음자리표 그리기
 			kara.draw.clefs_G(trcNm, pathString);
@@ -263,8 +263,8 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 			
 			y = y / 1.7 + 35;
 			
-			if (!kara.glyphs["clefs.F"]) return null;
-			pathString = this.pathClone(kara.glyphs["clefs.F"].d, x - 5, y - 20); //-5//-45
+			if (!kara.glyphs['clefs.F']) return null;
+			pathString = this.pathClone(kara.glyphs['clefs.F'].d, x - 5, y - 20); //-5//-45
 			
 			// 낮은 음자리표 그리기
 			kara.draw.clefs_F(trcNm, pathString);
@@ -275,9 +275,9 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 			
 			y = y / 1.5 + 35;
 			
-			if (!kara.glyphs["clefs.perc"]) return null;
+			if (!kara.glyphs['clefs.perc']) return null;
 			
-			pathString = this.pathClone(kara.glyphs["clefs.perc"].d, x - 5, y - 20.5);
+			pathString = this.pathClone(kara.glyphs['clefs.perc'].d, x - 5, y - 20.5);
 			kara.draw.clefs_perc(trcNm, pathString);
 			
 			break;
@@ -286,10 +286,10 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 			
 			y = y / 1.4 + 35;
 			
-			if (!kara.glyphs["clefs.G"]) return null;
+			if (!kara.glyphs['clefs.G']) return null;
 
-			kara.scoreInfo.track[trcNm].clef = "G";
-			pathString = this.pathClone(kara.glyphs["clefs.G"].d, x, y);
+			kara.scoreInfo.track[trcNm].clef = 'G';
+			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y);
 			
 			// 높은 음자리표 그리기
 			kara.draw.clefs_G(trcNm, pathString);
