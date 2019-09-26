@@ -390,7 +390,7 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 								break;
 						}
 						//flat 그리기
-						kara.printSymbol("accidentals.flat", 50 + (i * 10), y, trcNm);
+						kara.printSymbol('accidentals.flat', 50 + (i * 10), y, trcNm);
 					}
 					break;
 			}
@@ -404,14 +404,14 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 	// 조표 선택영역 SVG DRAW
 	svg.append('rect')
 		.attr('id', 'editKey')	// #editKey :: 조표 선택영역(수정)
-		.attr("class", 'in_bar ' + trcNm)// 삭제 영역
-    	.attr("x", x)
-   		.attr("y", y)
-		.attr("onclick", "kara.edit.key('" + trcNm + "')")	// 조표 수정 클릭 이벤트
-    	.style("width", width)
-    	.style("height", height)
-    	.style("fill", "#00ffff")
-		.style("fill-opacity", "0.3");
+		.attr('class', 'in_bar ' + trcNm)// 삭제 영역
+    	.attr('x', x)
+   		.attr('y', y)
+		.attr('onclick', "kara.edit.key('" + trcNm + "')")	// 조표 수정 클릭 이벤트
+    	.style('width', width)
+    	.style('height', height)
+    	.style('fill', '#00ffff')
+		.style('fill-opacity', '0.3');
 };
 
 //박자 SVG
