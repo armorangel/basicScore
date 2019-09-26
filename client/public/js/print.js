@@ -462,10 +462,10 @@ kara.printflag = function(symb, x, y, track) {
 	
 	var pathString = this.pathClone(kara.glyphs[symb].d, x + 10.35, y - 29);
 	
-	svg.append("path")
-		.attr("class", "in_bar " + track)// 삭제 영역
-		.attr("d", pathString)
-		.style("stroke", "black");
+	svg.append('path')
+		.attr('class', 'in_bar ' + track)// 삭제 영역
+		.attr('d', pathString)
+		.style('stroke', 'black');
 };
 
 // Draw Sharp, Flat, Rest, head
@@ -476,10 +476,10 @@ kara.printSymbol = function(symbol, x, y, trcNm) {
 	var svg = kara.svg[trcNm].svgSymbol;
 	var pathString = this.pathClone(kara.glyphs[symbol].d, x, y);
 	
-	svg.append("path")
-		.attr("class", "in_bar " + trcNm)// 삭제 영역
-		.attr("d", pathString)
-		.style("stroke", "black");
+	svg.append('path')
+		.attr('class', 'in_bar ' + trcNm)// 삭제 영역
+		.attr('d', pathString)
+		.style('stroke', 'black');
 };
 
 // 음표에 sharp, flat 붙이기
@@ -491,10 +491,10 @@ kara.print_s_p = function(symbol, x, y, trcNm) {// accidentals.flat, 204.7500038
 	let pathString = this.pathClone(kara.glyphs[symbol].d, x / 0.7, y / 0.7);
 	
 	svg.append('path')
-		.attr("class", "in_bar " + trcNm)// 삭제 영역
-		.attr("d", pathString)
-		.style("transform", "scale(0.7,0.7)")
-		.style("stroke", "black");
+		.attr('class', 'in_bar ' + trcNm)// 삭제 영역
+		.attr('d', pathString)
+		.style('transform', 'scale(0.7,0.7)')
+		.style('stroke', 'black');
 };
 
 // 심볼을 찾아옴
