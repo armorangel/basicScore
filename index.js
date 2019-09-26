@@ -8,7 +8,11 @@ const generatePassword = require('password-generator');
 const app = express();
 
 // CONNECT TO MONGODB SERVER
-var dbUrl = 'mongodb+srv://user:QmTs5zvR8Phw4CUL@bsdb-vsnj9.mongodb.net/book?retryWrites=true&useNewUrlParser=true';
+// var dbUrl = 'mongodb+srv://user:QmTs5zvR8Phw4CUL@bsdb-vsnj9.mongodb.net/book?retryWrites=true&useNewUrlParser=true';
+
+
+var dbUrl = 'mongodb+srv://user:AQgmEjEJFguMhUwq@basicscore-nyltz.mongodb.net/sample_airbnb?retryWrites=true&w=majority';
+
 mongoose.connect(dbUrl, (err) => { //MongoDB CONNECT
 	if(err) console.error('mongodb connection error', err);
 
@@ -18,6 +22,34 @@ mongoose.connect(dbUrl, (err) => { //MongoDB CONNECT
 // Serve static files from the React app
 //app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.static(path.join(__dirname, 'client/public')));
+
+/*
+var ScoreSchema = mongoose.
+///////////////////////
+const Score = mongoose.model('Score', ScoreSchema);
+
+// Statics model methods
+app.get('/score/list', (req, res) => {
+	Score.find({ }, function(err, score) {
+		if(err) throw err;
+		console.log(score);
+	});
+
+	// or
+
+	Score.find({})
+		.then(score => console.log(score))
+		.catch(err => console.log(err))
+});
+
+
+*/
+
+//////////////////////
+
+
+
+
 
 // Put all API endpoints under '/api'
 app.get('/api/passwords', (req, res) => {

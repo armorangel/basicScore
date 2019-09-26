@@ -27,9 +27,9 @@ kara.play = {
 					//console.log(instru[mn]);
 					//console.log(instru);
 					mn++;
-				}
-			}
-		}
+				}	// End of if
+			}	// End of if
+		}	// End of for
 		
 		kara.play.instru = instru;
 		//console.log(instru);
@@ -64,7 +64,7 @@ kara.play = {
 					console.log('setting :: ' + setting);
 					MIDI.setVolume(mm, 127);// 볼륨 설정
 					MIDI.programChange(mm, setting);
-				}
+				}	// End of for
 			
 				for (var key in note) {
 					if (note.hasOwnProperty(key)) {
@@ -83,13 +83,13 @@ kara.play = {
 									chord[m][n][0]= kara.noteToKey(note[key].notes[i][j][0]);
 									chord[m][n][1] = note[key].notes[i][j][1];
 									n++;
-								}
-							}
+								}	// End of for
+							}	// End of for
 							m++;
 							n = 0;
-						}
-					}
-				}
+						}	// End of if
+					}	// End of if
+				}	// End of for
 				
 				m = 0;
 				n = 0;
@@ -106,7 +106,7 @@ kara.play = {
 				var play = setInterval(function() {
 
 					//console.log("실행중");
-					for(var r = 0; r < chord.length; r++){
+					for(var r = 0; r < chord.length; r++) {
 						var meter = player[r];
 						var ind = index[r];
 
@@ -140,7 +140,7 @@ kara.play = {
 						clearInterval(play);
 						console.log("재생 끝");
 					}
-				}, (60000 / tempo) * (kara.noteMeter.head["16th"] / 4));
+				}, (60000 / tempo) * (kara.noteMeter.head["16th"] / 4));	// 60000?
 			}
 		});
 	},
