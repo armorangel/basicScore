@@ -298,6 +298,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 			
 			break;
 	}
+	
 	box_x = 0;
 	box_y = Y - 10;
 	width = 40;
@@ -458,11 +459,11 @@ kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 //꼬리 SVG
 kara.printflag = function(symb, x, y, track) {
 	
-	var svg = kara.svg[track].svgSymbol;
+	let svg = kara.svg[track].svgSymbol;
 	
 	if (!kara.glyphs[symb]) return null;
 	
-	var pathString = this.pathClone(kara.glyphs[symb].d, x + 10.35, y - 29);
+	let pathString = this.pathClone(kara.glyphs[symb].d, x + 10.35, y - 29);
 	
 	svg.append('path')
 		.attr('class', 'in_bar ' + track)// 삭제 영역
@@ -475,8 +476,8 @@ kara.printSymbol = function(symbol, x, y, trcNm) {
 	
 	if (!kara.glyphs[symbol]) return null;
 	
-	var svg = kara.svg[trcNm].svgSymbol;
-	var pathString = this.pathClone(kara.glyphs[symbol].d, x, y);
+	let svg = kara.svg[trcNm].svgSymbol;
+	let pathString = this.pathClone(kara.glyphs[symbol].d, x, y);
 	
 	svg.append('path')
 		.attr('class', 'in_bar ' + trcNm)// 삭제 영역
@@ -485,7 +486,7 @@ kara.printSymbol = function(symbol, x, y, trcNm) {
 };
 
 // 음표에 sharp, flat 붙이기
-kara.print_s_p = function(symbol, x, y, trcNm) {// accidentals.flat, 204.75000381469727, 231.00001525878906, track1
+kara.print_s_p = function(symbol, x, y, trcNm) {	// accidentals.flat, 204.75000381469727, 231.00001525878906, track1
 	
 	if (!kara.glyphs[symbol]) return null;
 	
@@ -652,12 +653,14 @@ kara.noteBox = {
 	// 악보 선택 영역 그리기
 	print: function(X, Y, bNum, nNum, meter, track) {
 		
-		var svg = kara.svg[track].svgContainer;
+		var trcNm = track;
+		
+		var svg = kara.svg[trcNm].svgContainer;
 		var key = kara.scoreInfo.key;
 		var keySplit = key.split(' ');
 		var M = kara.key[keySplit[0]];
 		var N = M[keySplit[1]];
-		var clef = kara.scoreInfo.track[track].clef;
+		var clef = kara.scoreInfo.track[trcNm].clef;
 		var i = 0, j = 0;
 
 		var a = N * 12 + 70;
@@ -693,7 +696,7 @@ kara.noteBox = {
 		//마디 생성
 		var svgVar = svg.append("g")	
 			.attr("id", "bar_" + bNum)	// 마디 번호
-			.attr("class", "in_bar" + " " + track);
+			.attr("class", "in_bar" + " " + trcNm);
 		
 		switch(clef) {
 			case "G": i = 14; break;	// A3 ~ C6 (14 ~ 30)	
@@ -719,17 +722,8 @@ kara.noteBox = {
 			if((i % 2) == 1) fill = '#6666FF';	// Odd Number
 			else fill = '#66FFFF';				// Even Number
 			
-			// 악보 선택 영역 추가
-			svgVar.append('rect')
-				.attr('id', p)
-				.attr('class', 'in_bar ' + 'bar_' + bNum + ' ' + 'note_' + nNum + ' ' + track) //마디,  음표 번호
-				.attr('x', x)
-				.attr('y', y)
-				.attr('onmousedown', "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
-				.style("width", width)
-				.style("height", height)	// 6
-				.style("fill", fill)
-				.style("fill-opacity", fill_opacity);	//0.3
+			// 악보 선택 영역 그리기
+			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity);
 		
 			y += height;
 		}
@@ -739,15 +733,15 @@ kara.noteBox = {
 // 악보 선택 영역 그리기2
 kara.noteBox_ = {
 	
-	print: function(X, Y , bNum, nNum, meter, track) {// 1166, 200, 0, 2, quarter, track1
+	print: function(X, Y , bNum, nNum, meter, trcNm) {	// 1166, 200, 0, 2, quarter, track1
 		
-		var note = kara.scoreInfo.track[track].notes;
-		var svg = kara.svg[track].svgContainer;
+		var note = kara.scoreInfo.track[trcNm].notes;
+		var svg = kara.svg[trcNm].svgContainer;
 		var key = kara.scoreInfo.key;
 		var keySplit = key.split(' ');
 		var M = kara.key[keySplit[0]];
 		var N = M[keySplit[1]];
-		var clef = kara.scoreInfo.track[track].clef;
+		var clef = kara.scoreInfo.track[trcNm].clef;
 		var i = 0, j = 0, flag = 0;
 		
 		// 이전 마디의 정보를 얻어옴
@@ -760,7 +754,7 @@ kara.noteBox_ = {
 		// var pitch = note[bNum][nNum][0];
 		var pre_meter = note[bNum][nNum][1];
 		//console.log(pre_meter);
-		var position = $(".bar_"+ bNum + ".note_" + nNum + "." + track).position();
+		var position = $(".bar_"+ bNum + ".note_" + nNum + "." + trcNm).position();
 
 		var a = N * 12 + 70;
 		var ac = (X - a) / 4;
@@ -769,7 +763,7 @@ kara.noteBox_ = {
 		// kara.vLine(ac*2+a, Y+12);
 		// kara.vLine(ac*3+a, Y+12);
 
-		var x = position.left - kara.scorePos.left(track);
+		var x = position.left - kara.scorePos.left(trcNm);
 		var y = Y - 15;
 
 		var width = (X - a) / 4;
@@ -820,9 +814,9 @@ kara.noteBox_ = {
 		}
 
 		//마디 번호
-		var svgVar = svg.append("g")
-			.attr("id", "bar_" + bNum)
-			.attr("class", 'in_bar ' + track);
+		var svgVar = svg.append('g')
+			.attr('id', 'bar_' + bNum)
+			.attr('class', 'in_bar ' + trcNm);
 
 		switch(clef) {
 			case "G": i = 14; break;// A3~ C6 17 j = 30
@@ -836,8 +830,7 @@ kara.noteBox_ = {
 			
 			var m = 50 - i;
 			var p = pitch_select.selection(m);// 선택한 음높이 계산 in edit.js
-			var fill;
-			var fill_opacity;
+			var fill, fill_opacity;
 			
 			if((i % 2) == 1) {
 				fill = '#6666FF';
@@ -847,17 +840,8 @@ kara.noteBox_ = {
 				fill_opacity = '0.5';
 			}
 			
-			//음표 선택 영역 추가
-			svgVar.append("rect")
-				.attr("id", p)
-				.attr("class", "in_bar " + "bar_"+ bNum + " "+"note_" + nNum + " " + track) //마디,  음표 번호
-				.attr("x", x)
-				.attr("y", y)
-				.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")
-				.style("width", width)
-				.style("height", height)
-				.style("fill", fill)
-				.style("fill-opacity", fill_opacity);
+			// 악보 선택 영역 그리기
+			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity);
 			
 			y = height + y;
 		}
@@ -867,23 +851,24 @@ kara.noteBox_ = {
 //아직 입력하지 않은 음표 선택 영역
 kara.noteBox_last = {
 	
-	print: function(X, Y , bNum, nNum, meter, set, track) {
-		var note = kara.scoreInfo.track[track].notes;
-		var svg = kara.svg[track].svgContainer;
+	print: function(X, Y , bNum, nNum, meter, set, trcNm) {
+		
+		var note = kara.scoreInfo.track[trcNm].notes;
+		var svg = kara.svg[trcNm].svgContainer;
 		var key = kara.scoreInfo.key;
 		var keySplit = key.split(' ');
 		var M = kara.key[keySplit[0]];
 		var N = M[keySplit[1]];
 		var pitch = note[bNum][nNum][0];
-		var clef = kara.scoreInfo.track[track].clef;
+		var clef = kara.scoreInfo.track[trcNm].clef;
 		var i = 0, j = 0;
 
-		var position = $(".bar_"+ bNum + ".note_" + nNum + "." + track).position();
+		var position = $(".bar_" + bNum + ".note_" + nNum + "." + trcNm).position();
 
 		var a = N * 12 + 70;
 		var ac = (X - a) / 4;
 
-		var x = position.left - kara.scorePos.left(track);
+		var x = position.left - kara.scorePos.left(trcNm);
 		var y = Y - 15;
 
 		var width = (X - a) / 4;
@@ -896,7 +881,7 @@ kara.noteBox_last = {
 				width = width;
 				x = x + (X - a) / 4;
 				
-				if(kara.meterCal_box(bNum, track)) { //마디 꽉차서
+				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
 					bNum = bNum + 1;
 					nNum = 0;
 				}
@@ -905,7 +890,7 @@ kara.noteBox_last = {
 				width = width-width/2;
 				x = x + (X-a)/4-width;
 
-				if(kara.meterCal_box(bNum, track)){ //마디 꽉차서
+				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
 					bNum = bNum+1;
 					nNum = 0;
 				}
@@ -915,15 +900,15 @@ kara.noteBox_last = {
 				width = width - width / 4;
 				x = x + (X - a) / 4 - width;
 
-				if(kara.meterCal_box(bNum, track)) { //마디 꽉차서
-					bNum = bNum+1;
+				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
+					bNum = bNum + 1;
 					nNum = 0;
 				}
 				break;
 			case '8th': // 8분음표
 				width = width - width / 8;
 				x = x + (X - a) / 4 - width;
-				if(kara.meterCal_box(bNum, track)) { //마디 꽉차서
+				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
 					bNum = bNum + 1;
 					nNum = 0;
 				}
@@ -931,8 +916,8 @@ kara.noteBox_last = {
 			case '16th': // 16분음표
 				width = width - width / 16;
 				x = x + (X - a) / 4 - width;
-				if(kara.meterCal_box(bNum, track)) { //마디 꽉차서
-					bNum = bNum+1;
+				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
+					bNum = bNum + 1;
 					nNum = 0;
 				}
 				break;
@@ -942,7 +927,7 @@ kara.noteBox_last = {
 			default: break;
 		}
 
-		if(set === 1){
+		if(set === 1) {
 			//console.log(bNum);
 			x = a;
 		}
@@ -950,18 +935,18 @@ kara.noteBox_last = {
 		// 마디 번호
 		var svgVar = svg.append('g')
 			.attr('id', 'bar_' + bNum)
-			.attr('class', 'in_bar ' + track);
+			.attr('class', 'in_bar ' + trcNm);
 
 		switch(clef) {
 			case "G":
 				i = 14; // A3~ C6 17 j = 30
-				j = i+16;
+				j = i + 16;
 
 				break;
 				
 			case "F":  // C2~E4 =
 				i = 26;
-				j = i+16;
+				j = i + 16;
 				break;
 				
 			case "P": break;
@@ -980,16 +965,9 @@ kara.noteBox_last = {
 				fill = '#660000';
 				fill_opacity = '0.5';
 			}
-			svgVar.append('rect')
-					.attr('id', p)			
-					.attr('class', 'in_bar bar_' + bNum +  ' note_' + nNum + ' ' + track) //마디,  음표 번호
-					.attr("x", x)
-					.attr("y", y)
-					.attr("onmousedown", "PopLayer.Action(this, 'noteSelect');")
-					.style("width", width)
-					.style("height", height)
-					.style("fill", fill)
-					.style("fill-opacity", fill_opacity);
+			
+			// 악보 선택 영역 추가
+			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity);
 			
 			y += height;
 		}
@@ -1024,4 +1002,19 @@ kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSpli
 		// 해당 음표에 flat이 있으면
 		if(kara.key_er(pitchSplit_pi) === -1) kara.print_s_p('accidentals.flat', x + leng - 5, y - 5, trcNm);
 	}
+};
+
+// 악보 선택 영역 그리기
+kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity) {
+	svgVar.append('rect')
+					.attr('id', p)
+					.attr('class', 'in_bar ' + 'bar_' + bNum + ' ' + 'note_' + nNum + ' ' + trcNm) //마디,  음표 번호
+					.attr('x', x)
+					.attr('y', y)
+					.attr('onmousedown', "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
+					.style("width", width)
+					.style("height", height)	// 6
+					.style("fill", fill)
+					.style("fill-opacity", fill_opacity);	//0.3, 0.5
+	
 };
