@@ -581,13 +581,13 @@ kara.vLine = function(x, y, trcNm) {	// trcNm :: Track Name 'track1'
 //음표 막대 그리기
 kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1
 	
-	var svg = kara.svg[trcNm].svgNote;
-	var pathString = kara.sprintf("M %f %f L %f %f", x + 10, y, x + 10, y - 30);
+	let svg = kara.svg[trcNm].svgNote;
+	let pathString = kara.sprintf('M %f %f L %f %f', x + 10, y, x + 10, y - 30);
 	
-	svg.append("path")
-		.attr("class", "in_bar " + trcNm)	// 삭제영역
-		.attr("d", pathString)
-		.style("stroke", "black");
+	svg.append('path')
+		.attr('class', 'in_bar ' + trcNm)	// 삭제영역
+		.attr('d', pathString)
+		.style('stroke', 'black');
 };
 
 //음표 막대
