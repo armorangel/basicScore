@@ -472,14 +472,14 @@ kara.noteToKey = function(keyArray) {// B4,F4
 
 	//Flat, Sharp 음 높이 조정
 	for(let i = 0; i < split.length; i++)
-		key[i] += kara.key_er(split[i]);
+		key[i] += kara.chkSharpFlat(split[i]);
 
   return key;
 };
 
 // sharp 또는 flat이 붙은 음표인지 검사
 // return 1 :: sharp이 있으면, -1 :: flat이 있으면, 아무것도 없으면 0
-kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
+kara.chkSharpFlat = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 	
 	// Why this funciton is called twice
 	var sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/];
@@ -511,17 +511,17 @@ kara.key_er = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 					}
 					break;
 				// Flat
-				case 'Gb': //6
+				case 'Gb': // 6
 				case 'Ebm':
-				case 'Ab': //5
+				case 'Ab': // 5
 				case 'Bbm':
-				case 'Db': //4
+				case 'Db': // 4
 				case 'Fm':
-				case 'Eb': //3
+				case 'Eb': // 3
 				case 'Cm':
-				case 'Bb': //2
+				case 'Bb': // 2
 				case 'Gm':
-				case 'F': //1
+				case 'F': // 1
 				case 'Dm':
 					for(let i = 0; i < keyCnt; i++) {
 						//해당 음이 b이 붙으면 -1을 리턴
@@ -556,56 +556,3 @@ kara.maxLength = function(chordArray) {	// [[[61, 77], 'whole'], [[68], 'whole']
 	
 	return longlen;
 };
-
-
-
-
-// kara.editNote = function(pitch){ //음표 수정
-// 	$('body').unbind('click');
-//
-// 	// var id = $('body').click(function(e){
-// 	// 		var id = e.target.getAttribute('id');
-// 	// 		if ( ( id != '') && (id != null)){
-// 	// 			alert(id);
-// 	// 			console.log(id);
-// 	// 			return id;
-// 	// 		}
-// 	//
-// 	// });
-//
-// 	var position = $(this).position();
-//
-// 	// console.log(id.width());
-//
-// 	var x = position.left + $(this).width();
-// 	var y = position.top;
-//
-// 	console.log(x);
-// 	console.log(y);
-// 	svgContainer.append("rect")
-// 		.attr("x", 100)
-// 		.attr("y", y)
-// 		.style("width", "50")
-// 		.style("height", "50")
-// 		// .style("position", "absolute")
-// 		// .style("z-index", "10000")
-// 		.style("fill", "#000000");
-
-
-
-
-	// switch(pitch){
-	// 	case 0:
-	// 		kara.printSymbol('noteheads.whole', 10,10);
-	// 	case 1:
-	// 		kara.printSymbol('noteheads.whole', 10,10);
-	// 	case 2:
-	// 		kara.printSymbol('noteheads.whole', 10,10);
-	// 	case 3:
-	// 		kara.printSymbol('noteheads.whole', 10,10);
-	// 	case 4:
-	// 		kara.printSymbol('noteheads.whole', 10,10);
-	// 	case 5:
-	// 		kara.printSymbol('noteheads.whole', 10,10);
-	// }
-// }

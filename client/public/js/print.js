@@ -995,10 +995,12 @@ kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSpli
 
 		//8분음표, 16분 음표 꼬리 그리기
 		if(pi === 0) kara.printflag('flags.u' + type, x + leng, y, trcNm);
+		
 		// 해당 음표에 sharp이 있으면
-		if(kara.key_er(pitchSplit_pi) === 1) kara.print_s_p('accidentals.sharp', x + leng - 5, y - 5, trcNm);
+		if(kara.chkSharpFlat(pitchSplit_pi) === 1) kara.print_s_p('accidentals.sharp', x + leng - 5, y - 5, trcNm);
+		
 		// 해당 음표에 flat이 있으면
-		if(kara.key_er(pitchSplit_pi) === -1) kara.print_s_p('accidentals.flat', x + leng - 5, y - 5, trcNm);
+		if(kara.chkSharpFlat(pitchSplit_pi) === -1) kara.print_s_p('accidentals.flat', x + leng - 5, y - 5, trcNm);
 	}
 };
 
