@@ -817,9 +817,9 @@ kara.noteBox_ = {
 			.attr('class', 'in_bar ' + trcNm);
 
 		switch(clef) {
-			case "G": i = 14; break;// A3~ C6 17 j = 30
-			case "F": i = 26; break; // C2~E4 =
-			case "P": break;
+			case 'G': i = 14; break;	// A3~ C6 17 j = 30
+			case 'F': i = 26; break;	// C2~E4 =
+			case 'P': break;
 		}
 		
 		j = i + 16;
@@ -982,6 +982,7 @@ kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSpli
 	
 	//쉼표 그리기
 	if(pitchSplit_pi === "rest") kara.printSymbol('rests.' + type, x + leng, y, trcNm);
+	
 	//음표 그리기
 	else {
 		
