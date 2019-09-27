@@ -320,11 +320,11 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 // 조표 SVG 그리기
 kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 	
-	var svg = kara.svg[trcNm].svgBox;
-	var keySplit = key.split(' ');	// ['major' 'Db']
-	var M = kara.key[keySplit[0]];	// kara.key['major']
-	var N = M[keySplit[1]];			// M['Db'] :: 5 -- 심볼 갯수
-	var x, y, width, height;
+	let svg = kara.svg[trcNm].svgBox;
+	let keySplit = key.split(' ');	// ['major' 'Db']
+	let M = kara.key[keySplit[0]];	// kara.key['major']
+	let N = M[keySplit[1]];			// M['Db'] :: 5 -- 심볼 갯수
+	let x, y, width, height;
 
 	for (let key in M) {	// k :: key
 		
@@ -391,10 +391,10 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 							case 5:
 								y = Y + 13; // F_c
 								break;
-						}
+						}	// End of switch
 						//flat 그리기
 						kara.printSymbol('accidentals.flat', 50 + (i * 10), y, trcNm);
-					}
+					}	// End of for
 					break;
 			}
 		}
@@ -420,16 +420,16 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 //박자 SVG
 kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 	
-	var box = kara.svg[trcNm].svgBox;
-	var key = kara.scoreInfo.key;	// 'major Db'
-	var keySplit = key.split(' ');
-	var M = kara.key[keySplit[0]];	// A: 3, Ab: 4, B: 5, Bb: 2, C: 0, D: 2, Db: 5, E: 4, Eb: 3, F: 1, G: 1, Gb: 6
-	var N = M[keySplit[1]];	// 5
+	let box = kara.svg[trcNm].svgBox;
+	let key = kara.scoreInfo.key;	// 'major Db'
+	let keySplit = key.split(' ');
+	let M = kara.key[keySplit[0]];	// A: 3, Ab: 4, B: 5, Bb: 2, C: 0, D: 2, Db: 5, E: 4, Eb: 3, F: 1, G: 1, Gb: 6
+	let N = M[keySplit[1]];	// 5
 
-	var x, y, width, height;
+	let x, y, width, height;
 
-	var meter = kara.scoreInfo.meter;	// 악보정보 객체 박자
-	var meterSplit = meter.split('/');
+	let meter = kara.scoreInfo.meter;	// 악보정보 객체 박자
+	let meterSplit = meter.split('/');
 
 	var pathString = this.pathClone(kara.glyphs[meterSplit[0]].d, 45 + (N * 10), Y / 1.4 + 24.7);
 	var pathString2 = this.pathClone(kara.glyphs[meterSplit[1]].d, 45 + (N * 10), Y / 1.4 + 41.7);
@@ -443,7 +443,7 @@ kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 	width = N + 20;
 	height = 50;
 
-	// 박사 선택영역 추가
+	// 박자 선택영역 추가
 	box.append('rect')
 		.attr('id', 'edtMtr')
 		.attr('class', 'in_bar ' + trcNm)	// 삭제 영역
@@ -503,14 +503,14 @@ kara.print_s_p = function(symbol, x, y, trcNm) {	// accidentals.flat, 204.750003
 // 심볼을 찾아옴
 kara.pathClone = function (pathString, x, y) {
 	
-	var res = [];
-	var res1;
+	let res = [];
+	let res1;
 	
-	for(var i = 0; i < pathString.length; i++) {
+	for(let i = 0; i < pathString.length; i++) {
 		
 		res[i] = [];
 		
-		for(var j = 0; j < pathString[i].length; j++) {
+		for(let j = 0; j < pathString[i].length; j++) {
 			res[i][j] = pathString[i][j];
 
 			if(i == 0 && j == 0) {
@@ -520,36 +520,36 @@ kara.pathClone = function (pathString, x, y) {
 				if(i == 0 && j == 2) {res[0][2] += y;}
 
 				res1 = res1 + ' ' + res[i][j];
-			}
-		}
-	}
+			}	// End of if
+		}	// End of for
+	}	// End of for
 	return res1;
 };
 
 // 오선지
 kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Track Name 'track1'
 		
-	var line = kara.svg[trcNm].svgLine;
-	var X = kara.XY.X();
-	var Y = kara.XY.Y(y);
-	var key = kara.scoreInfo.key;
-	var keySplit = key.split(' ');
-	var M = kara.key[keySplit[0]];
-	var N = M[keySplit[1]];
-	var clef = kara.scoreInfo.clef;
-	var gab = 12;
+	let line = kara.svg[trcNm].svgLine;
+	let X = kara.XY.X();
+	let Y = kara.XY.Y(y);
+	let key = kara.scoreInfo.key;
+	let keySplit = key.split(' ');
+	let M = kara.key[keySplit[0]];
+	let N = M[keySplit[1]];
+	let clef = kara.scoreInfo.clef;
+	let gab = 12;
 
 	//간격조절
 	for(i = 1; i <= 5; i++) {
 		
 		//간격 12씩 5줄 그리기
-		var pathString = kara.sprintf("M %f %f L %f %f", 0, (i * gab) + Y, X, (i * gab) + Y);
+		let pathString = kara.sprintf("M %f %f L %f %f", 0, (i * gab) + Y, X, (i * gab) + Y);
 		
 		line.append('path')
 			.attr('class', 'in_bar' + ' ' + trcNm)
 			.attr('d', pathString)
 			.style('stroke', 'black');
-	}
+	}	// End of for
 	
 	//분리 해야됨
 	kara.clefSVG(10, Y, Y, trcNm);	//높은 음자리 //1.4+35
@@ -557,8 +557,8 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 	kara.keySVG(Y+17, key, trcNm);	//조표 그리기
 	kara.meterSVG(Y, trcNm);		//박자
 
-	var a = N * 12 + 70;
-	var ac = (X - a) / 4;
+	let a = N * 12 + 70;
+	let ac = (X - a) / 4;
 	
 	kara.vLine(ac * 1 + a, Y + 12, trcNm);	// 첫마디 끝 구분선
 	kara.vLine(ac * 2 + a, Y + 12, trcNm);	// 두번째 마디 끝 구분선
@@ -579,13 +579,13 @@ kara.vLine = function(x, y, trcNm) {	// trcNm :: Track Name 'track1'
 };
 
 //음표 막대 그리기
-kara.notevLine = function(x, y, track) {	// 235.6875, 242, track1
+kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1
 	
-	var svg = kara.svg[track].svgNote;
+	var svg = kara.svg[trcNm].svgNote;
 	var pathString = kara.sprintf("M %f %f L %f %f", x + 10, y, x + 10, y - 30);
 	
 	svg.append("path")
-		.attr("class", "in_bar " + track)	// 삭제영역
+		.attr("class", "in_bar " + trcNm)	// 삭제영역
 		.attr("d", pathString)
 		.style("stroke", "black");
 };
