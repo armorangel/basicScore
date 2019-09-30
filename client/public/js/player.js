@@ -3,7 +3,7 @@ if(!window.kara) window.kara = {};
 //Init Score(Execute first)
 kara.initScore = function(trcNm) {// trcNm: Track Name -- 'track1'
 	
-	let trcNum = trcNm.slice(-1);
+	let trcNum = trcNm.slice(-1);	// 1
 	
 	kara.addInstr(trcNum);	// 트랙별 악기 콤보 추가
 	kara.initSvg(trcNm);	// 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
@@ -51,6 +51,7 @@ kara.addTabs = function() {
 	
 	// 삭제버튼 클릭시 해당 탭 지우기
 	$("#tabs").on( "click", "span.ui-icon-close", function() {
+		
 		var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
 		
 		// 해당하는 탭 제거
@@ -83,7 +84,7 @@ kara.addTabs = function() {
 };
 
 // Add Combo to select Instruments on Each Track
-kara.addInstr = function(trcNum){	//trackN: trackNumber -- 1
+kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 
 	var trcNm = 'track' + trcNum;	// 'track1'
 	var menuTtl = 'Select a track';
@@ -111,7 +112,7 @@ kara.addInstr = function(trcNum){	//trackN: trackNumber -- 1
 	});
 
 	// 콤보 갱신
-	$("#instrument" + trcNum).selectmenu("refresh");
+	$("#instrument" + trcNum).selectmenu('refresh');
 };
 
 // Convert Instrument Number to Instrument Name
