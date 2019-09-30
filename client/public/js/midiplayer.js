@@ -23,7 +23,11 @@ kara.play = {
 					
 					set = kara.scoreInfo.track[keyInstru].instrument;
 					//console.log(set);
-					instru[mn] = kara.numToInstrument(Number(set));
+					
+					// 악기 이름
+					instru[mn] = kara.instru.getName(Number(set));
+					
+					
 					//console.log(instru[mn]);
 					//console.log(instru);
 					mn++;
@@ -60,7 +64,10 @@ kara.play = {
 			  
 				// play the note
 				for(var mm = 0; mm < instru.length; mm++) {
-					setting = kara.instrumentTonum(instru[mm]);
+					
+					
+					// 악기 번호
+					setting = kara.instru.getNum(instru[mm]);
 					console.log('setting :: ' + setting);
 					MIDI.setVolume(mm, 127);// 볼륨 설정
 					MIDI.programChange(mm, setting);
