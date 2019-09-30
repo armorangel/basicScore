@@ -274,7 +274,6 @@ kara.instru = {
 	
 	// 악기 목록
 	list: {
-	
 		"acoustic_grand_piano":		0,
 		"bright_acoustic_piano":	1,
 		"electric_grand_piano":		2,

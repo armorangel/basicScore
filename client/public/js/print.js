@@ -89,7 +89,7 @@ kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 // 배열의 값을 가져와서 음표를 그린다
 kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	
-	var note = kara.scoreInfo.track[trcNm].notes;	// Array [["E5", "half"], ["E5", "half"]]
+	const note = kara.scoreInfo.track[trcNm].notes;	// Array [["E5", "half"], ["E5", "half"]]
 	var meter = kara.scoreInfo.meter.split('/');	// ["4", "4"]
 	var limited = meter[0] * meter[1];	// 마디 제한 16
 	var nowMeter = 0;					// 현재 마디
@@ -192,7 +192,9 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 
 				if(four2 == 0 && ii >= 4) {
 					if(kara.meterCal_box(i, trcNm)===1) {
-						$('#' + trcNm + ' > #score').height(four_boxEnter2 * 120 + 300);
+						
+						
+						$('#' + trcNm + ' > #score').height(four_boxEnter2 * 120 + 300);	// FUNCTION으로 변경
 						kara.hLine(four_boxEnter2, trcNm);
 						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter2), i, j, meter, 1, trcNm);
 					} else {

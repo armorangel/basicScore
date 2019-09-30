@@ -5,19 +5,22 @@ kara.edit = {
 	
 	// Edit Title
 	title: function(trcNm) {	// track Track Name :: 'track1'
-		//제목 입력
-		var title = prompt('Title');
-
-		// 제목 정합성 검사
-		if(!title) {
-			alert('제목을 입력하세요');
-			return;
-		}
-
-		// 악보 정보 객체에 제목 저장
-		kara.scoreInfo.title = title;
 		
-		kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
+		//제목 입력
+		swal("제목을 입력하세요.", {
+			content: "input",
+		}).then((value) => {
+
+			// 제목 정합성 검사
+			if(!value) {
+				// alert('제목을 입력하세요.');
+				return;
+			}
+
+			// 악보 정보 객체에 제목 저장
+			kara.scoreInfo.title = value;
+			kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
+		});
 	},
 	
 	// 템포 수정
@@ -44,20 +47,24 @@ kara.edit = {
 		kara.refresh();
 	},
 	
-	// 작곡가 수정
+	// 이름 수정
 	writer: function(trcNm) {// track Track Name :: 'track1'
-		// 작곡가 입력
-		var writer = prompt("Writer");
+		
+		//이름 입력
+		swal("이름을 입력하세요.", {
+			content: "input",
+		}).then((value) => {
 
-		// 작곡가 정합성 검사
-		if(!writer){
-			alert("작곡가명을 입력하세요.");
-			return;
-		}
+			// 이름 정합성 검사
+			if(!value) {
+				// alert('이름을 입력하세요.');
+				return;
+			}
 
-		// 악보 정보 객체에 작곡가 저장
-		kara.scoreInfo.writer = writer;		
-		kara.refresh();
+			// 악보 정보 객체에 이름 저장
+			kara.scoreInfo.writer = value;		
+			kara.refresh();
+		});		
 	},
 	
 	// 조표 수정
