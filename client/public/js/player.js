@@ -3,7 +3,7 @@ if(!window.kara) window.kara = {};
 //Init Score(Execute first)
 kara.initScore = function(trcNm) {// trcNm: Track Name -- 'track1'
 	
-	var trcNum = trcNm.slice(-1);
+	let trcNum = trcNm.slice(-1);
 	
 	kara.addInstr(trcNum);	// 트랙별 악기 콤보 추가
 	kara.initSvg(trcNm);	// 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
@@ -25,16 +25,6 @@ kara.refresh = function() {
 		// 초기화된 트랙만 그리기
 		kara.prtNote(trcNm);	// print Notes
 		kara.txtSVG(trcNm); 	// print Text
-	}
-};
-
-// 시간지연
-kara.delay = function delay(gap) { /* gap is in millisecs */  
-	var then, now;
-	then = new Date().getTime();
-	now = then;
-	while( (now - then) < gap ) {
-		now = new Date().getTime();  // 현재시간을 읽어 함수를 불러들인 시간과의 차를 이용하여 처리$
 	}
 };
 
