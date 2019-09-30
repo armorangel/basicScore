@@ -262,7 +262,7 @@
             if ((m = /^(\d+)samples(?:\/(\d+)Hz)?$/i.exec(str))) {
                 return m[1] * 1000 / (m[2] || timbre.samplerate);
             }
-            return 0;
+			return 0;
         };
     })();
 

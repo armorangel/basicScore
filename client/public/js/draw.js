@@ -106,7 +106,7 @@ kara.draw = {
 		
 		// SVG 요소 삭제
 		this.removeSvg('#tempo');	// 템포 제거
-		this.removeSvg('#edtTem');	// 템포 선택 영억 제거
+		this.removeSvg('#edtTem');	// 템포 선택 영역 제거
 		
 		/*
 		this.svgContainer.each(function(i, children) {//SVG.js
