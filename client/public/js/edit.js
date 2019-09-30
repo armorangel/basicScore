@@ -119,8 +119,6 @@ kara.edit = {
 		// G, F, C가 아니면
 
 		kara.scoreInfo.track[trcNm].clef = clef.toUpperCase();
-
-		$(".in_bar").remove();
 		kara.refresh();
 	}	
 };
