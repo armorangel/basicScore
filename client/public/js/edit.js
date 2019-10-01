@@ -5,7 +5,7 @@ kara.edit = {
 	
 	// Edit Title
 	title: function() {	// track Track Name :: 'track1'
-		
+			
 		//제목 입력
 		swal('제목을 입력하세요.', {
 			content: 'input',
@@ -67,25 +67,50 @@ kara.edit = {
 	// 조표 수정
 	key: function() {
 		
+
 		
-		
-		// 조표 입력
-		var key = prompt("Key");
+		////////////////////////////
+		Swal.fire({
+			title: '<strong>Select Key</strong>',
+			html:
+				"<button class='keyBtn'>Am</button>" + 
+				"<button class='keyBtn'>Em</button>" + 
+				"<button class='keyBtn'>Fm</button>" + 
+				"<button class='keyBtn'>Gm</button>" + 
+				"<button class='keyBtn'>Bm</button>" + 
+				"<button class='keyBtn'>D</button>",
+			showConfirmButton: false,
+			showCancelButton: true,
+			
+			cancelButtonText:'취소',
 
-		// 조표 정합성 검사
-		if(key === null || key === '') {
-			alert("조표를 입력하세요");
-			return;
-		}
+		 	onBeforeOpen: () => {
+				const content = Swal.getContent()
+				const $ = content.querySelectorAll.bind(content)
 
-		key = kara.keyvalue(key);
+				const keyBtn = $('.keyBtn')
+				
+				for(var i = 0; i < keyBtn.length; i++)  {
+			
+					keyBtn[i].addEventListener('click', (e) => {
+						
+						
+						var key = kara.keyvalue(e.target.innerText);
 
-		// 정해진 조표 입력 검사
-		if(!kara.keyTrueofFalse(key)) return;
+						// 정해진 조표 입력 검사
+						if(!kara.keyTrueofFalse(key)) return;
 
-		kara.scoreInfo.key = key.toString();
-
-		kara.refresh();
+						
+						// 팝업 종료
+						Swal.clickConfirm()
+						
+						// 키 반영
+						kara.scoreInfo.key = key.toString();
+						kara.refresh();
+					})
+				}
+			},
+		})
 	},
 	
 	// 박자 수정
