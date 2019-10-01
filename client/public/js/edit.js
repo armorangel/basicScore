@@ -4,23 +4,20 @@ if(!window.kara) window.kara = {};
 kara.edit = {
 	
 	// Edit Title
-	title: function(trcNm) {	// track Track Name :: 'track1'
+	title: function() {	// track Track Name :: 'track1'
 		
 		//제목 입력
-		swal("제목을 입력하세요.", {
-			content: "input",
+		swal('제목을 입력하세요.', {
+			content: 'input',
 		}).then((value) => {
 
 			// 제목 정합성 검사
-			if(!value) {
-				// alert('제목을 입력하세요.');
-				return;
-			}
+			if(!value) return;
 
 			// 악보 정보 객체에 제목 저장
-			kara.scoreInfo.title = value;
-			kara.refresh();		// 삭제영역 제거 후 악보 다시 그리기
-		});
+			kara.scoreInfo.title = value
+			kara.refresh()		// 삭제영역 제거 후 악보 다시 그리기
+		})
 	},
 	
 	// 템포 수정
@@ -69,6 +66,8 @@ kara.edit = {
 	
 	// 조표 수정
 	key: function() {
+		
+		
 		
 		// 조표 입력
 		var key = prompt("Key");

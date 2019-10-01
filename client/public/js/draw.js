@@ -93,7 +93,7 @@ kara.draw = {
 				.attr('class', 'in_bar')// .in_bar :: 악보 초기화 영역
 				.attr('x', boxSize.x)
 				.attr('y', boxSize.y)
-				.attr('onclick', "kara.edit.title('" + this.track + "')")// Click Event(제목 수정)
+				.attr('onclick', 'kara.edit.title()')// Click Event(제목 수정)
 				.style('width', '100')// 변경해야됨
 				.style('height', '80')// 변경해야됨
 				.style('fill', '#000000')
