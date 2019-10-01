@@ -70,19 +70,41 @@ kara.edit = {
 
 		
 		////////////////////////////
+		// major:{'C':0, 'G':1, 'D':2, 'A':3, 'E':4, 'B':5, 'Gb':6, 'Db':5, 'Ab':4, 'Eb':3, 'Bb':2, 'F':1},
+		// minor:{'Am':0, 'Em':1, 'Bm':2, 'F#m':3, 'C#m':4, 'G#m':5, 'Ebm':6, 'Bbm':5, 'Fm':4, 'Cm':3, 'Gm':2, 'Dm':1}
 		Swal.fire({
 			title: '<strong>Select Key</strong>',
 			html:
-				"<button class='keyBtn'>Am</button>" + 
-				"<button class='keyBtn'>Em</button>" + 
-				"<button class='keyBtn'>Fm</button>" + 
-				"<button class='keyBtn'>Gm</button>" + 
-				"<button class='keyBtn'>Bm</button>" + 
-				"<button class='keyBtn'>D</button>",
+				"<button class='keyBtn'>C</button>" + 
+				"<button class='keyBtn'>G</button>" + 
+				"<button class='keyBtn'>D</button>" + 
+				"<button class='keyBtn'>A</button>" + 
+				"<button class='keyBtn'>E</button>" + 
+				"<button class='keyBtn'>B</button>" +
+				"<button class='keyBtn'>Gb</button>" +
+				"<button class='keyBtn'>Db</button>" +
+				"<button class='keyBtn'>Ab</button>" +
+				"<button class='keyBtn'>Eb</button>" +
+				"<button class='keyBtn'>Bb</button>" +
+				"<button class='keyBtn'>F</button>" +
+				"<br>" +
+				"<button class='keyBtn'>Am</button>" +
+				"<button class='keyBtn'>Em</button>" +
+				"<button class='keyBtn'>Bm</button>" +
+				"<button class='keyBtn'>F#m</button>" +
+				"<button class='keyBtn'>C#m</button>" +
+				"<button class='keyBtn'>G#m</button>" +
+				"<button class='keyBtn'>Ebm</button>" +
+				"<button class='keyBtn'>Bbm</button>" +
+				"<button class='keyBtn'>Fm</button>" +
+				"<button class='keyBtn'>Cm</button>" +
+				"<button class='keyBtn'>Gm</button>" +
+				"<button class='keyBtn'>Dm</button>",
+
 			showConfirmButton: false,
 			showCancelButton: true,
-			
 			cancelButtonText:'취소',
+			width: '50%',
 
 		 	onBeforeOpen: () => {
 				const content = Swal.getContent()
