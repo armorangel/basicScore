@@ -48,9 +48,8 @@ kara.edit = {
 		}
 
 		// 악보 정보 객체에 템포 저장
-		kara.scoreInfo.tempo = tempo;
-
-		kara.refresh();
+		kara.scoreInfo.tempo = tempo
+		kara.refresh()
 	},
 	
 	// 이름 수정
@@ -131,19 +130,17 @@ kara.edit = {
 			
 					keyBtn[i].addEventListener('click', (e) => {
 						
-						
 						var key = kara.keyvalue(e.target.innerText);
 
 						// 정해진 조표 입력 검사
-						if(!kara.keyTrueofFalse(key)) return;
+						if(!kara.validKey(key)) return;
 
-						
 						// 팝업 종료
 						Swal.clickConfirm()
 						
 						// 키 반영
 						kara.scoreInfo.key = key.toString();
-						kara.refresh();
+						kara.refresh()
 					})
 				}
 			},
@@ -157,7 +154,7 @@ kara.edit = {
 	
 		// 박자 정합성 검사
 		if(!meter) {
-			alert('박자를 입력하세요.');
+			alert('박자를 입력하세요.')
 			return;
 		}
 
@@ -184,34 +181,34 @@ kara.edit = {
 	}	
 };
 
-// 정해진 조표 입력 검사
-kara.keyTrueofFalse = function(key) {// key :: key -- 'major C'
+// 키 유효성 검사
+kara.validKey = function(key) {// key :: key -- 'major C'
 	
 	switch (key) {
-		case "major C":
-		case "major G":
-		case "major D":
-		case "major A":
-		case "major E":
-		case "major B":
-		case "major Gb":
-		case "major Db":
-		case "major Ab":
-		case "major Eb":
-		case "major Bb":
-		case "major F":
-		case "minor Am":
-		case "minor Em":
-		case "minor Bm":
-		case "minor F#m":
-		case "minor C#m":
-		case "minor G#m":
-		case "minor Ebm":
-		case "minor Bbm":
-		case "minor Fm":
-		case "minor Cm":
-		case "minor Gm":
-		case "minor Dm":	return true;
+		case 'major C':
+		case 'major G':
+		case 'major D':
+		case 'major A':
+		case 'major E':
+		case 'major B':
+		case 'major Gb':
+		case 'major Db':
+		case 'major Ab':
+		case 'major Eb':
+		case 'major Bb':
+		case 'major F':
+		case 'minor Am':
+		case 'minor Em':
+		case 'minor Bm':
+		case 'minor F#m':
+		case 'minor C#m':
+		case 'minor G#m':
+		case 'minor Ebm':
+		case 'minor Bbm':
+		case 'minor Fm':
+		case 'minor Cm':
+		case 'minor Gm':
+		case 'minor Dm':	return true;
 		default:			return false;
 	}
 };
@@ -324,7 +321,6 @@ var notepush = {
 
 				// 다시 그리기
 				kara.prtNote(trcNm);
-				kara.test(trcNm);
 				
 				return;
 		}	// End of switch
@@ -332,7 +328,7 @@ var notepush = {
 		// 음표추가 가능 여부		
 		if(kara.meterCal(bNum[1], nNum[1], meterNm, trcNm) === -1) return;	// 마디 초과
 		
-		kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm);// 추가 가능
+		kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm);	// 추가 가능
 	}
 };
 

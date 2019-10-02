@@ -199,4 +199,4 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 	remain_meter = remain_meter - noteMeter.head[meterNm];
 	
 	return remain_meter;
-};
+}
