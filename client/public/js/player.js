@@ -20,13 +20,13 @@ kara.refresh = function() {
 	for (var trcNm in kara.scoreInfo.track) {
 			
 		// 해당 트랙이 초기화 되었는지 판단
-		if(kara.scoreInfo.track[trcNm].clef === '') continue;
+		if(kara.scoreInfo.track[trcNm].clef === '') continue
 		
 		// 초기화된 트랙만 그리기
-		kara.prtNote(trcNm);	// print Notes
-		kara.txtSVG(trcNm); 	// print Text
+		kara.prtNote(trcNm)	// print Notes
+		kara.txtSVG(trcNm) 	// print Text
 	}
-};
+}
 
 //트랙 탭 추가
 kara.addTabs = function() {
@@ -86,7 +86,7 @@ kara.addTabs = function() {
 // Add Combo to select Instruments on Each Track
 kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 
-	var trcNm = 'track' + trcNum;	// 'track1'
+	const trcNm = 'track' + trcNum;	// 'track1'
 	var menuTtl = 'Select a track';
 	
 	kara.scoreInfo.track[trcNm].instrument = 0;	//처음 Acoustic Grand Piano로 세팅
@@ -245,7 +245,7 @@ kara.addInstrOptCombo = function(trcNum) {	// trcNum :: Track Number - '1'
 	$("#instrument" + trcNum).append("<option value = '125'>Helicopter</option>");
 	$("#instrument" + trcNum).append("<option value = '126'>Applause</option>");
 	$("#instrument" + trcNum).append("<option value = '127'>Gunshot</option>");
-};
+}
 
 // 악기
 kara.instru = {

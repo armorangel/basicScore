@@ -76,14 +76,10 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 // Draw title, tempo, name SVG
 kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 	
-	const title = kara.scoreInfo.title;
-	const tempo = kara.scoreInfo.tempo;
-	const writer = kara.scoreInfo.writer;
-	
 	kara.draw.setTrack(trcNm)
-			.title(title)		// Draw Title
-			.tempo(tempo)		// Draw Tempo
-			.writer(writer);	// Draw Writer
+			.title(kara.scoreInfo.title)		// Draw Title
+			.tempo(kara.scoreInfo.tempo)		// Draw Tempo
+			.writer(kara.scoreInfo.writer);		// Draw Writer
 };
 
 // 배열의 값을 가져와서 음표를 그린다
@@ -91,7 +87,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	
 	const note = kara.scoreInfo.track[trcNm].notes;	// Array [["E5", "half"], ["E5", "half"]]
 	var meter = kara.scoreInfo.meter.split('/');	// ["4", "4"]
-	var limited = meter[0] * meter[1];	// 마디 제한 16
+	const limited = meter[0] * meter[1];	// 마디 제한 16
 	var nowMeter = 0;					// 현재 마디
 	var four_boxEnter = 0;
 	var four_check = 0;
@@ -170,11 +166,11 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 
 				//길이 대입
 				switch(meter) {
-					case 'whole':	leng = _whole; break;		// 온음표
-					case 'half':	leng = _half; break;		// 2분음표
-					case 'quarter':	leng = _quarter; break;		// 4분음표
-					case '8th':		leng = _8th; break;			// 8분음표
-					case '16th':	leng = _16th; break;		// 16분음표
+					case 'whole':	leng = _whole;	break;		// 온음표
+					case 'half':	leng = _half;	break;		// 2분음표
+					case 'quarter':	leng = _quarter;break;		// 4분음표
+					case '8th':		leng = _8th;	break;		// 8분음표
+					case '16th':	leng = _16th;	break;		// 16분음표
 					default: break;
 				}
 				
@@ -191,7 +187,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 				var four2 = ii % 4;
 
 				if(four2 == 0 && ii >= 4) {
-					if(kara.meterCal_box(i, trcNm)===1) {
+					if(kara.meterCal_box(i, trcNm) === 1) {
 						
 						
 						$('#' + trcNm + ' > #score').height(four_boxEnter2 * 120 + 300);	// FUNCTION으로 변경
@@ -214,12 +210,12 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 kara.scorePos = {
 	
 	//#score 악보 영역 left 좌표 반환
-	left: function(trcNm) {// trcNm :: Track Name -- 'track1'
+	left: function(trcNm) {	// trcNm :: Track Name -- 'track1'
 		var position = $('#' + trcNm + ' > #score');
 		return position.position().left;
 	},
 	// #score 악보 영억 top 좌표 반환
-	top: function(trcNm) {// trcNm :: Track Name -- 'track1'
+	top: function(trcNm) {	// trcNm :: Track Name -- 'track1'
 		var position = $('#' + trcNm + ' > #score');
 		return position.position().top;
 	}
@@ -243,7 +239,7 @@ kara.XY = {
 kara.clefSVG = function(x, y, Y, trcNm) {
 	// 10, 200, 200, 'track1'
 	
-	var clef = kara.scoreInfo.track[trcNm].clef;	// 현재 음자리표
+	const clef = kara.scoreInfo.track[trcNm].clef;	// 현재 음자리표
 	var svg = kara.svg[trcNm].svgSymbol;
 	var box_x, box_y;
 	var width, height;
@@ -499,7 +495,7 @@ kara.print_s_p = function(symbol, x, y, trcNm) {	// accidentals.flat, 204.750003
 		.attr('class', 'in_bar ' + trcNm)// 삭제 영역
 		.attr('d', pathString)
 		.style('transform', 'scale(0.7,0.7)')
-		.style('stroke', 'black');
+		.style('stroke', 'black')
 };
 
 // 심볼을 찾아옴

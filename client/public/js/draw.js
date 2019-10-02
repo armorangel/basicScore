@@ -133,11 +133,11 @@ kara.draw = {
 			.style('text-anchor', 'start')
 			.style('fill', '#000000')
 			.style('font-weight', 'bold')
-			.text('♩ = ' + tempo);
+			.text('♩ = ' + tempo)
 		
-		var boxSize = this.getBoxSize('#tempo');
+		var boxSize = this.getBoxSize('#tempo')
 
-		this.box.append("rect")
+		this.box.append('rect')
 			.attr("id", "edtTem")
 			.attr("class", "in_bar")// .in_bar :: 삭제영역
 			.attr("x", boxSize.x)
