@@ -992,14 +992,14 @@ kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSpli
 // 악보 선택 영역 그리기
 kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity) {
 	svgVar.append('rect')
-					.attr('id', p)
-					.attr('class', 'in_bar ' + 'bar_' + bNum + ' ' + 'note_' + nNum + ' ' + trcNm) //마디,  음표 번호
-					.attr('x', x)
-					.attr('y', y)
-					.attr('onmousedown', "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
-					.style("width", width)
-					.style("height", height)	// 6
-					.style("fill", fill)
-					.style("fill-opacity", fill_opacity);	//0.3, 0.5
+				.attr('id', p)
+				.attr('class', 'in_bar ' + 'bar_' + bNum + ' ' + 'note_' + nNum + ' ' + trcNm) //마디,  음표 번호
+				.attr('x', x)
+				.attr('y', y)
+				.attr('onmousedown', "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
+				.style("width", width)
+				.style("height", height)	// 6
+				.style("fill", fill)
+				.style("fill-opacity", fill_opacity);	//0.3, 0.5
 	
 }
