@@ -876,51 +876,37 @@ kara.noteBox_last = {
 			case 'whole': // 온음표
 				width = width;
 				x = x + (X - a) / 4;
-				
-				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
-					bNum = bNum + 1;
-					nNum = 0;
-				}
+
 				break;
 			case 'half': // 2분음표
 				width = width - width / 2;
 				x = x + (X - a) / 4 - width;
-
-				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
-					bNum = bNum + 1;
-					nNum = 0;
-				}
 
 				break;
 			case 'quarter': // 4분음표
 				width = width - width / 4;
 				x = x + (X - a) / 4 - width;
 
-				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
-					bNum = bNum + 1;
-					nNum = 0;
-				}
 				break;
 			case '8th': // 8분음표
 				width = width - width / 8;
 				x = x + (X - a) / 4 - width;
-				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
-					bNum = bNum + 1;
-					nNum = 0;
-				}
+
 				break;
 			case '16th': // 16분음표
 				width = width - width / 16;
 				x = x + (X - a) / 4 - width;
-				if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
-					bNum = bNum + 1;
-					nNum = 0;
-				}
+		
 				break;
 			case 32: break;
 			case 64: break;
 			case 128: break;
 			default: break;
+		}	// End of switch
+		
+		if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
+			bNum = bNum + 1;
+			nNum = 0;
 		}
 
 		if(set === 1) {
@@ -1016,4 +1002,4 @@ kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill,
 					.style("fill", fill)
 					.style("fill-opacity", fill_opacity);	//0.3, 0.5
 	
-};
+}

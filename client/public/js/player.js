@@ -20,7 +20,7 @@ kara.init = {
 kara.refresh = function() {
 	
 	// 악보 삭제영역 삭제
-	$('.in_bar').remove();
+	$('.in_bar').remove()
 	
 	for (var trcNm in kara.scoreInfo.track) {
 			
@@ -37,7 +37,7 @@ kara.refresh = function() {
 kara.addTabs = function() {
 	
 	var trcNm;
-	var trcNum = 1;
+	var trcNum = 1
 
 	//kara.svg :: 악보 트랙별 SVG 객체 return ['track1', 'track2', ..., 'track10']
 	//마지막 트랙번호 설정
@@ -257,7 +257,7 @@ kara.instru = {
 	
 	// 악기 총 갯수
 	getTotCnt: function() {
-		return Object.keys(this.list).length;
+		return Object.keys(this.list).length
 	},
 	
 	// 악기 이름
@@ -265,7 +265,7 @@ kara.instru = {
 		
 		for(let key in this.list) {
 			if(this.list[key] === num) {
-				return key;
+				return key
 			}
 		}
 		
@@ -274,7 +274,7 @@ kara.instru = {
 	
 	// 악기 번호
 	getNum: function(name) {
-		return this.list[name];
+		return this.list[name]
 	},
 	
 	// 악기 목록
@@ -408,7 +408,7 @@ kara.instru = {
 		"Applause":					126,
 		"gunshot":					127
 	}
-};
+}
 
 
 
