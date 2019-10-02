@@ -36,14 +36,14 @@ kara.refresh = function() {
 //트랙 탭 추가
 kara.addTabs = function() {
 	
-	var trcNm;
+	var trcNm
 	var trcNum = 1
 
 	//kara.svg :: 악보 트랙별 SVG 객체 return ['track1', 'track2', ..., 'track10']
 	//마지막 트랙번호 설정
 	for (var key in kara.svg) {	// 트랙별 svg
 		if(kara.svg['track' + trcNum].svgContainer !== null)
-			trcNum++;	// 1부터 시작 아직 생성안된 트랙까지
+			trcNum++	// 1부터 시작 아직 생성안된 트랙까지
 	}
 	
 	// 트랙 9개 제한
@@ -51,8 +51,8 @@ kara.addTabs = function() {
 	
 	//탭 태그 생성
 	$("#tab").children().last().before("<li><a href='#track" + trcNum + "'>track " + trcNum + "</a>" +
-									   "<span class='ui-icon ui-icon-close' role='presentation'>삭제</span></li>");
-	$("#tabs").children().last().after("<div id='track" + trcNum + "'></div>");
+									   "<span class='ui-icon ui-icon-close' role='presentation'>삭제</span></li>")
+	$("#tabs").children().last().after("<div id='track" + trcNum + "'></div>")
 	
 	// 삭제버튼 클릭시 해당 탭 지우기
 	$("#tabs").on( "click", "span.ui-icon-close", function() {
@@ -65,27 +65,27 @@ kara.addTabs = function() {
 		//해당 트랙의 악기 콤보 삭제
 		if(panelId.slice(-1) == trcNum) {
 			
-			$('#menu' + trcNum).remove();
-			kara.svg['track' + trcNum].svgContainer = null;
-			kara.svg['track' + trcNum].svgLine = null;
-			kara.svg['track' + trcNum].svgText = null;
-			kara.svg['track' + trcNum].svgSymbol = null;
-			kara.svg['track' + trcNum].svgNote = null;
-			kara.svg['track' + trcNum].svgBox = null;
+			$('#menu' + trcNum).remove()
+			kara.svg['track' + trcNum].svgContainer = null
+			kara.svg['track' + trcNum].svgLine = null
+			kara.svg['track' + trcNum].svgText = null
+			kara.svg['track' + trcNum].svgSymbol = null
+			kara.svg['track' + trcNum].svgNote = null
+			kara.svg['track' + trcNum].svgBox = null
 			
-			kara.scoreInfo.track['track' + trcNum].clef = '';
-			kara.scoreInfo.track['track' + trcNum].notes = [];
-			kara.scoreInfo.track['track' + trcNum].instrument = '';
+			kara.scoreInfo.track['track' + trcNum].clef = ''
+			kara.scoreInfo.track['track' + trcNum].notes = []
+			kara.scoreInfo.track['track' + trcNum].instrument = ''
 		}
 			
 		// 탭 refresh
-		$('#tabs').tabs('refresh');
+		$('#tabs').tabs('refresh')
 	});
 
 	// 탭 refresh
-	$('#tabs').tabs('refresh');
+	$('#tabs').tabs('refresh')
 
-	kara.init.score('track' + trcNum);	// Init Score
+	kara.init.score('track' + trcNum)	// Init Score
 };
 
 // Add Combo to select Instruments on Each Track
@@ -94,25 +94,25 @@ kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 	const trcNm = 'track' + trcNum	// 'track1'
 	var menuTtl = 'Select a track'
 	
-	kara.scoreInfo.track[trcNm].instrument = 0;	//처음 Acoustic Grand Piano로 세팅
+	kara.scoreInfo.track[trcNm].instrument = 0	//처음 Acoustic Grand Piano로 세팅
 	
 	// 메뉴 바에 Select a track 문구, 콤보 추가
-	$("#menu").append("<form id='menu" + trcNum + "' action='#'><fieldset><label for='instrument" + trcNum + "'>" + menuTtl + trcNum + "</label><select name='instrument" + trcNum 	+ "' id='instrument" + trcNum + "'></fieldset></form>");
+	$("#menu").append("<form id='menu" + trcNum + "' action='#'><fieldset><label for='instrument" + trcNum + "'>" + menuTtl + trcNum + "</label><select name='instrument" + trcNum 	+ "' id='instrument" + trcNum + "'></fieldset></form>")
 	
 	$("#instrument" + trcNum)
 		.selectmenu({width: 200})
 		.selectmenu("menuWidget")
-		.addClass("overflow");	// overflow클래스 추가
+		.addClass("overflow")	// overflow클래스 추가
 
 	//악기 콤보 요소 추가 add option tag
-	kara.addInstrOptCombo(trcNum);	// 1
+	kara.addInstrOptCombo(trcNum)	// 1
 
 	// 콤보 이벤트 추가
 	$("#instrument" + trcNum).selectmenu({
 		
 		// 콤보 박스 변경시 호출
 		change: function(event, ui) {
-			kara.scoreInfo.track[trcNm].instrument = ui.item.value;	// 선택된 악기번호 악보 정보 객체에 저장
+			kara.scoreInfo.track[trcNm].instrument = ui.item.value	// 선택된 악기번호 악보 정보 객체에 저장
 		}
 	});
 
