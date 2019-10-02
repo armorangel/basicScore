@@ -1,15 +1,20 @@
-if(!window.kara) window.kara = {};
+if(!window.kara) window.kara = {}
 
 //Init Score(Execute first)
-kara.initScore = function(trcNm) {// trcNm: Track Name -- 'track1'
+kara.init = {
 	
-	let trcNum = trcNm.slice(-1);	// 1
+	score: function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
-	kara.addInstr(trcNum);	// 트랙별 악기 콤보 추가
-	kara.initSvg(trcNm);	// 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
-	kara.txtSVG(trcNm);		// Draw title, tempo, name SVG in print.js
-	kara.prtNote(trcNm);	// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
-};
+		if(!trcNm) trcNm = 'track1'
+
+		let trcNum = trcNm.slice(-1)	// 1
+
+		kara.addInstr(trcNum)	// 트랙별 악기 콤보 추가
+		kara.initSvg(trcNm)		// 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
+		kara.txtSVG(trcNm)		// Draw title, tempo, name SVG in print.js
+		kara.prtNote(trcNm)		// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
+	}
+}
 
 // 악보 초기화
 kara.refresh = function() {
@@ -52,10 +57,10 @@ kara.addTabs = function() {
 	// 삭제버튼 클릭시 해당 탭 지우기
 	$("#tabs").on( "click", "span.ui-icon-close", function() {
 		
-		var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+		var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" )
 		
 		// 해당하는 탭 제거
-		$("#" + panelId).remove();
+		$("#" + panelId).remove()
 		
 		//해당 트랙의 악기 콤보 삭제
 		if(panelId.slice(-1) == trcNum) {
@@ -86,8 +91,8 @@ kara.addTabs = function() {
 // Add Combo to select Instruments on Each Track
 kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 
-	const trcNm = 'track' + trcNum;	// 'track1'
-	var menuTtl = 'Select a track';
+	const trcNm = 'track' + trcNum	// 'track1'
+	var menuTtl = 'Select a track'
 	
 	kara.scoreInfo.track[trcNm].instrument = 0;	//처음 Acoustic Grand Piano로 세팅
 	
@@ -112,7 +117,7 @@ kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 	});
 
 	// 콤보 갱신
-	$("#instrument" + trcNum).selectmenu('refresh');
+	$("#instrument" + trcNum).selectmenu('refresh')
 };
 
 //악기 콤보 요소 추가
