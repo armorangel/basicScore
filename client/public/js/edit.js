@@ -4,20 +4,29 @@ if(!window.kara) window.kara = {};
 kara.edit = {
 	
 	// Edit Title
-	title: function() {	// track Track Name :: 'track1'
-			
-		//제목 입력
-		swal('제목을 입력하세요.', {
-			content: 'input',
-		}).then((value) => {
-
-			// 제목 정합성 검사
-			if(!value) return;
-
-			// 악보 정보 객체에 제목 저장
-			kara.scoreInfo.title = value
-			kara.refresh()		// 삭제영역 제거 후 악보 다시 그리기
+	title: async function() {
+		
+		// 길이 제한
+		// 특수문자 제한
+		var value;
+		
+		const { value: title } = await Swal.fire({
+			title: '제목을 입력하세요.',
+			input: 'text',
+			inputValue: value,
+			showCancelButton: true,
+			inputValidator: (value) => {
+				if (!value) {
+					return '제목을 입력하세요.'
+				}
+			}
 		})
+		
+		if(title) {
+			// 악보 정보 객체에 제목 저장
+			kara.scoreInfo.title = title
+			kara.refresh()		// 삭제영역 제거 후 악보 다시 그리기
+		}
 	},
 	
 	// 템포 수정
@@ -45,23 +54,29 @@ kara.edit = {
 	},
 	
 	// 이름 수정
-	writer: function(trcNm) {// track Track Name :: 'track1'
+	writer: async function() {
 		
-		//이름 입력
-		swal("이름을 입력하세요.", {
-			content: "input",
-		}).then((value) => {
-
-			// 이름 정합성 검사
-			if(!value) {
-				// alert('이름을 입력하세요.');
-				return;
+		// 길이 제한
+		// 특수문자 제한
+		var value;
+		
+		const { value: writer } = await Swal.fire({
+			title: '이름을 입력하세요.',
+			input: 'text',
+			inputValue: value,
+			showCancelButton: true,
+			inputValidator: (value) => {
+				if (!value) {
+					return '이름을 입력하세요.'
+				}
 			}
-
-			// 악보 정보 객체에 이름 저장
-			kara.scoreInfo.writer = value;		
-			kara.refresh();
-		});		
+		})
+		
+		if(writer) {
+			// 악보 정보 객체에 제목 저장
+			kara.scoreInfo.writer = writer
+			kara.refresh()		// 삭제영역 제거 후 악보 다시 그리기
+		}
 	},
 	
 	// 조표 수정

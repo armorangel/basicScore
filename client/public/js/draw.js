@@ -175,7 +175,7 @@ kara.draw = {
 			.attr("class", "in_bar")
 			.attr("x", boxSize.x)
 			.attr("y", boxSize.y)
-			.attr("onclick", "kara.edit.writer('" + this.track + "')")
+			.attr("onclick", "kara.edit.writer()")
 			.style("width", "100")
 			.style("height", "25")
 			.style("fill", "#000000")
