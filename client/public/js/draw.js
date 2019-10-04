@@ -156,16 +156,16 @@ kara.draw = {
 		this.removeSvg('#writer');	// 작곡가 제거
 		this.removeSvg('#edtWtr');	// 작곡가 선택 영역 제거
 		
-		this.txt.append("text")
-			.attr("id", "writer")
-			.attr("class", "in_bar")
-			.attr("font-size", "16px")
-			.attr("x", "98%")
-			.attr("y", "140")
-			.attr("dy", ".47em")
-			.style("text-anchor", "end")
-			.style("fill", "#000000")
-			.style("font-weight", "bold")
+		this.txt.append('text')
+			.attr('id', 'writer')
+			.attr('class', 'in_bar')
+			.attr('font-size', '16px')
+			.attr('x', '98%')
+			.attr('y', '140')
+			.attr('dy', '.47em')
+			.style('text-anchor', 'end')
+			.style('fill', '#000000')
+			.style('font-weight', 'bold')
 			.text(writer);
 		
 		var boxSize = this.getBoxSize('#writer');
