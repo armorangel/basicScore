@@ -122,7 +122,6 @@ kara.draw = {
 		});
 		*/
 		
-		
 		this.txt.append('text')
 			.attr('id', 'tempo')
 			.attr('class', 'in_bar')	// .in_bar :: 악보 초기화 영역
@@ -146,15 +145,15 @@ kara.draw = {
 			.style('width', '100')// 0 ISSUE
 			.style('height', '25')// 0 ISSUE
 			.style('fill', '#000000')
-			.style('fill-opacity', '0.3');
+			.style('fill-opacity', '0.3')
 		
-		return this;
+		return this
 	},
 	writer: function(writer) {
 		
 		// SVG 요소 삭제
-		this.removeSvg('#writer');	// 작곡가 제거
-		this.removeSvg('#edtWtr');	// 작곡가 선택 영역 제거
+		this.removeSvg('#writer')	// 작곡가 제거
+		this.removeSvg('#edtWtr')	// 작곡가 선택 영역 제거
 		
 		this.txt.append('text')
 			.attr('id', 'writer')
@@ -166,66 +165,64 @@ kara.draw = {
 			.style('text-anchor', 'end')
 			.style('fill', '#000000')
 			.style('font-weight', 'bold')
-			.text(writer);
+			.text(writer)
 		
-		var boxSize = this.getBoxSize('#writer');
+		var boxSize = this.getBoxSize('#writer')
 
 		this.box.append('rect')
 			.attr('id', 'edtWtr')
-			.attr("class", "in_bar")
-			.attr("x", boxSize.x)
-			.attr("y", boxSize.y)
-			.attr("onclick", "kara.edit.writer()")
-			.style("width", "100")
-			.style("height", "25")
-			.style("fill", "#000000")
-			.style("fill-opacity", "0.3");
+			.attr('class', 'in_bar')
+			.attr('x', boxSize.x)
+			.attr('y', boxSize.y)
+			.attr('onclick', 'kara.edit.writer()')
+			.style('width', '100')
+			.style('height', '25')
+			.style('fill', '#000000')
+			.style('fill-opacity', '0.3')
 	},
 	
 	// 음자리표
 	clefs_G: function(trcNm, pathString) {
 		
-		const symbol = kara.svg[trcNm].svgSymbol;
+		const symbol = kara.svg[trcNm].svgSymbol
 		
-		symbol.append("path")
-				.attr("class", "in_bar " + trcNm)
-				.attr("d", pathString)
-				.style("transform", "scale(1.2,1.4)") //크기조절
-				.style("stroke", "black");
-		
-		
+		symbol.append('path')
+				.attr('class', 'in_bar ' + trcNm)
+				.attr('d', pathString)
+				.style('transform', 'scale(1.2,1.4)') // 크기조절
+				.style('stroke', 'black')
 	},
 	clefs_F: function(trcNm, pathString) {
 		
-		const symbol = kara.svg[trcNm].svgSymbol;
+		const symbol = kara.svg[trcNm].svgSymbol
 		
-		symbol.append("path")
-				.attr("class", "in_bar " + trcNm)
-				.attr("d", pathString)
-				.style("transform", "scale(1.4,1.7)")	// 크기조절
-				.style("stroke", "black");
+		symbol.append('path')
+				.attr('class', 'in_bar ' + trcNm)
+				.attr('d', pathString)
+				.style('transform', 'scale(1.4,1.7)')	// 크기조절
+				.style('stroke', 'black')
 	},
 	clefs_perc: function(trcNm, pathString) {
 		
-		const symbol = kara.svg[trcNm].svgSymbol;
+		const symbol = kara.svg[trcNm].svgSymbol
 		
-		symbol.append("path")
-				.attr("class", "in_bar " + trcNm)
-				.attr("d", pathString)
-				.style("transform", "scale(1.2,1.5)")	// 크기조절
-				.style("stroke", "black");
+		symbol.append('path')
+				.attr('class', 'in_bar ' + trcNm)
+				.attr('d', pathString)
+				.style('transform', 'scale(1.2,1.5)')	// 크기조절
+				.style('stroke', 'black')
 	},
 	
 	// 박자
 	meter: function(trcNm, pathString) {
 		
-		const symbol = kara.svg[trcNm].svgSymbol;
+		const symbol = kara.svg[trcNm].svgSymbol
 		
-		symbol.append("path")
-			.attr("id", "meter")
-			.attr("class", "in_bar " + trcNm)// 삭제 영역
-			.attr("d", pathString)
-			.style("transform", "scale(1.2,1.4)")
-			.style("stroke", "black");
+		symbol.append('path')
+			.attr('id', 'meter')
+			.attr('class', 'in_bar ' + trcNm)// 삭제 영역
+			.attr('d', pathString)
+			.style('transform', 'scale(1.2,1.4)')
+			.style('stroke', 'black')
 	}
-};
+}
