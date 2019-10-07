@@ -253,20 +253,20 @@ kara.keyvalue = function(key) {// key :: 조표 'F'
 // 탭 클릭시 트랙 변경 이벤트
 $('#tab').click(function(e) {
 	// 탭 변경 후 악보 리셋
-	kara.refresh();
+	kara.refresh()
 });
 
 
 $('#tabs').click(function(e) {
 	
-	var klass = e.target.getAttribute('class');
-	var id = e.target.getAttribute('id');
-	var id_P = $('#' + id).parent();
-
-	notepush.setId(id);
-	notepush.setKlass(klass);
+	var klass = e.target.getAttribute('class')
+	var id = e.target.getAttribute('id')
+	var id_P = $('#' + id).parent()
 	
-	//console.log(notepush.id);
+	notepush.setId(id)
+	notepush.setKlass(klass)
+	
+	// console.log(notepush.id)
 });
 
 // 선택한 음을 배열에 담는다
@@ -278,7 +278,7 @@ var notepush = {
 	nNum:'',
 	track:'',
 	setId: function(id) {
-		this.id = id;
+		this.id = id
 	},
 	getId: function() {
 		return this.id;
@@ -286,25 +286,25 @@ var notepush = {
 	setKlass: function(klass) {
 		var klass_split = klass.split(' ');
 
-		this.bNum = klass_split[1];
-		this.nNum = klass_split[2];
-		this.track = klass_split[3];
+		this.bNum = klass_split[1]
+		this.nNum = klass_split[2]
+		this.track = klass_split[3]
 		
-		//console.log(klass_split[1]);
-		//console.log(klass_split[2]);
-		//console.log(klass_split[3]);
+		//console.log(klass_split[1])
+		//console.log(klass_split[2])
+		//console.log(klass_split[3])
 
-		// this.klass = klass_split[1];
+		// this.klass = klass_split[1]
 	},
 	
 	// 선택한 음표 배열에 담기
 	setNote: function(meter) {
 		
 		this.meter = meter;
-		var bNum = this.bNum.split('_');	// 마디번호 -- bar,0
-		var nNum = this.nNum.split('_');	// 음표번호 -- note,0
-		var trcNm = this.track;				// 현재 선택된 트랙 -- 'track1'
-		var meterNm;						// whole, half, quarter, 8th, 16th
+		var bNum = this.bNum.split('_')	// 마디번호 -- bar,0
+		var nNum = this.nNum.split('_')	// 음표번호 -- note,0
+		var trcNm = this.track			// 현재 선택된 트랙 -- 'track1'
+		var meterNm						// whole, half, quarter, 8th, 16th
 	
 		switch(meter) {
 			case 1:		meterNm	= 'whole';	break;	// 온음표
@@ -316,19 +316,19 @@ var notepush = {
 			default:	// 해당하는 음표가 없을 때
 				
 				// 쉼표
-				kara.scoreInfo.track[trcNm].notes[bNum[1]][nNum[1]][0] = 'rest';
-				$('.in_bar.' + trcNm).remove();
+				kara.scoreInfo.track[trcNm].notes[bNum[1]][nNum[1]][0] = 'rest'
+				$('.in_bar.' + trcNm).remove()
 
 				// 다시 그리기
-				kara.prtNote(trcNm);
+				kara.prtNote(trcNm)
 				
 				return;
 		}	// End of switch
 		
 		// 음표추가 가능 여부		
-		if(kara.meterCal(bNum[1], nNum[1], meterNm, trcNm) === -1) return;	// 마디 초과
+		if(kara.meterCal(bNum[1], nNum[1], meterNm, trcNm) === -1) return	// 마디 초과
 		
-		kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm);	// 추가 가능
+		kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm)		// 추가 가능
 	}
 };
 
@@ -345,24 +345,24 @@ var pitch_select = {
 		
 		for(var i = 1; i <= 7; i++) {		// 1옥타브 부터 7옥타브까지 검사
 			if(m <= pitch && pitch <= n) {  // 음높이 계산 현재 범위에 있는 지
-				if(pitch % 7 == 0) return this.note[6] + i;
-				return this.note[(pitch % 7) - 1] + i;
+				if(pitch % 7 == 0) return this.note[6] + i
+				return this.note[(pitch % 7) - 1] + i
 			}
 			
 			// 해당 범위 안에 있지 않으면 한 옥타브 올려서 계산
-			m = m + 7;	// 1 옥타브 올리기
-			n = n + 7;	// 1 옥타브 올리기
+			m = m + 7	// 1 옥타브 올리기
+			n = n + 7	// 1 옥타브 올리기
 		}	// End of for
 	}
 };
 
 var boxWidth = function(meter) {
 	
-	var key = kara.scoreInfo.key;	//현재 악보 키
-	var keySplit = key.split(' ');
-	var M = kara.key[keySplit[0]];
-	var N = M[keySplit[1]];
-	var X = kara.XY.X();
+	var key = kara.scoreInfo.key	//현재 악보 키
+	var keySplit = key.split(' ')
+	var M = kara.key[keySplit[0]]
+	var N = M[keySplit[1]]
+	var X = kara.XY.X()
 
 	var a = N * 12 + 70;
 	var ac = (X - a) / 4;
@@ -370,10 +370,10 @@ var boxWidth = function(meter) {
 	var width = (X - a) / 4;
 	
 	switch(meter) {
-		case 'whole':	width = width; break;		//온음표
-		case 'half':	width = width / 2; break;	//2분음표
-		case 'quarter':	width = width / 4; break;	//4분음표
-		case '8th':		width = width / 8; break;	//8분음표
+		case 'whole':	width = width;		break;	//온음표
+		case 'half':	width = width / 2;	break;	//2분음표
+		case 'quarter':	width = width / 4;	break;	//4분음표
+		case '8th':		width = width / 8;	break;	//8분음표
 		case '16th':	width = width / 16; break;	//16분음표
 		case 32: break;		// 지원안함
 		case 64: break;		// 지원안함
