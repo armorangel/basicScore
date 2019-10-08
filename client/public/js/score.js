@@ -186,17 +186,17 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 	var meterNm;	// half, quarter, 8th, 18th
 	
 	if(!jQuery.isArray(note[bNum][nNum]))
-		note[bNum][nNum] = [];	// new Array()	배열이 아니면
+		note[bNum][nNum] = []	// new Array()	배열이 아니면
 
-	note[bNum][nNum][0] = 'rest';	// 쉼표
+	note[bNum][nNum][0] = 'rest'	// 쉼표
 	
-	if(remain_meter >= noteMeter.head.half) meterNm = 'half';				// 8
-	else if(remain_meter >= noteMeter.head.quarter) meterNm = 'quarter';	// 4
-	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th';			// 2
+	if(remain_meter >= noteMeter.head.half) meterNm = 'half'				// 8
+	else if(remain_meter >= noteMeter.head.quarter) meterNm = 'quarter'		// 4
+	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th'			// 2
 	else meterNm = '16th';													// 1
 	
 	note[bNum][nNum][1] = meterNm;
-	remain_meter = remain_meter - noteMeter.head[meterNm];
+	remain_meter = remain_meter - noteMeter.head[meterNm]
 	
 	return remain_meter;
 }
@@ -205,6 +205,7 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 $('body').keypress(function(e) {
 	console.log(e.keyCode)
 	
+	// 스페이스 키 입력시 화면 움직임 방지
 	e.preventDefault()
 	e.stopPropagation()
 	
