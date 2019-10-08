@@ -33,7 +33,7 @@ kara.refresh = function() {
 	}
 }
 
-//트랙 탭 추가
+//트랙 탭 추가(개선 필요)
 kara.addTabs = function() {
 	
 	var trcNm

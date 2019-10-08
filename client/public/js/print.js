@@ -28,9 +28,9 @@ kara.svg = {
 //해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성
 kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
-	const trcSvg = kara.svg[trcNm];		// kara.svg['track1'] 트랙별 SVG 객체
-	const width = $('#tabs').width();	// 악보 탭 넓이
-	let svgContainer;					// #track1 > #score SVG 트랙영역
+	const trcSvg = kara.svg[trcNm]		// kara.svg['track1'] 트랙별 SVG 객체
+	const width = $('#tabs').width()	// 악보 탭 넓이
+	let svgContainer					// #track1 > #score SVG 트랙영역
 
 	//svgContainer = SVG(trcNm).size(width - 43, 400);// SVG.js test
 	// 악보영역 생성후 저장
@@ -85,18 +85,19 @@ kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 // 배열의 값을 가져와서 음표를 그린다
 kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	
-	const note = kara.scoreInfo.track[trcNm].notes;	// Array [["E5", "half"], ["E5", "half"]]
-	var meter = kara.scoreInfo.meter.split('/');	// ["4", "4"]
-	const limited = meter[0] * meter[1];	// 마디 제한 16
-	var nowMeter = 0;					// 현재 마디
-	var four_boxEnter = 0;
-	var four_check = 0;
-	var pageInc = 0;
+	const note = kara.scoreInfo.track[trcNm].notes	// Array [["E5", "half"], ["E5", "half"]]
+	var meter = kara.scoreInfo.meter.split('/')	// ["4", "4"]
+	const limited = meter[0] * meter[1]	// 마디 제한 16
 	
-	kara.hLine(0, trcNm);	// 한줄 긋고 시작
+	var nowMeter = 0					// 현재 마디
+	var four_boxEnter = 0
+	var four_check = 0
+	var pageInc = 0
+	
+	kara.hLine(0, trcNm)	// 한줄 긋고 시작
 	
 	// 첫마디가 없으면 노트박스 생성
-	if(note[0] === undefined) kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, 'whole', trcNm);
+	if(note[0] === undefined) kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, 'whole', trcNm)
 	
 	// 마디 찍기
 	for(var i = 0; i < note.length; i++) {
@@ -108,32 +109,32 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			var four = i / 4;
 			
 			// 4번째 마디마다 새 오선지 찍기
-			kara.hLine(four, trcNm);
-			four_boxEnter++;
+			kara.hLine(four, trcNm)
+			four_boxEnter++
 		}
 		
 		//음표와 음표 박스 찍기
 		for(var j = 0; j < note[i].length; j++) {
 			
-			var key = kara.scoreInfo.key;
-			var keySplit = key.split(' ');
-			var M = kara.key[keySplit[0]];
-			var N = M[keySplit[1]];
-			var X = kara.XY.X();
-			var Y = kara.XY.Y(i);
-			var a = N * 12 + 70;
-			var ac = (X - a) / 4;
+			var key = kara.scoreInfo.key
+			var keySplit = key.split(' ')
+			var M = kara.key[keySplit[0]]
+			var N = M[keySplit[1]]
+			var X = kara.XY.X()
+			var Y = kara.XY.Y(i)
+			var a = N * 12 + 70
+			var ac = (X - a) / 4
 			
-			var _whole = ac / 2 - 8;
-			var _half = _whole / 2;
-			var _quarter = _half / 2;
-			var _8th = _quarter / 2;
-			var _16th = _8th / 2 - 8;
+			var _whole = ac / 2 - 8
+			var _half = _whole / 2
+			var _quarter = _half / 2
+			var _8th = _quarter / 2
+			var _16th = _8th / 2 - 8
 			
-			var position;
+			var position
 
-			var pitch = note[i][j][0];
-			var meter = note[i][j][1];
+			var pitch = note[i][j][0]
+			var meter = note[i][j][1]
 			
 			if(four_boxEnter == four_check) {
 
@@ -203,7 +204,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 		}	// End of for
 	}
 	
-	kara.test(trcNm);		// 배열값 표시
+	kara.test(trcNm);		// 배열값 표시(옮겨야됨)
 };
 
 //악보 위치 반환
@@ -211,13 +212,13 @@ kara.scorePos = {
 	
 	//#score 악보 영역 left 좌표 반환
 	left: function(trcNm) {	// trcNm :: Track Name -- 'track1'
-		var position = $('#' + trcNm + ' > #score');
-		return position.position().left;
+		var position = $('#' + trcNm + ' > #score')
+		return position.position().left
 	},
 	// #score 악보 영억 top 좌표 반환
 	top: function(trcNm) {	// trcNm :: Track Name -- 'track1'
-		var position = $('#' + trcNm + ' > #score');
-		return position.position().top;
+		var position = $('#' + trcNm + ' > #score')
+		return position.position().top
 	}
 };
 
@@ -228,10 +229,10 @@ kara.XY = {
 	
 	//#score :: 악보 width return
 	X: function() {
-		return $('#score').width();
+		return $('#score').width()
 	},
 	Y: function(y) {
-		return this.topMargin + (y * 110);	
+		return this.topMargin + (y * 110)
 	}
 };
 
@@ -239,23 +240,23 @@ kara.XY = {
 kara.clefSVG = function(x, y, Y, trcNm) {
 	// 10, 200, 200, 'track1'
 	
-	const clef = kara.scoreInfo.track[trcNm].clef;	// 현재 음자리표
-	var svg = kara.svg[trcNm].svgSymbol;
-	var box_x, box_y;
-	var width, height;
-	var pathString;
+	const clef = kara.scoreInfo.track[trcNm].clef	// 현재 음자리표
+	var svg = kara.svg[trcNm].svgSymbol
+	var box_x, box_y
+	var width, height
+	var pathString
 	
 	switch(clef) {
 		case 'G':	// 높은 음자리표
 			
-			y = y / 1.4 + 35;
+			y = y / 1.4 + 35
 			
 			//clefs.G 없으면 null
-			if (!kara.glyphs['clefs.G']) return null;
-			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y);
+			if (!kara.glyphs['clefs.G']) return null
+			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y)
 			
 			// 높은 음자리표 그리기
-			kara.draw.clefs_G(trcNm, pathString);
+			kara.draw.clefs_G(trcNm, pathString)
 			
 			break;
 			
@@ -263,17 +264,17 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 			
 			y = y / 1.7 + 35;
 			
-			if (!kara.glyphs['clefs.F']) return null;
-			pathString = this.pathClone(kara.glyphs['clefs.F'].d, x - 5, y - 20); //-5//-45
+			if (!kara.glyphs['clefs.F']) return null
+			pathString = this.pathClone(kara.glyphs['clefs.F'].d, x - 5, y - 20) //-5//-45
 			
 			// 낮은 음자리표 그리기
-			kara.draw.clefs_F(trcNm, pathString);
+			kara.draw.clefs_F(trcNm, pathString)
 			
 			break;
 			
 		case 'P':
 			
-			y = y / 1.5 + 35;
+			y = y / 1.5 + 35
 			
 			if (!kara.glyphs['clefs.perc']) return null;
 			

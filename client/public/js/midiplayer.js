@@ -110,7 +110,8 @@ kara.play = {
 
 				//재생 Interval
 				var play = setInterval(function() {
-
+					
+					console.log(kara.play.lengs)
 					//console.log("실행중");
 					for(var r = 0; r < chord.length; r++) {
 						var meter = player[r];

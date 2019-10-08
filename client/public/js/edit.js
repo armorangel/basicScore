@@ -375,11 +375,11 @@ var boxWidth = function(meter) {
 	var width = (X - a) / 4;
 	
 	switch(meter) {
-		case 'whole':	width = width;		break;	//온음표
-		case 'half':	width = width / 2;	break;	//2분음표
-		case 'quarter':	width = width / 4;	break;	//4분음표
-		case '8th':		width = width / 8;	break;	//8분음표
-		case '16th':	width = width / 16; break;	//16분음표
+		case 'whole':	width = width;		break;	// 온음표
+		case 'half':	width = width / 2;	break;	// 2분음표
+		case 'quarter':	width = width / 4;	break;	// 4분음표
+		case '8th':		width = width / 8;	break;	// 8분음표
+		case '16th':	width = width / 16; break;	// 16분음표
 		case 32: break;		// 지원안함
 		case 64: break;		// 지원안함
 		case 128: break;	// 지원안함
@@ -549,9 +549,9 @@ kara.noteToKey = function(keyArray) {// B4,F4
 kara.chkSharpFlat = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 	
 	// Why this funciton is called twice
-	var sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/];
-	var flatArray = [/B/, /E/, /A/, /D/, /G/, /C/, /F/];
-	var key = kara.scoreInfo.key;
+	const sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/];
+	const flatArray = [/B/, /E/, /A/, /D/, /G/, /C/, /F/];
+	const key = kara.scoreInfo.key;
 	var keySplit = key.split(' ');						// major, Db
 	var keyCnt = kara.key[keySplit[0]][keySplit[1]];	// 변환될 음표의 개수
 	var M = kara.key[keySplit[0]];
@@ -562,15 +562,15 @@ kara.chkSharpFlat = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 				// Sharp
 				//case 'C':
 				//case 'Am': return 0;	// 아무것도 없으면 0
-				case 'G': //1
+				case 'G': // 1
 				case 'Em':
-				case 'D': //2
+				case 'D': // 2
 				case 'Bm':
-				case 'A': //3
+				case 'A': // 3
 				case 'F#m':
-				case 'E': //4
+				case 'E': // 4
 				case 'C#m':
-				case 'B': //5
+				case 'B': // 5
 				case 'G#m':
 					for(let i = 0; i < keyCnt; i++) {
 						// 해당 음이 #이 붙으면 1을 리턴
