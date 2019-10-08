@@ -24,13 +24,13 @@ kara.scoreInfo = {
 		"track9":{clef: "",notes: [],instrument: ""},
 		"track10":{clef: "",notes: [],instrument: ""},
 	} // 노트 저장
-};
+}
 
 // 노트 길이
 kara.noteMeter = {	// 왜 같은걸 두개로 해놨지
 	head: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1},
 	rest: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1}
-};
+}
 
 // 키 종류
 kara.key = {	// 심볼 갯수 객체
@@ -128,11 +128,11 @@ kara.meterCal_box = function(bNum, track) {
 	if(!note[bNum]) return;
 	
 	for(let i = 0; i < note[bNum].length; i++) {
-		var note_meter = noteMeter.head[note[bNum][i][1]];
+		var note_meter = noteMeter.head[note[bNum][i][1]]
 		now = now + note_meter;
 	}
 	
-	if (now == limited) return 1;
+	if (now == limited) return 1
 };
 
 kara.barsort = function(bNum, nNum , nowmeter, trcNm) {	// 0, 0, 16th, track1

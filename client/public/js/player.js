@@ -152,7 +152,7 @@ kara.instru = {
 			if(this.list[key] === num) {
 				return key
 			}
-		}
+		}	// End of for
 		
 		return null;
 	},

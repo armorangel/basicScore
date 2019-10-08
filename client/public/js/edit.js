@@ -180,7 +180,7 @@ kara.edit = {
 			kara.scoreInfo.track[trcNm].clef = clef.toUpperCase()
 			kara.refresh();
 		} else {
-			alert('정확한 음자리 입력');
+			alert('정확한 음자리 입력')
 		}
 		
 	}	
@@ -223,7 +223,7 @@ kara.validKey = function(key) {// key :: key -- 'major C'
 kara.keyvalue = function(key) {// key :: 조표 'F'
 
 	// 'G' 입력받은 key의 첫 문자를 대문자로
-	var k = key.charAt(0).toUpperCase() + key.slice(1);
+	var k = key.charAt(0).toUpperCase() + key.slice(1)
 	
 	switch (k) {
 		case 'C':

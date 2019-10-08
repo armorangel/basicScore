@@ -21,8 +21,7 @@
 
 //function str_repeat(i, m) { for (var o = []; m > 0; o[--m] = i); return(o.join('')); }
 
-if (!window.kara)
-	window.kara = {};
+if (!window.kara) window.kara = {};
 
 kara.sprintf = function() {
   var i = 0, a, f = arguments[i++], o = [], m, p, c, x;

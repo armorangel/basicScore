@@ -183,9 +183,9 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 
 			if(i === note.length - 1 && j === note[i].length - 1) {
 
-				var four_boxEnter2 = four_boxEnter + 1;
-				var ii = i + 1;
-				var four2 = ii % 4;
+				var four_boxEnter2 = four_boxEnter + 1
+				var ii = i + 1
+				var four2 = ii % 4
 
 				if(four2 == 0 && ii >= 4) {
 					if(kara.meterCal_box(i, trcNm) === 1) {
@@ -276,24 +276,24 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 			
 			y = y / 1.5 + 35
 			
-			if (!kara.glyphs['clefs.perc']) return null;
+			if (!kara.glyphs['clefs.perc']) return null
 			
-			pathString = this.pathClone(kara.glyphs['clefs.perc'].d, x - 5, y - 20.5);
-			kara.draw.clefs_perc(trcNm, pathString);
+			pathString = this.pathClone(kara.glyphs['clefs.perc'].d, x - 5, y - 20.5)
+			kara.draw.clefs_perc(trcNm, pathString)
 			
 			break;
 			
 		default:
 			
-			y = y / 1.4 + 35;
+			y = y / 1.4 + 35
 			
-			if (!kara.glyphs['clefs.G']) return null;
+			if (!kara.glyphs['clefs.G']) return null
 
-			kara.scoreInfo.track[trcNm].clef = 'G';
-			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y);
+			kara.scoreInfo.track[trcNm].clef = 'G'
+			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y)
 			
 			// 높은 음자리표 그리기
-			kara.draw.clefs_G(trcNm, pathString);
+			kara.draw.clefs_G(trcNm, pathString)
 			
 			break;
 	}
@@ -313,7 +313,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 		.style('width', width)
 		.style('height', height)
 		.style('fill', '#00ff01')
-		.style('fill-opacity', '0.3');
+		.style('fill-opacity', '0.3')
 };
 
 // 조표 SVG 그리기
@@ -392,7 +392,7 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 								break;
 						}	// End of switch
 						//flat 그리기
-						kara.printSymbol('accidentals.flat', 50 + (i * 10), y, trcNm);
+						kara.printSymbol('accidentals.flat', 50 + (i * 10), y, trcNm)
 					}	// End of for
 					break;
 			}
