@@ -1,5 +1,7 @@
 if(!window.kara) window.kara = {};
 
+// 선택영역
+// in_bar bar_0 note_0 track1
 kara.draw = {
 	
 	track: '',
@@ -76,7 +78,7 @@ kara.draw = {
 	
 		this.txt.append('text')
 				.attr('id', 'title')
-				.attr('class', 'in_bar')		// .in_bar :: 초기화 영역
+				.attr('class', kara.area.del)		// .in_bar :: 초기화 영역
 				.attr('font-size', '60px')		// font size 60px
 				.attr('x', '50%')				// 가운데
 				.attr('y', '50')				// 위에서 50
@@ -90,7 +92,7 @@ kara.draw = {
 	
 		this.box.append('rect')
 				.attr('id', 'edtTtl')					// #editTitle :: TITLE 선택영역(수정용)
-				.attr('class', 'in_bar')				// .in_bar :: 악보 초기화 영역
+				.attr('class', kara.area.del)				// .in_bar :: 악보 초기화 영역
 				.attr('x', boxSize.x)
 				.attr('y', boxSize.y)
 				.attr('onclick', 'kara.edit.title()')	// Click Event(제목 수정)
@@ -124,7 +126,7 @@ kara.draw = {
 		
 		this.txt.append('text')
 			.attr('id', 'tempo')
-			.attr('class', 'in_bar')	// .in_bar :: 악보 초기화 영역
+			.attr('class', kara.area.del)	// .in_bar :: 악보 초기화 영역
 			.attr('font-size', '16px')
 			.attr('x', '5%')
 			.attr('y', '140')
@@ -138,7 +140,7 @@ kara.draw = {
 
 		this.box.append('rect')
 			.attr('id', 'edtTem')
-			.attr("class", "in_bar")// .in_bar :: 삭제영역
+			.attr("class", kara.area.del)// .in_bar :: 삭제영역
 			.attr('x', boxSize.x)
 			.attr('y', boxSize.y)
 			.attr('onclick', "kara.edit.tempo('" + this.track + "')")
@@ -157,7 +159,7 @@ kara.draw = {
 		
 		this.txt.append('text')
 			.attr('id', 'writer')
-			.attr('class', 'in_bar')
+			.attr('class', kara.area.del)
 			.attr('font-size', '16px')
 			.attr('x', '98%')
 			.attr('y', '140')
@@ -171,7 +173,7 @@ kara.draw = {
 
 		this.box.append('rect')
 			.attr('id', 'edtWtr')
-			.attr('class', 'in_bar')
+			.attr('class', kara.area.del)
 			.attr('x', boxSize.x)
 			.attr('y', boxSize.y)
 			.attr('onclick', 'kara.edit.writer()')
@@ -187,7 +189,7 @@ kara.draw = {
 		const symbol = kara.svg[trcNm].svgSymbol
 		
 		symbol.append('path')
-				.attr('class', 'in_bar ' + trcNm)
+				.attr('class', kara.area.del + ' ' + trcNm)
 				.attr('d', pathString)
 				.style('transform', 'scale(1.2,1.4)') // 크기조절
 				.style('stroke', 'black')
@@ -197,7 +199,7 @@ kara.draw = {
 		const symbol = kara.svg[trcNm].svgSymbol
 		
 		symbol.append('path')
-				.attr('class', 'in_bar ' + trcNm)
+				.attr('class', kara.area.del + ' ' + trcNm)
 				.attr('d', pathString)
 				.style('transform', 'scale(1.4,1.7)')	// 크기조절
 				.style('stroke', 'black')
@@ -207,7 +209,7 @@ kara.draw = {
 		const symbol = kara.svg[trcNm].svgSymbol
 		
 		symbol.append('path')
-				.attr('class', 'in_bar ' + trcNm)
+				.attr('class', kara.area.del + ' ' + trcNm)
 				.attr('d', pathString)
 				.style('transform', 'scale(1.2,1.5)')	// 크기조절
 				.style('stroke', 'black')
@@ -220,7 +222,7 @@ kara.draw = {
 		
 		symbol.append('path')
 			.attr('id', 'meter')
-			.attr('class', 'in_bar ' + trcNm)// 삭제 영역
+			.attr('class', kara.area.del + ' ' + trcNm)// 삭제 영역
 			.attr('d', pathString)
 			.style('transform', 'scale(1.2,1.4)')
 			.style('stroke', 'black')
