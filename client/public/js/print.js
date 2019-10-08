@@ -58,11 +58,11 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
 	trcSvg.svgContainer	= svgContainer;
 	
-	trcSvg.svgText		= svgContainer.append('g').attr("id", "text");		// title, tempo, writer
-	trcSvg.svgLine		= svgContainer.append('g').attr("id", "lines");		// line(오선지)
-	trcSvg.svgSymbol	= svgContainer.append('g').attr("id", "symbol");	// clef(음자리표), 조표 4/4	
-	trcSvg.svgNote		= svgContainer.append('g').attr("id", "note");		// 음표, 음표 막대 SVG
-	trcSvg.svgBox		= svgContainer.append('g').attr("id", "boxes");		// 선택영역
+	trcSvg.svgText		= svgContainer.append('g').attr('id', 'text');		// title, tempo, writer
+	trcSvg.svgLine		= svgContainer.append('g').attr('id', 'lines');		// line(오선지)
+	trcSvg.svgSymbol	= svgContainer.append('g').attr('id', 'symbol');	// clef(음자리표), 조표 4/4	
+	trcSvg.svgNote		= svgContainer.append('g').attr('id', 'note');		// 음표, 음표 막대 SVG
+	trcSvg.svgBox		= svgContainer.append('g').attr('id', 'boxes');		// 선택영역
 	
 	/*
 	trcSvg.svgText	 = svgContainer.group().attr('id', 'text');//SVG.js
@@ -96,7 +96,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	kara.hLine(0, trcNm);	// 한줄 긋고 시작
 	
 	// 첫마디가 없으면 노트박스 생성
-	if(note[0] === undefined) kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, "whole", trcNm);
+	if(note[0] === undefined) kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, 'whole', trcNm);
 	
 	// 마디 찍기
 	for(var i = 0; i < note.length; i++) {

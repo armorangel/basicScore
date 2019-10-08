@@ -35,21 +35,21 @@ kara.play = {
 			}	// End of if
 		}	// End of for
 		
-		kara.play.instru = instru;
-		//console.log(instru);
+		kara.play.instru = instru
+		//console.log(instru)
 		
 	    MIDI.loadPlugin({
 			soundfontUrl: "./soundfont/",//soundfont path
 			instrument: kara.play.instru,
 			onprogress: function(state, progress) {
-	        	console.log(state, progress);
+	        	console.log(state, progress)
 			},
 	  		onsuccess: function() {
 			
-				console.log("midi set");
-				var note = kara.scoreInfo.track; //note
-				var instru = kara.play.instru;
-				//console.log(kara.play.instru);
+				console.log("midi set")
+				var note = kara.scoreInfo.track //note
+				var instru = kara.play.instru
+				//console.log(kara.play.instru)
 				//console.log(instru);
 				var chord = [];
 				var tempo = Number(kara.scoreInfo.tempo);

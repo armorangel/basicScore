@@ -200,3 +200,8 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 	
 	return remain_meter;
 }
+
+// 악보 커서 이동
+$('body').keypress(function(e) {
+	console.log(e)
+})
