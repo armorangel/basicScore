@@ -130,7 +130,7 @@ kara.edit = {
 			
 					keyBtn[i].addEventListener('click', (e) => {
 						
-						var key = kara.keyvalue(e.target.innerText);
+						var key = kara.keyvalue(e.target.innerText)
 
 						// 정해진 조표 입력 검사
 						if(!kara.validKey(key)) return;
@@ -139,7 +139,7 @@ kara.edit = {
 						Swal.clickConfirm()
 						
 						// 키 반영
-						kara.scoreInfo.key = key.toString();
+						kara.scoreInfo.key = key.toString()
 						kara.refresh()
 					})
 				}
@@ -158,7 +158,7 @@ kara.edit = {
 			return;
 		}
 
-		kara.scoreInfo.meter = meter;
+		kara.scoreInfo.meter = meter
 
 		$(".in_bar").remove();
 		kara.refresh();
@@ -171,13 +171,18 @@ kara.edit = {
 		var clef = prompt("Clef");
 
 		if(clef === null || clef === '') {
-			alert("음자리표를 입력하세요.");
+			alert("음자리표를 입력하세요.")
 			return;
 		}
 		// G, F, C가 아니면
-
-		kara.scoreInfo.track[trcNm].clef = clef.toUpperCase();
-		kara.refresh();
+		
+		if(clef === 'G' || clef === 'g' || clef === 'F' || clef === 'f' || clef === 'C' || clef === 'c') {
+			kara.scoreInfo.track[trcNm].clef = clef.toUpperCase()
+			kara.refresh();
+		} else {
+			alert('정확한 음자리 입력');
+		}
+		
 	}	
 };
 

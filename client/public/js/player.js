@@ -66,6 +66,8 @@ kara.addTabs = function() {
 		if(panelId.slice(-1) == trcNum) {
 			
 			$('#menu' + trcNum).remove()
+			
+			// 트랙 초기화
 			kara.svg['track' + trcNum].svgContainer = null
 			kara.svg['track' + trcNum].svgLine = null
 			kara.svg['track' + trcNum].svgText = null
@@ -411,7 +413,7 @@ kara.instru = {
 }
 
 
-
+// 음악 저장
 
 
 // 마디 여러등분으로 나눠 음정
@@ -427,4 +429,4 @@ kara.instru = {
 // 마디 블록 지정
 // 음악 재생 및 일시정지
 // 음악 재생 애니메이션
-// 음악 저장
+
