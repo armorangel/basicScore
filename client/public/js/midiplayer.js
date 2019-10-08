@@ -1,4 +1,4 @@
-if(!window.kara) window.kara = {};
+if(!window.kara) window.kara = {}
 
 //재생
 kara.play = {
@@ -7,30 +7,30 @@ kara.play = {
 	lengs: 0,
 	player: function() {
 		
-		console.log("Executed Play Function.");
-		kara.play.instru = [];
+		console.log("Executed Play Function.")
+		kara.play.instru = []
 		
-		var mn = 0;
-		var set;
-		var instru = kara.play.instru;
+		var mn = 0
+		var set
+		var instru = kara.play.instru
 		
 		for (var keyInstru in kara.scoreInfo.track) {
 			if (kara.scoreInfo.track.hasOwnProperty(keyInstru)) {
 				if(kara.scoreInfo.track[keyInstru].instrument !== '') {
 					
-					//console.log(kara.scoreInfo.track[keyInstru].instrument);
-					//console.log(kara.numToInstrument(kara.scoreInfo.track[keyInstru].instrument));
+					//console.log(kara.scoreInfo.track[keyInstru].instrument)
+					//console.log(kara.numToInstrument(kara.scoreInfo.track[keyInstru].instrument))
 					
-					set = kara.scoreInfo.track[keyInstru].instrument;
-					//console.log(set);
+					set = kara.scoreInfo.track[keyInstru].instrument
+					//console.log(set)
 					
 					// 악기 이름
-					instru[mn] = kara.instru.getName(Number(set));
+					instru[mn] = kara.instru.getName(Number(set))
 					
 					
-					//console.log(instru[mn]);
-					//console.log(instru);
-					mn++;
+					//console.log(instru[mn])
+					//console.log(instru)
+					mn++
 				}	// End of if
 			}	// End of if
 		}	// End of for
@@ -64,7 +64,6 @@ kara.play = {
 			  
 				// play the note
 				for(var mm = 0; mm < instru.length; mm++) {
-					
 					
 					// 악기 번호
 					setting = kara.instru.getNum(instru[mm]);
