@@ -203,5 +203,18 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 
 // 악보 커서 이동
 $('body').keypress(function(e) {
-	console.log(e)
+	console.log(e.keyCode)
+	
+	e.preventDefault()
+	e.stopPropagation()
+	
+	switch(e.keyCode) {
+		
+		case 32:	// 재생(스페이스바)
+			kara.play.player()
+			break;
+	}
+	
+	
+	
 })
