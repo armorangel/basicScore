@@ -130,7 +130,7 @@ kara.addInstrOptCombo = function(trcNum) {	// trcNum :: Track Number - '1'
 	for(var i in list) {
 		
 		// underscore to camelcase
-		list[i] = list[i].replace(/_([a-z])/g, function (g) {return ' ' + g[1].toUpperCase()})
+		list[i] = list[i].replace(/_([a-z0-9])/g, function (g) {return ' ' + g[1].toUpperCase()})
 		list[i] = list[i].charAt(0).toUpperCase() + list[i].slice(1);	// 첫 글자 대문자
 		
 		$('#instrument' + trcNum).append("<option value = '0'>" + list[i]+ "</option>")
