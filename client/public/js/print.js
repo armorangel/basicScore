@@ -150,7 +150,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			var width = $('.bar_' + i + '.note_' + j + '.' + trcNm).width();// .bar_1.note_2.track1
 			d3.select('.bar_' + i + '.note_' + j + '#' + pitch + '.' + trcNm).style('fill', '#ffffff');
 
-			pitchSplit = pitch.split(",");// ["B4", "C6"] 같은 박자에 있는 음표들
+			pitchSplit = pitch.split(',');// ["B4", "C6"] 같은 박자에 있는 음표들
 
 			for(var pi = 0; pi < pitchSplit.length; pi++) {
 				
@@ -306,7 +306,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {
 	//음자리표 선택영역 APPEND
 	svg.append('rect')
 		.attr('id', 'edtClf')	// #editClef :: 음자리표 선택영역(수정)
-		.attr('class', 'in_bar ' + trcNm)
+		.attr('class', kara.area.del + ' ' + trcNm)
 		.attr('x', box_x)
 		.attr('y', box_y)
 		.attr('onclick', "kara.edit.clef('" + trcNm + "')")
@@ -406,26 +406,26 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 	// 조표 선택영역 SVG DRAW
 	svg.append('rect')
 		.attr('id', 'editKey')	// #editKey :: 조표 선택영역(수정)
-		.attr('class', 'in_bar ' + trcNm)// 삭제 영역
+		.attr('class', kara.area.del + ' ' + trcNm)// 삭제 영역
     	.attr('x', x)
    		.attr('y', y)
 		.attr('onclick', "kara.edit.key('" + trcNm + "')")	// 조표 수정 클릭 이벤트
     	.style('width', width)
     	.style('height', height)
     	.style('fill', '#00ffff')
-		.style('fill-opacity', '0.3');
+		.style('fill-opacity', '0.3')
 };
 
 //박자 SVG
 kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 	
-	let box = kara.svg[trcNm].svgBox;
-	let key = kara.scoreInfo.key;	// 'major Db'
-	let keySplit = key.split(' ');
-	let M = kara.key[keySplit[0]];	// A: 3, Ab: 4, B: 5, Bb: 2, C: 0, D: 2, Db: 5, E: 4, Eb: 3, F: 1, G: 1, Gb: 6
-	let N = M[keySplit[1]];	// 5
+	let box = kara.svg[trcNm].svgBox
+	let key = kara.scoreInfo.key	// 'major Db'
+	let keySplit = key.split(' ')
+	let M = kara.key[keySplit[0]]	// A: 3, Ab: 4, B: 5, Bb: 2, C: 0, D: 2, Db: 5, E: 4, Eb: 3, F: 1, G: 1, Gb: 6
+	let N = M[keySplit[1]]	// 5
 
-	let x, y, width, height;
+	let x, y, width, height
 
 	let meter = kara.scoreInfo.meter;	// 악보정보 객체 박자
 	let meterSplit = meter.split('/');
