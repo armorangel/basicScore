@@ -3,6 +3,8 @@ if(!window.kara) window.kara = {}
 //재생
 kara.play = {
 	
+	isPlaying: false,
+	play: null,
 	instru: [],//악기
 	lengs: 0,
 	player: function() {
@@ -46,6 +48,16 @@ kara.play = {
 			},
 	  		onsuccess: function() {
 			
+				
+				if(kara.play.isPlaying) {
+					console.log('now is playing');
+					return;
+				}
+					
+				
+				kara.play.isPlaying = true
+				
+				
 				console.log("midi set")
 				var note = kara.scoreInfo.track //note
 				var instru = kara.play.instru
@@ -108,8 +120,11 @@ kara.play = {
 				kara.play.lengs = kara.maxLength(chord);
 				console.log("실행 전");
 
+				
+				
+				
 				//재생 Interval
-				var play = setInterval(function() {
+				kara.play.play = setInterval(function() {
 					
 					console.log(kara.play.lengs)
 					//console.log("실행중");
@@ -142,9 +157,14 @@ kara.play = {
 					kara.play.lengs--;
 					//console.log("kara.play.lengs는" + kara.play.lengs);
 
+					
 					if(kara.play.lengs < 0) {
 						//재생 Interval 삭제
-						clearInterval(play);
+						
+						kara.play.isPlaying = false
+						clearInterval(kara.play.play);
+						
+						
 						console.log("재생 끝");
 					}
 				}, (60000 / tempo) * (kara.noteMeter.head["16th"] / 4));	// 60000?
@@ -154,8 +174,34 @@ kara.play = {
 
 	// 정지
 	stop: function() {
-		kara.play.lengs = 0;
-		clearInterval(play);
-		console.log("kara.play.lengs는" + kara.play.lengs);
+		kara.play.lengs = 0
+		kara.play.isPlaying = false
+		
+		clearInterval(kara.play.play);
+		
+		kara.play.play = null;
+		console.log("kara.play.lengs는" + kara.play.lengs)
 	}
+};
+
+// 재생에 필요한 악보 전체 재생 길이 구하기
+// Array(3), Array(5), Array(2) -- (트랙별 마디 갯수)
+kara.maxLength = function(chordArray) {	// [[[61, 77], 'whole'], [[68], 'whole']]
+	
+	var longlen = 0, nowlen = 0;
+
+	for(var o = 0; o < chordArray.length; o++) {
+		for(var oo = 0; oo < chordArray[o].length; oo++) {
+			// 음표 길이 중첩
+			nowlen = nowlen + kara.noteMeter.head[chordArray[o][oo][1]]	// 16
+		}	// End of for
+		
+		// 최대 길이
+		if(nowlen >= longlen) longlen = nowlen
+		
+		// 현재 트랙 길이 초기화
+		nowlen = 0
+	}	// End of for
+	
+	return longlen;
 };

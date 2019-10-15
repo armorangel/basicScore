@@ -158,7 +158,6 @@ kara.edit = {
 		}
 
 		kara.scoreInfo.meter = meter
-
 		kara.refresh()
 	},
 	
@@ -176,7 +175,7 @@ kara.edit = {
 		
 		if(clef === 'G' || clef === 'g' || clef === 'F' || clef === 'f' || clef === 'C' || clef === 'c') {
 			kara.scoreInfo.track[trcNm].clef = clef.toUpperCase()
-			kara.refresh();
+			kara.refresh()
 		} else {
 			alert('정확한 음자리 입력')
 		}
@@ -367,10 +366,10 @@ var boxWidth = function(meter) {
 	var N = M[keySplit[1]]
 	var X = kara.XY.X()
 
-	var a = N * 12 + 70;
-	var ac = (X - a) / 4;
+	var a = N * 12 + 70
+	var ac = (X - a) / 4
 	var x = a;
-	var width = (X - a) / 4;
+	var width = (X - a) / 4
 	
 	switch(meter) {
 		case 'whole':	width = width;		break;	// 온음표
@@ -431,8 +430,8 @@ var PopLayer = {
 // 악기 재생을 위해 계이름을 MIDI숫자로 변환
 kara.noteToKey = function(keyArray) {// B4,F4
 		
-	var split = keyArray.split(',');
-	var key = new Array(split.length);	// 반환할 숫자 배열
+	var split = keyArray.split(',')
+	var key = new Array(split.length)	// 반환할 숫자 배열
 
 	// 음 갯수 만큼 반복
 	for(let i = 0; i < split.length; i++) {
@@ -547,8 +546,8 @@ kara.noteToKey = function(keyArray) {// B4,F4
 kara.chkSharpFlat = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 	
 	// Why this funciton is called twice
-	const sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/];
-	const flatArray = [/B/, /E/, /A/, /D/, /G/, /C/, /F/];
+	const sharpArray = [/F/, /C/, /G/, /D/, /A/, /E/, /B/]
+	const flatArray = [/B/, /E/, /A/, /D/, /G/, /C/, /F/]
 	const key = kara.scoreInfo.key;
 	var keySplit = key.split(' ');						// major, Db
 	var keyCnt = kara.key[keySplit[0]][keySplit[1]];	// 변환될 음표의 개수
@@ -598,26 +597,4 @@ kara.chkSharpFlat = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 	}	// End of for
 	
 	return 0;	// 아무것도 없으면
-};
-
-// 재생에 필요한 악보 전체 재생 길이 구하기
-// Array(3), Array(5), Array(2) -- (트랙별 마디 갯수)
-kara.maxLength = function(chordArray) {	// [[[61, 77], 'whole'], [[68], 'whole']]
-	
-	var longlen = 0, nowlen = 0;
-
-	for(var o = 0; o < chordArray.length; o++) {
-		for(var oo = 0; oo < chordArray[o].length; oo++) {
-			// 음표 길이 중첩
-			nowlen = nowlen + kara.noteMeter.head[chordArray[o][oo][1]];	// 16
-		}	// End of for
-		
-		// 최대 길이
-		if(nowlen >= longlen) longlen = nowlen;
-		
-		// 현재 트랙 길이 초기화
-		nowlen = 0;
-	}	// End of for
-	
-	return longlen;
 };

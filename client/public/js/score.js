@@ -105,7 +105,7 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 				kara.barsort(bNum, nNum, nowMeter, trcNm);
 				return 1;	// 정상 추가인데 쉼표를 넣어줘야되
 			} else {
-				alert("마디 초과");
+				alert('마디 초과')
 				return -1;	// 그래도 터져
 			}
 		}
@@ -203,19 +203,25 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 
 // 악보 커서 이동
 $('body').keypress(function(e) {
-	console.log(e.keyCode);
+	console.log(e.keyCode)
 	
 	// 스페이스 키 입력시 화면 움직임 방지
 	e.preventDefault();
 	e.stopPropagation();
 	
 	switch(e.keyCode) {
-		
+		// 재생 상태
 		case 32:	// 재생(스페이스바)
-			kara.play.player();
+			
+			if(!kara.play.isPlaying) {	// 재생 중이 아닐 때
+				kara.play.player()
+			} else {
+				kara.play.stop()
+			}
+			//console.log('!kara.play.isPlaying :: ' + !kara.play.isPlaying);
+			//kara.play.isPlaying = !kara.play.isPlaying
+			//console.log('kara.play.isPlaying :: ' + kara.play.isPlaying);
+			
 			break;
 	}
-	
-	
-	
 });
