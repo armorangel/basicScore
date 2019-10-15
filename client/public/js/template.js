@@ -1,4 +1,4 @@
-
+// 음표 로그 표시
 kara.test = function(track) {
   var text = kara.scoreInfo.track[track].notes;
   var textPlus = "";
