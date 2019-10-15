@@ -160,8 +160,8 @@ kara.edit = {
 
 		kara.scoreInfo.meter = meter
 
-		$(".in_bar").remove();
-		kara.refresh();
+		$(".in_bar").remove()
+		kara.refresh()
 	},
 	
 	// 음자리표 수정
