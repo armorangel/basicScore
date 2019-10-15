@@ -203,11 +203,11 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 
 // 악보 커서 이동
 $('body').keypress(function(e) {
-	console.log(e.keyCode)
+	// console.log(e.keyCode)
 	
 	// 스페이스 키 입력시 화면 움직임 방지
-	e.preventDefault();
-	e.stopPropagation();
+	e.preventDefault()
+	e.stopPropagation()
 	
 	switch(e.keyCode) {
 		// 재생 상태
@@ -218,10 +218,7 @@ $('body').keypress(function(e) {
 			} else {
 				kara.play.stop()
 			}
-			//console.log('!kara.play.isPlaying :: ' + !kara.play.isPlaying);
-			//kara.play.isPlaying = !kara.play.isPlaying
-			//console.log('kara.play.isPlaying :: ' + kara.play.isPlaying);
 			
 			break;
 	}
-});
+})
