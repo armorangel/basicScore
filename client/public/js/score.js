@@ -24,13 +24,13 @@ kara.scoreInfo = {
 		"track9":{clef: "",notes: [],instrument: ""},
 		"track10":{clef: "",notes: [],instrument: ""},
 	} // 노트 저장
-}
+};
 
 // 노트 길이
 kara.noteMeter = {	// 왜 같은걸 두개로 해놨지
 	head: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1},
 	rest: {'whole':16, 'half':8, 'quarter':4, '8th':2, '16th':1}
-}
+};
 
 // 키 종류
 kara.key = {	// 심볼 갯수 객체
@@ -61,14 +61,14 @@ kara.noteSelect = {
 			
 			// 똑같은 음이 없으면 추가
 			if(split.indexOf(pitch) === -1)
-				note[i][j][0] += (',' + pitch);// A4
+				note[i][j][0] += (',' + pitch);	// A4
 		}
 		
 		note[i][j][1] = note_meter;	// whole
 
 		$('.in_bar.' + trcNm).remove();
 		
-		kara.prtNote(trcNm);	// 음표 그리기
+		kara.prtNote(trcNm);		// 음표 그리기
 	}
 };
 
@@ -128,11 +128,11 @@ kara.meterCal_box = function(bNum, track) {
 	if(!note[bNum]) return;
 	
 	for(let i = 0; i < note[bNum].length; i++) {
-		var note_meter = noteMeter.head[note[bNum][i][1]]
+		var note_meter = noteMeter.head[note[bNum][i][1]];
 		now = now + note_meter;
 	}
 	
-	if (now == limited) return 1
+	if (now == limited) return 1;
 };
 
 kara.barsort = function(bNum, nNum , nowmeter, trcNm) {	// 0, 0, 16th, track1
@@ -186,36 +186,36 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 	var meterNm;	// half, quarter, 8th, 18th
 	
 	if(!jQuery.isArray(note[bNum][nNum]))
-		note[bNum][nNum] = []	// new Array()	배열이 아니면
+		note[bNum][nNum] = [];	// new Array()	배열이 아니면
 
-	note[bNum][nNum][0] = 'rest'	// 쉼표
+	note[bNum][nNum][0] = 'rest';	// 쉼표
 	
-	if(remain_meter >= noteMeter.head.half) meterNm = 'half'				// 8
-	else if(remain_meter >= noteMeter.head.quarter) meterNm = 'quarter'		// 4
-	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th'			// 2
+	if(remain_meter >= noteMeter.head.half) meterNm = 'half';				// 8
+	else if(remain_meter >= noteMeter.head.quarter) meterNm = 'quarter';	// 4
+	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th';			// 2
 	else meterNm = '16th';													// 1
 	
 	note[bNum][nNum][1] = meterNm;
-	remain_meter = remain_meter - noteMeter.head[meterNm]
+	remain_meter = remain_meter - noteMeter.head[meterNm];
 	
 	return remain_meter;
-}
+};
 
 // 악보 커서 이동
 $('body').keypress(function(e) {
-	console.log(e.keyCode)
+	console.log(e.keyCode);
 	
 	// 스페이스 키 입력시 화면 움직임 방지
-	e.preventDefault()
-	e.stopPropagation()
+	e.preventDefault();
+	e.stopPropagation();
 	
 	switch(e.keyCode) {
 		
 		case 32:	// 재생(스페이스바)
-			kara.play.player()
+			kara.play.player();
 			break;
 	}
 	
 	
 	
-})
+});
