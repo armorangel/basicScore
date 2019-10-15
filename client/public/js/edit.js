@@ -33,17 +33,17 @@ kara.edit = {
 	tempo: function(trcNm) {	// trcNm Track Name :: 'track1'
 		
 		// 템포 입력
-		var tempo = prompt("tempo");
+		var tempo = prompt('tempo')
 
 		// 템포 정합성 검사
 		if(!tempo || isNaN(tempo)) {	// isNaN(숫자) ==> false 
-			alert("숫자를 입력하세요.");
+			alert('숫자를 입력하세요.')
 			return;
 		}
 
 		// 템포는 10에서 300사이
 		if(tempo < 10 || tempo > 300) {
-			alert("템포는 10이상 300이하만 입력할 수 있습니다.");
+			alert('템포는 10이상 300이하만 입력할 수 있습니다.')
 			return;
 		}
 
@@ -80,7 +80,6 @@ kara.edit = {
 	
 	// 조표 수정
 	key: function() {
-		
 
 		
 		////////////////////////////
@@ -133,7 +132,7 @@ kara.edit = {
 						var key = kara.keyvalue(e.target.innerText)
 
 						// 정해진 조표 입력 검사
-						if(!kara.validKey(key)) return;
+						if(!kara.validKey(key)) return
 
 						// 팝업 종료
 						Swal.clickConfirm()
@@ -150,7 +149,7 @@ kara.edit = {
 	// 박자 수정
 	meter: function() {	// edtMtr
 		
-		var meter = prompt("meter");
+		var meter = prompt('meter')
 	
 		// 박자 정합성 검사
 		if(!meter) {
@@ -160,7 +159,6 @@ kara.edit = {
 
 		kara.scoreInfo.meter = meter
 
-		$(".in_bar").remove()
 		kara.refresh()
 	},
 	
@@ -168,10 +166,10 @@ kara.edit = {
 	clef: function(trcNm) {
 		
 		// 음자리표 입력
-		var clef = prompt("Clef");
+		var clef = prompt('Clef')
 
 		if(clef === null || clef === '') {
-			alert("음자리표를 입력하세요.")
+			alert('음자리표를 입력하세요.')
 			return;
 		}
 		// G, F, C가 아니면
