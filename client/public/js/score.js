@@ -119,17 +119,17 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 
 kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	
-	var note = kara.scoreInfo.track[trcNm].notes;
-	var meter = kara.scoreInfo.meter.split('/');
-	var limited = meter[0] * meter[1]; //마디 제한
+	var note = kara.scoreInfo.track[trcNm].notes
+	var meter = kara.scoreInfo.meter.split('/')
+	var limited = meter[0] * meter[1] //마디 제한
 	var now = 0;
-	var noteMeter = kara.noteMeter;
+	var noteMeter = kara.noteMeter
 	
 	if(!note[bNum]) return;
 	
 	for(let i = 0; i < note[bNum].length; i++) {
-		var note_meter = noteMeter.head[note[bNum][i][1]];
-		now = now + note_meter;
+		var note_meter = noteMeter.head[note[bNum][i][1]]
+		now = now + note_meter
 	}
 	
 	if (now == limited) return 1;
@@ -137,45 +137,45 @@ kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 
 kara.barsort = function(bNum, nNum , nowmeter, trcNm) {	// 0, 0, 16th, track1
 	
-	var note = kara.scoreInfo.track[trcNm].notes;
-	var copynote = [];
-	var barLength = note[bNum].length;
-	var noteMeter = kara.noteMeter;
-	var pre_meter = note[bNum][nNum][1];
-	var remain_meter = 0;
-	var i = 0, j = 0;
+	var note = kara.scoreInfo.track[trcNm].notes
+	var copynote = []
+	var barLength = note[bNum].length
+	var noteMeter = kara.noteMeter
+	var pre_meter = note[bNum][nNum][1]
+	var remain_meter = 0
+	var i = 0, j = 0
 
 	for(let k = 0; k < note[bNum].length; k++) {
-		copynote[k] = [];	// new Array();
-		copynote[k][0] = note[bNum][k][0];
-		copynote[k][1] = note[bNum][k][1];
+		copynote[k] = []	// new Array();
+		copynote[k][0] = note[bNum][k][0]
+		copynote[k][1] = note[bNum][k][1]
 	}
 
 	while(i < nNum) {
-		note[bNum][i][0] = copynote[i][0];
-		note[bNum][i][1] = copynote[i][1];
-		i++;
+		note[bNum][i][0] = copynote[i][0]
+		note[bNum][i][1] = copynote[i][1]
+		i++
 	}
 	
-	remain_meter = noteMeter.head[pre_meter] - noteMeter.head[nowmeter];
-	i = Number(nNum) + 1;
+	remain_meter = noteMeter.head[pre_meter] - noteMeter.head[nowmeter]
+	i = Number(nNum) + 1
 	
 	while(remain_meter > 0) {
-		remain_meter = kara.remain_meter(remain_meter, bNum, i, trcNm);
-		i++;
+		remain_meter = kara.remain_meter(remain_meter, bNum, i, trcNm)
+		i++
 	}
 	
-	nNum++;
+	nNum++
 	
 	for(let j = nNum; j < barLength; j++) {
 		
 		if(!jQuery.isArray(note[bNum][i]))
-			note[bNum][i] = [];	// new Array();
+			note[bNum][i] = []	// new Array();
 		
-		note[bNum][i][0] = copynote[j][0];
-		note[bNum][i][1] = copynote[j][1];
+		note[bNum][i][0] = copynote[j][0]
+		note[bNum][i][1] = copynote[j][1]
 		
-		i++;
+		i++
 	}	// End of for
 };
 
