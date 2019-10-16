@@ -319,7 +319,7 @@ var notepush = {
 				
 				// 쉼표
 				kara.scoreInfo.track[trcNm].notes[bNum[1]][nNum[1]][0] = 'rest'
-				$('.in_bar.' + trcNm).remove()
+				$('.' + kara.area.del + '.' + trcNm).remove()
 
 				// 다시 그리기
 				kara.prtNote(trcNm)
@@ -519,18 +519,18 @@ kara.noteToKey = function(keyArray) {// B4,F4
 			case 'A#6':	key[i] = 94; break;	// 94
 			case 'B6':	key[i] = 95; break;	// 95
 
-			case "C7":	key[i] = 96; break;	// 96
-			case "C#7":	key[i] = 97; break;	// 97
-			case "D7":	key[i] = 98; break;	// 98
-			case "D#7":	key[i] = 99; break;	// 99
-			case "E7":	key[i] = 100; break;// 100
-			case "F7":	key[i] = 101; break;// 101
-			case "F#7":	key[i] = 102; break;// 102
-			case "G7":	key[i] = 103; break;// 103
-			case "G#7":	key[i] = 104; break;// 104
-			case "A7":	key[i] = 105; break;// 105
-			case "A#7":	key[i] = 106; break;// 106
-			case "B7":	key[i] = 107; break;// 107
+			case 'C7':	key[i] = 96; break;	// 96
+			case 'C#7':	key[i] = 97; break;	// 97
+			case 'D7':	key[i] = 98; break;	// 98
+			case 'D#7':	key[i] = 99; break;	// 99
+			case 'E7':	key[i] = 100; break;// 100
+			case 'F7':	key[i] = 101; break;// 101
+			case 'F#7':	key[i] = 102; break;// 102
+			case 'G7':	key[i] = 103; break;// 103
+			case 'G#7':	key[i] = 104; break;// 104
+			case 'A7':	key[i] = 105; break;// 105
+			case 'A#7':	key[i] = 106; break;// 106
+			case 'B7':	key[i] = 107; break;// 107
 		}	// End of switch
 	}	// End Of for
 

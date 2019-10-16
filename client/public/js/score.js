@@ -66,7 +66,7 @@ kara.noteSelect = {
 		
 		note[i][j][1] = note_meter	// whole
 
-		$('.' + kara.area.del + ' .' + trcNm).remove()
+		$('.' + kara.area.del + '.' + trcNm).remove()
 		
 		kara.prtNote(trcNm)		// 음표 그리기
 	}
