@@ -133,7 +133,7 @@ kara.addInstrOptCombo = function(trcNum) {	// trcNum :: Track Number - '1'
 	
 	for(var i in list) {
 		
-		// underscore to camelcase
+		// replace underscore to camelcase
 		list[i] = list[i].replace(/_([a-z0-9])/g, function (g) {return ' ' + g[1].toUpperCase();});
 		list[i] = list[i].charAt(0).toUpperCase() + list[i].slice(1);	// 첫 글자 대문자
 		
@@ -301,15 +301,15 @@ kara.instru = {
 
 
 // 음악 저장
-
+// 반복재생
 
 // 마디 여러등분으로 나눠 음정
 // 마디 여러 등분으로 나누기
 // 블록 지정 반복 재생
-// 반복재생
+
 // 악보 저장 텍스트형식
 
-
+// 음표 선택 개선
 // 재생 정지 버튼 유무
 // 표식 삽입 후 추적
 // 마디를 그룹지정

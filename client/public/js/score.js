@@ -43,13 +43,13 @@ kara.noteSelect = {
 	push: function(i, j,  pitch, note_meter, trcNm) { // i: 마디 번호 j: 음표 번호
 		// 0, 0, A4, whole, track1
 		
-		var note = kara.scoreInfo.track[trcNm].notes; // 배열을 받아온다
+		var note = kara.scoreInfo.track[trcNm].notes // 배열을 받아온다
 
 		// 2차원배열이 아니면 2차원 배열 생성
-		if(!jQuery.isArray(note[i])) note[i] = []; // new Array(); [i][]
+		if(!jQuery.isArray(note[i])) note[i] = [] // new Array(); [i][]
 
 		// [0]은 계이름, [1]은 박자
-		if(!jQuery.isArray(note[i][j])) note[i][j] = new Array(2);
+		if(!jQuery.isArray(note[i][j])) note[i][j] = new Array(2)
 
 		// 만약 계이름이 없으면
 		if(!note[i][j][0])
@@ -57,18 +57,18 @@ kara.noteSelect = {
 		else if(note[i][j][0] === 'rest')	// 쉼표면
 			note[i][j][0] = pitch;
 		else { //아니면
-			var split = note[i][j][0].split(',');
+			var split = note[i][j][0].split(',')
 			
 			// 똑같은 음이 없으면 추가
 			if(split.indexOf(pitch) === -1)
-				note[i][j][0] += (',' + pitch);	// A4
+				note[i][j][0] += (',' + pitch)	// A4
 		}
 		
-		note[i][j][1] = note_meter;	// whole
+		note[i][j][1] = note_meter	// whole
 
-		$('.in_bar.' + trcNm).remove();
+		$('.' + kara.area.del + ' .' + trcNm).remove()
 		
-		kara.prtNote(trcNm);		// 음표 그리기
+		kara.prtNote(trcNm)		// 음표 그리기
 	}
 };
 
@@ -117,9 +117,9 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	}
 };
 
-kara.meterCal_box = function(bNum, track) {
+kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	
-	var note = kara.scoreInfo.track[track].notes;
+	var note = kara.scoreInfo.track[trcNm].notes;
 	var meter = kara.scoreInfo.meter.split('/');
 	var limited = meter[0] * meter[1]; //마디 제한
 	var now = 0;
