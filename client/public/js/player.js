@@ -60,7 +60,7 @@ kara.addTabs = function() {
 	
 	// Score Area
 	$("#tabs").children().last().after("<div id='track" + trcNum + "'></div>");
-	
+
 	// 탭 클릭시 트랙 변경 이벤트
 	$('#tab').click(function(e) {
 		// 탭 변경 후 악보 리셋
@@ -69,14 +69,14 @@ kara.addTabs = function() {
 		// text부분만 초기화
 		kara.refresh()
 	});
-
+	
 	// 삭제버튼 클릭시 해당 탭 지우기
-	$("#tabs").on( "click", "span.ui-icon-close", function() {
+	$("#tabs").on( 'click', "span.ui-icon-close", function() {
 		
 		var panelId = $(this).closest("li").remove().attr( "aria-controls" );
 		
 		// 해당하는 탭 제거
-		$("#" + panelId).remove();
+		$('#' + panelId).remove();
 		
 		//해당 트랙의 악기 콤보 삭제
 		if(panelId.slice(-1) == trcNum) {
@@ -135,21 +135,21 @@ kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 	});
 
 	// 콤보 갱신
-	$("#instrument" + trcNum).selectmenu('refresh');
+	$("#instrument" + trcNum).selectmenu('refresh')
 };
 
 //악기 콤보 요소 추가
 kara.addInstrOptCombo = function(trcNum) {	// trcNum :: Track Number - '1'
 	
-	var list = Object.keys(kara.instru.list);
+	var list = Object.keys(kara.instru.list)
 	
 	for(var i in list) {
 		
 		// replace underscore to camelcase
-		list[i] = list[i].replace(/_([a-z0-9])/g, function (g) {return ' ' + g[1].toUpperCase();});
+		list[i] = list[i].replace(/_([a-z0-9])/g, function (g) {return ' ' + g[1].toUpperCase()})
 		list[i] = list[i].charAt(0).toUpperCase() + list[i].slice(1);	// 첫 글자 대문자
 		
-		$('#instrument' + trcNum).append("<option value = '0'>" + list[i]+ "</option>");
+		$('#instrument' + trcNum).append("<option value = '0'>" + list[i]+ "</option>")
 	}
 };
 
@@ -158,7 +158,7 @@ kara.instru = {
 	
 	// 악기 총 갯수
 	getTotCnt: function() {
-		return Object.keys(this.list).length;
+		return Object.keys(this.list).length
 	},
 	
 	// 악기 이름
@@ -170,12 +170,12 @@ kara.instru = {
 			}
 		}	// End of for
 		
-		return null;
+		return null
 	},
 	
 	// 악기 번호
 	getNum: function(name) {
-		return this.list[name];
+		return this.list[name]
 	},
 	
 	// 악기 목록
@@ -309,7 +309,7 @@ kara.instru = {
 		'Applause':					126,
 		'gunshot':					127
 	}
-};
+}
 
 
 // 음악 저장
