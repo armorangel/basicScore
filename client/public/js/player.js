@@ -9,14 +9,14 @@ kara.init = {
 	
 	score: function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
-		if(!trcNm) trcNm = 'track1';
+		if(!trcNm) trcNm = 'track1'
 
-		let trcNum = trcNm.slice(-1);	// 1
+		let trcNum = trcNm.slice(-1)	// 1
 
-		kara.addInstr(trcNum);	// 트랙별 악기 콤보 추가
-		kara.initSvg(trcNm);	// 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
-		kara.txtSVG(trcNm);		// Draw title, tempo, name SVG in print.js
-		kara.prtNote(trcNm);	// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
+		kara.addInstr(trcNum)	// 트랙별 악기 콤보 추가
+		kara.initSvg(trcNm)		// 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
+		kara.txtSVG(trcNm)		// Draw title, tempo, name SVG in print.js
+		kara.prtNote(trcNm)		// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
 	}
 };
 
@@ -24,42 +24,42 @@ kara.init = {
 kara.refresh = function() {
 	
 	// 악보 삭제영역 삭제
-	$('.' + kara.area.del).remove();
+	$('.' + kara.area.del).remove()
 	
 	for(var trcNm in kara.scoreInfo.track) {
 			
 		// 해당 트랙이 초기화 되었는지 판단
-		if(kara.scoreInfo.track[trcNm].clef === '') continue;
+		if(kara.scoreInfo.track[trcNm].clef === '') continue
 		
 		// 초기화된 트랙만 그리기
-		kara.prtNote(trcNm);	// print Notes
-		kara.txtSVG(trcNm); 	// print Text
+		kara.prtNote(trcNm)	// print Notes
+		kara.txtSVG(trcNm) 	// print Text
 	}
-};
+}
 
 //트랙 탭 추가(개선 필요 -- 탭 생성시 탭 이동)
 kara.addTabs = function() {
 	
-	var trcNm;
-	var trcNum = 1;
+	var trcNm
+	var trcNum = 1
 
 	//kara.svg :: 악보 트랙별 SVG 객체 return ['track1', 'track2', ..., 'track10']
 	//마지막 트랙번호 설정
 	for (var key in kara.svg) {	// 트랙별 svg
 		if(kara.svg['track' + trcNum].svgContainer !== null)
-			trcNum++;	// 1부터 시작 아직 생성안된 트랙까지
+			trcNum++	// 1부터 시작 아직 생성안된 트랙까지
 	}
 	
 	// 트랙 9개 제한
-	if(trcNum === 10) return;
+	if(trcNum === 10) return
 	
 	//탭 태그 생성
 	// Tap Area
 	$("#tab").children().last().before("<li><a href='#track" + trcNum + "'>track " + trcNum + "</a>" +
-									   "<span class='ui-icon ui-icon-close' role='presentation'>삭제</span></li>");
+									   "<span class='ui-icon ui-icon-close' role='presentation'>삭제</span></li>")
 	
 	// Score Area
-	$("#tabs").children().last().after("<div id='track" + trcNum + "'></div>");
+	$("#tabs").children().last().after("<div id='track" + trcNum + "'></div>")
 
 	// 탭 클릭시 트랙 변경 이벤트
 	$('#tab').click(function(e) {
@@ -73,38 +73,38 @@ kara.addTabs = function() {
 	// 삭제버튼 클릭시 해당 탭 지우기
 	$("#tabs").on( 'click', "span.ui-icon-close", function() {
 		
-		var panelId = $(this).closest("li").remove().attr( "aria-controls" );
+		var panelId = $(this).closest("li").remove().attr( "aria-controls" )
 		
 		// 해당하는 탭 제거
-		$('#' + panelId).remove();
+		$('#' + panelId).remove()
 		
 		//해당 트랙의 악기 콤보 삭제
 		if(panelId.slice(-1) == trcNum) {
 			
-			$('#menu' + trcNum).remove();
+			$('#menu' + trcNum).remove()
 			
 			// 트랙 초기화
-			kara.svg['track' + trcNum].svgContainer = null;
-			kara.svg['track' + trcNum].svgLine = null;
-			kara.svg['track' + trcNum].svgText = null;
-			kara.svg['track' + trcNum].svgSymbol = null;
-			kara.svg['track' + trcNum].svgNote = null;
-			kara.svg['track' + trcNum].svgBox = null;
+			kara.svg['track' + trcNum].svgContainer = null
+			kara.svg['track' + trcNum].svgLine = null
+			kara.svg['track' + trcNum].svgText = null
+			kara.svg['track' + trcNum].svgSymbol = null
+			kara.svg['track' + trcNum].svgNote = null
+			kara.svg['track' + trcNum].svgBox = null
 			
-			kara.scoreInfo.track['track' + trcNum].clef = '';
-			kara.scoreInfo.track['track' + trcNum].notes = [];
-			kara.scoreInfo.track['track' + trcNum].instrument = '';
+			kara.scoreInfo.track['track' + trcNum].clef = ''
+			kara.scoreInfo.track['track' + trcNum].notes = []
+			kara.scoreInfo.track['track' + trcNum].instrument = ''
 		}
 			
 		// 탭 refresh
-		$('#tabs').tabs('refresh');
+		$('#tabs').tabs('refresh')
 	});
 
 	// 탭 refresh
-	$('#tabs').tabs('refresh');
+	$('#tabs').tabs('refresh')
 
-	kara.init.score('track' + trcNum);	// Init Score
-};
+	kara.init.score('track' + trcNum)	// Init Score
+}
 
 // Add Combo to select Instruments on Each Track
 kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
