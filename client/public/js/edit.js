@@ -132,7 +132,7 @@ kara.edit = {
 						var key = kara.keyvalue(e.target.innerText)
 
 						// 정해진 조표 입력 검사
-						if(!kara.validKey(key)) return
+						// if(!kara.validKey(key)) return
 
 						// 팝업 종료
 						Swal.clickConfirm()
@@ -183,6 +183,8 @@ kara.edit = {
 	}	
 };
 
+/*
+
 // 키 유효성 검사
 kara.validKey = function(key) {// key :: key -- 'major C'
 	
@@ -214,6 +216,7 @@ kara.validKey = function(key) {// key :: key -- 'major C'
 		default:			return false;
 	}
 };
+*/
 
 // 조표에 해당하는 key로 변경하여 리턴
 // 입력 조표가 major인지 minor인지
@@ -250,14 +253,6 @@ kara.keyvalue = function(key) {// key :: 조표 'F'
 		default: return '';	// 없으면 공백 리턴
 	}
 };
-
-
-// 탭 클릭시 트랙 변경 이벤트
-$('#tab').click(function(e) {
-	// 탭 변경 후 악보 리셋
-	kara.refresh()
-});
-
 
 $('#tabs').click(function(e) {
 	

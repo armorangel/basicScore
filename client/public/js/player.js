@@ -26,7 +26,7 @@ kara.refresh = function() {
 	// 악보 삭제영역 삭제
 	$('.' + kara.area.del).remove();
 	
-	for (var trcNm in kara.scoreInfo.track) {
+	for(var trcNm in kara.scoreInfo.track) {
 			
 		// 해당 트랙이 초기화 되었는지 판단
 		if(kara.scoreInfo.track[trcNm].clef === '') continue;
@@ -54,14 +54,26 @@ kara.addTabs = function() {
 	if(trcNum === 10) return;
 	
 	//탭 태그 생성
+	// Tap Area
 	$("#tab").children().last().before("<li><a href='#track" + trcNum + "'>track " + trcNum + "</a>" +
 									   "<span class='ui-icon ui-icon-close' role='presentation'>삭제</span></li>");
+	
+	// Score Area
 	$("#tabs").children().last().after("<div id='track" + trcNum + "'></div>");
 	
+	// 탭 클릭시 트랙 변경 이벤트
+	$('#tab').click(function(e) {
+		// 탭 변경 후 악보 리셋
+		// console.log('track' + trcNum);
+		
+		// text부분만 초기화
+		kara.refresh()
+	});
+
 	// 삭제버튼 클릭시 해당 탭 지우기
 	$("#tabs").on( "click", "span.ui-icon-close", function() {
 		
-		var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+		var panelId = $(this).closest("li").remove().attr( "aria-controls" );
 		
 		// 해당하는 탭 제거
 		$("#" + panelId).remove();
