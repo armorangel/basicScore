@@ -38,9 +38,10 @@ kara.key = {	// 심볼 갯수 객체
 	minor:{'Am':0, 'Em':1, 'Bm':2, 'F#m':3, 'C#m':4, 'G#m':5, 'Ebm':6, 'Bbm':5, 'Fm':4, 'Cm':3, 'Gm':2, 'Dm':1}
 }
 
-kara.config = {
+kara.conf = {
 	
-	score: 'score'	// 악보영역
+	score: 'score',	// 악보영역
+	del : 'in_bar'	// 삭제영역
 	
 }
 
