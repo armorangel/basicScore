@@ -119,11 +119,11 @@ kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 	
 	$("#instrument" + trcNum)
 		.selectmenu({width: 200})
-		.selectmenu("menuWidget")
-		.addClass("overflow");	// overflow클래스 추가
+		.selectmenu('menuWidget')
+		.addClass("overflow")	// overflow클래스 추가
 
 	//악기 콤보 요소 추가 add option tag
-	kara.addInstrOptCombo(trcNum);	// 1
+	kara.addInstrOptCombo(trcNum)	// 1
 
 	// 콤보 이벤트 추가
 	$("#instrument" + trcNum).selectmenu({
