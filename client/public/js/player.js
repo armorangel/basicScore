@@ -31,8 +31,10 @@ kara.refresh = function() {
 		// 해당 트랙이 초기화 되었는지 판단
 		if(kara.scoreInfo.track[trcNm].clef === '') continue
 		
-		// 초기화된 트랙만 그리기
+		// 초기화된 트랙만 그리기(오선지만)
 		kara.prtNote(trcNm)	// print Notes
+		
+		// 매개변수 여부 검토
 		kara.txtSVG(trcNm) 	// print Text
 	}
 }
@@ -123,7 +125,7 @@ kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 		.addClass('overflow')	// overflow클래스 추가
 
 	//악기 콤보 요소 추가 add option tag
-	kara.addInstrOptCombo(trcNum)	// 1
+	kara.instru.addCombo(trcNum)	// 1
 
 	// 콤보 이벤트 추가
 	$('#instrument' + trcNum).selectmenu({
@@ -136,21 +138,6 @@ kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 
 	// 콤보 갱신
 	$('#instrument' + trcNum).selectmenu('refresh')
-};
-
-//악기 콤보 요소 추가
-kara.addInstrOptCombo = function(trcNum) {	// trcNum :: Track Number - '1'
-	
-	var list = Object.keys(kara.instru.list)
-	
-	for(var i in list) {
-		
-		// replace underscore to camelcase
-		list[i] = list[i].replace(/_([a-z0-9])/g, function (g) {return ' ' + g[1].toUpperCase()})
-		list[i] = list[i].charAt(0).toUpperCase() + list[i].slice(1);	// 첫 글자 대문자
-		
-		$('#instrument' + trcNum).append("<option value = '0'>" + list[i]+ "</option>")
-	}
 }
 
 // 악기
@@ -166,7 +153,7 @@ kara.instru = {
 		
 		for(let key in this.list) {
 			if(this.list[key] === num) {
-				return key;
+				return key
 			}
 		}	// End of for
 		
@@ -176,6 +163,21 @@ kara.instru = {
 	// 악기 번호
 	getNum: function(name) {
 		return this.list[name]
+	},
+	
+	//악기 콤보 요소 추가
+	addCombo: function(trcNum) {	// trcNum :: Track Number - '1'
+		
+		const list = Object.keys(this.list)
+	
+		for(let i in list) {
+
+			// replace underscore to camelcase
+			list[i] = list[i].replace(/_([a-z0-9])/g, function (g) {return ' ' + g[1].toUpperCase()})
+			list[i] = list[i].charAt(0).toUpperCase() + list[i].slice(1);	// 첫 글자 대문자
+
+			$('#instrument' + trcNum).append("<option value = '" + i + "'>" + list[i]+ "</option>")
+		}
 	},
 	
 	// 악기 목록

@@ -269,19 +269,20 @@ $('#tabs').click(function(e) {
 // 선택한 음을 배열에 담는다
 var notepush = {
 	
-	parentId:'',
-	id:'',
-	bNum:'',
-	nNum:'',
-	track:'',
+	parentId: '',
+	id: '',
+	bNum: '',
+	nNum: '',
+	track: '',
 	setId: function(id) {
 		this.id = id
 	},
 	getId: function() {
-		return this.id;
+		return this.id
 	},
 	setKlass: function(klass) {
-		var klass_split = klass.split(' ');
+		
+		var klass_split = klass.split(' ')
 
 		this.bNum = klass_split[1]
 		this.nNum = klass_split[2]
@@ -297,11 +298,11 @@ var notepush = {
 	// 선택한 음표 배열에 담기
 	setNote: function(meter) {
 		
-		this.meter = meter;
+		this.meter = meter
 		var bNum = this.bNum.split('_')	// 마디번호 -- bar,0
 		var nNum = this.nNum.split('_')	// 음표번호 -- note,0
 		var trcNm = this.track			// 현재 선택된 트랙 -- 'track1'
-		var meterNm						// whole, half, quarter, 8th, 16th
+		var meterNm = ''				// whole, half, quarter, 8th, 16th
 	
 		switch(meter) {
 			case 1:		meterNm	= 'whole';	break;	// 온음표
@@ -318,7 +319,7 @@ var notepush = {
 				// 다시 그리기
 				kara.prtNote(trcNm)
 				
-				return;
+				return
 		}	// End of switch
 		
 		// 음표추가 가능 여부		
