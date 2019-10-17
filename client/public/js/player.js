@@ -56,11 +56,11 @@ kara.addTabs = function() {
 	
 	//탭 태그 생성
 	// Tap Area
-	$("#tab").children().last().before("<li><a href='#track" + trcNum + "'>track " + trcNum + "</a>" +
+	$('#tab').children().last().before("<li><a href='#track" + trcNum + "'>track " + trcNum + "</a>" +
 									   "<span class='ui-icon ui-icon-close' role='presentation'>삭제</span></li>")
 	
 	// Score Area
-	$("#tabs").children().last().after("<div id='track" + trcNum + "'></div>")
+	$('#tabs').children().last().after("<div id='track" + trcNum + "'></div>")
 
 	// 탭 클릭시 트랙 변경 이벤트
 	$('#tab').click(function(e) {
@@ -72,7 +72,7 @@ kara.addTabs = function() {
 	});
 	
 	// 삭제버튼 클릭시 해당 탭 지우기
-	$("#tabs").on('click', "span.ui-icon-close", function() {
+	$('#tabs').on('click', "span.ui-icon-close", function() {
 		
 		var panelId = $(this).closest("li").remove().attr( "aria-controls" )
 		
