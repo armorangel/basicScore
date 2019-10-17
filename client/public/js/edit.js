@@ -38,17 +38,17 @@ kara.edit = {
 		// 템포 정합성 검사
 		if(!tempo || isNaN(tempo)) {	// isNaN(숫자) ==> false 
 			alert('숫자를 입력하세요.')
-			return;
+			return
 		}
 
 		// 템포는 10에서 300사이
 		if(tempo < 10 || tempo > 300) {
 			alert('템포는 10이상 300이하만 입력할 수 있습니다.')
-			return;
+			return
 		}
 
 		// 악보 정보 객체에 템포 저장
-		kara.scoreInfo.tempo = tempo
+		kara.scoreInfo.tempo = Number(tempo)
 		kara.refresh()
 	},
 	
@@ -57,7 +57,7 @@ kara.edit = {
 		
 		// 길이 제한
 		// 특수문자 제한
-		var value;
+		var value
 		
 		const { value: writer } = await Swal.fire({
 			title: '이름을 입력하세요.',
