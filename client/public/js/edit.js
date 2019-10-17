@@ -347,42 +347,48 @@ var boxWidth = function(meter) {
 //음표선택 팝업 호출
 var PopLayer = {
 	
-	nowLayer : "",
-	openLayer : "",
-	Xpos : "",
-	Ypos : "",
+	nowLayer : '',
+	openLayer : '',
+	Xpos : '',
+	Ypos : '',
 	Action : function(strAnchor, strLayer) {
 		
-		this.nowLayer = strLayer;
+		this.nowLayer = strLayer
 		
-		if(this.openLayer != "") {
-			var objOpenLayer = document.getElementById(this.openLayer);
-			objOpenLayer.style.display = "none";
-			this.openLayer = "";
+		if(this.openLayer != '') {
+			var objOpenLayer = document.getElementById(this.openLayer)
+			objOpenLayer.style.display = 'none'
+			this.openLayer = ''
 		}	// End of if
-		this.openLayer = strLayer;
-		try {
-			strAnchor.onmouseup = PopLayer.Open;
+		
+		this.openLayer = strLayer
+		
+		try {			
+			strAnchor.onmouseup = PopLayer.Open
 		} catch(e) {}
 	},
 	Open : function(e) {
+		
 		if(document.all) {
-			this.Xpos = event.clientX;
-			this.Ypos = event.clientY;
+			
+			this.Xpos = event.clientX
+			this.Ypos = event.clientY
 		} else {
-			this.Xpos = e.clientX;
-			this.Ypos = e.clientY;
+			this.Xpos = e.clientX
+			this.Ypos = e.clientY
 		}
-		var objNowLayer = document.getElementById(PopLayer.nowLayer);
+		
+		var objNowLayer = document.getElementById(PopLayer.nowLayer)
 
-		objNowLayer.style.left = document.body.scrollLeft + this.Xpos + "px";
-		objNowLayer.style.top = document.body.scrollTop + this.Ypos + "px";
-		objNowLayer.style.display = "block";
+		objNowLayer.style.left = document.body.scrollLeft + this.Xpos + 'px'
+		objNowLayer.style.top = document.body.scrollTop + this.Ypos + 'px'
+		objNowLayer.style.display = 'block';
 	},
+	
 	Close : function() {
-		this.openLayer = "";
+		this.openLayer = '';
 		var objNowLayer = document.getElementById(PopLayer.nowLayer);
-		objNowLayer.style.display = "none";
+		objNowLayer.style.display = 'none'
 	}
 };
 
@@ -555,5 +561,5 @@ kara.chkSharpFlat = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 		}	// End of if
 	}	// End of for
 	
-	return 0;	// 아무것도 없으면
+	return 0	// 아무것도 없으면
 }
