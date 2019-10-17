@@ -996,13 +996,14 @@ kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSpli
 
 // 악보 선택 영역 그리기
 kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity) {
+	
 	svgVar.append('rect')
 				.attr('id', p)
 				.attr('class', kara.conf.del + ' bar_' + bNum + ' ' + 'note_' + nNum + ' ' + trcNm) //마디,  음표 번호
 				.attr('x', x)
 				.attr('y', y)
 				.attr('onmousedown', "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
-				.attr('onclick', 'kara.selectBox(' + bNum + ', ' + nNum + ', this)')
+				.attr('onclick', 'kara.selectBox(' + bNum + ', ' + nNum + ",  '" + trcNm + "', this)")
 				.style("width", width)
 				.style("height", height)	// 6
 				.style("fill", fill)
@@ -1010,22 +1011,34 @@ kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill,
 	
 };
 
-kara.selectBox = function(bNum, nNum, obj) {
+// 음표 선택
+kara.selectBox = function(bNum, nNum, trcNm, obj) {
+	console.log(bNum, nNum, trcNm, obj);
 	// alert(bNum + ',' + nNum);
 	// console.log(obj.id);
 	//in_bar bar_0 note_0 track1
-	console.log($('.bar_' + bNum + ' .note_' + nNum + ' #' + obj.id));
+	// console.log($('.bar_' + bNum + ' .note_' + nNum + ' #' + obj.id));
 
-	let svg = kara.svg.track1.svgContainer;
+	let svg = kara.svg.track1.svgContainer
+	
+	var svgVar = svg.append('g')
+			.attr('id', 'selected')
+			.attr('class', kara.conf.del)
+	
+	console.log('!! ' + obj.id + ', ' + $(obj.id).width() + ", " + $(obj.id).height());
+	console.log(trcNm);
+	
+	
+	var t = $('#' + obj.id + '.' + trcNm);
 	
 	svg.append('rect')
 				.attr('id', 'selected')
 				.attr('class', kara.conf.del) //마디,  음표 번호
 				// .attr('x', obj.offsetLeft)
 				// .attr('y', obj.offsetTop)
-				.attr('x', 100)
-				.attr('y', 100)
-				.style("width", obj.width)
-				.style("height", obj.height)	// 6
-				.style("fill", 'red');
+				.attr('x', t.offset().left)
+				.attr('y', t.offset().top)
+				.style("width", t.width())
+				.style("height", t.height())	// 6
+				.style("fill", 'red')
 };
