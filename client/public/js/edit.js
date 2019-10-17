@@ -131,9 +131,6 @@ kara.edit = {
 						
 						var key = kara.keyvalue(e.target.innerText)
 
-						// 정해진 조표 입력 검사
-						// if(!kara.validKey(key)) return
-
 						// 팝업 종료
 						Swal.clickConfirm()
 						
@@ -181,42 +178,7 @@ kara.edit = {
 		}
 		
 	}	
-};
-
-/*
-
-// 키 유효성 검사
-kara.validKey = function(key) {// key :: key -- 'major C'
-	
-	switch (key) {
-		case 'major C':
-		case 'major G':
-		case 'major D':
-		case 'major A':
-		case 'major E':
-		case 'major B':
-		case 'major Gb':
-		case 'major Db':
-		case 'major Ab':
-		case 'major Eb':
-		case 'major Bb':
-		case 'major F':
-		case 'minor Am':
-		case 'minor Em':
-		case 'minor Bm':
-		case 'minor F#m':
-		case 'minor C#m':
-		case 'minor G#m':
-		case 'minor Ebm':
-		case 'minor Bbm':
-		case 'minor Fm':
-		case 'minor Cm':
-		case 'minor Gm':
-		case 'minor Dm':	return true;
-		default:			return false;
-	}
-};
-*/
+}
 
 // 조표에 해당하는 key로 변경하여 리턴
 // 입력 조표가 major인지 minor인지
@@ -258,13 +220,12 @@ $('#tabs').click(function(e) {
 	
 	var klass = e.target.getAttribute('class')
 	var id = e.target.getAttribute('id')
-	var id_P = $('#' + id).parent()
 	
 	notepush.setId(id)
 	notepush.setKlass(klass)
 	
 	// console.log(notepush.id)
-});
+})
 
 // 선택한 음을 배열에 담는다
 var notepush = {
@@ -433,6 +394,7 @@ kara.noteToKey = function(keyArray) {// B4,F4
 
 	// 음 갯수 만큼 반복
 	for(let i = 0; i < split.length; i++) {
+		
 		switch(split[i]) {
 				
 			case 'A0':	key[i] = 21; break;	// 21
@@ -533,8 +495,7 @@ kara.noteToKey = function(keyArray) {// B4,F4
 	}	// End Of for
 
 	//Flat, Sharp 음 높이 조정
-	for(let i = 0; i < split.length; i++)
-		key[i] += kara.chkSharpFlat(split[i]);
+	for(let i in split) key[i] += kara.chkSharpFlat(split[i]);
 
   return key;
 };

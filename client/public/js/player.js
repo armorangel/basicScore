@@ -42,7 +42,6 @@ kara.refresh = function() {
 //트랙 탭 추가(개선 필요 -- 탭 생성시 탭 이동)
 kara.addTabs = function() {
 	
-	var trcNm
 	var trcNum = 1
 
 	//kara.svg :: 악보 트랙별 SVG 객체 return ['track1', 'track2', ..., 'track10']
@@ -73,7 +72,7 @@ kara.addTabs = function() {
 	});
 	
 	// 삭제버튼 클릭시 해당 탭 지우기
-	$("#tabs").on( 'click', "span.ui-icon-close", function() {
+	$("#tabs").on('click', "span.ui-icon-close", function() {
 		
 		var panelId = $(this).closest("li").remove().attr( "aria-controls" )
 		
