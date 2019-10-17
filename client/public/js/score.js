@@ -8,21 +8,21 @@ kara.scoreInfo = {
 	key: 'major Db',		// 키 저장
 	meter: '4/4',			// 박자저장
 	track: {
-		"track1":{
-			clef: "G",		// 음자리표
+		'track1':{
+			clef: 'G',		// 음자리표
 			notes: [],		// 음표배열
 			instrument: 0	// 악기번호
 		},
 		//10개 트랙 생성
-		"track2":{clef: "",notes: [],instrument: ""},
-		"track3":{clef: "",notes: [],instrument: ""},
-		"track4":{clef: "",notes: [],instrument: ""},
-		"track5":{clef: "",notes: [],instrument: ""},
-		"track6":{clef: "",notes: [],instrument: ""},
-		"track7":{clef: "",notes: [],instrument: ""},
-		"track8":{clef: "",notes: [],instrument: ""},
-		"track9":{clef: "",notes: [],instrument: ""},
-		"track10":{clef: "",notes: [],instrument: ""},
+		'track2':{clef: '',notes: [],instrument: ''},
+		'track3':{clef: '',notes: [],instrument: ''},
+		'track4':{clef: '',notes: [],instrument: ''},
+		'track5':{clef: '',notes: [],instrument: ''},
+		'track6':{clef: '',notes: [],instrument: ''},
+		'track7':{clef: '',notes: [],instrument: ''},
+		'track8':{clef: '',notes: [],instrument: ''},
+		'track9':{clef: '',notes: [],instrument: ''},
+		'track10':{clef: '',notes: [],instrument: ''},
 	} // 노트 저장
 };
 
@@ -53,9 +53,9 @@ kara.noteSelect = {
 
 		// 만약 계이름이 없으면
 		if(!note[i][j][0])
-			note[i][j][0] = pitch;	// 그냥 넣어라(A4)
+			note[i][j][0] = pitch	// 그냥 넣어라(A4)
 		else if(note[i][j][0] === 'rest')	// 쉼표면
-			note[i][j][0] = pitch;
+			note[i][j][0] = pitch
 		else { //아니면
 			var split = note[i][j][0].split(',')
 			
@@ -65,8 +65,6 @@ kara.noteSelect = {
 		}
 		
 		note[i][j][1] = note_meter	// whole
-
-		$('.' + kara.area.del + '.' + trcNm).remove()
 		
 		kara.prtNote(trcNm)		// 음표 그리기
 	}
@@ -135,7 +133,8 @@ kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	if (now == limited) return 1;
 };
 
-kara.barsort = function(bNum, nNum , nowmeter, trcNm) {	// 0, 0, 16th, track1
+// 음표 수정 시
+kara.barsort = function(bNum, nNum , nowmeter, trcNm) {	// 0, 0, 16th, track1	
 	
 	var note = kara.scoreInfo.track[trcNm].notes
 	var copynote = []
@@ -177,7 +176,7 @@ kara.barsort = function(bNum, nNum , nowmeter, trcNm) {	// 0, 0, 16th, track1
 		
 		i++
 	}	// End of for
-};
+}
 
 kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, track1
 	

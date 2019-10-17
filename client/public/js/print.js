@@ -85,6 +85,9 @@ kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 // 배열의 값을 가져와서 음표를 그린다
 kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	
+	// SVG 삭제
+	$('.' + kara.area.del + '.' + trcNm).remove()
+	
 	const note = kara.scoreInfo.track[trcNm].notes;	// Array [["E5", "half"], ["E5", "half"]]
 	let meter = kara.scoreInfo.meter.split('/');	// ["4", "4"]
 	const limited = meter[0] * meter[1];	// 마디 제한 16

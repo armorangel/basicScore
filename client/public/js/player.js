@@ -18,7 +18,7 @@ kara.init = {
 		kara.txtSVG(trcNm)		// Draw title, tempo, name SVG in print.js
 		kara.prtNote(trcNm)		// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
 	}
-};
+}
 
 // 악보 초기화
 kara.refresh = function() {
@@ -115,18 +115,18 @@ kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 	kara.scoreInfo.track[trcNm].instrument = 0;	//처음 Acoustic Grand Piano로 세팅
 	
 	// 메뉴 바에 Select a track 문구, 콤보 추가
-	$("#menu").append("<form id='menu" + trcNum + "' action='#'><fieldset><label for='instrument" + trcNum + "'>" + menuTtl + trcNum + "</label><select name='instrument" + trcNum 	+ "' id='instrument" + trcNum + "'></fieldset></form>");
+	$('#menu').append("<form id='menu" + trcNum + "' action='#'><fieldset><label for='instrument" + trcNum + "'>" + menuTtl + trcNum + "</label><select name='instrument" + trcNum 	+ "' id='instrument" + trcNum + "'></fieldset></form>");
 	
-	$("#instrument" + trcNum)
+	$('#instrument' + trcNum)
 		.selectmenu({width: 200})
 		.selectmenu('menuWidget')
-		.addClass("overflow")	// overflow클래스 추가
+		.addClass('overflow')	// overflow클래스 추가
 
 	//악기 콤보 요소 추가 add option tag
 	kara.addInstrOptCombo(trcNum)	// 1
 
 	// 콤보 이벤트 추가
-	$("#instrument" + trcNum).selectmenu({
+	$('#instrument' + trcNum).selectmenu({
 		
 		// 콤보 박스 변경시 호출
 		change: function(event, ui) {
@@ -135,7 +135,7 @@ kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 	});
 
 	// 콤보 갱신
-	$("#instrument" + trcNum).selectmenu('refresh')
+	$('#instrument' + trcNum).selectmenu('refresh')
 };
 
 //악기 콤보 요소 추가
@@ -151,7 +151,7 @@ kara.addInstrOptCombo = function(trcNum) {	// trcNum :: Track Number - '1'
 		
 		$('#instrument' + trcNum).append("<option value = '0'>" + list[i]+ "</option>")
 	}
-};
+}
 
 // 악기
 kara.instru = {

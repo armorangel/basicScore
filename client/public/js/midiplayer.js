@@ -9,7 +9,7 @@ kara.play = {
 	lengs: 0,
 	player: function() {
 		
-		console.log("Executed Play Function.")
+		console.log('Executed Play Function.')
 		kara.play.instru = []
 		
 		var mn = 0
@@ -143,7 +143,7 @@ kara.play = {
 								MIDI.chordOn(r, 0, 0, delay)
 							}
 
-							meter = player[r];
+							meter = player[r]
 							player[r] = meter - kara.noteMeter.head["16th"]
 							// console.log(r + " - " + player[r]);
 							index[r] = ind
@@ -172,13 +172,14 @@ kara.play = {
 
 	// 정지
 	stop: function() {
+		
 		kara.play.lengs = 0
 		kara.play.isPlaying = false
 		
 		clearInterval(kara.play.play)
 		
 		kara.play.play = null
-		console.log("kara.play.lengs는" + kara.play.lengs)
+		console.log('kara.play.lengs는 ' + kara.play.lengs)
 	}
 };
 

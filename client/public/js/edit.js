@@ -314,7 +314,6 @@ var notepush = {
 				
 				// 쉼표
 				kara.scoreInfo.track[trcNm].notes[bNum[1]][nNum[1]][0] = 'rest'
-				$('.' + kara.area.del + '.' + trcNm).remove()
 
 				// 다시 그리기
 				kara.prtNote(trcNm)
@@ -327,7 +326,7 @@ var notepush = {
 		
 		kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm)		// 추가 가능
 	}
-};
+}
 
 
 //선택한 음높이 계산
@@ -337,8 +336,8 @@ var pitch_select = {
 	//음 높이 계산 높이에 따른 계이름 반환
 	selection: function(pitch) {	// pitch 36 return C6
 		
-		var m = 1;
-		var n = m + 6;	// 7
+		var m = 1
+		var n = m + 6	// 7
 		
 		for(var i = 1; i <= 7; i++) {		// 1옥타브 부터 7옥타브까지 검사
 			if(m <= pitch && pitch <= n) {  // 음높이 계산 현재 범위에 있는 지
@@ -351,7 +350,7 @@ var pitch_select = {
 			n = n + 7	// 1 옥타브 올리기
 		}	// End of for
 	}
-};
+}
 
 var boxWidth = function(meter) {
 	
@@ -367,6 +366,7 @@ var boxWidth = function(meter) {
 	var width = (X - a) / 4
 	
 	switch(meter) {
+			
 		case 'whole':	width = width;		break;	// 온음표
 		case 'half':	width = width / 2;	break;	// 2분음표
 		case 'quarter':	width = width / 4;	break;	// 4분음표
@@ -376,7 +376,9 @@ var boxWidth = function(meter) {
 		case 64: break;		// 지원안함
 		case 128: break;	// 지원안함
 		default: break;
+			
 	}	// End of switch
+	
 	return width;
 };
 
@@ -592,4 +594,4 @@ kara.chkSharpFlat = function(pitch) {  // b = -1 return, natural = 0, # = 1;
 	}	// End of for
 	
 	return 0;	// 아무것도 없으면
-};
+}
