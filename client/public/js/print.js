@@ -153,7 +153,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			var width = $('.bar_' + i + '.note_' + j + '.' + trcNm).width();// .bar_1.note_2.track1
 			d3.select('.bar_' + i + '.note_' + j + '#' + pitch + '.' + trcNm).style('fill', '#ffffff');
 
-			pitchSplit = pitch.split(',');// ["B4", "C6"] 같은 박자에 있는 음표들
+			var pitchSplit = pitch.split(',');// ["B4", "C6"] 같은 박자에 있는 음표들
 
 			for(var pi = 0; pi < pitchSplit.length; pi++) {
 				
@@ -207,7 +207,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 		}	// End of for
 	}
 	
-	kara.test(trcNm);		// 배열값 표시(옮겨야됨)
+	kara.test(trcNm)	// 배열값 표시(옮겨야됨)
 };
 
 //악보 위치 반환
@@ -215,15 +215,15 @@ kara.scorePos = {
 	
 	//#score 악보 영역 left 좌표 반환
 	left: function(trcNm) {	// trcNm :: Track Name -- 'track1'
-		var position = $('#' + trcNm + ' > #score');
-		return position.position().left;
+		const position = $('#' + trcNm + ' > #score')
+		return position.position().left
 	},
 	// #score 악보 영억 top 좌표 반환
 	top: function(trcNm) {	// trcNm :: Track Name -- 'track1'
-		var position = $('#' + trcNm + ' > #score');
-		return position.position().top;
+		const position = $('#' + trcNm + ' > #score')
+		return position.position().top
 	}
-};
+}
 
 //악보 길이 반환
 kara.XY = {
@@ -234,6 +234,7 @@ kara.XY = {
 	X: function() {
 		return $('#score').width();
 	},
+	
 	Y: function(y) {
 		return this.topMargin + (y * 110);
 	}

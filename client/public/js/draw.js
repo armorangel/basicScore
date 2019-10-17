@@ -13,16 +13,16 @@ kara.draw = {
 	// 현재 트랙으로 설정
 	setTrack: function(trcNm) {
 		
-		if(!trcNm) trcNm = 'track1';	// default track
+		if(!trcNm) trcNm = 'track1'	// default track
 		
-		this.track = trcNm;
-		this.svgContainer = kara.svg[trcNm].svgContainer;
-		this.txt = kara.svg[trcNm].svgText;
-		this.box = kara.svg[trcNm].svgBox;
-		this.symbol = kara.svg[trcNm].svgSymbol;
-		this.svgjs = kara.svg[trcNm].svgjs;
+		this.track = trcNm
+		this.svgContainer = kara.svg[trcNm].svgContainer
+		this.txt = kara.svg[trcNm].svgText
+		this.box = kara.svg[trcNm].svgBox
+		this.symbol = kara.svg[trcNm].svgSymbol
+		this.svgjs = kara.svg[trcNm].svgjs
 		
-		return this;
+		return this
 	},
 	
 	// 해당 트랙의 SVG 요소 삭제
@@ -45,8 +45,7 @@ kara.draw = {
 			y: y,
 			width: width,	
 			height: height	// 0 ISSUE
-		};
-		
+		}
 	},
 	
 	// text
