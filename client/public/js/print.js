@@ -241,16 +241,16 @@ kara.XY = {
 // 음자리표 SVG 그리기
 kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 	
-	const clef = kara.scoreInfo.track[trcNm].clef;	// 현재 음자리표
-	var svg = kara.svg[trcNm].svgSymbol;
-	var box_x, box_y;
-	var width, height;
-	var pathString;
-	
+	const clef = kara.scoreInfo.track[trcNm].clef	// 현재 음자리표
+	var svg = kara.svg[trcNm].svgSymbol
+	var box_x, box_y
+	var width, height
+	var pathString
+
 	switch(clef) {
 		case 'G':	// 높은 음자리표
 			
-			y = y / 1.4 + 35;
+			y = y / 1.4 + 35
 			
 			//clefs.G 없으면 null
 			if (!kara.glyphs['clefs.G']) return null;
@@ -1024,6 +1024,6 @@ kara.selectBox = function(bNum, nNum, trcNm, obj) {
 	beforeStyle = obj.style.fill
 	
 	// 선택 영역 표시
-	obj.style.fill = 'red'
+	obj.style.fill = 'red'	// config
 
 };
