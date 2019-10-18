@@ -529,40 +529,40 @@ kara.pathClone = function (pathString, x, y) {
 // 오선지
 kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Track Name 'track1'
 		
-	let line = kara.svg[trcNm].svgLine;
-	let X = kara.XY.X();
-	let Y = kara.XY.Y(y);
-	let key = kara.scoreInfo.key;
-	let keySplit = key.split(' ');
-	let M = kara.key[keySplit[0]];
-	let N = M[keySplit[1]];
-	let clef = kara.scoreInfo.clef;
-	let gab = 12;
+	let line = kara.svg[trcNm].svgLine
+	let X = kara.XY.X()
+	let Y = kara.XY.Y(y)
+	let key = kara.scoreInfo.key
+	let keySplit = key.split(' ')
+	let M = kara.key[keySplit[0]]
+	let N = M[keySplit[1]]
+	let clef = kara.scoreInfo.clef
+	let gab = 12
 
 	//간격조절
 	for(i = 1; i <= 5; i++) {
 		
 		//간격 12씩 5줄 그리기
-		let pathString = kara.sprintf("M %f %f L %f %f", 0, (i * gab) + Y, X, (i * gab) + Y);
+		let pathString = kara.sprintf("M %f %f L %f %f", 0, (i * gab) + Y, X, (i * gab) + Y)
 		
 		line.append('path')
 			.attr('class', kara.conf.del + ' ' + trcNm)
 			.attr('d', pathString)
-			.style('stroke', 'black');
+			.style('stroke', 'black')
 	}	// End of for
 	
 	//분리 해야됨
-	kara.clefSVG(10, Y, Y, trcNm);	//높은 음자리 //1.4+35
-	kara.vLine(X, Y+12, trcNm);		//끝 줄
-	kara.keySVG(Y+17, key, trcNm);	//조표 그리기
-	kara.meterSVG(Y, trcNm);		//박자
+	kara.clefSVG(10, Y, Y, trcNm)	//높은 음자리 //1.4+35
+	kara.vLine(X, Y+12, trcNm)		//끝 줄
+	kara.keySVG(Y+17, key, trcNm)	//조표 그리기
+	kara.meterSVG(Y, trcNm)			//박자
 
-	let a = N * 12 + 70;
-	let ac = (X - a) / 4;
+	let a = N * 12 + 70
+	let ac = (X - a) / 4
 	
-	kara.vLine(ac * 1 + a, Y + 12, trcNm);	// 첫마디 끝 구분선
-	kara.vLine(ac * 2 + a, Y + 12, trcNm);	// 두번째 마디 끝 구분선
-	kara.vLine(ac * 3 + a, Y + 12, trcNm);	// 세번째 마디 끝 구분선
+	kara.vLine(ac * 1 + a, Y + 12, trcNm)	// 첫마디 끝 구분선
+	kara.vLine(ac * 2 + a, Y + 12, trcNm)	// 두번째 마디 끝 구분선
+	kara.vLine(ac * 3 + a, Y + 12, trcNm)	// 세번째 마디 끝 구분선
 }
 
 //마디
