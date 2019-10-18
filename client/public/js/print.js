@@ -1,4 +1,4 @@
-if(!window.kara) window.kara = {};
+if(!window.kara) window.kara = {}
 
 // Printing Score
 
@@ -28,9 +28,9 @@ kara.svg = {
 //해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성
 kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
-	const trcSvg = kara.svg[trcNm];		// kara.svg['track1'] 트랙별 SVG 객체
-	const width = $('#tabs').width();	// 악보 탭 넓이
-	let svgContainer;					// #track1 > #score SVG 트랙영역
+	const trcSvg = kara.svg[trcNm]		// kara.svg['track1'] 트랙별 SVG 객체
+	const width = $('#tabs').width()	// 악보 탭 넓이
+	let svgContainer					// #track1 > #score SVG 트랙영역
 
 	//svgContainer = SVG(trcNm).size(width - 43, 400);// SVG.js test
 	// 악보영역 생성후 저장
@@ -48,7 +48,7 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 					.attr('version', '1.1')
 					.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
 					.style('width', width - 43)		// 악보 넓이 //우측부터 43
-					.style('height', '400');		// 악보 높이
+					.style('height', '400')			// 악보 높이
 	
 	/*
 	svgContainer = d3.select('#' + trcNm + ' > #score')	// '#track1'
@@ -56,13 +56,13 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 					.style('height', '400');			// 악보 높이
 	*/
 	
-	trcSvg.svgContainer	= svgContainer;
+	trcSvg.svgContainer	= svgContainer
 	
-	trcSvg.svgText		= svgContainer.append('g').attr('id', 'text');		// title, tempo, writer
-	trcSvg.svgLine		= svgContainer.append('g').attr('id', 'lines');		// line(오선지)
-	trcSvg.svgSymbol	= svgContainer.append('g').attr('id', 'symbol');	// clef(음자리표), 조표 4/4	
-	trcSvg.svgNote		= svgContainer.append('g').attr('id', 'note');		// 음표, 음표 막대 SVG
-	trcSvg.svgBox		= svgContainer.append('g').attr('id', 'boxes');		// 선택영역
+	trcSvg.svgText		= svgContainer.append('g').attr('id', 'text')	// title, tempo, writer
+	trcSvg.svgLine		= svgContainer.append('g').attr('id', 'lines')	// line(오선지)
+	trcSvg.svgSymbol	= svgContainer.append('g').attr('id', 'symbol')	// clef(음자리표), 조표 4/4	
+	trcSvg.svgNote		= svgContainer.append('g').attr('id', 'note')	// 음표, 음표 막대 SVG
+	trcSvg.svgBox		= svgContainer.append('g').attr('id', 'boxes')	// 선택영역
 	
 	/*
 	trcSvg.svgText	 = svgContainer.group().attr('id', 'text');//SVG.js
@@ -79,7 +79,7 @@ kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 	kara.draw.setTrack(trcNm)
 			.title(kara.scoreInfo.title)		// Draw Title
 			.tempo(kara.scoreInfo.tempo)		// Draw Tempo
-			.writer(kara.scoreInfo.writer);		// Draw Writer
+			.writer(kara.scoreInfo.writer)		// Draw Writer
 };
 
 // 배열의 값을 가져와서 음표를 그린다
@@ -119,41 +119,41 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 		//음표와 음표 박스 찍기
 		for(var j = 0; j < note[i].length; j++) {
 			
-			var key = kara.scoreInfo.key;
-			var keySplit = key.split(' ');
-			var M = kara.key[keySplit[0]];
-			var N = M[keySplit[1]];
-			var X = kara.XY.X();
-			var Y = kara.XY.Y(i);
-			var a = N * 12 + 70;
-			var ac = (X - a) / 4;
+			var key = kara.scoreInfo.key
+			var keySplit = key.split(' ')
+			var M = kara.key[keySplit[0]]
+			var N = M[keySplit[1]]
+			var X = kara.XY.X()
+			var Y = kara.XY.Y(i)
+			var a = N * 12 + 70
+			var ac = (X - a) / 4
 			
-			var _whole = ac / 2 - 8;
-			var _half = _whole / 2;
-			var _quarter = _half / 2;
-			var _8th = _quarter / 2;
-			var _16th = _8th / 2 - 8;
+			var _whole = ac / 2 - 8
+			var _half = _whole / 2
+			var _quarter = _half / 2
+			var _8th = _quarter / 2
+			var _16th = _8th / 2 - 8
 			
-			var position;
+			var position
 
-			var pitch = note[i][j][0];
-			let meter = note[i][j][1];
+			var pitch = note[i][j][0]
+			let meter = note[i][j][1]
 			
 			if(four_boxEnter == four_check) {
 
 				// 첫 음표 // 악보 선택 영역 그리기
-				kara.noteBox.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, trcNm);
-				four_check++;
+				kara.noteBox.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, trcNm)
+				four_check++
 			} else {
 				// 두번째 부터 // 악보 선택 영역 그리기
-				kara.noteBox_.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, trcNm);
+				kara.noteBox_.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, trcNm)
 				//console.log("그릴 박스는 i는" + i + "j " +  j);
 			}
 			
-			var width = $('.bar_' + i + '.note_' + j + '.' + trcNm).width();// .bar_1.note_2.track1
-			d3.select('.bar_' + i + '.note_' + j + '#' + pitch + '.' + trcNm).style('fill', '#ffffff');
+			var width = $('.bar_' + i + '.note_' + j + '.' + trcNm).width()	// .bar_1.note_2.track1
+			d3.select('.bar_' + i + '.note_' + j + '#' + pitch + '.' + trcNm).style('fill', '#ffffff')
 
-			var pitchSplit = pitch.split(',');// ["B4", "C6"] 같은 박자에 있는 음표들
+			var pitchSplit = pitch.split(',')	// ["B4", "C6"] 같은 박자에 있는 음표들
 
 			for(var pi = 0; pi < pitchSplit.length; pi++) {
 				
