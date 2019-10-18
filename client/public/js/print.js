@@ -563,32 +563,33 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 	kara.vLine(ac * 1 + a, Y + 12, trcNm);	// 첫마디 끝 구분선
 	kara.vLine(ac * 2 + a, Y + 12, trcNm);	// 두번째 마디 끝 구분선
 	kara.vLine(ac * 3 + a, Y + 12, trcNm);	// 세번째 마디 끝 구분선
-};
+}
 
 //마디
 kara.vLine = function(x, y, trcNm) {	// trcNm :: Track Name 'track1'
 	//1051, 212, track1
 	
-	var svg = kara.svg[trcNm].svgLine;
-	var pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y + 48);
+	// 라인 그리는 거 통합하고 메소드로 나누자
+	var svg = kara.svg[trcNm].svgLine
+	var pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y + 48)
 	
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)// 삭제영역
 		.attr('d', pathString)
-		.style('stroke', 'black');
-};
+		.style('stroke', 'black')
+}
 
 //음표 막대 그리기
 kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1
 	
-	let svg = kara.svg[trcNm].svgNote;
-	let pathString = kara.sprintf('M %f %f L %f %f', x + 10, y, x + 10, y - 30);
+	let svg = kara.svg[trcNm].svgNote
+	let pathString = kara.sprintf('M %f %f L %f %f', x + 10, y, x + 10, y - 30)
 	
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
 		.attr('d', pathString)
-		.style('stroke', 'black');
-};
+		.style('stroke', 'black')
+}
 
 //음표 막대
 kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half, track1
@@ -650,6 +651,7 @@ kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half
 
 // 악보 선택 영역 그리기
 kara.noteBox = {
+	
 	// 악보 선택 영역 그리기
 	print: function(X, Y, bNum, nNum, meter, trcNm) {
 		
