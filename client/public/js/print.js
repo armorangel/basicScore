@@ -230,13 +230,13 @@ kara.XY = {
 	
 	//#score :: 악보 width return
 	X: function() {
-		return $('#score').width();
+		return $('#score').width()
 	},
 	
 	Y: function(y) {
-		return this.topMargin + (y * 110);	// 110 이 뭔지 알아네
+		return this.topMargin + (y * 110)	// 110 이 뭔지 알아네
 	}
-};
+}
 
 // 음자리표 SVG 그리기
 kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
