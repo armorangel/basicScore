@@ -645,47 +645,49 @@ kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half
 		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
 		.attr('d', pathString)
 		.style('stroke', 'black')
-		.style('stroke-width', '1.5px');
-};
+		.style('stroke-width', '1.5px')
+}
 
 // 악보 선택 영역 그리기
 kara.noteBox = {
 	// 악보 선택 영역 그리기
 	print: function(X, Y, bNum, nNum, meter, trcNm) {
 		
-		let svg = kara.svg[trcNm].svgContainer;
-		let key = kara.scoreInfo.key;
-		let keySplit = key.split(' ');
-		let M = kara.key[keySplit[0]];
-		let N = M[keySplit[1]];
-		let clef = kara.scoreInfo.track[trcNm].clef;
-		let i = 0, j = 0;
+		let svg = kara.svg[trcNm].svgContainer
+		let key = kara.scoreInfo.key
+		let keySplit = key.split(' ')
+		let M = kara.key[keySplit[0]]
+		let N = M[keySplit[1]]
+		let clef = kara.scoreInfo.track[trcNm].clef
+		let i = 0, j = 0
 
-		let a = N * 12 + 70;
-		let ac = (X - a) / 4;
+		
+		// 왜 인지 알아네
+		let a = N * 12 + 70
+		let ac = (X - a) / 4
 
-		let x = a;
-		let y = Y - 15;
+		let x = a
+		let y = Y - 15
 
-		let width = (X - a) / 4;
+		let width = (X - a) / 4
 		let height = 6;
-		let fill_opacity = '0.3';
+		let fill_opacity = '0.3'
 
 		switch(meter) {
 			case 'whole': //온음표
-				width = width;
+				width = width
 				break;
 			case 'half': //2분음표
-				width = width / 2;
+				width = width / 2
 				break;
 			case 'quarter': //4분음표
-				width = width / 4;
+				width = width / 4
 				break;
 			case '8th': //8분음표
-				width = width / 8;
+				width = width / 8
 				break;
 			case '16th': //16분음표
-				width = width / 16;
+				width = width / 16
 				break;
 			default:
 				break;
@@ -694,7 +696,7 @@ kara.noteBox = {
 		//마디 생성
 		let svgVar = svg.append('g')	
 			.attr('id', 'bar_' + bNum)	// 마디 번호
-			.attr('class', kara.conf.del + ' ' + trcNm);
+			.attr('class', kara.conf.del + ' ' + trcNm)
 		
 		switch(clef) {
 			case 'G': i = 14; break;	// A3 ~ C6 (14 ~ 30)	
