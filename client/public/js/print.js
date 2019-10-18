@@ -1004,41 +1004,29 @@ kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill,
 				.attr('y', y)
 				.attr('onmousedown', "PopLayer.Action(this, 'noteSelect');")	// 음표선택 팝업 호출 메소드
 				.attr('onclick', 'kara.selectBox(' + bNum + ', ' + nNum + ",  '" + trcNm + "', this)")
-				.style("width", width)
-				.style("height", height)	// 6
-				.style("fill", fill)
-				.style("fill-opacity", fill_opacity);	//0.3, 0.5
+				.style('width', width)
+				.style('height', height)	// 6
+				.style('fill', fill)
+				.style('fill-opacity', fill_opacity);	//0.3, 0.5
 	
 };
 
+
+// 음표선택 임시 저장
+var beforeObj = undefined;
+var beforeStyle = '';
 // 음표 선택
 kara.selectBox = function(bNum, nNum, trcNm, obj) {
-	console.log(bNum, nNum, trcNm, obj);
-	// alert(bNum + ',' + nNum);
-	// console.log(obj.id);
-	//in_bar bar_0 note_0 track1
-	// console.log($('.bar_' + bNum + ' .note_' + nNum + ' #' + obj.id));
 
-	let svg = kara.svg.track1.svgContainer
+	// 선택된 영역이 없으면 저장
+	// 기존 선택 영역 색상 되돌리기
+	if(beforeObj !== undefined) beforeObj.style.fill = beforeStyle
 	
-	var svgVar = svg.append('g')
-			.attr('id', 'selected')
-			.attr('class', kara.conf.del)
+	// 선택 영역 저장
+	beforeObj = obj
+	beforeStyle = obj.style.fill
 	
-	console.log('!! ' + obj.id + ', ' + $(obj.id).width() + ", " + $(obj.id).height());
-	console.log(trcNm);
-	
-	
-	var t = $('#' + obj.id + '.' + trcNm);
-	
-	svg.append('rect')
-				.attr('id', 'selected')
-				.attr('class', kara.conf.del) //마디,  음표 번호
-				// .attr('x', obj.offsetLeft)
-				// .attr('y', obj.offsetTop)
-				.attr('x', t.offset().left)
-				.attr('y', t.offset().top)
-				.style("width", t.width())
-				.style("height", t.height())	// 6
-				.style("fill", 'red')
+	// 선택 영역 표시
+	obj.style.fill = 'red'
+
 };
