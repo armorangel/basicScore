@@ -692,14 +692,14 @@ kara.noteBox = {
 		}
 		
 		//마디 생성
-		let svgVar = svg.append("g")	
-			.attr("id", "bar_" + bNum)	// 마디 번호
-			.attr("class", kara.conf.del + ' ' + trcNm);
+		let svgVar = svg.append('g')	
+			.attr('id', 'bar_' + bNum)	// 마디 번호
+			.attr('class', kara.conf.del + ' ' + trcNm);
 		
 		switch(clef) {
-			case "G": i = 14; break;	// A3 ~ C6 (14 ~ 30)	
-			case "F": i = 26; break;	// C2 ~ E4
-			case "P": break;
+			case 'G': i = 14; break;	// A3 ~ C6 (14 ~ 30)	
+			case 'F': i = 26; break;	// C2 ~ E4
+			case 'P': break;
 		}
 		/*
 		switch(clef) {
@@ -708,22 +708,22 @@ kara.noteBox = {
 			case "P": break;
 		}
 		*/
-		j = i + 16;	// j = 42 17개 음
+		j = i + 16	// j = 42 17개 음
 
 		for(i; i <= j; i++) {  // A3 ~ C6 (34 ~ 61)
 			//var m = i;
-			let m = 50 - i;	// 36 ~ 20
-			let p = pitch_select.selection(m);	//선택한 음높이 계산 // return C6 m::36 p::C6
-			let fill = '';
+			let m = 50 - i	// 36 ~ 20
+			let p = pitch_select.selection(m)	//선택한 음높이 계산 // return C6 m::36 p::C6
+			let fill = ''
 			
 			//색상 선택
-			if((i % 2) == 1) fill = '#6666FF';	// Odd Number
-			else fill = '#66FFFF';				// Even Number
+			if((i % 2) == 1) fill = '#6666FF'	// Odd Number
+			else fill = '#66FFFF'				// Even Number
 			
 			// 악보 선택 영역 그리기
-			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity);
+			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
 		
-			y += height;
+			y += height
 		}
 	}
 };
@@ -733,26 +733,26 @@ kara.noteBox_ = {
 	
 	print: function(X, Y , bNum, nNum, meter, trcNm) {	// 1166, 200, 0, 2, quarter, track1
 		
-		var note = kara.scoreInfo.track[trcNm].notes;
-		var svg = kara.svg[trcNm].svgContainer;
-		var key = kara.scoreInfo.key;
-		var keySplit = key.split(' ');
-		var M = kara.key[keySplit[0]];
-		var N = M[keySplit[1]];
-		var clef = kara.scoreInfo.track[trcNm].clef;
-		var i = 0, j = 0, flag = 0;
+		var note = kara.scoreInfo.track[trcNm].notes
+		var svg = kara.svg[trcNm].svgContainer
+		var key = kara.scoreInfo.key
+		var keySplit = key.split(' ')
+		var M = kara.key[keySplit[0]]
+		var N = M[keySplit[1]]
+		var clef = kara.scoreInfo.track[trcNm].clef
+		var i = 0, j = 0, flag = 0
 		
 		// 이전 마디의 정보를 얻어옴
 		if(nNum == 0) {
 			bNum--;
-			nNum = note[bNum].length - 1;
+			nNum = note[bNum].length - 1
 			flag = 1;
-		} else nNum = nNum - 1;
+		} else nNum = nNum - 1
 		
 		// var pitch = note[bNum][nNum][0];
-		var pre_meter = note[bNum][nNum][1];
+		var pre_meter = note[bNum][nNum][1]
 		//console.log(pre_meter);
-		var position = $(".bar_"+ bNum + ".note_" + nNum + "." + trcNm).position();
+		var position = $('.bar_' + bNum + '.note_' + nNum + '.' + trcNm).position()
 
 		var a = N * 12 + 70;
 		var ac = (X - a) / 4;
@@ -967,7 +967,7 @@ kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSpli
 	if(type !== 'whole' && type !== 'half') head = 'quarter'
 	
 	//쉼표 그리기
-	if(pitchSplit_pi === "rest") kara.printSymbol('rests.' + type, x + leng, y, trcNm)
+	if(pitchSplit_pi === 'rest') kara.printSymbol('rests.' + type, x + leng, y, trcNm)
 	
 	//음표 그리기
 	else {
