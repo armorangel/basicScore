@@ -817,7 +817,7 @@ kara.noteBox_ = {
 		//마디 번호
 		var svgVar = svg.append('g')
 			.attr('id', 'bar_' + bNum)
-			.attr('class', kara.conf.del + ' ' + trcNm);
+			.attr('class', kara.conf.del + ' ' + trcNm)
 
 		switch(clef) {
 			case 'G': i = 14; break;	// A3~ C6 17 j = 30
@@ -830,21 +830,21 @@ kara.noteBox_ = {
 		for(i; i <= j; i++) {  //a3 ~ b7
 			
 			var m = 50 - i;
-			var p = pitch_select.selection(m);// 선택한 음높이 계산 in edit.js
+			var p = pitch_select.selection(m)// 선택한 음높이 계산 in edit.js
 			var fill, fill_opacity;
 			
 			if((i % 2) == 1) {
 				fill = '#6666FF';
-				fill_opacity = '0.3';
+				fill_opacity = '0.3'
 			} else {
-				fill = '#66FFFF';
-				fill_opacity = '0.5';
+				fill = '#66FFFF'
+				fill_opacity = '0.5'
 			}
 			
 			// 악보 선택 영역 그리기
-			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity);
+			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
 			
-			y = height + y;
+			y = height + y
 		}
 	}
 };
@@ -854,53 +854,53 @@ kara.noteBox_last = {
 	
 	print: function(X, Y , bNum, nNum, meter, set, trcNm) {
 		
-		var note = kara.scoreInfo.track[trcNm].notes;
-		var svg = kara.svg[trcNm].svgContainer;
-		var key = kara.scoreInfo.key;
-		var keySplit = key.split(' ');
-		var M = kara.key[keySplit[0]];
-		var N = M[keySplit[1]];
-		var pitch = note[bNum][nNum][0];
-		var clef = kara.scoreInfo.track[trcNm].clef;
-		var i = 0, j = 0;
+		var note = kara.scoreInfo.track[trcNm].notes
+		var svg = kara.svg[trcNm].svgContainer
+		var key = kara.scoreInfo.key
+		var keySplit = key.split(' ')
+		var M = kara.key[keySplit[0]]
+		var N = M[keySplit[1]]
+		var pitch = note[bNum][nNum][0]
+		var clef = kara.scoreInfo.track[trcNm].clef
+		var i = 0, j = 0
 
-		var position = $(".bar_" + bNum + ".note_" + nNum + "." + trcNm).position();
+		var position = $('.bar_' + bNum + '.note_' + nNum + '.' + trcNm).position()
 
-		var a = N * 12 + 70;
-		var ac = (X - a) / 4;
+		var a = N * 12 + 70
+		var ac = (X - a) / 4
 
-		var x = position.left - kara.scorePos.left(trcNm);
-		var y = Y - 15;
+		var x = position.left - kara.scorePos.left(trcNm)
+		var y = Y - 15
 
-		var width = (X - a) / 4;
-		var height = 6;
+		var width = (X - a) / 4
+		var height = 6
 
-		nNum = nNum + 1;
+		nNum = nNum + 1
 
 		switch(meter) {
 			case 'whole': // 온음표
-				width = width;
-				x = x + (X - a) / 4;
+				width = width
+				x = x + (X - a) / 4
 
 				break;
 			case 'half': // 2분음표
-				width = width - width / 2;
-				x = x + (X - a) / 4 - width;
+				width = width - width / 2
+				x = x + (X - a) / 4 - width
 
 				break;
 			case 'quarter': // 4분음표
-				width = width - width / 4;
-				x = x + (X - a) / 4 - width;
+				width = width - width / 4
+				x = x + (X - a) / 4 - width
 
 				break;
 			case '8th': // 8분음표
-				width = width - width / 8;
-				x = x + (X - a) / 4 - width;
+				width = width - width / 8
+				x = x + (X - a) / 4 - width
 
 				break;
 			case '16th': // 16분음표
-				width = width - width / 16;
-				x = x + (X - a) / 4 - width;
+				width = width - width / 16
+				x = x + (X - a) / 4 - width
 		
 				break;
 			case 32: break;
@@ -910,30 +910,30 @@ kara.noteBox_last = {
 		}	// End of switch
 		
 		if(kara.meterCal_box(bNum, trcNm)) { //마디 꽉차서
-			bNum = bNum + 1;
-			nNum = 0;
+			bNum = bNum + 1
+			nNum = 0
 		}
 
 		if(set === 1) {
 			//console.log(bNum);
-			x = a;
+			x = a
 		}
 		
 		// 마디 번호
 		var svgVar = svg.append('g')
 			.attr('id', 'bar_' + bNum)
-			.attr('class', kara.conf.del + ' ' + trcNm);
+			.attr('class', kara.conf.del + ' ' + trcNm)
 
 		switch(clef) {
 			case "G":
-				i = 14; // A3~ C6 17 j = 30
-				j = i + 16;
+				i = 14 // A3~ C6 17 j = 30
+				j = i + 16
 
 				break;
 				
 			case "F":  // C2~E4 =
-				i = 26;
-				j = i + 16;
+				i = 26
+				j = i + 16
 				break;
 				
 			case "P": break;
@@ -941,16 +941,16 @@ kara.noteBox_last = {
 
 		for(var i4; i <= j; i++) {  // a3 ~ b7
 			
-			var m = 50 - i;
-			var p = pitch_select.selection(m);
-			var fill, fill_opacity;
+			var m = 50 - i
+			var p = pitch_select.selection(m)
+			var fill, fill_opacity
 			
 			if((i % 2) == 1) {
-				fill = '#6622FF';
-				fill_opacity = '0.3';
+				fill = '#6622FF'
+				fill_opacity = '0.3'
 			} else {
-				fill = '#660000';
-				fill_opacity = '0.5';
+				fill = '#660000'
+				fill_opacity = '0.5'
 			}
 			
 			// 악보 선택 영역 추가
@@ -967,7 +967,7 @@ kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSpli
 	var head = type;
 	
 	// 온음표와 2분음표를 제외하면 공통
-	if(type !=='whole' && type !== 'half') head = 'quarter';
+	if(type !== 'whole' && type !== 'half') head = 'quarter';
 	
 	//쉼표 그리기
 	if(pitchSplit_pi === "rest") kara.printSymbol('rests.' + type, x + leng, y, trcNm);
