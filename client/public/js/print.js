@@ -961,33 +961,33 @@ kara.noteBox_last = {
 //음표, 쉼표 그리기
 kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSplit_pi, pi, type) {
 	
-	var head = type;
+	var head = type
 	
 	// 온음표와 2분음표를 제외하면 공통
-	if(type !== 'whole' && type !== 'half') head = 'quarter';
+	if(type !== 'whole' && type !== 'half') head = 'quarter'
 	
 	//쉼표 그리기
-	if(pitchSplit_pi === "rest") kara.printSymbol('rests.' + type, x + leng, y, trcNm);
+	if(pitchSplit_pi === "rest") kara.printSymbol('rests.' + type, x + leng, y, trcNm)
 	
 	//음표 그리기
 	else {
 		
 		if(type !== 'whole')//온음일때는 막대 안 그리기
-			kara.notevLine(x + leng, y, trcNm);
+			kara.notevLine(x + leng, y, trcNm)
 		
-		kara.printSymbol('noteheads.' + head, x + leng, y, trcNm);	// head
+		kara.printSymbol('noteheads.' + head, x + leng, y, trcNm)	// head
 		
 		//오선지를 벗어나면 구분선 그리기
-		kara.notevLow(x + leng, y, pitchSplit_pi, meter, trcNm);
+		kara.notevLow(x + leng, y, pitchSplit_pi, meter, trcNm)
 
 		//8분음표, 16분 음표 꼬리 그리기
-		if(pi === 0) kara.printflag('flags.u' + type, x + leng, y, trcNm);
+		if(pi === 0) kara.printflag('flags.u' + type, x + leng, y, trcNm)
 		
 		// 해당 음표에 sharp이 있으면
-		if(kara.chkSharpFlat(pitchSplit_pi) === 1) kara.print_s_p('accidentals.sharp', x + leng - 5, y - 5, trcNm);
+		if(kara.chkSharpFlat(pitchSplit_pi) === 1) kara.print_s_p('accidentals.sharp', x + leng - 5, y - 5, trcNm)
 		
 		// 해당 음표에 flat이 있으면
-		if(kara.chkSharpFlat(pitchSplit_pi) === -1) kara.print_s_p('accidentals.flat', x + leng - 5, y - 5, trcNm);
+		if(kara.chkSharpFlat(pitchSplit_pi) === -1) kara.print_s_p('accidentals.flat', x + leng - 5, y - 5, trcNm)
 	}
 };
 
@@ -1004,14 +1004,13 @@ kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill,
 				.style('width', width)
 				.style('height', height)	// 6
 				.style('fill', fill)
-				.style('fill-opacity', fill_opacity);	//0.3, 0.5
+				.style('fill-opacity', fill_opacity)	//0.3, 0.5
 	
-};
-
+}
 
 // 음표선택 임시 저장
-var beforeObj = undefined;
-var beforeStyle = '';
+var beforeObj = undefined
+var beforeStyle = ''
 // 음표 선택
 kara.selectBox = function(bNum, nNum, trcNm, obj) {
 
@@ -1025,5 +1024,4 @@ kara.selectBox = function(bNum, nNum, trcNm, obj) {
 	
 	// 선택 영역 표시
 	obj.style.fill = 'red'	// config
-
-};
+}
