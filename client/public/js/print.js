@@ -593,54 +593,54 @@ kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1
 //음표 막대
 kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half, track1
 	
-	var svg = kara.svg[trcNm].svgNote;
-	var pathString;
-	var m = 0, n = 0;
+	var svg = kara.svg[trcNm].svgNote
+	var pathString
+	var m = 0, n = 0
 
-	if(pitch === 'C4')		y = y;
-	else if(pitch === 'B3') y = y - 4;
-	else if(pitch === 'A3') y = y;
-	else if(pitch === 'E2') y = y;
-	else if(pitch === 'D2') y = y - 4;
-	else if(pitch === 'C2') y = y;
+	if(pitch === 'C4')		y = y
+	else if(pitch === 'B3') y = y - 4
+	else if(pitch === 'A3') y = y
+	else if(pitch === 'E2') y = y
+	else if(pitch === 'D2') y = y - 4
+	else if(pitch === 'C2') y = y
 	else return;
 	
 	switch(meter) {
 		case 'whole':
-			x = x - 3.5;
-			m = x + 22;
-			n = y;
+			x = x - 3.5
+			m = x + 22
+			n = y
 			
 			break;
 			
 		case 'half':
-			x = x - 4;
-			m = x + 18;
+			x = x - 4
+			m = x + 18
 			n = y;
 			break;
 			
 		case 'quarter':
-			x = x - 3;
-			m = x + 18.5;
+			x = x - 3
+			m = x + 18.5
 			n = y;
 			break;
 			
 		case '8th':
-			x = x - 3;
-			m = x + 18.5;
+			x = x - 3
+			m = x + 18.5
 			n = y;
 			break;
 			
 		case '16th':
-			x = x - 3;
-			m = x + 18.5;
-			n = y;
+			x = x - 3
+			m = x + 18.5
+			n = y
 			break;
 			
 		default: break;
 	}
 
-	pathString = kara.sprintf('M %f %f L %f %f', x, y, m, n);
+	pathString = kara.sprintf('M %f %f L %f %f', x, y, m, n)
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
 		.attr('d', pathString)
