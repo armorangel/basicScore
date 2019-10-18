@@ -93,9 +93,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	const limited = meter[0] * meter[1]	// 마디 제한 16
 	
 	var nowMeter = 0					// 현재 마디
-	var four_boxEnter = 0
-	var four_check = 0
-	var pageInc = 0
+	var four_boxEnter = 0, four_check = 0, pageInc = 0
 	
 	kara.hLine(0, trcNm)	// 한줄 긋고 시작
 	
@@ -128,6 +126,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			var a = N * 12 + 70
 			var ac = (X - a) / 4
 			
+			// 이것들이 뭔지 알아네
 			var _whole = ac / 2 - 8
 			var _half = _whole / 2
 			var _quarter = _half / 2
@@ -159,12 +158,12 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 				
 				//쉼표 일때는 A4높이에 그리기
 				if(pitchSplit[pi] === 'rest')
-					position = $('#A4.bar_' + i + '.note_' + j + '.' + trcNm).position();
+					position = $('#A4.bar_' + i + '.note_' + j + '.' + trcNm).position()	// A4 상수로 변환
 				else
-					position = $('#' + pitchSplit[pi] + '.bar_' + i + '.note_' + j + '.' + trcNm).position();
+					position = $('#' + pitchSplit[pi] + '.bar_' + i + '.note_' + j + '.' + trcNm).position()
 					
-				var x = position.left - kara.scorePos.left(trcNm);
-				var y = position.top - kara.scorePos.top(trcNm) + 3;// 3이 뭔지
+				var x = position.left - kara.scorePos.left(trcNm)
+				var y = position.top - kara.scorePos.top(trcNm) + 3// 3이 뭔지
 				
 				var leng = 0;	// x 길이 추가
 
@@ -181,27 +180,26 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 				//leng -= 10;// x 길이 조정
 				
 				//음표 그리기
-				kara.print8th16thQuarterHalfWhole(trcNm, x, leng, y, meter, pitchSplit[pi], pi, meter);
+				kara.print8th16thQuarterHalfWhole(trcNm, x, leng, y, meter, pitchSplit[pi], pi, meter)
 			}	// End of for
 
 			if(i === note.length - 1 && j === note[i].length - 1) {
 
-				var four_boxEnter2 = four_boxEnter + 1;
-				var ii = i + 1;
-				var four2 = ii % 4;
+				var four_boxEnter2 = four_boxEnter + 1
+				var ii = i + 1
+				var four2 = ii % 4
 
 				if(four2 == 0 && ii >= 4) {
 					if(kara.meterCal_box(i, trcNm) === 1) {
 						
-						
-						$('#' + trcNm + ' > #score').height(four_boxEnter2 * 120 + 300);	// FUNCTION으로 변경
-						kara.hLine(four_boxEnter2, trcNm);
-						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter2), i, j, meter, 1, trcNm);
+						$('#' + trcNm + ' > #score').height(four_boxEnter2 * 120 + 300)	// FUNCTION으로 변경
+						kara.hLine(four_boxEnter2, trcNm)
+						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter2), i, j, meter, 1, trcNm)
 					} else {
-						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, trcNm);
+						kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, trcNm)
 					}
 				} else {
-					kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, trcNm);
+					kara.noteBox_last.print(kara.XY.X(), kara.XY.Y(four_boxEnter), i, j, meter, 0, trcNm)
 				}
 			}	// End of if
 		}	// End of for
@@ -236,13 +234,12 @@ kara.XY = {
 	},
 	
 	Y: function(y) {
-		return this.topMargin + (y * 110);
+		return this.topMargin + (y * 110);	// 110 이 뭔지 알아네
 	}
 };
 
 // 음자리표 SVG 그리기
-kara.clefSVG = function(x, y, Y, trcNm) {
-	// 10, 200, 200, 'track1'
+kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 	
 	const clef = kara.scoreInfo.track[trcNm].clef;	// 현재 음자리표
 	var svg = kara.svg[trcNm].svgSymbol;
@@ -864,7 +861,7 @@ kara.noteBox_last = {
 		var clef = kara.scoreInfo.track[trcNm].clef
 		var i = 0, j = 0
 
-		var position = $('.bar_' + bNum + '.note_' + nNum + '.' + trcNm).position()
+		var position = $('.bar_' + bNum + '.note_' + nNum + '.' + trcNm).position()	// FUNcTION 
 
 		var a = N * 12 + 70
 		var ac = (X - a) / 4
