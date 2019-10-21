@@ -228,12 +228,12 @@ kara.draw = {
 	},
 	
 	// 라인
-	line: function(trcNm, x1, y1, x2, y2) {
+	line: function(trcNm, x1, y1, x2, y2, strokeWidth) {
 		
 		const svg = kara.svg[trcNm].svgLine
 		const pathString = kara.sprintf('M %f %f L %f %f', x1, y1, x2, y2)
 		
-		svg.append('path')
+		var sss = svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
 		.attr('d', pathString)
 		.style('stroke', 'black')

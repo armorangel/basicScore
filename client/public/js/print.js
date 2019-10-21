@@ -627,7 +627,11 @@ kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half
 		default: break;
 	}
 
+	// kara.draw.line(trcNm, x, y, m, n, '1.5px')
+
+	// 이것도 합쳐야되
 	pathString = kara.sprintf('M %f %f L %f %f', x, y, m, n)
+	
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
 		.attr('d', pathString)
