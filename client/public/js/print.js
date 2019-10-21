@@ -478,14 +478,14 @@ kara.printSymbol = function(symbol, x, y, trcNm) {
 	
 	if (!kara.glyphs[symbol]) return null;
 	
-	let svg = kara.svg[trcNm].svgSymbol;
-	let pathString = this.pathClone(kara.glyphs[symbol].d, x, y);
+	let svg = kara.svg[trcNm].svgSymbol
+	let pathString = this.pathClone(kara.glyphs[symbol].d, x, y)
 	
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)// 삭제 영역
 		.attr('d', pathString)
-		.style('stroke', 'black');
-};
+		.style('stroke', 'black')
+}
 
 // 음표에 sharp, flat 붙이기
 kara.print_s_p = function(symbol, x, y, trcNm) {	// accidentals.flat, 204.75000381469727, 231.00001525878906, track1
