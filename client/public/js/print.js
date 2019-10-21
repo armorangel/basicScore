@@ -433,17 +433,17 @@ kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 	let meter = kara.scoreInfo.meter	// 악보정보 객체 박자
 	let meterSplit = meter.split('/')
 
-	var pathString = this.pathClone(kara.glyphs[meterSplit[0]].d, 45 + (N * 10), Y / 1.4 + 24.7);
-	var pathString2 = this.pathClone(kara.glyphs[meterSplit[1]].d, 45 + (N * 10), Y / 1.4 + 41.7);
+	var pathString = this.pathClone(kara.glyphs[meterSplit[0]].d, 45 + (N * 10), Y / 1.4 + 24.7)
+	var pathString2 = this.pathClone(kara.glyphs[meterSplit[1]].d, 45 + (N * 10), Y / 1.4 + 41.7)
 	
-	kara.draw.meter(trcNm, pathString);		// 위
-	kara.draw.meter(trcNm, pathString2);	// 아래
+	kara.draw.meter(trcNm, pathString)		// 위
+	kara.draw.meter(trcNm, pathString2)	// 아래
 
 	//박자 변경을 위한 선택역역 BOX 생성
-	x = 55 + (N * 10);	// 조표의 갯수에 맞게 박자박스 SVG x 좌표 위치 조정
-	y = Y + 11;
-	width = N + 20;
-	height = 50;
+	x = 55 + (N * 10)	// 조표의 갯수에 맞게 박자박스 SVG x 좌표 위치 조정
+	y = Y + 11
+	width = N + 20
+	height = 50
 
 	// 박자 선택영역 추가
 	box.append('rect')
@@ -455,8 +455,8 @@ kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 		.style('width', width)
 		.style('height', height)
 		.style('fill', '#00ff00')
-		.style('fill-opacity', '0.7');
-};
+		.style('fill-opacity', '0.7')
+}
 
 //꼬리 SVG
 kara.printflag = function(symb, x, y, trcNm) {	// flags.uquarter, track1, 141.15625381469727, 235.99998474121094
