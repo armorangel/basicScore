@@ -461,17 +461,17 @@ kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 //꼬리 SVG
 kara.printflag = function(symb, x, y, trcNm) {	// flags.uquarter, track1, 141.15625381469727, 235.99998474121094
 	
-	let svg = kara.svg[trcNm].svgSymbol;
+	let svg = kara.svg[trcNm].svgSymbol
 	
 	if (!kara.glyphs[symb]) return null;
 	
-	let pathString = this.pathClone(kara.glyphs[symb].d, x + 10.35, y - 29);
+	let pathString = this.pathClone(kara.glyphs[symb].d, x + 10.35, y - 29)
 	
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제 영역
 		.attr('d', pathString)
-		.style('stroke', 'black');
-};
+		.style('stroke', 'black')
+}
 
 // Draw Sharp, Flat, Rest, head
 kara.printSymbol = function(symbol, x, y, trcNm) {
