@@ -571,26 +571,19 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 kara.vLine = function(x, y, trcNm) {	// trcNm :: Track Name 'track1'
 	//1051, 212, track1
 	
-	// 라인 그리는 거 통합하고 메소드로 나누자
-	var svg = kara.svg[trcNm].svgLine
-	var pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y + 48)
+	// 이것도 합치자
+	const pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y + 48)
 	
-	svg.append('path')
-		.attr('class', kara.conf.del + ' ' + trcNm)// 삭제영역
-		.attr('d', pathString)
-		.style('stroke', 'black')
+	kara.draw.line(trcNm, pathString)
 }
 
 //음표 막대 그리기
 kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1
 	
-	let svg = kara.svg[trcNm].svgNote
-	let pathString = kara.sprintf('M %f %f L %f %f', x + 10, y, x + 10, y - 30)
+	// 이것도 합치자
+	const pathString = kara.sprintf('M %f %f L %f %f', x + 10, y, x + 10, y - 30)
 	
-	svg.append('path')
-		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
-		.attr('d', pathString)
-		.style('stroke', 'black')
+	kara.draw.line(trcNm, pathString)
 }
 
 //음표 막대

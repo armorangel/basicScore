@@ -225,5 +225,16 @@ kara.draw = {
 			.attr('d', pathString)
 			.style('transform', 'scale(1.2,1.4)')
 			.style('stroke', 'black');
+	},
+	
+	// 라인
+	line: function(trcNm, pathString) {
+		
+		const svg = kara.svg[trcNm].svgLine
+		
+		svg.append('path')
+		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
+		.attr('d', pathString)
+		.style('stroke', 'black')
 	}
 }
