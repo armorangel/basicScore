@@ -317,7 +317,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 		.style('height', height)
 		.style('fill', '#00ff01')
 		.style('fill-opacity', '0.3')
-};
+}
 
 // 조표 SVG 그리기
 kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
@@ -356,7 +356,7 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 						}	// End of switch
 						
 						//sharp 그리기
-						kara.printSymbol("accidentals.sharp", 50 + (i * 10), y, trcNm);
+						kara.printSymbol("accidentals.sharp", 50 + (i * 10), y, trcNm)
 					}	// End of for
 					break;
 				case 'Gb': //6
@@ -395,16 +395,16 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 								break;
 						}	// End of switch
 						//flat 그리기
-						kara.printSymbol('accidentals.flat', 50 + (i * 10), y, trcNm);
+						kara.printSymbol('accidentals.flat', 50 + (i * 10), y, trcNm)
 					}	// End of for
 					break;
 			}
 		}
 	}
-	x = 40;	// 악보 좌측부터 40
-	y = Y - 17;
-	width = N * 10 + 15;
-	height = 74;
+	x = 40	// 악보 좌측부터 40
+	y = Y - 17
+	width = N * 10 + 15
+	height = 74
 
 	// 조표 선택영역 SVG DRAW
 	svg.append('rect')
@@ -416,8 +416,8 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
     	.style('width', width)
     	.style('height', height)
     	.style('fill', '#00ffff')
-		.style('fill-opacity', '0.3');
-};
+		.style('fill-opacity', '0.3')
+}
 
 //박자 SVG
 kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
