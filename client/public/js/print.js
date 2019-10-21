@@ -43,7 +43,7 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
 	svgContainer = d3.select('#' + trcNm)			// '#track1'
 					.append('svg')					// SVG 객체 생성
-					.attr('id', 'score')			// #score :: 악보영역
+					.attr('id', kara.conf.score)			// #score :: 악보영역
 					.attr('xmlns', 'http://www.w3.org/2000/svg')
 					.attr('version', '1.1')
 					.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
