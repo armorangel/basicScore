@@ -492,15 +492,15 @@ kara.print_s_p = function(symbol, x, y, trcNm) {	// accidentals.flat, 204.750003
 	
 	if (!kara.glyphs[symbol]) return null;
 	
-	let svg = kara.svg[trcNm].svgSymbol;
-	let pathString = this.pathClone(kara.glyphs[symbol].d, x / 0.7, y / 0.7);
+	let svg = kara.svg[trcNm].svgSymbol
+	let pathString = this.pathClone(kara.glyphs[symbol].d, x / 0.7, y / 0.7)
 	
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)// 삭제 영역
 		.attr('d', pathString)
 		.style('transform', 'scale(0.7,0.7)')
-		.style('stroke', 'black');
-};
+		.style('stroke', 'black')
+}
 
 // 심볼을 찾아옴
 kara.pathClone = function (pathString, x, y) {
