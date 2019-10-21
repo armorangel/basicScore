@@ -568,22 +568,13 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 }
 
 //마디
-kara.vLine = function(x, y, trcNm) {	// trcNm :: Track Name 'track1'
-	//1051, 212, track1
-	
-	// 이것도 합치자
-	const pathString = kara.sprintf("M %f %f L %f %f", x, y, x, y + 48)
-	
-	kara.draw.line(trcNm, pathString)
+kara.vLine = function(x, y, trcNm) {	// trcNm :: Track Name 'track1' //1051, 212, track1
+	kara.draw.line(trcNm, x, y, x, y + 48)
 }
 
 //음표 막대 그리기
-kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1
-	
-	// 이것도 합치자
-	const pathString = kara.sprintf('M %f %f L %f %f', x + 10, y, x + 10, y - 30)
-	
-	kara.draw.line(trcNm, pathString)
+kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1	
+	kara.draw.line(trcNm, x + 10, y, x + 10, y - 30)
 }
 
 //음표 막대
