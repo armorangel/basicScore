@@ -48,7 +48,7 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 					.attr('version', '1.1')
 					.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
 					.style('width', width - 43)		// 악보 넓이 //우측부터 43
-					.style('height', '400')			// 악보 높이
+					.style('height', '400')			// 악보 높이	(브라우저 크기로)
 	
 	/*
 	svgContainer = d3.select('#' + trcNm + ' > #score')	// '#track1'
@@ -265,24 +265,24 @@ kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 			
 		case 'F':	// 낮은 음자리표
 			
-			y = y / 1.7 + 35;
+			y = y / 1.7 + 35
 			
 			if (!kara.glyphs['clefs.F']) return null;
-			pathString = this.pathClone(kara.glyphs['clefs.F'].d, x - 5, y - 20); // -5// -45
+			pathString = this.pathClone(kara.glyphs['clefs.F'].d, x - 5, y - 20) // -5// -45
 			
 			// 낮은 음자리표 그리기
-			kara.draw.clefs_F(trcNm, pathString);
+			kara.draw.clefs_F(trcNm, pathString)
 			
 			break;
 			
 		case 'P':
 			
-			y = y / 1.5 + 35;
+			y = y / 1.5 + 35
 			
 			if (!kara.glyphs['clefs.perc']) return null;
 			
-			pathString = this.pathClone(kara.glyphs['clefs.perc'].d, x - 5, y - 20.5);
-			kara.draw.clefs_perc(trcNm, pathString);
+			pathString = this.pathClone(kara.glyphs['clefs.perc'].d, x - 5, y - 20.5)
+			kara.draw.clefs_perc(trcNm, pathString)
 			
 			break;
 			
@@ -292,19 +292,19 @@ kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 			
 			if (!kara.glyphs['clefs.G']) return null;
 
-			kara.scoreInfo.track[trcNm].clef = 'G';
-			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y);
+			kara.scoreInfo.track[trcNm].clef = 'G'
+			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y)
 			
 			// 높은 음자리표 그리기
-			kara.draw.clefs_G(trcNm, pathString);
+			kara.draw.clefs_G(trcNm, pathString)
 			
 			break;
 	}
 	
-	box_x = 0;
-	box_y = Y - 10;
-	width = 40;
-	height = 90;
+	box_x = 0
+	box_y = Y - 10
+	width = 40
+	height = 90
 
 	//음자리표 선택영역 APPEND
 	svg.append('rect')
@@ -316,7 +316,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 		.style('width', width)
 		.style('height', height)
 		.style('fill', '#00ff01')
-		.style('fill-opacity', '0.3');
+		.style('fill-opacity', '0.3')
 };
 
 // 조표 SVG 그리기
