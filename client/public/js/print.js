@@ -505,28 +505,28 @@ kara.print_s_p = function(symbol, x, y, trcNm) {	// accidentals.flat, 204.750003
 // 심볼을 찾아옴
 kara.pathClone = function (pathString, x, y) {
 	
-	let res = [];
-	let res1;
+	let res = []
+	let res1
 	
 	for(let i = 0; i < pathString.length; i++) {
 		
-		res[i] = [];
+		res[i] = []
 		
 		for(let j = 0; j < pathString[i].length; j++) {
-			res[i][j] = pathString[i][j];
+			res[i][j] = pathString[i][j]
 
 			if(i == 0 && j == 0) {
-				res1 = res[i][j];
+				res1 = res[i][j]
 			} else {
-				if(i == 0 && j == 1) {res[0][1] += x;}
-				if(i == 0 && j == 2) {res[0][2] += y;}
+				if(i == 0 && j == 1) {res[0][1] += x}
+				if(i == 0 && j == 2) {res[0][2] += y}
 
-				res1 = res1 + ' ' + res[i][j];
+				res1 = res1 + ' ' + res[i][j]
 			}	// End of if
 		}	// End of for
 	}	// End of for
-	return res1;
-};
+	return res1
+}
 
 // 오선지
 kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Track Name 'track1'
