@@ -40,12 +40,14 @@ kara.key = {	// 심볼 갯수 객체
 
 kara.conf = {
 	
-	score: 'score',	// 악보영역
-	del : 'in_bar'	// 삭제영역
+	score: 'score',	// 악보
+	del : 'in_bar'	// 삭제
 	
 }
 
+// 삭제예정
 kara.area = {
 	
-	del : 'in_bar'	// 삭제영역
+	score: 'score',	// 악보
+	del : 'in_bar'	// 삭제
 }

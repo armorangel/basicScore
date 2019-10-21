@@ -123,6 +123,8 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 			var N = M[keySplit[1]]
 			var X = kara.XY.X()
 			var Y = kara.XY.Y(i)
+			
+			// 뭔지 알아내
 			var a = N * 12 + 70
 			var ac = (X - a) / 4
 			
@@ -163,7 +165,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 					position = $('#' + pitchSplit[pi] + '.bar_' + i + '.note_' + j + '.' + trcNm).position()
 					
 				var x = position.left - kara.scorePos.left(trcNm)
-				var y = position.top - kara.scorePos.top(trcNm) + 3// 3이 뭔지
+				var y = position.top - kara.scorePos.top(trcNm) + 3	// 3이 뭔지
 				
 				var leng = 0;	// x 길이 추가
 
@@ -213,12 +215,12 @@ kara.scorePos = {
 	
 	//#score 악보 영역 left 좌표 반환
 	left: function(trcNm) {	// trcNm :: Track Name -- 'track1'
-		const position = $('#' + trcNm + ' > #score')
+		const position = $('#' + trcNm + ' > #' + kara.conf.score)
 		return position.position().left
 	},
 	// #score 악보 영억 top 좌표 반환
 	top: function(trcNm) {	// trcNm :: Track Name -- 'track1'
-		const position = $('#' + trcNm + ' > #score')
+		const position = $('#' + trcNm + ' > #' + kara.conf.score)
 		return position.position().top
 	}
 }
@@ -230,7 +232,7 @@ kara.XY = {
 	
 	//#score :: 악보 width return
 	X: function() {
-		return $('#score').width()
+		return $('#' + kara.conf.score).width()
 	},
 	
 	Y: function(y) {
