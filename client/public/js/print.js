@@ -913,18 +913,18 @@ kara.noteBox_last = {
 			.attr('class', kara.conf.del + ' ' + trcNm)
 
 		switch(clef) {
-			case "G":
+			case 'G':
 				i = 14 // A3~ C6 17 j = 30
 				j = i + 16
 
 				break;
 				
-			case "F":  // C2~E4 =
+			case 'F':  // C2~E4 =
 				i = 26
 				j = i + 16
 				break;
 				
-			case "P": break;
+			case 'P': break;	// 이게 뭐지
 		}
 
 		for(var i4; i <= j; i++) {  // a3 ~ b7
@@ -942,7 +942,8 @@ kara.noteBox_last = {
 			}
 			
 			// 악보 선택 영역 추가
-			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity);
+			// 매개변수좀 줄여봐
+			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
 			
 			y += height
 		}
