@@ -719,6 +719,8 @@ kara.noteBox_ = {
 	
 	print: function(X, Y , bNum, nNum, meter, trcNm) {	// 1166, 200, 0, 2, quarter, track1
 		
+		
+		// 이것들을 줄일 수 있는 방법
 		var note = kara.scoreInfo.track[trcNm].notes
 		var svg = kara.svg[trcNm].svgContainer
 		var key = kara.scoreInfo.key
