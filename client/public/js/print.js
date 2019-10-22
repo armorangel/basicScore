@@ -752,6 +752,7 @@ kara.noteBox_ = {
 		var x = position.left - kara.scorePos.left(trcNm)
 		var y = Y - 15
 
+		// 이게 뭔지
 		var width = (X - a) / 4
 		var height = 6
 
@@ -810,7 +811,7 @@ kara.noteBox_ = {
 			case 'P': break;
 		}
 		
-		j = i + 16;
+		j = i + 16
 		
 		for(i; i <= j; i++) {  //a3 ~ b7
 			
