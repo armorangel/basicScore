@@ -750,10 +750,10 @@ kara.noteBox_ = {
 		// kara.vLine(ac*3+a, Y+12);
 
 		var x = position.left - kara.scorePos.left(trcNm)
-		var y = Y - 15;
+		var y = Y - 15
 
-		var width = (X - a) / 4;
-		var height = 6;
+		var width = (X - a) / 4
+		var height = 6
 
 		// 원래 상태로 돌려놓는다
 		if(flag == 1) { 
