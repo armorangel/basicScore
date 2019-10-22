@@ -742,8 +742,8 @@ kara.noteBox_ = {
 		// 이것도 설정으로
 		var position = $('.bar_' + bNum + '.note_' + nNum + '.' + trcNm).position()
 
-		var a = N * 12 + 70;
-		var ac = (X - a) / 4;
+		var a = N * 12 + 70
+		var ac = (X - a) / 4
 		// kara.vLine(a, Y+12); // 없어도 됨
 		// kara.vLine(ac*1+a, Y+12);
 		// kara.vLine(ac*2+a, Y+12);
