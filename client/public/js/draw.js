@@ -233,9 +233,14 @@ kara.draw = {
 		const svg = kara.svg[trcNm].svgLine
 		const pathString = kara.sprintf('M %f %f L %f %f', x1, y1, x2, y2)
 		
-		var sss = svg.append('path')
-		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
-		.attr('d', pathString)
-		.style('stroke', 'black')
+		const line = svg.append('path')
+			.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
+			.attr('d', pathString)
+			.style('stroke', 'black')
+		
+		// 5선지 벗어난 음표 줄
+		if(typeof strokeWidth !== "undefined") {
+			line.style('stroke-width', strokeWidth)
+		}
 	}
 }

@@ -547,6 +547,8 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 		//간격 12씩 5줄 그리기
 		let pathString = kara.sprintf("M %f %f L %f %f", 0, (i * gab) + Y, X, (i * gab) + Y)
 		
+		
+		// 이것도 합치자
 		line.append('path')
 			.attr('class', kara.conf.del + ' ' + trcNm)
 			.attr('d', pathString)
@@ -627,8 +629,9 @@ kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half
 		default: break;
 	}
 
-	// kara.draw.line(trcNm, x, y, m, n, '1.5px')
+	kara.draw.line(trcNm, x, y, m, n, '1.5px')
 
+	/*
 	// 이것도 합쳐야되
 	pathString = kara.sprintf('M %f %f L %f %f', x, y, m, n)
 	
@@ -637,6 +640,7 @@ kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half
 		.attr('d', pathString)
 		.style('stroke', 'black')
 		.style('stroke-width', '1.5px')
+	*/
 }
 
 // 악보 선택 영역 그리기
