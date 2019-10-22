@@ -850,8 +850,10 @@ kara.noteBox_last = {
 		var clef = kara.scoreInfo.track[trcNm].clef
 		var i = 0, j = 0
 
+		// 상수로 만들어
 		var position = $('.bar_' + bNum + '.note_' + nNum + '.' + trcNm).position()	// FUNcTION 
 
+		// 이것들이 뭔지
 		var a = N * 12 + 70
 		var ac = (X - a) / 4
 
@@ -1000,6 +1002,7 @@ kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill,
 // 음표선택 임시 저장
 var beforeObj = undefined
 var beforeStyle = ''
+
 // 음표 선택
 kara.selectBox = function(bNum, nNum, trcNm, obj) {
 
