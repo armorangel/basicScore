@@ -679,7 +679,7 @@ kara.noteBox = {
 		
 		//마디 생성
 		let svgVar = svg.append('g')	
-			.attr('id', 'bar_' + bNum)	// 마디 번호
+			.attr('id', 'bar_' + bNum)	// 마디 번호	//설정으로
 			.attr('class', kara.conf.del + ' ' + trcNm)
 		
 		switch(clef) {
@@ -707,6 +707,7 @@ kara.noteBox = {
 			else fill = '#66FFFF'				// Even Number
 			
 			// 악보 선택 영역 그리기
+			// 매개변수좀 줄이자
 			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
 		
 			y += height
