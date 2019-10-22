@@ -738,6 +738,8 @@ kara.noteBox_ = {
 		// var pitch = note[bNum][nNum][0];
 		var pre_meter = note[bNum][nNum][1]
 		//console.log(pre_meter);
+		
+		// 이것도 설정으로
 		var position = $('.bar_' + bNum + '.note_' + nNum + '.' + trcNm).position()
 
 		var a = N * 12 + 70;
@@ -747,7 +749,7 @@ kara.noteBox_ = {
 		// kara.vLine(ac*2+a, Y+12);
 		// kara.vLine(ac*3+a, Y+12);
 
-		var x = position.left - kara.scorePos.left(trcNm);
+		var x = position.left - kara.scorePos.left(trcNm)
 		var y = Y - 15;
 
 		var width = (X - a) / 4;
