@@ -944,7 +944,7 @@ kara.noteBox_last = {
 			// 악보 선택 영역 추가
 			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity);
 			
-			y += height;
+			y += height
 		}
 	}
 };
@@ -985,6 +985,8 @@ kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSpli
 // 악보 선택 영역 그리기
 kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity) {
 	
+	
+	// print.js로 이동
 	svgVar.append('rect')
 				.attr('id', p)
 				.attr('class', kara.conf.del + ' bar_' + bNum + ' ' + 'note_' + nNum + ' ' + trcNm) //마디,  음표 번호
