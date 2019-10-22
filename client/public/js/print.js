@@ -581,10 +581,8 @@ kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1
 
 //음표 막대
 kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half, track1
-	
-	var svg = kara.svg[trcNm].svgNote
-	var pathString
-	var m = 0, n = 0
+
+	let m = 0, n = 0
 
 	if(pitch === 'C4')		y = y
 	else if(pitch === 'B3') y = y - 4
@@ -594,6 +592,7 @@ kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half
 	else if(pitch === 'C2') y = y
 	else return;
 	
+	// 무슨 계산인지
 	switch(meter) {
 		case 'whole':
 			x = x - 3.5
@@ -630,17 +629,6 @@ kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half
 	}
 
 	kara.draw.line(trcNm, x, y, m, n, '1.5px')
-
-	/*
-	// 이것도 합쳐야되
-	pathString = kara.sprintf('M %f %f L %f %f', x, y, m, n)
-	
-	svg.append('path')
-		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제영역
-		.attr('d', pathString)
-		.style('stroke', 'black')
-		.style('stroke-width', '1.5px')
-	*/
 }
 
 // 악보 선택 영역 그리기
