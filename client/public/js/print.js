@@ -1003,7 +1003,7 @@ kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill,
 var beforeObj = undefined
 var beforeStyle = ''
 
-// 음표 선택
+// 음표영역 클릭시 하이라이트
 kara.selectBox = function(bNum, nNum, trcNm, obj) {
 
 	// 선택된 영역이 없으면 저장
