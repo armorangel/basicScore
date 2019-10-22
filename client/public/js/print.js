@@ -815,9 +815,9 @@ kara.noteBox_ = {
 		
 		for(i; i <= j; i++) {  //a3 ~ b7
 			
-			var m = 50 - i;
-			var p = pitch_select.selection(m)// 선택한 음높이 계산 in edit.js
-			var fill, fill_opacity;
+			var m = 50 - i
+			var p = pitch_select.selection(m)	// 선택한 음높이 계산 in edit.js
+			var fill, fill_opacity
 			
 			if((i % 2) == 1) {
 				fill = '#6666FF';
@@ -909,7 +909,7 @@ kara.noteBox_last = {
 		
 		// 마디 번호
 		var svgVar = svg.append('g')
-			.attr('id', 'bar_' + bNum)
+			.attr('id', 'bar_' + bNum)	// 이것도 설정
 			.attr('class', kara.conf.del + ' ' + trcNm)
 
 		switch(clef) {
