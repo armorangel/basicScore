@@ -758,7 +758,7 @@ kara.noteBox_ = {
 
 		// 원래 상태로 돌려놓는다
 		if(flag == 1) { 
-			bNum++;
+			bNum++
 			nNum = 0;
 		} else nNum = nNum + 1;
 
@@ -820,7 +820,7 @@ kara.noteBox_ = {
 			var fill, fill_opacity
 			
 			if((i % 2) == 1) {
-				fill = '#6666FF';
+				fill = '#6666FF'
 				fill_opacity = '0.3'
 			} else {
 				fill = '#66FFFF'
