@@ -728,7 +728,7 @@ kara.noteBox_ = {
 		
 		
 		// 이것들을 줄일 수 있는 방법
-		var note = kara.scoreInfo.track[trcNm].notes
+		const note = kara.scoreInfo.track[trcNm].notes
 		var svg = kara.svg[trcNm].svgContainer
 		var key = kara.scoreInfo.key
 		var keySplit = key.split(' ')
@@ -739,7 +739,7 @@ kara.noteBox_ = {
 		
 		// 이전 마디의 정보를 얻어옴
 		if(nNum == 0) {
-			bNum--;
+			bNum--
 			nNum = note[bNum].length - 1
 			flag = 1;
 		} else nNum = nNum - 1
