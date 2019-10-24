@@ -590,12 +590,12 @@ kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half
 	else if(pitch === 'E2') y = y
 	else if(pitch === 'D2') y = y - 4
 	else if(pitch === 'C2') y = y
+	
 	else return;
 	*/
 	
-	if(pitch === 'B3' || pitch === 'D2') {
-		y = y - 4
-	}
+	// 뭘까
+	if(pitch === 'B3' || pitch === 'D2') y = y - 4
 	
 	// 무슨 계산인지
 	switch(meter) {
@@ -662,6 +662,7 @@ kara.noteBox = {
 		let height = 6;
 		let fill_opacity = '0.3'
 
+		// 이 영역으로 4분음표로만 고정
 		switch(meter) {
 			case 'whole': //온음표
 				width = width
