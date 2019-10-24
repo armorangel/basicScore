@@ -553,11 +553,11 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 		kara.draw.line(trcNm, 0, (i * gab) + Y, X, (i * gab) + Y)
 	}	// End of for
 	
-	//분리 해야됨
-	kara.clefSVG(10, Y, Y, trcNm)	//높은 음자리 //1.4+35
-	kara.vLine(X, Y + 12, trcNm)	//끝 줄
-	kara.keySVG(Y + 17, key, trcNm)	//조표 그리기
-	kara.meterSVG(Y, trcNm)			//박자
+	//분리 해야됨(여기선 오선지만)
+	kara.clefSVG(10, Y, Y, trcNm)	// 높은 음자리 //1.4+35
+	kara.vLine(X, Y + 12, trcNm)	// 끝 줄
+	kara.keySVG(Y + 17, key, trcNm)	// 조표 그리기
+	kara.meterSVG(Y, trcNm)			// 박자
 
 	let a = N * 12 + 70
 	let ac = (X - a) / 4
@@ -568,9 +568,9 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 	kara.vLine(ac * 3 + a, Y + 12, trcNm)	// 세번째 마디 끝 구분선
 }
 
-//마디
+//마디 구분선
 kara.vLine = function(x, y, trcNm) {	// trcNm :: Track Name 'track1' //1051, 212, track1
-	kara.draw.line(trcNm, x, y, x, y + 48)
+	kara.draw.line(trcNm, x, y, x, y + 48)	// 48이 뭔지
 }
 
 //음표 막대 그리기
@@ -582,7 +582,8 @@ kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1
 kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half, track1
 
 	let m = 0, n = 0
-
+	// 이거 뭔지
+	/*
 	if(pitch === 'C4')		y = y
 	else if(pitch === 'B3') y = y - 4
 	else if(pitch === 'A3') y = y
@@ -590,6 +591,11 @@ kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half
 	else if(pitch === 'D2') y = y - 4
 	else if(pitch === 'C2') y = y
 	else return;
+	*/
+	
+	if(pitch === 'B3' || pitch === 'D2') {
+		y = y - 4
+	}
 	
 	// 무슨 계산인지
 	switch(meter) {
