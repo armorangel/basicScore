@@ -104,11 +104,11 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	// 마디 찍기
 	for(let i = 0; i < note.length; i++) {
 		
-		let four_enter = i % 4
+		let four_enter = i % 4	// 4마디 마다
 		
 		if(four_enter === 0 && i >= 4) {	// 4마디 검사
 			
-			let four = i / 4
+			let four = i / 4	// 왜 4를 나누는지
 			
 			// 4번째 마디마다 새 오선지 찍기
 			kara.hLine(four, trcNm)
@@ -116,8 +116,9 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 		}
 		
 		//음표와 음표 박스 찍기
-		for(var j = 0; j < note[i].length; j++) {
+		for(let j = 0; j < note[i].length; j++) {
 			
+			// 이것들을 줄일 수 있는 방법은
 			var key = kara.scoreInfo.key
 			var keySplit = key.split(' ')
 			var M = kara.key[keySplit[0]]
