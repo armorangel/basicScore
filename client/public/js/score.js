@@ -144,15 +144,16 @@ kara.barsort = function(bNum, nNum , nowmeter, trcNm) {	// 0, 0, 16th, track1
 
 kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, track1
 	
-	var note = kara.scoreInfo.track[trcNm].notes;
-	var noteMeter = kara.noteMeter;
-	var meterNm;	// half, quarter, 8th, 18th
+	var note = kara.scoreInfo.track[trcNm].notes
+	var noteMeter = kara.noteMeter
+	var meterNm	// half, quarter, 8th, 18th
 	
 	if(!jQuery.isArray(note[bNum][nNum]))
 		note[bNum][nNum] = [];	// new Array()	배열이 아니면
 
-	note[bNum][nNum][0] = 'rest';	// 쉼표
+	note[bNum][nNum][0] = 'rest'	// 쉼표	(상수로 전환)
 	
+	// 상수로 전환
 	if(remain_meter >= noteMeter.head.half) meterNm = 'half';				// 8
 	else if(remain_meter >= noteMeter.head.quarter) meterNm = 'quarter';	// 4
 	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th';			// 2
