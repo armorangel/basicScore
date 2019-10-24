@@ -927,6 +927,7 @@ kara.noteBox_last = {
 			var p = pitch_select.selection(m)
 			var fill, fill_opacity
 			
+			// 이걸 개선 할 방법은
 			if((i % 2) == 1) {
 				fill = '#6622FF'
 				fill_opacity = '0.3'

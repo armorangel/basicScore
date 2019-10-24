@@ -7,6 +7,7 @@ kara.noteSelect = {
 		
 		var note = kara.scoreInfo.track[trcNm].notes // 배열을 받아온다
 
+		// 배열 말고 다른 방법은
 		// 2차원배열이 아니면 2차원 배열 생성
 		if(!jQuery.isArray(note[i])) note[i] = [] // new Array(); [i][]
 
@@ -30,18 +31,18 @@ kara.noteSelect = {
 		
 		kara.prtNote(trcNm)		// 음표 그리기
 	}
-};
+}
 
 // 마디에 음표 추가시 음표 추가 가능 여부 검사
 // return -1 :: 불가능, 0 :: 가능 마디 꽉참, 1 :: 가능
 kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	
 	//Why this function is called twice
-	var note = kara.scoreInfo.track[trcNm].notes;
-	var meter = kara.scoreInfo.meter.split('/');
-	var limited = meter[0] * meter[1];	// 마디 제한
-	var now = 0;
-	var noteMeter = kara.noteMeter;	// {head, rest}
+	var note = kara.scoreInfo.track[trcNm].notes
+	var meter = kara.scoreInfo.meter.split('/')
+	var limited = meter[0] * meter[1]	// 마디 제한
+	var now = 0
+	var noteMeter = kara.noteMeter	// {head, rest}
 	
 	if(!note[bNum]) return;
 
