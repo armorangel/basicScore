@@ -81,11 +81,11 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 
 kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	
-	var note = kara.scoreInfo.track[trcNm].notes
-	var meter = kara.scoreInfo.meter.split('/')
-	var limited = meter[0] * meter[1] //마디 제한
-	var now = 0;
-	var noteMeter = kara.noteMeter
+	const note = kara.scoreInfo.track[trcNm].notes
+	const meter = kara.scoreInfo.meter.split('/')
+	const limited = meter[0] * meter[1] //마디 제한
+	let now = 0
+	const noteMeter = kara.noteMeter
 	
 	if(!note[bNum]) return;
 	
