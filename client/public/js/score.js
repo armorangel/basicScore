@@ -59,7 +59,7 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 			alert("마디 초과")
 			return -1; // 넣지 못합
 		} else {
-			now = now - noteMeter.head[note[bNum][nNum][1]] + noteMeter.head[nowMeter];
+			now = now - noteMeter.head[note[bNum][nNum][1]] + noteMeter.head[nowMeter]	// 무슨 계산인지
 			
 			if(now === limited) {
 				return 0;
@@ -84,8 +84,9 @@ kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	const note = kara.scoreInfo.track[trcNm].notes
 	const meter = kara.scoreInfo.meter.split('/')
 	const limited = meter[0] * meter[1] //마디 제한
-	let now = 0
 	const noteMeter = kara.noteMeter
+	
+	let now = 0
 	
 	if(!note[bNum]) return;
 	
