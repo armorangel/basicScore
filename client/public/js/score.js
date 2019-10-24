@@ -47,15 +47,16 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	if(!note[bNum]) return;
 
 	for(var i = 0; i < note[bNum].length; i++) {
-		let note_meter = noteMeter.head[note[bNum][i][1]];
-		now = now + note_meter;
+		let note_meter = noteMeter.head[note[bNum][i][1]]
+		now = now + note_meter
 	}
 	
 	// 지금까지의 마디와 현재 마디를 더하면 초과인가
 	if((now + noteMeter.head[nowMeter]) > limited) {
 		
+		// 얼럿창 개선
 		if(note[bNum][nNum][1] === undefined) {
-			alert("마디 초과");
+			alert("마디 초과")
 			return -1; // 넣지 못합
 		} else {
 			now = now - noteMeter.head[note[bNum][nNum][1]] + noteMeter.head[nowMeter];
@@ -63,7 +64,7 @@ kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 			if(now === limited) {
 				return 0;
 			} else if(now < limited) {
-				kara.barsort(bNum, nNum, nowMeter, trcNm);
+				kara.barsort(bNum, nNum, nowMeter, trcNm)
 				return 1;	// 정상 추가인데 쉼표를 넣어줘야되
 			} else {
 				alert('마디 초과')
