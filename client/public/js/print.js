@@ -169,7 +169,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 				var x = position.left - kara.scorePos.left(trcNm)
 				var y = position.top - kara.scorePos.top(trcNm) + 3	// 3이 뭔지
 				
-				var leng = 0;	// x 길이 추가
+				var leng = 0	// x 길이 추가
 
 				//길이 대입
 				switch(meter) {
@@ -535,8 +535,8 @@ kara.pathClone = function (pathString, x, y) {
 
 // 오선지
 kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Track Name 'track1'
-		
-	let line = kara.svg[trcNm].svgLine
+	
+	// 줄일 수 있는 방법
 	let X = kara.XY.X()
 	let Y = kara.XY.Y(y)
 	let key = kara.scoreInfo.key
@@ -547,23 +547,16 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 	let gab = 12
 
 	//간격조절
-	for(i = 1; i <= 5; i++) {
+	for(let i = 1; i <= 5; i++) {
 		
-		//간격 12씩 5줄 그리기
-		let pathString = kara.sprintf("M %f %f L %f %f", 0, (i * gab) + Y, X, (i * gab) + Y)
-		
-		
-		// 이것도 합치자
-		line.append('path')
-			.attr('class', kara.conf.del + ' ' + trcNm)
-			.attr('d', pathString)
-			.style('stroke', 'black')
+		//간격 12씩 5줄 그리기		
+		kara.draw.line(trcNm, 0, (i * gab) + Y, X, (i * gab) + Y)
 	}	// End of for
 	
 	//분리 해야됨
 	kara.clefSVG(10, Y, Y, trcNm)	//높은 음자리 //1.4+35
 	kara.vLine(X, Y + 12, trcNm)	//끝 줄
-	kara.keySVG(Y+17, key, trcNm)	//조표 그리기
+	kara.keySVG(Y + 17, key, trcNm)	//조표 그리기
 	kara.meterSVG(Y, trcNm)			//박자
 
 	let a = N * 12 + 70
