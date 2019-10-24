@@ -238,7 +238,7 @@ kara.draw = {
 			.attr('d', pathString)
 			.style('stroke', 'black')
 		
-		// 5선지 벗어난 음표 줄
+		// 5선지 벗어난 음표 줄 두껍게
 		if(typeof strokeWidth !== "undefined") {
 			line.style('stroke-width', strokeWidth)
 		}

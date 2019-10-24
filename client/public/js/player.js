@@ -84,6 +84,7 @@ kara.addTabs = function() {
 			
 			$('#menu' + trcNum).remove()
 			
+			// 이럴 꺼면 왜 쪼개놨어
 			// 트랙 초기화
 			kara.svg['track' + trcNum].svgContainer = null
 			kara.svg['track' + trcNum].svgLine = null
@@ -332,3 +333,4 @@ kara.instru = {
 // 음악 재생 및 일시정지
 // 음악 재생 애니메이션
 
+// 클래스로 변경방법

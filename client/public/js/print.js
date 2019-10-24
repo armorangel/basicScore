@@ -58,6 +58,7 @@ kara.initSvg = function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
 	trcSvg.svgContainer	= svgContainer
 	
+	// 합칠까
 	trcSvg.svgText		= svgContainer.append('g').attr('id', 'text')	// title, tempo, writer
 	trcSvg.svgLine		= svgContainer.append('g').attr('id', 'lines')	// line(오선지)
 	trcSvg.svgSymbol	= svgContainer.append('g').attr('id', 'symbol')	// clef(음자리표), 조표 4/4	
@@ -101,13 +102,13 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	if(note[0] === undefined) kara.noteBox.print(kara.XY.X(), kara.XY.Y(0), 0, 0, 'whole', trcNm)
 	
 	// 마디 찍기
-	for(var i = 0; i < note.length; i++) {
+	for(let i = 0; i < note.length; i++) {
 		
-		var four_enter = i % 4
+		let four_enter = i % 4
 		
 		if(four_enter === 0 && i >= 4) {	// 4마디 검사
 			
-			var four = i / 4
+			let four = i / 4
 			
 			// 4번째 마디마다 새 오선지 찍기
 			kara.hLine(four, trcNm)
@@ -436,7 +437,7 @@ kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 	var pathString = this.pathClone(kara.glyphs[meterSplit[0]].d, 45 + (N * 10), Y / 1.4 + 24.7)
 	var pathString2 = this.pathClone(kara.glyphs[meterSplit[1]].d, 45 + (N * 10), Y / 1.4 + 41.7)
 	
-	kara.draw.meter(trcNm, pathString)		// 위
+	kara.draw.meter(trcNm, pathString)	// 위
 	kara.draw.meter(trcNm, pathString2)	// 아래
 
 	//박자 변경을 위한 선택역역 BOX 생성
@@ -467,6 +468,7 @@ kara.printflag = function(symb, x, y, trcNm) {	// flags.uquarter, track1, 141.15
 	
 	let pathString = this.pathClone(kara.glyphs[symb].d, x + 10.35, y - 29)
 	
+	// 합치자
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)	// 삭제 영역
 		.attr('d', pathString)
@@ -481,6 +483,7 @@ kara.printSymbol = function(symbol, x, y, trcNm) {
 	let svg = kara.svg[trcNm].svgSymbol
 	let pathString = this.pathClone(kara.glyphs[symbol].d, x, y)
 	
+	// 합치자
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)// 삭제 영역
 		.attr('d', pathString)
@@ -495,6 +498,7 @@ kara.print_s_p = function(symbol, x, y, trcNm) {	// accidentals.flat, 204.750003
 	let svg = kara.svg[trcNm].svgSymbol
 	let pathString = this.pathClone(kara.glyphs[symbol].d, x / 0.7, y / 0.7)
 	
+	// 합칠 방법
 	svg.append('path')
 		.attr('class', kara.conf.del + ' ' + trcNm)// 삭제 영역
 		.attr('d', pathString)
@@ -557,13 +561,14 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 	
 	//분리 해야됨
 	kara.clefSVG(10, Y, Y, trcNm)	//높은 음자리 //1.4+35
-	kara.vLine(X, Y+12, trcNm)		//끝 줄
+	kara.vLine(X, Y + 12, trcNm)	//끝 줄
 	kara.keySVG(Y+17, key, trcNm)	//조표 그리기
 	kara.meterSVG(Y, trcNm)			//박자
 
 	let a = N * 12 + 70
 	let ac = (X - a) / 4
 	
+	// 동적으로
 	kara.vLine(ac * 1 + a, Y + 12, trcNm)	// 첫마디 끝 구분선
 	kara.vLine(ac * 2 + a, Y + 12, trcNm)	// 두번째 마디 끝 구분선
 	kara.vLine(ac * 3 + a, Y + 12, trcNm)	// 세번째 마디 끝 구분선
@@ -579,7 +584,7 @@ kara.notevLine = function(x, y, trcNm) {	// 235.6875, 242, track1
 	kara.draw.line(trcNm, x + 10, y, x + 10, y - 30)
 }
 
-//음표 막대
+//음표 막대(머리부분)
 kara.notevLow = function(x, y, pitch, meter, trcNm) {	// 147.9375, 230, C5, half, track1
 
 	let m = 0, n = 0
