@@ -642,7 +642,6 @@ kara.noteBox = {
 	// 악보 선택 영역 그리기
 	print: function(X, Y, bNum, nNum, meter, trcNm) {
 		
-		let svg = kara.svg[trcNm].svgContainer
 		let key = kara.scoreInfo.key
 		let keySplit = key.split(' ')
 		let M = kara.key[keySplit[0]]
@@ -683,11 +682,6 @@ kara.noteBox = {
 				break;
 		}
 		
-		//마디 생성
-		let svgVar = svg.append('g')	
-			.attr('id', 'bar_' + bNum)	// 마디 번호	//설정으로
-			.attr('class', kara.conf.del + ' ' + trcNm)
-		
 		switch(clef) {
 			case 'G': i = 14; break;	// A3 ~ C6 (14 ~ 30)	
 			case 'F': i = 26; break;	// C2 ~ E4
@@ -714,7 +708,7 @@ kara.noteBox = {
 			
 			// 악보 선택 영역 그리기
 			// 매개변수좀 줄이자
-			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
+			kara.selArea(p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
 		
 			y += height
 		}
@@ -729,7 +723,6 @@ kara.noteBox_ = {
 		
 		// 이것들을 줄일 수 있는 방법
 		const note = kara.scoreInfo.track[trcNm].notes
-		var svg = kara.svg[trcNm].svgContainer
 		var key = kara.scoreInfo.key
 		var keySplit = key.split(' ')
 		var M = kara.key[keySplit[0]]
@@ -809,11 +802,6 @@ kara.noteBox_ = {
 			default: break;
 		}
 
-		//마디 번호
-		var svgVar = svg.append('g')
-			.attr('id', 'bar_' + bNum)
-			.attr('class', kara.conf.del + ' ' + trcNm)
-
 		switch(clef) {
 			case 'G': i = 14; break;	// A3~ C6 17 j = 30
 			case 'F': i = 26; break;	// C2~E4 =
@@ -837,7 +825,7 @@ kara.noteBox_ = {
 			}
 			
 			// 악보 선택 영역 그리기
-			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
+			kara.selArea(p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
 			
 			y = height + y
 		}
@@ -900,7 +888,7 @@ kara.noteBox_last = {
 				x = x + (X - a) / 4 - width
 		
 				break;
-			case 32: break;
+			case 32: break;	// 이건 어떻게 할껀지
 			case 64: break;
 			case 128: break;
 			default: break;
@@ -916,10 +904,7 @@ kara.noteBox_last = {
 			x = a
 		}
 		
-		// 마디 번호
-		var svgVar = svg.append('g')
-			.attr('id', 'bar_' + bNum)	// 이것도 설정
-			.attr('class', kara.conf.del + ' ' + trcNm)
+		
 
 		switch(clef) {
 			case 'G':
@@ -952,7 +937,7 @@ kara.noteBox_last = {
 			
 			// 악보 선택 영역 추가
 			// 매개변수좀 줄여봐
-			kara.selArea(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
+			kara.selArea(p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
 			
 			y += height
 		}
@@ -993,9 +978,15 @@ kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSpli
 };
 
 // 악보 선택 영역 그리기
-kara.selArea = function(svgVar, p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity) {
+kara.selArea = function(p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity) {
 	
+	const svg = kara.svg[trcNm].svgContainer
 	
+	// 마디 번호
+	const svgVar = svg.append('g')
+		.attr('id', 'bar_' + bNum)	// 이것도 설정
+		.attr('class', kara.conf.del + ' ' + trcNm)
+		
 	// print.js로 이동
 	svgVar.append('rect')
 				.attr('id', p)
