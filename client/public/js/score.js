@@ -159,8 +159,8 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th';			// 2
 	else meterNm = '16th';													// 1
 	
-	note[bNum][nNum][1] = meterNm;
-	remain_meter = remain_meter - noteMeter.head[meterNm];
+	note[bNum][nNum][1] = meterNm
+	remain_meter = remain_meter - noteMeter.head[meterNm]
 	
 	return remain_meter;
 };
