@@ -93,8 +93,7 @@ kara.meter = {
 kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	
 	const note = kara.scoreInfo.track[trcNm].notes
-	const meter = kara.scoreInfo.meter.split('/')
-	const limited = meter[0] * meter[1] //마디 제한
+	const limited = kara.meter.limit //마디 제한
 	const noteMeter = kara.noteMeter
 	
 	let now = 0
