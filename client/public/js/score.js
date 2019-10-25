@@ -1,4 +1,5 @@
-if(!window.kara) window.kara = {};
+if(!window.kara) window.kara = {}
+// 이것도 한곳에 몰아보자
 
 // 배열에 음표 담기
 kara.noteSelect = {
@@ -96,6 +97,21 @@ kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	const note = kara.scoreInfo.track[trcNm].notes
 	const limited = kara.meter.limit() //마디 제한
 	const noteMeter = kara.noteMeter
+	/*
+	head:
+		8th: 2
+		16th: 1
+		half: 8
+		quarter: 4
+		whole: 16
+		
+	rest:
+		8th: 2
+		16th: 1
+		half: 8
+		quarter: 4
+		whole: 16
+	*/
 	
 	let now = 0
 	
@@ -106,7 +122,7 @@ kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 		now = now + note_meter
 	}
 	
-	if (now == limited) return 1;
+	if (now == limited) return 1;	// 이 1이 뭔지
 };
 
 // 음표 수정 시
