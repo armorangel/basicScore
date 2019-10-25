@@ -50,8 +50,8 @@ kara.meter = {
 		//Why this function is called twice
 		const note = kara.scoreInfo.track[trcNm].notes
 		const limited = this.limit()	// 마디 제한
-		let now = 0
 		const noteMeter = kara.noteMeter	// {head, rest}
+		let now = 0
 
 		if(!note[bNum]) return;
 
@@ -89,6 +89,7 @@ kara.meter = {
 	}
 }
 
+// 너 뭐야
 kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	
 	const note = kara.scoreInfo.track[trcNm].notes
