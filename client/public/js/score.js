@@ -102,7 +102,7 @@ kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	if(!note[bNum]) return;
 	
 	for(let i = 0; i < note[bNum].length; i++) {
-		var note_meter = noteMeter.head[note[bNum][i][1]]
+		let note_meter = noteMeter.head[note[bNum][i][1]]	// whole 16	half 8
 		now = now + note_meter
 	}
 	
