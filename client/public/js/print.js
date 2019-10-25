@@ -309,6 +309,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 	width = 40
 	height = 90
 
+	// 이거 그리는 것도 메소드로
 	//음자리표 선택영역 APPEND
 	svg.append('rect')
 		.attr('id', 'edtClf')	// #editClef :: 음자리표 선택영역(수정)
