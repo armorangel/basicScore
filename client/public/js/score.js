@@ -92,8 +92,9 @@ kara.meter = {
 // 너 뭐야
 kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 	
+	// 이거 줄일 수 없나
 	const note = kara.scoreInfo.track[trcNm].notes
-	const limited = kara.meter.limit //마디 제한
+	const limited = kara.meter.limit() //마디 제한
 	const noteMeter = kara.noteMeter
 	
 	let now = 0
