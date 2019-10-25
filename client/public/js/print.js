@@ -303,6 +303,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 			break;
 	}
 	
+	// 이것도 메소드로 바꾸자
 	box_x = 0
 	box_y = Y - 10
 	width = 40
