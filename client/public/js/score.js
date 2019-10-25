@@ -7,7 +7,7 @@ kara.noteSelect = {
 		
 		var note = kara.scoreInfo.track[trcNm].notes // 배열을 받아온다
 
-		// 배열 말고 다른 방법은
+		// 배열 말고 다른 방법은..? Object?!
 		// 2차원배열이 아니면 2차원 배열 생성
 		if(!jQuery.isArray(note[i])) note[i] = [] // new Array(); [i][]
 
@@ -20,7 +20,7 @@ kara.noteSelect = {
 		else if(note[i][j][0] === 'rest')	// 쉼표면
 			note[i][j][0] = pitch
 		else { //아니면
-			var split = note[i][j][0].split(',')
+			let split = note[i][j][0].split(',')
 			
 			// 똑같은 음이 없으면 추가
 			if(split.indexOf(pitch) === -1)
@@ -33,14 +33,23 @@ kara.noteSelect = {
 	}
 }
 
+kara.meter = {
+	
+	// 마디 음표 제한 계산
+	limit : function() {
+		const meter = kara.scoreInfo.meter.split('/')
+	
+		return meter[0] * meter[1];
+	}
+}
+
 // 마디에 음표 추가시 음표 추가 가능 여부 검사
 // return -1 :: 불가능, 0 :: 가능 마디 꽉참, 1 :: 가능
 kara.meterCal = function(bNum, nNum, nowMeter, trcNm) {	// 0, 0, whole, track1
 	
 	//Why this function is called twice
-	var note = kara.scoreInfo.track[trcNm].notes
-	var meter = kara.scoreInfo.meter.split('/')
-	var limited = meter[0] * meter[1]	// 마디 제한
+	const note = kara.scoreInfo.track[trcNm].notes
+	const limited = kara.meter.limit()	// 마디 제한
 	var now = 0
 	var noteMeter = kara.noteMeter	// {head, rest}
 	
