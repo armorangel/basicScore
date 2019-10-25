@@ -111,7 +111,7 @@ kara.meterCal_box = function(bNum, trcNm) {	// 0, "track1"
 
 // 음표 수정 시
 kara.barsort = function(bNum, nNum , nowmeter, trcNm) {	// 0, 0, 16th, track1	
-	
+	// 무슨 기능인지 확실하게
 	var note = kara.scoreInfo.track[trcNm].notes
 	var copynote = []
 	var barLength = note[bNum].length
@@ -196,5 +196,7 @@ $('body').keypress(function(e) {
 			}
 			
 			break;
+			
+		// 방향키로 음표 선택
 	}
 })
