@@ -284,7 +284,7 @@ var notepush = {
 		}	// End of switch
 		
 		// 음표추가 가능 여부		
-		if(kara.meterCal(bNum[1], nNum[1], meterNm, trcNm) === -1) return	// 마디 초과
+		if(kara.meter.addable(bNum[1], nNum[1], meterNm, trcNm) === -1) return	// 마디 초과
 		
 		kara.noteSelect.push(bNum[1], nNum[1], this.id, meterNm, trcNm)		// 추가 가능
 	}
