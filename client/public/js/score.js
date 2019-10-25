@@ -166,10 +166,10 @@ kara.remain_meter = function(remain_meter, bNum, nNum, trcNm) {	// 8, 1, 1, trac
 	note[bNum][nNum][0] = 'rest'	// 쉼표	(상수로 전환)
 	
 	// 상수로 전환
-	if(remain_meter >= noteMeter.head.half) meterNm = 'half';				// 8
-	else if(remain_meter >= noteMeter.head.quarter) meterNm = 'quarter';	// 4
-	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th';			// 2
-	else meterNm = '16th';													// 1
+	if(remain_meter >= noteMeter.head.half) meterNm = 'half'				// 8
+	else if(remain_meter >= noteMeter.head.quarter) meterNm = 'quarter'		// 4
+	else if(remain_meter >= noteMeter.head['8th']) meterNm = '8th'			// 2
+	else meterNm = '16th'													// 1
 	
 	note[bNum][nNum][1] = meterNm
 	remain_meter = remain_meter - noteMeter.head[meterNm]
