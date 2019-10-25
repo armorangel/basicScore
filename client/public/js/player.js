@@ -111,10 +111,10 @@ kara.addTabs = function() {
 // Add Combo to select Instruments on Each Track
 kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 
-	const trcNm = 'track' + trcNum;	// 'track1'
-	var menuTtl = 'Select a track';
+	const trcNm = 'track' + trcNum	// 'track1'
+	let menuTtl = 'Select a track'
 	
-	kara.scoreInfo.track[trcNm].instrument = 0;	//처음 Acoustic Grand Piano로 세팅
+	kara.scoreInfo.track[trcNm].instrument = 0	//처음 Acoustic Grand Piano로 세팅
 	
 	// 메뉴 바에 Select a track 문구, 콤보 추가
 	$('#menu').append("<form id='menu" + trcNum + "' action='#'><fieldset><label for='instrument" + trcNum + "'>" + menuTtl + trcNum + "</label><select name='instrument" + trcNum 	+ "' id='instrument" + trcNum + "'></fieldset></form>");
