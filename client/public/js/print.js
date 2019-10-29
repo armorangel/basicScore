@@ -405,7 +405,10 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 			}
 		}
 	}
-	x = 40	// 악보 좌측부터 40
+	
+	// (조표 선택영역)
+	// 다른 방법을 생각해봐
+	x = 40	// 악보 좌측부터 40	
 	y = Y - 17
 	width = N * 10 + 15
 	height = 74
