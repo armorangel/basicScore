@@ -271,7 +271,7 @@ kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 			
 			//clefs.G 없으면 null
 			if (!kara.glyphs['clefs.G']) return null;
-			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y);
+			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y)
 			
 			// 높은 음자리표 그리기
 			kara.draw.clefs_G(trcNm, pathString);
@@ -341,8 +341,8 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 	
 	let svg = kara.svg[trcNm].svgBox
 	let keySplit = key.split(' ')	// ['major' 'Db']
-	const M = kara.keySplit(key).M;	// major 속성명 바꿔
-	const N = kara.keySplit(key).N;	// Db 	속성명 바꿔
+	const M = kara.keySplit(key).M	// major 속성명 바꿔
+	const N = kara.keySplit(key).N	// Db 	속성명 바꿔
 	let x, y, width, height
 
 	for (let key in M) {	// k :: key
@@ -431,8 +431,8 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 	
 	let box = kara.svg[trcNm].svgBox
-	const M = kara.keySplit().M;	// major 속성명 바꿔
-	const N = kara.keySplit().N;	// Db 	속성명 바꿔
+	const M = kara.keySplit().M		// major 속성명 바꿔
+	const N = kara.keySplit().N		// Db 	속성명 바꿔
 
 	let x, y, width, height
 
