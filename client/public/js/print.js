@@ -326,11 +326,11 @@ kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 // 조표 SVG 그리기
 kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 	
-	let svg = kara.svg[trcNm].svgBox;
-	let keySplit = key.split(' ');	// ['major' 'Db']
-	let M = kara.key[keySplit[0]];	// kara.key['major']
-	let N = M[keySplit[1]];			// M['Db'] :: 5 -- 심볼 갯수
-	let x, y, width, height;
+	let svg = kara.svg[trcNm].svgBox
+	let keySplit = key.split(' ')	// ['major' 'Db']
+	let M = kara.key[keySplit[0]]	// kara.key['major']
+	let N = M[keySplit[1]]			// M['Db'] :: 5 -- 심볼 갯수
+	let x, y, width, height
 
 	for (let key in M) {	// k :: key
 		
