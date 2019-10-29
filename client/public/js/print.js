@@ -92,7 +92,7 @@ kara.keySplit = function(key) {
 	
 	const keySplit = key.split(' ')	// ['major' 'Db']
 	const M = kara.key[keySplit[0]]	// kara.key['major']
-	
+	// A: 3, Ab: 4, B: 5, Bb: 2, C: 0, D: 2, Db: 5, E: 4, Eb: 3, F: 1, G: 1, Gb: 6
 	return {
 		M: kara.key[keySplit[0]],	// major	kara.key['major']
 		N: M[keySplit[1]]			// Db		M['Db'] :: 5 -- 심볼 갯수
@@ -341,10 +341,8 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 	
 	let svg = kara.svg[trcNm].svgBox
 	let keySplit = key.split(' ')	// ['major' 'Db']
-	// let M = kara.key[keySplit[0]]	// kara.key['major']
-	// let N = M[keySplit[1]]			// M['Db'] :: 5 -- 심볼 갯수
 	const M = kara.keySplit(key).M;	// major 속성명 바꿔
-	const N = kara.keySplit(key).N;	// Db 	속성명 바꿔	
+	const N = kara.keySplit(key).N;	// Db 	속성명 바꿔
 	let x, y, width, height
 
 	for (let key in M) {	// k :: key
@@ -433,10 +431,8 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 kara.meterSVG = function(Y, trcNm) {// trcNm :: Track Name - 'track1'
 	
 	let box = kara.svg[trcNm].svgBox
-	let key = kara.scoreInfo.key	// 'major Db'
-	let keySplit = key.split(' ')
-	let M = kara.key[keySplit[0]]	// A: 3, Ab: 4, B: 5, Bb: 2, C: 0, D: 2, Db: 5, E: 4, Eb: 3, F: 1, G: 1, Gb: 6
-	let N = M[keySplit[1]]	// 5
+	const M = kara.keySplit().M;	// major 속성명 바꿔
+	const N = kara.keySplit().N;	// Db 	속성명 바꿔
 
 	let x, y, width, height
 
