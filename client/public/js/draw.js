@@ -153,8 +153,8 @@ kara.draw = {
 	writer: function(writer) {
 		
 		// SVG 요소 삭제
-		this.removeSvg('#writer');	// 작곡가 제거
-		this.removeSvg('#edtWtr');	// 작곡가 선택 영역 제거
+		this.removeSvg('#writer')	// 작곡가 제거
+		this.removeSvg('#edtWtr')	// 작곡가 선택 영역 제거
 		
 		this.txt.append('text')
 			.attr('id', 'writer')
@@ -168,7 +168,7 @@ kara.draw = {
 			.style('font-weight', 'bold')
 			.text(writer);
 		
-		var boxSize = this.getBoxSize('#writer');
+		var boxSize = this.getBoxSize('#writer')
 
 		this.box.append('rect')
 			.attr('id', 'edtWtr')
@@ -179,52 +179,52 @@ kara.draw = {
 			.style('width', '100')
 			.style('height', '25')
 			.style('fill', '#000000')
-			.style('fill-opacity', '0.3');
+			.style('fill-opacity', '0.3')
 	},
 	
 	// 음자리표
 	clefs_G: function(trcNm, pathString) {
 		
-		const symbol = kara.svg[trcNm].svgSymbol;
+		const symbol = kara.svg[trcNm].svgSymbol
 		
 		symbol.append('path')
 				.attr('class', kara.conf.del + ' ' + trcNm)
 				.attr('d', pathString)
 				.style('transform', 'scale(1.2,1.4)') // 크기조절
-				.style('stroke', 'black');
+				.style('stroke', 'black')
 	},
 	clefs_F: function(trcNm, pathString) {
 		
-		const symbol = kara.svg[trcNm].svgSymbol;
+		const symbol = kara.svg[trcNm].svgSymbol
 		
 		symbol.append('path')
 				.attr('class', kara.conf.del + ' ' + trcNm)
 				.attr('d', pathString)
 				.style('transform', 'scale(1.4,1.7)')	// 크기조절
-				.style('stroke', 'black');
+				.style('stroke', 'black')
 	},
 	clefs_perc: function(trcNm, pathString) {
 		
-		const symbol = kara.svg[trcNm].svgSymbol;
+		const symbol = kara.svg[trcNm].svgSymbol
 		
 		symbol.append('path')
 				.attr('class', kara.conf.del + ' ' + trcNm)
 				.attr('d', pathString)
 				.style('transform', 'scale(1.2,1.5)')	// 크기조절
-				.style('stroke', 'black');
+				.style('stroke', 'black')
 	},
 	
 	// 박자
 	meter: function(trcNm, pathString) {
 		
-		const symbol = kara.svg[trcNm].svgSymbol;
+		const symbol = kara.svg[trcNm].svgSymbol
 		
 		symbol.append('path')
 			.attr('id', 'meter')
 			.attr('class', kara.conf.del + ' ' + trcNm)// 삭제 영역
 			.attr('d', pathString)
 			.style('transform', 'scale(1.2,1.4)')
-			.style('stroke', 'black');
+			.style('stroke', 'black')
 	},
 	
 	// 라인
@@ -239,7 +239,7 @@ kara.draw = {
 			.style('stroke', 'black')
 		
 		// 5선지 벗어난 음표 줄 두껍게
-		if(typeof strokeWidth !== "undefined") {
+		if(typeof strokeWidth !== 'undefined') {
 			line.style('stroke-width', strokeWidth)
 		}
 	}
