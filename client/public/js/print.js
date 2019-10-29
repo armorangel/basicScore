@@ -223,7 +223,7 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	}
 	
 	kara.test(trcNm)	// 배열값 표시(옮겨야됨)
-};
+}
 
 //악보 위치 반환
 kara.scorePos = {
