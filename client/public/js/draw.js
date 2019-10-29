@@ -190,7 +190,7 @@ kara.draw = {
 		symbol.append('path')
 				.attr('class', kara.conf.del + ' ' + trcNm)
 				.attr('d', pathString)
-				.style('transform', 'scale(1.2,1.4)') // 크기조절
+				.style('transform', 'scale(1.2,1.4)') // 크기조절	(변경)
 				.style('stroke', 'black')
 	},
 	clefs_F: function(trcNm, pathString) {
@@ -200,7 +200,7 @@ kara.draw = {
 		symbol.append('path')
 				.attr('class', kara.conf.del + ' ' + trcNm)
 				.attr('d', pathString)
-				.style('transform', 'scale(1.4,1.7)')	// 크기조절
+				.style('transform', 'scale(1.4,1.7)')	// 크기조절	(변경)
 				.style('stroke', 'black')
 	},
 	clefs_perc: function(trcNm, pathString) {
@@ -210,7 +210,7 @@ kara.draw = {
 		symbol.append('path')
 				.attr('class', kara.conf.del + ' ' + trcNm)
 				.attr('d', pathString)
-				.style('transform', 'scale(1.2,1.5)')	// 크기조절
+				.style('transform', 'scale(1.2,1.5)')	// 크기조절	(변경)
 				.style('stroke', 'black')
 	},
 	
@@ -223,7 +223,7 @@ kara.draw = {
 			.attr('id', 'meter')
 			.attr('class', kara.conf.del + ' ' + trcNm)// 삭제 영역
 			.attr('d', pathString)
-			.style('transform', 'scale(1.2,1.4)')
+			.style('transform', 'scale(1.2,1.4)')	// (변경)
 			.style('stroke', 'black')
 	},
 	
