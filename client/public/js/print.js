@@ -84,9 +84,12 @@ kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 };
 
 // 키 문자열 반환
-kara.keySplit = function() {
+kara.keySplit = function(key) {	
 	
-	const key = kara.scoreInfo.key	// major Db
+	if(typeof key === 'undefined') {
+		key = kara.scoreInfo.key	// major Db	
+	}
+	
 	const keySplit = key.split(' ')
 	const M = kara.key[keySplit[0]]
 	
@@ -338,8 +341,10 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 	
 	let svg = kara.svg[trcNm].svgBox
 	let keySplit = key.split(' ')	// ['major' 'Db']
-	let M = kara.key[keySplit[0]]	// kara.key['major']
-	let N = M[keySplit[1]]			// M['Db'] :: 5 -- 심볼 갯수
+	// let M = kara.key[keySplit[0]]	// kara.key['major']
+	// let N = M[keySplit[1]]			// M['Db'] :: 5 -- 심볼 갯수
+	const M = kara.keySplit(key).M;	// major 속성명 바꿔
+	const N = kara.keySplit(key).N;	// Db 	속성명 바꿔
 	let x, y, width, height
 
 	for (let key in M) {	// k :: key
