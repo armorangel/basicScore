@@ -8,7 +8,7 @@ kara.draw = {
 	svgContainer: null,
 	txt: null,
 	box: null,
-	svgSymbol: null,
+	svgSymbol: null,	// 이거 뭐야
 	
 	// 현재 트랙으로 설정
 	setTrack: function(trcNm) {
@@ -19,7 +19,7 @@ kara.draw = {
 		this.svgContainer = kara.svg[trcNm].svgContainer
 		this.txt = kara.svg[trcNm].svgText
 		this.box = kara.svg[trcNm].svgBox
-		this.svgSymbol = kara.svg[trcNm].svgSymbol
+		this.svgSymbol = kara.svg[trcNm].svgSymbol	//이거 뭐야
 		this.svgjs = kara.svg[trcNm].svgjs
 		
 		return this
@@ -230,7 +230,7 @@ kara.draw = {
 	// 라인
 	line: function(trcNm, x1, y1, x2, y2, strokeWidth) {
 		
-		const svg = kara.svg[trcNm].svgLine
+		const svg = kara.svg[trcNm].svgLine	// 이거 setTrack으로 
 		const pathString = kara.sprintf('M %f %f L %f %f', x1, y1, x2, y2)
 		
 		const line = svg.append('path')
