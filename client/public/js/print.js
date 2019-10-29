@@ -83,6 +83,19 @@ kara.txtSVG = function(trcNm) {// trcNm :: Track Name 'track1'
 			.writer(kara.scoreInfo.writer)		// Draw Writer
 };
 
+// 키 문자열 반환
+kara.keySplit = function() {
+	
+	const key = kara.scoreInfo.key	// major Db
+	const keySplit = key.split(' ')
+	const M = kara.key[keySplit[0]]
+	
+	return {
+		M: kara.key[keySplit[0]],	// major
+		N: M[keySplit[1]]			// Db
+	}
+}
+
 // 배열의 값을 가져와서 음표를 그린다
 kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 	
@@ -117,12 +130,9 @@ kara.prtNote = function(trcNm) {// trcNm :: Track Name 'track1'
 		
 		//음표와 음표 박스 찍기
 		for(let j = 0; j < note[i].length; j++) {
-			
-			// 이것들을 줄일 수 있는 방법은
-			var key = kara.scoreInfo.key
-			var keySplit = key.split(' ')
-			var M = kara.key[keySplit[0]]
-			var N = M[keySplit[1]]
+
+			const M = kara.keySplit().M;	// major 속성명 바꿔
+			const N = kara.keySplit().N;	// Db 	속성명 바꿔
 			var X = kara.XY.X()
 			var Y = kara.XY.Y(i)
 			

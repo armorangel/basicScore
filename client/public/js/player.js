@@ -24,7 +24,7 @@ kara.init = {
 kara.refresh = function() {
 	
 	// 악보 삭제영역 삭제
-	$('.' + kara.area.del).remove()
+	$('.' + kara.conf.del).remove()
 	
 	for(var trcNm in kara.scoreInfo.track) {
 			
