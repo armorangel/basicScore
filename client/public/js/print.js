@@ -379,24 +379,12 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 					// 심볼 갯수 만큼 그리기
 					for(let i = 0; i < M[keySplit[1]]; i++) {
 						switch (i) {
-							case 0:
-								y = Y + 19; 
-								break;// Gb_b
-							case 1:
-								y = Y + 1; 
-								break;// Ab_e
-							case 2:
-								y = Y + 25; 
-								break;// Db_a
-							case 3:
-								y = Y + 7; 
-								break;// Eb_d
-							case 4:
-								y = Y + 31; // Bb_g
-								break;
-							case 5:
-								y = Y + 13; // F_c
-								break;
+							case 0: y = Y + 19;	break;	// Gb_b
+							case 1: y = Y + 1;	break;	// Ab_e
+							case 2: y = Y + 25;	break;	// Db_a
+							case 3: y = Y + 7;	break;	// Eb_d
+							case 4: y = Y + 31;	break;	// Bb_g
+							case 5: y = Y + 13;	break;	// F_c
 						}	// End of switch
 						//flat 그리기
 						kara.printSymbol('accidentals.flat', 50 + (i * 10), y, trcNm)
