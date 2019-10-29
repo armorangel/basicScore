@@ -259,7 +259,7 @@ kara.XY = {
 kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 	
 	const clef = kara.scoreInfo.track[trcNm].clef	// 현재 음자리표
-	var svg = kara.svg[trcNm].svgSymbol
+	const svg = kara.svg[trcNm].svgSymbol
 	var box_x, box_y
 	var width, height
 	var pathString
@@ -267,14 +267,14 @@ kara.clefSVG = function(x, y, Y, trcNm) {// 10, 200, 200, 'track1'
 	switch(clef) {
 		case 'G':	// 높은 음자리표
 			
-			y = y / 1.4 + 35
+			y = y / 1.4 + 35	// 동적으로 할 방법을 찾아
 			
 			//clefs.G 없으면 null
 			if (!kara.glyphs['clefs.G']) return null;
 			pathString = this.pathClone(kara.glyphs['clefs.G'].d, x, y)
 			
 			// 높은 음자리표 그리기
-			kara.draw.clefs_G(trcNm, pathString);
+			kara.draw.clefs_G(trcNm, pathString)
 			
 			break;
 			
