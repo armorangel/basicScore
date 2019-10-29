@@ -90,12 +90,12 @@ kara.keySplit = function(key) {
 		key = kara.scoreInfo.key	// major Db	
 	}
 	
-	const keySplit = key.split(' ')
-	const M = kara.key[keySplit[0]]
+	const keySplit = key.split(' ')	// ['major' 'Db']
+	const M = kara.key[keySplit[0]]	// kara.key['major']
 	
 	return {
-		M: kara.key[keySplit[0]],	// major
-		N: M[keySplit[1]]			// Db
+		M: kara.key[keySplit[0]],	// major	kara.key['major']
+		N: M[keySplit[1]]			// Db		M['Db'] :: 5 -- 심볼 갯수
 	}
 }
 
@@ -344,7 +344,7 @@ kara.keySVG = function(Y, key, trcNm) {	// 217, major Db, track1
 	// let M = kara.key[keySplit[0]]	// kara.key['major']
 	// let N = M[keySplit[1]]			// M['Db'] :: 5 -- 심볼 갯수
 	const M = kara.keySplit(key).M;	// major 속성명 바꿔
-	const N = kara.keySplit(key).N;	// Db 	속성명 바꿔
+	const N = kara.keySplit(key).N;	// Db 	속성명 바꿔	
 	let x, y, width, height
 
 	for (let key in M) {	// k :: key
