@@ -6,7 +6,7 @@ kara.noteSelect = {
 	push: function(i, j,  pitch, note_meter, trcNm) { // i: 마디 번호 j: 음표 번호
 		// 0, 0, A4, whole, track1
 		
-		var note = kara.scoreInfo.track[trcNm].notes // 배열을 받아온다
+		const note = kara.scoreInfo.track[trcNm].notes // 음표배열을 받아온다
 
 		// 배열 말고 다른 방법은..? Object?!
 		// 2차원배열이 아니면 2차원 배열 생성

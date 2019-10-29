@@ -8,7 +8,7 @@ kara.draw = {
 	svgContainer: null,
 	txt: null,
 	box: null,
-	symbol: null,
+	svgSymbol: null,
 	
 	// 현재 트랙으로 설정
 	setTrack: function(trcNm) {
@@ -19,7 +19,7 @@ kara.draw = {
 		this.svgContainer = kara.svg[trcNm].svgContainer
 		this.txt = kara.svg[trcNm].svgText
 		this.box = kara.svg[trcNm].svgBox
-		this.symbol = kara.svg[trcNm].svgSymbol
+		this.svgSymbol = kara.svg[trcNm].svgSymbol
 		this.svgjs = kara.svg[trcNm].svgjs
 		
 		return this
@@ -242,5 +242,16 @@ kara.draw = {
 		if(typeof strokeWidth !== 'undefined') {
 			line.style('stroke-width', strokeWidth)
 		}
+	},
+	
+	// Draw Sharp, Flat, Rest, head
+	symbol: function(trcNm, pathString) {
+		
+		let svg = kara.svg[trcNm].svgSymbol
+		
+		svg.append('path')
+			.attr('class', kara.conf.del + ' ' + trcNm)// 삭제 영역
+			.attr('d', pathString)
+			.style('stroke', 'black')
 	}
 }
