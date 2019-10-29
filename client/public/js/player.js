@@ -132,7 +132,7 @@ kara.addInstr = function(trcNum) {	//trackN: trackNumber -- 1
 		
 		// 콤보 박스 변경시 호출
 		change: function(event, ui) {
-			kara.scoreInfo.track[trcNm].instrument = ui.item.value;	// 선택된 악기번호 악보 정보 객체에 저장
+			kara.scoreInfo.track[trcNm].instrument = ui.item.value	// 선택된 악기번호 악보 정보 객체에 저장
 		}
 	});
 
@@ -174,7 +174,7 @@ kara.instru = {
 
 			// replace underscore to camelcase
 			list[i] = list[i].replace(/_([a-z0-9])/g, function (g) {return ' ' + g[1].toUpperCase()})
-			list[i] = list[i].charAt(0).toUpperCase() + list[i].slice(1);	// 첫 글자 대문자
+			list[i] = list[i].charAt(0).toUpperCase() + list[i].slice(1)	// 첫 글자 대문자
 
 			$('#instrument' + trcNum).append("<option value = '" + i + "'>" + list[i]+ "</option>")
 		}
