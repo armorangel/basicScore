@@ -550,7 +550,7 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 	let M = kara.key[keySplit[0]]
 	let N = M[keySplit[1]]
 	let clef = kara.scoreInfo.clef
-	let gab = 12
+	let gab = 12	// dynamic
 
 	//간격조절
 	for(let i = 1; i <= 5; i++) {
