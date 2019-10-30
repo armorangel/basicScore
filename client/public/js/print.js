@@ -983,10 +983,10 @@ kara.noteBox_last = {
 	}
 };
 
-//음표, 쉼표 그리기
+//음표, 쉼표 그리기	(required name change)
 kara.print8th16thQuarterHalfWhole = function(trcNm, x, leng, y, meter, pitchSplit_pi, pi, type) {
 	
-	var head = type
+	let head = type
 	
 	// 온음표와 2분음표를 제외하면 공통
 	if(type !== 'whole' && type !== 'half') head = 'quarter'
