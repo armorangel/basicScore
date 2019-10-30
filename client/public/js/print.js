@@ -936,7 +936,7 @@ kara.noteBox_last = {
 			nNum = 0
 		}
 
-		if(set === 1) {
+		if(set === 1) {	//왜 1
 			//console.log(bNum);
 			x = a
 		}
