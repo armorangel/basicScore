@@ -583,7 +583,7 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 
 //마디 구분선
 kara.vLine = function(x, y, trcNm) {	// trcNm :: Track Name 'track1' //1051, 212, track1
-	kara.draw.line(trcNm, x, y, x, y + 48)	// 48이 뭔지
+	kara.draw.line(trcNm, x, y, x, y + 48)	// 48이 뭔지	dynamic
 }
 
 //음표 막대 그리기
@@ -678,7 +678,7 @@ kara.noteBox = {
 
 		let width = (X - a) / 4
 		let height = 6;
-		let fill_opacity = '0.3'
+		let fill_opacity = '0.3'	// 이것도 배버려
 
 		// 이 영역으로 4분음표로만 고정
 		switch(meter) {
