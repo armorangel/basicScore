@@ -655,9 +655,8 @@ kara.noteBox = {
 		let N = M[keySplit[1]]	// 이거
 		*/
 		
-		let M = kara.keySplit().M
+		let M = kara.keySplit().M	// 무슨 용도
 		let N = kara.keySplit().N
-		
 		
 		let clef = kara.scoreInfo.track[trcNm].clef
 		let i = 0, j = 0
@@ -736,10 +735,18 @@ kara.noteBox_ = {
 		
 		// 이것들을 줄일 수 있는 방법
 		const note = kara.scoreInfo.track[trcNm].notes
+		
+		/*
 		var key = kara.scoreInfo.key
 		var keySplit = key.split(' ')
 		var M = kara.key[keySplit[0]]
 		var N = M[keySplit[1]]
+		*/
+		
+		let M = kara.keySplit().M	// 무슨 용도
+		let N = kara.keySplit().N
+		
+		
 		var clef = kara.scoreInfo.track[trcNm].clef
 		var i = 0, j = 0, flag = 0
 		
