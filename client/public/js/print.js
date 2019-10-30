@@ -843,7 +843,7 @@ kara.noteBox_ = {
 			
 			var m = 50 - i
 			var p = pitch_select.selection(m)	// 선택한 음높이 계산 in edit.js
-			var fill, fill_opacity
+			let fill, fill_opacity
 			
 			if((i % 2) == 1) {
 				fill = '#6666FF'
