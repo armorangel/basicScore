@@ -678,6 +678,7 @@ kara.noteBox = {
 
 		let width = (X - a) / 4
 		let height = 6;
+		
 		let fill_opacity = '0.3'	// 이것도 배버려
 
 		// 이 영역으로 4분음표로만 고정
@@ -719,7 +720,8 @@ kara.noteBox = {
 			//var m = i;
 			let m = 50 - i	// 36 ~ 20
 			let p = pitch_select.selection(m)	//선택한 음높이 계산 // return C6 m::36 p::C6
-			let fill = ''
+			
+			let fill = ''	// 이것도 빼버려
 			
 			//색상 선택
 			if((i % 2) == 1) fill = '#6666FF'	// Odd Number
