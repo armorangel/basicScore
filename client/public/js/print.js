@@ -859,10 +859,18 @@ kara.noteBox_last = {
 		
 		var note = kara.scoreInfo.track[trcNm].notes
 		var svg = kara.svg[trcNm].svgContainer
+		
+		/*
 		var key = kara.scoreInfo.key
 		var keySplit = key.split(' ')
 		var M = kara.key[keySplit[0]]
 		var N = M[keySplit[1]]
+		*/
+		
+		let M = kara.keySplit().M	// 무슨 용도
+		let N = kara.keySplit().N
+		
+		
 		var pitch = note[bNum][nNum][0]
 		var clef = kara.scoreInfo.track[trcNm].clef
 		var i = 0, j = 0
