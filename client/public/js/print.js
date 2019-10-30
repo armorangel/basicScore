@@ -857,7 +857,7 @@ kara.noteBox_last = {
 	
 	print: function(X, Y , bNum, nNum, meter, set, trcNm) {
 		
-		var note = kara.scoreInfo.track[trcNm].notes
+		let note = kara.scoreInfo.track[trcNm].notes
 		var svg = kara.svg[trcNm].svgContainer
 		
 		/*
@@ -871,7 +871,7 @@ kara.noteBox_last = {
 		let N = kara.keySplit().N
 		
 		
-		var pitch = note[bNum][nNum][0]
+		let pitch = note[bNum][nNum][0]
 		var clef = kara.scoreInfo.track[trcNm].clef
 		var i = 0, j = 0
 
