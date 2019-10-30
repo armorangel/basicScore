@@ -648,10 +648,17 @@ kara.noteBox = {
 	// 악보 선택 영역 그리기
 	print: function(X, Y, bNum, nNum, meter, trcNm) {
 		
+		/*
 		let key = kara.scoreInfo.key
 		let keySplit = key.split(' ')
 		let M = kara.key[keySplit[0]]
 		let N = M[keySplit[1]]	// 이거
+		*/
+		
+		let M = kara.keySplit().M
+		let N = kara.keySplit().N
+		
+		
 		let clef = kara.scoreInfo.track[trcNm].clef
 		let i = 0, j = 0
 
