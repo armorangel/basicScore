@@ -545,10 +545,17 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 	// 줄일 수 있는 방법
 	let X = kara.XY.X()
 	let Y = kara.XY.Y(y)
+	
+	/*
 	let key = kara.scoreInfo.key
 	let keySplit = key.split(' ')
 	let M = kara.key[keySplit[0]]
 	let N = M[keySplit[1]]
+	*/
+	
+	let M = kara.keySplit().M	// 무슨 용도
+	let N = kara.keySplit().N
+	
 	let clef = kara.scoreInfo.clef
 	let gab = 12	// dynamic
 
@@ -966,6 +973,7 @@ kara.noteBox_last = {
 			
 			// 악보 선택 영역 추가
 			// 매개변수좀 줄여봐
+			// 투명도를 뺄수 있는 방법
 			kara.selArea(p, bNum, nNum, trcNm, x, y, width, height, fill, fill_opacity)
 			
 			y += height
