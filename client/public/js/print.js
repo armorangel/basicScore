@@ -651,7 +651,7 @@ kara.noteBox = {
 		let key = kara.scoreInfo.key
 		let keySplit = key.split(' ')
 		let M = kara.key[keySplit[0]]
-		let N = M[keySplit[1]]
+		let N = M[keySplit[1]]	// 이거
 		let clef = kara.scoreInfo.track[trcNm].clef
 		let i = 0, j = 0
 
