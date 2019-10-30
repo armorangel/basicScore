@@ -746,8 +746,7 @@ kara.noteBox_ = {
 		let M = kara.keySplit().M	// 무슨 용도
 		let N = kara.keySplit().N
 		
-		
-		var clef = kara.scoreInfo.track[trcNm].clef
+		const clef = kara.scoreInfo.track[trcNm].clef
 		var i = 0, j = 0, flag = 0
 		
 		// 이전 마디의 정보를 얻어옴
@@ -766,6 +765,7 @@ kara.noteBox_ = {
 
 		var a = N * 12 + 70
 		var ac = (X - a) / 4
+		
 		// kara.vLine(a, Y+12); // 없어도 됨
 		// kara.vLine(ac*1+a, Y+12);
 		// kara.vLine(ac*2+a, Y+12);
