@@ -962,7 +962,7 @@ kara.noteBox_last = {
 			
 			var m = 50 - i
 			var p = pitch_select.selection(m)
-			var fill, fill_opacity
+			let fill, fill_opacity
 			
 			// 이걸 개선 할 방법은
 			if((i % 2) == 1) {
