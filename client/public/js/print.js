@@ -877,7 +877,7 @@ kara.noteBox_last = {
 		*/
 		
 		let M = kara.keySplit().M	// 무슨 용도
-		let N = kara.keySplit().N
+		let N = kara.keySplit().N	
 		
 		
 		let pitch = note[bNum][nNum][0]
@@ -891,7 +891,7 @@ kara.noteBox_last = {
 		var a = N * 12 + 70
 		var ac = (X - a) / 4
 
-		var x = position.left - kara.scorePos.left(trcNm)
+		var x = position.left - kara.scorePos.left(trcNm)	// 이게 뭐지
 		var y = Y - 15
 
 		var width = (X - a) / 4
