@@ -678,7 +678,7 @@ kara.noteBox = {
 		let y = Y - 15
 
 		let width = (X - a) / 4
-		let height = 6;
+		let height = 6
 		
 		let fill_opacity = '0.3'	// 이것도 배버려
 
@@ -764,7 +764,7 @@ kara.noteBox_ = {
 		if(nNum == 0) {
 			bNum--
 			nNum = note[bNum].length - 1
-			flag = 1;
+			flag = 1
 		} else nNum = nNum - 1
 		
 		// var pitch = note[bNum][nNum][0];
