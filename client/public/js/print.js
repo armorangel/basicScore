@@ -546,8 +546,9 @@ kara.hLine = function(y, trcNm) {// y :: 오선지 줄 번호 :: 1, trcNm :: Tra
 	let X = kara.XY.X()
 	let Y = kara.XY.Y(y)
 	
-	/*
+	
 	let key = kara.scoreInfo.key
+	/*
 	let keySplit = key.split(' ')
 	let M = kara.key[keySplit[0]]
 	let N = M[keySplit[1]]
@@ -723,6 +724,7 @@ kara.noteBox = {
 			
 			let fill = ''	// 이것도 빼버려
 			
+			// 이거 메소드에 추가
 			//색상 선택
 			if((i % 2) == 1) fill = '#6666FF'	// Odd Number
 			else fill = '#66FFFF'				// Even Number
