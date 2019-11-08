@@ -40,7 +40,8 @@ kara.refresh = function() {
 	}
 }
 
-//트랙 탭 추가(개선 필요 -- 탭 생성시 탭 이동)
+// 트랙 탭 추가(개선 필요 -- 탭 생성시 탭 이동)
+// 새로운 탭
 kara.addTabs = function() {
 	
 	var trcNum = 1
