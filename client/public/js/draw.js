@@ -54,7 +54,6 @@ kara.draw = {
 		this.removeSvg('#title')	// 타이틀 제거
 		this.removeSvg('#edtTtl')	// 타이틀 선택 영역 제거
 		
-
 		/*
 		this.svgContainer.each(function(i, children) {//SVG.js
 			//this.fill({ color: '#f06' });
@@ -87,6 +86,7 @@ kara.draw = {
 				.style('font-weight', 'bold')
 				.text(title)					// 악보정보객체의 TITLE
 	
+		//선택 영역 사이즈, 위치 구하기
 		var boxSize = this.getBoxSize('#title')
 	
 		this.box.append('rect')
@@ -106,8 +106,8 @@ kara.draw = {
 	tempo: function(tempo) {
 		
 		// SVG 요소 삭제
-		this.removeSvg('#tempo');	// 템포 제거
-		this.removeSvg('#edtTem');	// 템포 선택 영역 제거
+		this.removeSvg('#tempo')	// 템포 제거
+		this.removeSvg('#edtTem')	// 템포 선택 영역 제거
 		
 		/*
 		this.svgContainer.each(function(i, children) {//SVG.js
@@ -133,8 +133,9 @@ kara.draw = {
 			.style('text-anchor', 'start')
 			.style('fill', '#000000')
 			.style('font-weight', 'bold')
-			.text('♩ = ' + tempo);
+			.text('♩ = ' + tempo)
 		
+		//선택 영역 사이즈, 위치 구하기
 		var boxSize = this.getBoxSize('#tempo');
 
 		this.box.append('rect')
@@ -146,7 +147,7 @@ kara.draw = {
 			.style('width', '100')// 0 ISSUE
 			.style('height', '25')// 0 ISSUE
 			.style('fill', '#000000')
-			.style('fill-opacity', '0.3');
+			.style('fill-opacity', '0.3')
 		
 		return this;
 	},
@@ -166,8 +167,9 @@ kara.draw = {
 			.style('text-anchor', 'end')
 			.style('fill', '#000000')
 			.style('font-weight', 'bold')
-			.text(writer);
+			.text(writer)
 		
+		//선택 영역 사이즈, 위치 구하기
 		var boxSize = this.getBoxSize('#writer')
 
 		this.box.append('rect')
