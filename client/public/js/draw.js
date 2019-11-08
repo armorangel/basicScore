@@ -51,8 +51,8 @@ kara.draw = {
 	// text
 	title: function(title) {	// 제목 그리기
 		
-		this.removeSvg('#title');	// 타이틀 제거
-		this.removeSvg('#edtTtl');	// 타이틀 선택 영역 제거
+		this.removeSvg('#title')	// 타이틀 제거
+		this.removeSvg('#edtTtl')	// 타이틀 선택 영역 제거
 		
 
 		/*
@@ -85,9 +85,9 @@ kara.draw = {
 				.style('text-anchor', 'middle')	// 가운데 정렬
 				.style('fill', '#000000')
 				.style('font-weight', 'bold')
-				.text(title);					// 악보정보객체의 TITLE
+				.text(title)					// 악보정보객체의 TITLE
 	
-		var boxSize = this.getBoxSize('#title');
+		var boxSize = this.getBoxSize('#title')
 	
 		this.box.append('rect')
 				.attr('id', 'edtTtl')					// #editTitle :: TITLE 선택영역(수정용)
@@ -98,7 +98,7 @@ kara.draw = {
 				.style('width', '100')// 변경해야됨
 				.style('height', '80')// 변경해야됨
 				.style('fill', '#000000')
-				.style('fill-opacity', '0.3');
+				.style('fill-opacity', '0.3')
 		
 		return this;
 	},
