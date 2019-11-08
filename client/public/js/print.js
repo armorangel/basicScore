@@ -675,7 +675,7 @@ kara.noteBox = {
 		let ac = (X - a) / 4
 
 		let x = a
-		let y = Y - 15
+		let y = Y - 15	// 상수가 너무 많아
 
 		let width = (X - a) / 4
 		let height = 6
