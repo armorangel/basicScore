@@ -9,6 +9,7 @@ kara.init = {
 	
 	score: function(trcNm) {	// trcNm: Track Name -- 'track1'
 	
+		// 기본값
 		if(!trcNm) trcNm = 'track1'
 
 		let trcNum = trcNm.slice(-1)	// 1
