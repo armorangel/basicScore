@@ -1025,6 +1025,7 @@ kara.selArea = function(p, bNum, nNum, trcNm, x, y, width, height, fill, fill_op
 	const svg = kara.svg[trcNm].svgContainer
 	
 	// 마디 번호
+	// 이것 빌더로 해볼까
 	const svgVar = svg.append('g')
 		.attr('id', 'bar_' + bNum)	// 이것도 설정
 		.attr('class', kara.conf.del + ' ' + trcNm)
