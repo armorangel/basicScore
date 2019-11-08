@@ -33,11 +33,11 @@ kara.draw = {
 	//선택 영역 사이즈, 위치 구하기
 	getBoxSize: function(tag) {
 		
-		const position = $('#' + this.track + ' ' + tag).position();	// 제목 위치리턴 객체 left, top
-		const width = $('#' + this.track + ' ' + tag).width();			// 0 ISSUE
-		const height = $('#' + this.track + ' ' + tag).height();		// 0 ISSUE
-		const x = position.left - kara.scorePos.left(this.track);
-		const y = position.top - kara.scorePos.top(this.track);
+		const position = $('#' + this.track + ' ' + tag).position()	// 제목 위치리턴 객체 left, top
+		const width = $('#' + this.track + ' ' + tag).width()		// 0 ISSUE
+		const height = $('#' + this.track + ' ' + tag).height()		// 0 ISSUE
+		const x = position.left - kara.scorePos.left(this.track)
+		const y = position.top - kara.scorePos.top(this.track)
 		
 		return {
 			position: position,
