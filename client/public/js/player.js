@@ -6,7 +6,8 @@ if(!window.kara) window.kara = {};
 /*
 class karaClss {
 	
-	constructor(trcNm) {
+	//Init Score(Execute first)
+	constructor(trcNm) {	// trcNm: Track Name -- 'track1'
 		// 기본값
 		if(!trcNm) trcNm = 'track1'
 
