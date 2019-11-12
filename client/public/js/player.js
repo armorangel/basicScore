@@ -3,6 +3,26 @@ if(!window.kara) window.kara = {};
 // import script
 // document.write("<script src='b.js'></script>");
 
+/*
+class karaClss {
+	
+	constructor(trcNm) {
+		// 기본값
+		if(!trcNm) trcNm = 'track1'
+
+		let trcNum = trcNm.slice(-1)	// 1
+
+		kara.addInstr(trcNum)	// 트랙별 악기 콤보 추가
+		kara.initSvg(trcNm)		// 해당 트랙 svg 구성요소들 SVG 객체 저장, 악보영역 생성 in print.js
+		kara.txtSVG(trcNm)		// Draw title, tempo, name SVG in print.js
+		kara.prtNote(trcNm)		// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
+	}
+}
+*/
+
+
+
+/////////////////////////////////////////////////////////////
 
 //Init Score(Execute first)
 kara.init = {
