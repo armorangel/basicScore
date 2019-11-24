@@ -3,7 +3,7 @@ if(!window.kara) window.kara = {};
 // import script
 // document.write("<script src='b.js'></script>");
 
-
+/*
 class karaClss {
 	
 	//Init Score(Execute first)
@@ -20,14 +20,11 @@ class karaClss {
 		kara.prtNote(trcNm)		// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
 	}
 }
-
-
-
+*/
 
 /////////////////////////////////////////////////////////////
 
 //Init Score(Execute first)
-/*
 kara.init = {
 	
 	score: function(trcNm) {	// trcNm: Track Name -- 'track1'
@@ -43,7 +40,6 @@ kara.init = {
 		kara.prtNote(trcNm)		// 배열의 값을 가져와서 음표를 그린다 in karaoke.js
 	}
 }
-*/
 
 // 악보 초기화
 kara.refresh = function() {
@@ -51,7 +47,7 @@ kara.refresh = function() {
 	// 악보 삭제영역 삭제
 	$('.' + kara.conf.del).remove()
 	
-	for(var trcNm in kara.scoreInfo.track) {
+	for(let trcNm in kara.scoreInfo.track) {
 			
 		// 해당 트랙이 초기화 되었는지 판단
 		if(kara.scoreInfo.track[trcNm].clef === '') continue
