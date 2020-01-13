@@ -23,6 +23,39 @@ class karaClss {
 */
 
 /////////////////////////////////////////////////////////////
+/*
+	// http://{S3 버킷}/{key prefix}/{상품번호 2자리씩 구분}/{상품번호}_{이미지구분코드}_{순번}.jpg
+				// 상품번호 : LO12345678, 구분코드 : 3D(상품3D 이미지)
+				// http://dev-contents.lotteon.com/itemImage/LO/12/34/56/78/LO12345678_3D_1.jpg
+        		String fileNm = "";
+        		String prefixDir = "/itemimage/";
+
+    			if(Optional.ofNullable(contentsFileModel.getOrigFileNm()).map(String::length).orElse(0) == 0) {
+					continue;
+    			}
+
+				String FileName = contentsFileModel.getOrigFileNm();
+				String fileExtension = Optional.ofNullable(FileName).orElse("");
+				if(fileExtension.length() > 0) {
+					fileExtension = fileExtension.split("\\.")[1];
+				}
+				
+				fileNm = spdNo + "_" + FILE_DVS_CD + "_" + String.valueOf(seq) + "." + fileExtension;
+				String[] splitStr = spdNo.split("(?<=\\G.{" + 2 + "})"); // 2글자마다 잘라내어 배열 생성
+				String str = StringUtils.join(splitStr, "/"); 	// 배열 원소 사이에 | 구분자를 추가하며 하나의 문자열로 이어붙임 [/LO/12/34/56/78/]
+				prefixDir = prefixDir + str + "/";				// /itemImage/LO/12/34/56/78/
+        		
+        		contentsFileEntity.setFileTypCd(FILE_TYP_CD);			// 묶음상품
+        		contentsFileEntity.setFileDvsCd(FILE_DVS_CD);			// 기획전형상품이미지
+        		contentsFileEntity.setFileNm(fileNm);					// 파일명
+        		contentsFileEntity.setFileRteNm(prefixDir);				// 파일경로명
+        		contentsFileEntity.setFileCrtYn(ProductConstant.Y);		// 파일생성여부
+        		contentsFileEntity.setOrigFileNm(contentsFileModel.getOrigFileNm());// 원본파일명
+        		contentsFileEntityList.add(contentsFileEntity);
+
+*/
+
+/////////////////////////////////////////////////////////////
 
 //Init Score(Execute first)
 kara.init = {

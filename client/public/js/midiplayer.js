@@ -63,7 +63,13 @@ kara.play = {
 				//console.log(instru);
 				var chord = []
 				var tempo = Number(kara.scoreInfo.tempo)
-				var delay = 0 // play one note every quarter second
+				// 숫자가 아닐 때
+				
+				
+				// var delay = 0 // play one note every quarter second
+				var delay = 1
+				
+				var vol = 127
 				var velocity = 127 // how hard the note hits
 				var m = 0 //트랙
 				var n = 0 //음과 박자
@@ -78,7 +84,7 @@ kara.play = {
 					// 악기 번호
 					setting = kara.instru.getNum(instru[mm])
 					console.log('setting :: ' + setting)
-					MIDI.setVolume(mm, 127)	// 볼륨 설정
+					MIDI.setVolume(mm, vol)	// 볼륨 설정
 					MIDI.programChange(mm, setting)
 				}	// End of for
 			
